@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"session="true" import="entidades.Vw_usuario_rol, datos.DT_usuario;"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +17,31 @@
  <link rel="stylesheet" href="dist/css/adminlte.min.css">
  <!-- Google Font: Source Sans Pro -->
  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+ 
+ 
+ 
+ 
+ <%
+
+Vw_usuario_rol usuarioSesion = new Vw_usuario_rol();
+DT_usuario dtus = new DT_usuario();
+
+/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+String carne = "";
+carne = request.getParameter("msj");
+carne = carne==null?"":carne;
+
+usuarioSesion = dtus.UsuarioConfirmado(carne);
+
+//creamos el objeto sesion
+HttpSession sesion = request.getSession();
+	 sesion.setAttribute("nombre", usuarioSesion.getNombre());
+	 sesion.setAttribute("apellido", usuarioSesion.getApellido());
+	 sesion.setAttribute("correo", usuarioSesion.getCorreo());
+	 sesion.setAttribute("id_rol", usuarioSesion.getId_rol());
+	 sesion.setAttribute("carne", usuarioSesion.getCarne());
+ 
+ %>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

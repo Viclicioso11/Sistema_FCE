@@ -119,11 +119,11 @@ public class SL_usuario extends HttpServlet {
 					
 					if(dtus.validarUsuario(tus.getCarne(), tus.getContrasena()))
 					{
-						response.sendRedirect("sistema.jsp");
+						response.sendRedirect("./sistema.jsp?msj="+tus.getCarne());
 					}
 					else
 					{
-						response.sendRedirect("index.jsp?msj=2");
+						response.sendRedirect("./index.jsp?msj=2");
 					}
 				}
 				catch(Exception e)

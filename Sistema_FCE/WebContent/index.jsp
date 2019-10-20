@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"  import="entidades.Tbl_usuario,datos.DT_usuario;"%>
+    pageEncoding="ISO-8859-1"  import="entidades.Tbl_usuario, datos.DT_usuario, entidades.Vw_usuario_rol ;" session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,14 +40,19 @@ mensaje = mensaje==null?"":mensaje;
     <a href="../../index2.html"><b>Sistema de Control FCE</b></a>
   </div>
   <!-- /.login-logo -->
+  
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Ingresa tu información para iniciar sesión</p>
-      <input name="opc" id="opc" type="hidden" value="3"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+      
+      
 
-      <form action="../../index3.html" method="post">
+      <form role="form" action="SL_usuario" method="post">
         <div class="input-group mb-3">
-          <input id="carne" name="carne type="text" class="form-control" placeholder="Carné UCA">
+        
+        <input name="opc" id="opc" type="hidden" value="3"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+        
+          <input id="carne" name="carne" type="text" class="form-control" placeholder="Carné UCA">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -104,14 +109,18 @@ mensaje = mensaje==null?"":mensaje;
 
 
  <script>
+ $(document).ready(function ()
+{
  var nuevo = 0;
  nuevo = "<%=mensaje%>";
 
 
+
  if(nuevo == "2")
  {
-   warningAlert('Aviso', 'Carné o contraseña no válidos');
+   errorAlert('Aviso', 'Carné o contraseña no válidos');
  }
+});
 
  
    

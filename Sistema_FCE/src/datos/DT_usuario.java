@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import entidades.Tbl_usuario;
+import entidades.Vw_usuario_rol;
 
 public class DT_usuario 
 {
@@ -77,7 +78,7 @@ public class DT_usuario
 	}
 	
 	
-	//Metodo para validar el Login
+	//Metodo para validar si existe el usuario del Login
 	public boolean validarUsuario(String carne, String contrasena)
 	{
 		
@@ -96,7 +97,7 @@ public class DT_usuario
 				tus.setContrasena(rsUsuario.getString("contrasena"));
 			}
 			
-			if(tus.getCarne().equals(carne) && tus.getContrasena() == contrasena) {
+			if(tus.getCarne().equals(carne) && tus.getContrasena().equals(contrasena)) {
 				return true;
 			}
 			else {
@@ -106,7 +107,7 @@ public class DT_usuario
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en obtenerUser() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en Validar usuario "+ e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -196,6 +197,35 @@ public class DT_usuario
 			e.printStackTrace();
 		}
 		return eliminado;
+	}
+	
+	//Metodo para retornar el un objeto creado de la sesion
+	public Vw_usuario_rol UsuarioConfirmado(String carne)
+	{
+		Vw_usuario_rol vsus  = new Vw_usuario_rol();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT nombre, apellido, carne, id, correo from vw_usuario_rol where carne = ? ", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, carne);
+			rsUsuario = ps.executeQuery();
+			if(rsUsuario.next())
+			{
+				vsus.setNombre(rsUsuario.getString("nombre"));
+				vsus.setApellido(rsUsuario.getString("apellido"));
+				vsus.setCarne(rsUsuario.getString("carne"));
+				vsus.setId_rol(rsUsuario.getInt("id"));
+				vsus.setCorreo(rsUsuario.getString("correo"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerUsuarioConfirmado() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return vsus;
 	}
 	
 
