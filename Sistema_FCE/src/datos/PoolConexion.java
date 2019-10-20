@@ -12,7 +12,7 @@ public class PoolConexion
 	private static PoolConexion INSTANCE = null; //CREA UNA INSTANCIA DE TIPO PoolConexion EN NULL 
 	private static Connection con = null; //CREA UN OBJETO DE TIPO Connection
 	private static DataSource dataSource; //CREA UN OBJETO DE TIPO DataSource
-	private static String db = "HR"; //VARIABLE CON EL NOMBRE DE LA BD
+	private static String db = "FCE"; //VARIABLE CON EL NOMBRE DE LA BD
 	private static String url = "jdbc:postgresql://localhost:5432/"+db; // VARIABLE CON LA URL DE CONEXION A LA BD
 	private static String user = "postgres"; // VARIABLE CON EL USERNAME DE BD
 	private static String pass = "Usuario123#."; // VARIABLE CON EL PASSWORD DE BD

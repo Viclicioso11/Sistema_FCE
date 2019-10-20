@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import entidades.Tbl_user;
+import entidades.Tbl_usuario;
 
 public class DT_usuario 
 {
@@ -13,28 +13,25 @@ public class DT_usuario
 	private ResultSet rsUsuario;
 	
 	// Metodo para visualizar todos los usuarios activos
-	public ArrayList<Tbl_user> listUser()
+	public ArrayList<Tbl_usuario> listUser()
 	{
-		ArrayList<Tbl_user> listaUsuario = new ArrayList<Tbl_user>();
+		ArrayList<Tbl_usuario> listaUsuario = new ArrayList<Tbl_usuario>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where estado<>3", 
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_usuario where estado<>3", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsUsuario = ps.executeQuery();
 			while(rsUsuario.next())
 			{
-				Tbl_user tus  = new Tbl_user();
-				tus.setId_user(rsUsuario.getInt("id_user"));
-				tus.setNombre1(rsUsuario.getString("nombre1"));
-				tus.setNombre2(rsUsuario.getString("nombre2"));
-				tus.setApellido1(rsUsuario.getString("apellido1"));
-				tus.setApellido2(rsUsuario.getString("apellido2"));
-				tus.setUsername(rsUsuario.getString("username"));
-				tus.setPassword(rsUsuario.getString("password"));
-				tus.setEmail(rsUsuario.getString("email"));
-				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
+				Tbl_usuario tus  = new Tbl_usuario();
+				tus.setId(rsUsuario.getInt("id"));
+				tus.setNombres(rsUsuario.getString("nombres"));
+				tus.setApellidos(rsUsuario.getString("apellidos"));
+				tus.setCarne(rsUsuario.getString("carne"));
+				tus.setContrasena(rsUsuario.getString("contrasena"));
+				tus.setCorreo(rsUsuario.getString("correo"));
 				tus.setEstado(rsUsuario.getInt("estado"));
 				listaUsuario.add(tus);
 			}
@@ -49,9 +46,9 @@ public class DT_usuario
 	}
 	
 	// Metodo para obtenero un usuario
-	public Tbl_user obtenerUser(int idUser)
+	public Tbl_usuario obtenerUser(int idUser)
 	{
-		Tbl_user tus  = new Tbl_user();
+		Tbl_usuario tus  = new Tbl_usuario();
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where id_user = ? and estado<>3", 
@@ -61,15 +58,12 @@ public class DT_usuario
 			rsUsuario = ps.executeQuery();
 			if(rsUsuario.next())
 			{
-				tus.setId_user(rsUsuario.getInt("id_user"));
-				tus.setNombre1(rsUsuario.getString("nombre1"));
-				tus.setNombre2(rsUsuario.getString("nombre2"));
-				tus.setApellido1(rsUsuario.getString("apellido1"));
-				tus.setApellido2(rsUsuario.getString("apellido2"));
-				tus.setUsername(rsUsuario.getString("username"));
-				tus.setPassword(rsUsuario.getString("password"));
-				tus.setEmail(rsUsuario.getString("email"));
-				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
+				tus.setId(rsUsuario.getInt("id"));
+				tus.setNombres(rsUsuario.getString("nombres"));
+				tus.setApellidos(rsUsuario.getString("apellidos"));
+				tus.setCarne(rsUsuario.getString("carne"));
+				tus.setContrasena(rsUsuario.getString("contrasena"));
+				tus.setCorreo(rsUsuario.getString("correo"));
 				tus.setEstado(rsUsuario.getInt("estado"));
 			}
 		}
@@ -82,7 +76,44 @@ public class DT_usuario
 		return tus;
 	}
 	
-	public boolean guardarUser(Tbl_user tus)
+	
+	//Metodo para validar el Login
+	public boolean validarUsuario(String carne, String contrasena)
+	{
+		
+		
+		Tbl_usuario tus  = new Tbl_usuario();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT carne, contrasena from tbl_usuario where carne = ? and estado <>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, carne);
+			rsUsuario = ps.executeQuery();
+			if(rsUsuario.next())
+			{
+				tus.setCarne(rsUsuario.getString("carne"));
+				tus.setContrasena(rsUsuario.getString("contrasena"));
+			}
+			
+			if(tus.getCarne().equals(carne) && tus.getContrasena() == contrasena) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerUser() "+ e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public boolean guardarUser(Tbl_usuario tus)
 	{
 		boolean guardado = false;
 		
@@ -91,13 +122,11 @@ public class DT_usuario
 			this.listUser();
 			rsUsuario.moveToInsertRow();
 			
-			rsUsuario.updateString("username", tus.getUsername());
-			rsUsuario.updateString("nombre1", tus.getNombre1());
-			rsUsuario.updateString("nombre2", tus.getNombre2());
-			rsUsuario.updateString("apellido1", tus.getApellido1());
-			rsUsuario.updateString("apellido2", tus.getApellido2());
-			rsUsuario.updateString("password", tus.getPassword());
-			rsUsuario.updateString("email", tus.getEmail());
+			rsUsuario.updateString("carne", tus.getCarne());
+			rsUsuario.updateString("nombres", tus.getNombres());
+			rsUsuario.updateString("apellidos", tus.getApellidos());
+			rsUsuario.updateString("contrasena", tus.getContrasena());
+			rsUsuario.updateString("correo", tus.getCorreo());
 			rsUsuario.updateInt("estado", 1);
 			rsUsuario.insertRow();
 			rsUsuario.moveToCurrentRow();
@@ -112,7 +141,7 @@ public class DT_usuario
 		return guardado;
 	}
 	
-	public boolean modificarUser(Tbl_user tus)
+	public boolean modificarUser(Tbl_usuario tus)
 	{
 		boolean modificado=false;	
 		try
@@ -121,14 +150,12 @@ public class DT_usuario
 			rsUsuario.beforeFirst();
 			while (rsUsuario.next())
 			{
-				if(rsUsuario.getInt(1)==tus.getId_user())
+				if(rsUsuario.getInt(1)==tus.getId())
 				{
-					rsUsuario.updateString("nombre1", tus.getNombre1());
-					rsUsuario.updateString("nombre2", tus.getNombre2());
-					rsUsuario.updateString("apellido1", tus.getApellido1());
-					rsUsuario.updateString("apellido2", tus.getApellido2());
-					rsUsuario.updateString("password", tus.getPassword());
-					rsUsuario.updateString("email", tus.getEmail());
+					rsUsuario.updateString("nombre1", tus.getNombres());
+					rsUsuario.updateString("apellidos", tus.getApellidos());
+					rsUsuario.updateString("password", tus.getContrasena());
+					rsUsuario.updateString("email", tus.getCorreo());
 					rsUsuario.updateInt("estado", 2);
 					rsUsuario.updateRow();
 					modificado=true;
@@ -145,7 +172,7 @@ public class DT_usuario
 		
 	}
 	
-	public boolean eliminarUser(Tbl_user tus)
+	public boolean eliminarUser(Tbl_usuario tus)
 	{
 		boolean eliminado=false;	
 		try
@@ -154,7 +181,7 @@ public class DT_usuario
 			rsUsuario.beforeFirst();
 			while (rsUsuario.next())
 			{
-				if(rsUsuario.getInt(1)==tus.getId_user())
+				if(rsUsuario.getInt(1)==tus.getId())
 				{
 					rsUsuario.updateInt("estado",3);
 					rsUsuario.updateRow();

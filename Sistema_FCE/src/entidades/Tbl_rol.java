@@ -3,29 +3,29 @@ package entidades;
 public class Tbl_rol 
 {
 	//ATRIBUTOS
-	private int id_rol;
-	private String rol_name;
-	private String rol_desc;
+	private int id;
+	private String rol;
+	private String descripcion;
 	private int estado;
 	
 	//METODOS
-	public int getId_rol() {
-		return id_rol;
+	public int getId() {
+		return id;
 	}
-	public void setId_rol(int id_rol) {
-		this.id_rol = id_rol;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getRol_name() {
-		return rol_name;
+	public String getRol() {
+		return rol;
 	}
-	public void setRol_name(String rol_name) {
-		this.rol_name = rol_name;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
-	public String getRol_desc() {
-		return rol_desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setRol_desc(String rol_desc) {
-		this.rol_desc = rol_desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public int getEstado() {
 		return estado;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.DT_usuario;"%>
+    pageEncoding="ISO-8859-1" import="entidades.Tbl_usuario,datos.DT_usuario;"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +20,7 @@
 
 
 <%
-/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
 String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
@@ -34,11 +34,10 @@ int user = 0;
 user = Integer.parseInt(idUser); 
 
 /* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
-Tbl_user tus = new Tbl_user();
+Tbl_usuario tus = new Tbl_usuario();
 DT_usuario dtus = new DT_usuario();
 
 tus = dtus.obtenerUser(user);
-
 %>
 
 
@@ -190,15 +189,12 @@ tus = dtus.obtenerUser(user);
     {
 		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
     	
-    	$("#IdUser").val("<%=tus.getId_user()%>");
-    	$("#username").val("<%=tus.getUsername()%>");
-    	$("#password").val("<%=tus.getPassword()%>");
-    	$("#password2").val("<%=tus.getPassword()%>");
-    	$("#nombre1").val("<%=tus.getNombre1()%>");
-    	$("#nombre2").val("<%=tus.getNombre2()%>");
-    	$("#apellido1").val("<%=tus.getApellido1()%>");
-    	$("#apellido2").val("<%=tus.getApellido2()%>");
-    	$("#email").val("<%=tus.getEmail()%>");
+    	$("#IdUser").val("<%=tus.getId()%>");
+    	$("#username").val("<%=tus.getCarne()%>");
+    	$("#password").val("<%=tus.getContrasena()%>");
+    	$("#nombre1").val("<%=tus.getNombres()%>");
+    	$("#apellido1").val("<%=tus.getApellidos()%>");
+    	$("#email").val("<%=tus.getCorreo()%>");
     	
     	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      

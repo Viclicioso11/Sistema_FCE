@@ -3,17 +3,17 @@ package entidades;
 public class Tbl_opcion 
 {
 	//ATRIBUTOS
-	private int id_opcion;
+	private int id;
 	private String opcion;
-	private String opcion_desc;
+	private String descripcion;
 	private int estado;
-	
+
 	//METODOS
-	public int getId_opcion() {
-		return id_opcion;
+	public int getId() {
+		return id;
 	}
-	public void setId_opcion(int id_opcion) {
-		this.id_opcion = id_opcion;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getOpcion() {
 		return opcion;
@@ -21,11 +21,11 @@ public class Tbl_opcion
 	public void setOpcion(String opcion) {
 		this.opcion = opcion;
 	}
-	public String getOpcion_desc() {
-		return opcion_desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setOpcion_desc(String opcion_desc) {
-		this.opcion_desc = opcion_desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public int getEstado() {
 		return estado;
@@ -33,6 +33,7 @@ public class Tbl_opcion
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+	
 	
 	
 	

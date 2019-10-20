@@ -95,32 +95,30 @@
                 <tbody>
                 <%
                 	DT_usuario dtus = new DT_usuario();
-  	        		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
-  	        		listUser = dtus.listUser();
-  	        		
-  	        		String nombreCompleto = "";
-  	        		String nombre2="";
-  	        		String apellido2="";
-  	        		String apellidos= "";
-  	        		String estado = "";
-  	        		for(Tbl_user tus : listUser)
-  	        		{
-  	        			nombre2=tus.getNombre2();
-  	        			nombre2=nombre2==null?" ":nombre2;
-  	        			apellido2=tus.getApellido2();
-  	        			apellido2=apellido2==null?" ":apellido2;
-  	        			nombreCompleto = tus.getNombre1()+" "+nombre2;
-  	        			apellidos = tus.getApellido1()+" "+apellido2;
-  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+                  	        		ArrayList<Tbl_usuario> listUser = new ArrayList<Tbl_usuario>();
+                  	        		listUser = dtus.listUser();
+                  	        		
+                  	        		String nombreCompleto = "";
+                  	        		String nombre2="";
+                  	        		String apellido2="";
+                  	        		String apellidos= "";
+                  	        		String estado = "";
+                  	        		for(Tbl_usuario tus : listUser)
+                  	        		{
+                  	        			nombre2=nombre2==null?" ":nombre2;
+                  	        			apellido2=apellido2==null?" ":apellido2;
+                  	        			nombreCompleto = tus.getNombres();
+                  	        			apellidos = tus.getApellidos();
+                  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
                 %>
 	                <tr>
-	                  <td><%=tus.getId_user()%></td>
+	                  <td><%=tus.getId()%></td>
 	                  <td><%=nombreCompleto %></td>
 	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getUsername() %></td>
-	                  <td><%=tus.getEmail() %></td>
+	                  <td><%=tus.getCarne() %></td>
+	                  <td><%=tus.getCorreo() %></td>
 	                  <td><%=estado %></td>
-	                  <td><a onclick="linkEditUser('<%=tus.getId_user()%>');"><i class="far fa-edit"></i></a></td>
+	                  <td><a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit"></i></a></td>
 	                </tr>
 	             <%
 	        		}   

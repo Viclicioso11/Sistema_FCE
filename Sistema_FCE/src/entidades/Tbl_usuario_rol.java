@@ -1,6 +1,6 @@
 package entidades;
 
-public class Tbl_user_rol 
+public class Tbl_usuario_rol 
 {
 	//ATRIBUTOS
 	private int id_user_rol;

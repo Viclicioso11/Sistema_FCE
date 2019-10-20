@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Tbl_user;
+import entidades.Tbl_usuario;
 import datos.DT_usuario;
 
 /**
@@ -51,7 +51,7 @@ public class SL_usuario extends HttpServlet {
 		opcion = Integer.parseInt(opc);
 		System.out.println("opcion: "+opcion);
 		
-		Tbl_user tus = new Tbl_user();
+		Tbl_usuario tus = new Tbl_usuario();
 		DT_usuario dtus = new DT_usuario();
 		
 		switch(opcion)
@@ -60,13 +60,11 @@ public class SL_usuario extends HttpServlet {
 			{
 				try
 				{
-					tus.setUsername(request.getParameter("username"));
-					tus.setPassword(request.getParameter("password"));
-					tus.setNombre1(request.getParameter("nombre1"));
-					tus.setNombre2(request.getParameter("nombre2"));
-					tus.setApellido1(request.getParameter("apellido1"));
-					tus.setApellido2(request.getParameter("apellido2"));
-					tus.setEmail(request.getParameter("email"));
+					tus.setCarne(request.getParameter("carne"));
+					tus.setContrasena(request.getParameter("contrasena"));
+					tus.setNombres(request.getParameter("nombres"));
+					tus.setApellidos(request.getParameter("apellidos"));
+					tus.setCorreo(request.getParameter("correo"));
 					
 					if(dtus.guardarUser(tus))
 					{
@@ -88,14 +86,12 @@ public class SL_usuario extends HttpServlet {
 			{
 				try
 				{
-					tus.setId_user(Integer.parseInt(request.getParameter("IdUser")));
-					tus.setUsername(request.getParameter("username"));
-					tus.setPassword(request.getParameter("password"));
-					tus.setNombre1(request.getParameter("nombre1"));
-					tus.setNombre2(request.getParameter("nombre2"));
-					tus.setApellido1(request.getParameter("apellido1"));
-					tus.setApellido2(request.getParameter("apellido2"));
-					tus.setEmail(request.getParameter("email"));
+					tus.setId(Integer.parseInt(request.getParameter("id")));
+					tus.setCarne(request.getParameter("carne"));
+					tus.setContrasena(request.getParameter("contrasena"));
+					tus.setNombres(request.getParameter("nombres"));
+					tus.setApellidos(request.getParameter("apellidos"));
+					tus.setCorreo(request.getParameter("correo"));
 					
 					if(dtus.modificarUser(tus))
 					{
@@ -113,10 +109,37 @@ public class SL_usuario extends HttpServlet {
 				}
 				break;
 			}
+			case 3:
+			{
+				try
+				{
+					tus.setCarne(request.getParameter("carne"));
+					tus.setContrasena(request.getParameter("contrasena"));
+					
+					
+					if(dtus.validarUsuario(tus.getCarne(), tus.getContrasena()))
+					{
+						response.sendRedirect("sistema.jsp");
+					}
+					else
+					{
+						response.sendRedirect("index.jsp?msj=2");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error al intentar autenticar el Usuario.");
+				}
+				break;
+				
+				
+				
+			}
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/newUser.jsp?msj=ERROR");
+				response.sendRedirect("index.jsp?msj=ERROR");
 			}
 		}
 		
