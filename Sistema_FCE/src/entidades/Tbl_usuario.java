@@ -3,7 +3,7 @@ package entidades;
 public class Tbl_usuario 
 {
 	//ATRIBUTOS
-
+	private int id;
 	private String carne;
 	private String contrasena;
 	private String nombres;
@@ -16,7 +16,7 @@ public class Tbl_usuario
 
 	//METODOS
 
-	private int id;
+	
 	public int getId() {
 		return id;
 	}

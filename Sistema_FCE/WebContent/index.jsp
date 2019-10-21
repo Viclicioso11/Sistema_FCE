@@ -52,7 +52,7 @@ mensaje = mensaje==null?"":mensaje;
         
         <input name="opc" id="opc" type="hidden" value="3"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
         
-          <input id="carne" name="carne" type="text" class="form-control" placeholder="Carné UCA">
+          <input id="carne" name="carne" type="text" class="form-control" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
