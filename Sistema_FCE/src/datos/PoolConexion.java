@@ -15,7 +15,7 @@ public class PoolConexion
 	private static String db = "FCE"; //VARIABLE CON EL NOMBRE DE LA BD
 	private static String url = "jdbc:postgresql://localhost:5432/"+db; // VARIABLE CON LA URL DE CONEXION A LA BD
 	private static String user = "postgres"; // VARIABLE CON EL USERNAME DE BD
-	private static String pass = "Usuario123#."; // VARIABLE CON EL PASSWORD DE BD
+	private static String pass = "123"; // VARIABLE CON EL PASSWORD DE BD
 	
 	private PoolConexion() // CONSTRUCTOR DE LA CLASE
     {
