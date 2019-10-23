@@ -105,7 +105,7 @@
 	                  <td><%=topcion.getDescripcion() %></td>
 	                  <td><%=estado %></td>
 	                  <td><a href="#"onclick="linkEditOpciones('<%=topcion.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a><td>
+	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a></td>
 	                </tr>
 	             <%
 	        		}   
