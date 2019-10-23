@@ -377,9 +377,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../seguridad/tblusuarios.jsp" class="nav-link active">
+                <a href="../seguridad/tblusuarios.jsp" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Control Usuarios</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="../seguridad/tblroles.jsp" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Roles</p>
                 </a>
               </li>
               
