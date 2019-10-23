@@ -58,12 +58,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Gestión de Roles</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              
             </ol>
           </div>
         </div>
@@ -76,53 +75,39 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <a href="../seguridad/newRol.jsp">Agregar Rol <i class="fas fa-plus-circle"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="display">
+              <table id="Tbl_rol" name="Tbl_rol" class="display">
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Descripción</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_usuario dtus = new DT_usuario();
-                  	        		ArrayList<Tbl_usuario> listUser = new ArrayList<Tbl_usuario>();
-                  	        		listUser = dtus.listUser();
-                  	        		
-                  	        		String nombreCompleto = "";
-                  	        		String nombre2="";
-                  	        		String apellido2="";
-                  	        		String apellidos= "";
+                	DT_rol dtrol = new DT_rol();
+                  	        		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+                  	        		listRol = dtrol.listRol();
+                  	        
                   	        		String estado = "";
-                  	        		for(Tbl_usuario tus : listUser)
+                  	        		
+                  	        		for(Tbl_rol trol : listRol)
                   	        		{
-                  	        			nombre2=nombre2==null?" ":nombre2;
-                  	        			apellido2=apellido2==null?" ":apellido2;
-                  	        			nombreCompleto = tus.getNombres();
-                  	        			apellidos = tus.getApellidos();
-                  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+                  	        			estado = trol.getEstado()==1||trol.getEstado()==2?"ACTIVO":"INACTIVO";
                 %>
 	                <tr>
-	                  <td><%=tus.getId()%></td>
-	                  <td><%=nombreCompleto %></td>
-	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getCarne() %></td>
-	                  <td><%=tus.getCorreo() %></td>
+	                  <td><%=trol.getId()%></td>
+	                  <td><%=trol.getRol() %></td>
+	                  <td><%=trol.getDescripcion() %></td>
 	                  <td><%=estado %></td>
-	                  <td>
-	                  <a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
-		                  &nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteUser('<%=tus.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
-	                  </td>
+	                  <td><a href="#"onclick="linkEditRol('<%=trol.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                  <a href="#" onclick="deleteRol('<%=trol.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a><td>
 	                </tr>
 	             <%
 	        		}   
@@ -130,11 +115,9 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                   <th>Id</th>
+                  <th>Rol</th>
+                  <th>Descripción</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -144,22 +127,8 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-<<<<<<< HEAD
-=======
 
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">DataTable with default features</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
->>>>>>> 46d1921a4e1d22538118dc9ade0004ac784959ac
-        </div>
+               </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -218,47 +187,21 @@
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditUser(user)
+function linkEditRol(rol)
 {
-	var idUsuario = user;
-	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	var idRol = rol;
+	window.location.href="../../pages/seguridad/editRol.jsp?rolID="+idRol;	
 }
 </script>
 
-
 <script>
-  $(function () {
-    $("#example1").DataTable();
-//     $('#example2').DataTable({
-//       "paging": true,
-//       "lengthChange": false,
-//       "searching": true,
-//       "ordering": false,
-//       "info": true,
-//       "autoWidth": false,
-      
-//     });
-    $('#example2').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-        'pdf',
-        'excel',
-        'print'
-        ]
-
-      });
-  });
-  
-</script>
-
-<script>
-function deleteUser(user)
+function deleteRol(rol)
 {
-	var idUsuario = user;
+	var idRol = rol;
 	confirm(function(e,btn)
      { 	//event + button clicked
      	e.preventDefault();
-     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+     	window.location.href="../../SL_rol?opc=1&rolID="+idRol;
        	//successAlert('Confirmed!');
      }, 
      function(e,btn)
@@ -270,6 +213,21 @@ function deleteUser(user)
 }
 </script>
 
+
+<script>
+  $(function () {
+    $('#Tbl_rol').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+        'pdf',
+        'excel',
+        'print'
+        ]
+
+      });
+  });
+  
+</script>
 <script>
   $(document).ready(function ()
   {
@@ -280,12 +238,26 @@ function deleteUser(user)
 
     if(nuevo == "1")
     {
-      successAlert('Éxito', 'El registro ha sido editado!!!');
+      successAlert('Éxito', 'El registro ha sido almacenado correctamente.');
     }
-    if(nuevo == "2")
+    
+    if(nuevo == "3")
     {
-      errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+      successAlert('Éxito', 'El registro ha sido modificado correctamente.');
     }
+    
+    if(nuevo == "4")
+    {
+      successAlert('Éxito', 'El registro ha sido eliminado correctamente.');
+    }
+    
+    if(nuevo == "5")
+    {
+      errorAlert('Error', 'El registro no se ha podido eliminar.');
+    }
+    
+    
+    
   
     
 

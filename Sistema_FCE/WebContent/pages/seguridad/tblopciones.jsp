@@ -34,8 +34,6 @@
 	String mensaje = "";
 	mensaje = request.getParameter("msj");
 	mensaje = mensaje==null?"":mensaje;
-
-
 %>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -58,12 +56,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Gestión de Opciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              
             </ol>
           </div>
         </div>
@@ -76,53 +73,39 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <a href="./newOpcion.jsp">Agregar Opciones <i class="fas fa-plus-circle"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="display">
+              <table id="Tbl_opcion" name="Tbl_opcion" class="display">
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Opciones</th>
+                  <th>Descripción</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_usuario dtus = new DT_usuario();
-                  	        		ArrayList<Tbl_usuario> listUser = new ArrayList<Tbl_usuario>();
-                  	        		listUser = dtus.listUser();
+                	DT_opcion dtopcion = new DT_opcion();
+                  	    ArrayList<Tbl_opcion> listOpciones = new ArrayList<Tbl_opcion>();
+                  	    listOpciones = dtopcion.obtenerOpciones();
+                  	        
+                  	    String estado = "";
                   	        		
-                  	        		String nombreCompleto = "";
-                  	        		String nombre2="";
-                  	        		String apellido2="";
-                  	        		String apellidos= "";
-                  	        		String estado = "";
-                  	        		for(Tbl_usuario tus : listUser)
-                  	        		{
-                  	        			nombre2=nombre2==null?" ":nombre2;
-                  	        			apellido2=apellido2==null?" ":apellido2;
-                  	        			nombreCompleto = tus.getNombres();
-                  	        			apellidos = tus.getApellidos();
-                  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+                  	    for(Tbl_opcion topcion : listOpciones)
+                  	    {
+                  	        estado = topcion.getEstado()==1||topcion.getEstado()==2?"ACTIVO":"INACTIVO";
                 %>
 	                <tr>
-	                  <td><%=tus.getId()%></td>
-	                  <td><%=nombreCompleto %></td>
-	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getCarne() %></td>
-	                  <td><%=tus.getCorreo() %></td>
+	                  <td><%=topcion.getId()%></td>
+	                  <td><%=topcion.getOpcion() %></td>
+	                  <td><%=topcion.getDescripcion() %></td>
 	                  <td><%=estado %></td>
-	                  <td>
-	                  <a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
-		                  &nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteUser('<%=tus.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
-	                  </td>
+	                  <td><a href="#"onclick="linkEditOpciones('<%=topcion.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a><td>
 	                </tr>
 	             <%
 	        		}   
@@ -131,10 +114,8 @@
                 <tfoot>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Opcion</th>
+                  <th>Descripción</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -144,22 +125,8 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-<<<<<<< HEAD
-=======
 
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">DataTable with default features</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
->>>>>>> 46d1921a4e1d22538118dc9ade0004ac784959ac
-        </div>
+               </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -218,47 +185,20 @@
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditUser(user)
+function linkEditOpciones(opcion)
 {
-	var idUsuario = user;
-	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	var idOpciones = opcion;
+	window.location.href="../../pages/seguridad/editOpcion.jsp?opcionID="+idOpciones;	
 }
 </script>
 
-
 <script>
-  $(function () {
-    $("#example1").DataTable();
-//     $('#example2').DataTable({
-//       "paging": true,
-//       "lengthChange": false,
-//       "searching": true,
-//       "ordering": false,
-//       "info": true,
-//       "autoWidth": false,
-      
-//     });
-    $('#example2').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-        'pdf',
-        'excel',
-        'print'
-        ]
-
-      });
-  });
-  
-</script>
-
-<script>
-function deleteUser(user)
+function deleteOpciones(id)
 {
-	var idUsuario = user;
 	confirm(function(e,btn)
      { 	//event + button clicked
      	e.preventDefault();
-     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+     	window.location.href= "../../SL_opcion?opc=1&id="+ id;
        	//successAlert('Confirmed!');
      }, 
      function(e,btn)
@@ -270,6 +210,20 @@ function deleteUser(user)
 }
 </script>
 
+
+<script>
+  $(function () {
+    $('#Tbl_opcion').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+        'pdf',
+        'excel',
+        'print'
+        ]
+      });
+  });
+  
+</script>
 <script>
   $(document).ready(function ()
   {
@@ -277,18 +231,30 @@ function deleteUser(user)
     /////////// VARIABLES DE CONTROL MSJ ///////////
     var nuevo = 0;
     nuevo = "<%=mensaje%>";
-
     if(nuevo == "1")
     {
-      successAlert('Éxito', 'El registro ha sido editado!!!');
+      successAlert('Éxito', 'El registro ha sido guardado correctamente.');
     }
-    if(nuevo == "2")
+    
+    if(nuevo == "3")
     {
-      errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+      successAlert('Éxito', 'El registro ha sido modificado correctamente.');
     }
+    
+    if(nuevo == "4")
+    {
+      successAlert('Éxito', 'El registro ha sido eliminado correctamente.');
+    }
+    
+    if(nuevo == "5")
+    {
+      errorAlert('Error', 'El registro no se ha podido eliminar.');
+    }
+    
+    
+    
   
     
-
   });
   </script>
 </body>
