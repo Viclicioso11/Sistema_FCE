@@ -19,8 +19,7 @@
  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  
  
- 
- 
+
  <%
 
 Vw_usuario_rol usuarioSesion = new Vw_usuario_rol();
@@ -40,6 +39,7 @@ HttpSession sesion = request.getSession();
 	 sesion.setAttribute("correo", usuarioSesion.getCorreo());
 	 sesion.setAttribute("id_rol", usuarioSesion.getId_rol());
 	 sesion.setAttribute("carne", usuarioSesion.getCarne());
+	 
  
  %>
 </head>

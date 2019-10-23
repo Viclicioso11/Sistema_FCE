@@ -6,6 +6,13 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
+    
+    <%
+
+  //creamos el objeto sesion
+ 	 HttpSession sesion = request.getSession();
+    
+    %>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -15,7 +22,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><%=(sesion.getAttribute("nombre")+" "+sesion.getAttribute("apellido"))%></a>
         </div>
       </div>
 
@@ -377,8 +384,12 @@
                   <p>Control Usuarios</p>
                 </a>
               </li>
-              
-              
+              <li class="nav-item">
+                <a href="pages/seguridad/tblroles.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Roles</p>
+                </a>
+              </li>
               
             </ul>
           </li>

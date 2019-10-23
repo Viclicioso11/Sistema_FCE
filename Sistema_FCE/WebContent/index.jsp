@@ -107,7 +107,6 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
-
  <script>
  $(document).ready(function ()
 {
@@ -120,6 +119,7 @@ mensaje = mensaje==null?"":mensaje;
  {
    errorAlert('Aviso', 'Carné o contraseña no válidos');
  }
+ 
 });
 
  
