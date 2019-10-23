@@ -388,7 +388,12 @@
                   <p>Control Roles</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="../seguridad/tblopciones.jsp" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control de Opciones</p>
+                </a>
+              </li>
             </ul>
           </li>
           

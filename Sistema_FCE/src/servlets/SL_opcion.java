@@ -50,11 +50,11 @@ public class SL_opcion extends HttpServlet {
 					
 					if(dtopc.eliminarOpcion(id))
 					{
-						response.sendRedirect("./pages/seguridad/add_opcion.jsp?msj=1");
+						response.sendRedirect("./pages/seguridad/tblopciones.jsp?msj=4");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/add_opcion.jsp?msj=2");
+						response.sendRedirect("./pages/seguridad/add_opcion.jsp?msj=5");
 					}
 					
 				}catch(Exception e) {
@@ -95,11 +95,11 @@ public class SL_opcion extends HttpServlet {
 					
 					if(dtopc.guardarOpcion(topc))
 					{
-						response.sendRedirect("./pages/seguridad/add_opcion.jsp?msj=1");
+						response.sendRedirect("./pages/seguridad/tblopciones.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/add_opcion.jsp?msj=2");
+						response.sendRedirect("./pages/seguridad/tblopciones.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -111,33 +111,24 @@ public class SL_opcion extends HttpServlet {
 			}
 			case 2:
 			{
-				try
+				topc.setId(Integer.parseInt(request.getParameter("IdOpcion")));
+				topc.setOpcion(request.getParameter("opcion"));
+				topc.setDescripcion(request.getParameter("descripcion"));
+						
+				if(dtopc.editarOpcion(topc))
 				{
-					topc.setId(Integer.parseInt(request.getParameter("id")));
-					topc.setOpcion(request.getParameter("opcion"));
-					topc.setDescripcion(request.getParameter("descripcion"));
-
-					
-					if(dtopc.editarOpcion(topc))
-					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=1");
-					}
-					else
-					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=2");
-					}
+					response.sendRedirect("./pages/seguridad/tblopciones.jsp?msj=3");
 				}
-				catch(Exception e)
+				else
 				{
-					e.printStackTrace();
-					System.out.println("Servlet: Error al editar el Usuario!!!");
+					response.sendRedirect("./pages/seguridad/editopcion.jsp?msj=2");
 				}
 				break;
+							
 			}
-			
 			default:
 			{
-				response.sendRedirect("index.jsp?msj=ERROR");
+				response.sendRedirect("../seguridad/tblopciones.jsp?msj=ERROR");
 			}
 		}
 		

@@ -75,7 +75,7 @@ public class DT_opcion {
 					
 					rsOpcion.updateString("opcion", topc.getOpcion() );
 					rsOpcion.updateString("descripcion", topc.getDescripcion());
-					rsOpcion.updateInt("estado", 1);
+					rsOpcion.updateInt("estado", 2);
 					
 					rsOpcion.updateRow();
 					editado = true;
@@ -141,5 +141,33 @@ public class DT_opcion {
 		}
 		
 		return listaOpcion;
+	}
+	
+	public Tbl_opcion obtenerOpcion(int idOpcion)
+	{
+		Tbl_opcion tOpcion  = new Tbl_opcion();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_opcion where id = ? and estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idOpcion);
+			
+			rsOpcion = ps.executeQuery();
+			if(rsOpcion.next())
+			{
+				tOpcion.setId(rsOpcion.getInt("id"));
+				tOpcion.setOpcion(rsOpcion.getString("Opcion"));
+				tOpcion.setDescripcion(rsOpcion.getString("descripcion"));
+				tOpcion.setEstado(rsOpcion.getInt("estado"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en ObtenerOpcion() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return tOpcion;
 	}
 }
