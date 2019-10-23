@@ -32,7 +32,7 @@ public class SL_usuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		////////////////////VARIABLE DE CONTROL //////////////////////
 		String opc = request.getParameter("opc");
@@ -89,11 +89,11 @@ public class SL_usuario extends HttpServlet {
 			response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
 		}
 		}
-=======
+
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	
->>>>>>> 46d1921a4e1d22538118dc9ade0004ac784959ac
+
 	}
 
 	/**

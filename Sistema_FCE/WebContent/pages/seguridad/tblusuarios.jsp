@@ -144,8 +144,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-<<<<<<< HEAD
-=======
+
 
           <div class="card">
             <div class="card-header">
@@ -158,7 +157,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
->>>>>>> 46d1921a4e1d22538118dc9ade0004ac784959ac
+
         </div>
         <!-- /.col -->
       </div>
