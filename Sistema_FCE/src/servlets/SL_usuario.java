@@ -32,9 +32,68 @@ public class SL_usuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		// TODO Auto-generated method stub
+
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		////////////////////VARIABLE DE CONTROL //////////////////////
+		String opc = request.getParameter("opc");
+		int opcion = 0;
+		
+		opc = opc==null?"0":opc;
+		System.out.println("opc: "+opc);
+		opcion = Integer.parseInt(opc);
+		System.out.println("opcion: "+opcion);
+		
+		///////// RECUPERAMOS EL ID DEL USUARIO A ELIMINAR //////////
+		String idEliminar = request.getParameter("userID");
+		int idUser = 0;
+		
+		idEliminar = idEliminar==null?"0":idEliminar;
+		System.out.println("idEliminar: "+idEliminar);
+		idUser = Integer.parseInt(idEliminar);
+		System.out.println("idUser: "+idUser);
+		
+		Tbl_usuario tus = new Tbl_usuario();
+		DT_usuario dtus = new DT_usuario();
+		switch(opcion)
+		{
+		case 1:
+		{
+			try
+			{
+				tus.setId(idUser);
+				
+				if(dtus.eliminarUser(tus))
+				{
+					response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=3");
+		}
+		else
+		{
+			response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=4");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Servlet: Error eliminarUser()");
+			}
+			break;
+		}
+		case 2:
+		{
+			//SIN CODIGO AUN
+			break;
+		}
+		
+		default:
+		{
+			response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
+		}
+		}
+
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	
+
 	}
 
 	/**
@@ -63,10 +122,12 @@ public class SL_usuario extends HttpServlet {
 				try
 				{
 					tus.setCarne(request.getParameter("carne"));
-					tus.setContrasena(request.getParameter("contrasena"));
 					tus.setNombres(request.getParameter("nombres"));
 					tus.setApellidos(request.getParameter("apellidos"));
 					tus.setCorreo(request.getParameter("correo"));
+					tus.setContrasena(request.getParameter("contrasenia"));
+					
+					
 					
 					if(dtus.guardarUser(tus))
 					{
@@ -88,12 +149,12 @@ public class SL_usuario extends HttpServlet {
 			{
 				try
 				{
-					tus.setId(Integer.parseInt(request.getParameter("id")));
+					tus.setId(Integer.parseInt(request.getParameter("IdUser")));
 					tus.setCarne(request.getParameter("carne"));
-					tus.setContrasena(request.getParameter("contrasena"));
 					tus.setNombres(request.getParameter("nombres"));
 					tus.setApellidos(request.getParameter("apellidos"));
 					tus.setCorreo(request.getParameter("correo"));
+					tus.setContrasena(request.getParameter("contrasenia"));
 					
 					if(dtus.modificarUser(tus))
 					{

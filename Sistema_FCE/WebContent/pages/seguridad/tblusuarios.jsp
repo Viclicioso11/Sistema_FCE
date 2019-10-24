@@ -118,7 +118,11 @@
 	                  <td><%=tus.getCarne() %></td>
 	                  <td><%=tus.getCorreo() %></td>
 	                  <td><%=estado %></td>
-	                  <td><a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit"></i></a></td>
+	                  <td>
+	                  <a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
+		                  &nbsp;&nbsp;&nbsp;
+	                  <a href="#" onclick="deleteUser('<%=tus.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  </td>
 	                </tr>
 	             <%
 	        		}   
@@ -141,6 +145,7 @@
           </div>
           <!-- /.card -->
 
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with default features</h3>
@@ -152,6 +157,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+
         </div>
         <!-- /.col -->
       </div>
@@ -214,7 +220,7 @@
 function linkEditUser(user)
 {
 	var idUsuario = user;
-	window.location.href="http://localhost:8080/SEGURIDAD/pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
 }
 </script>
 
@@ -243,6 +249,26 @@ function linkEditUser(user)
   });
   
 </script>
+
+<script>
+function deleteUser(user)
+{
+	var idUsuario = user;
+	confirm(function(e,btn)
+     { 	//event + button clicked
+     	e.preventDefault();
+     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+       	//successAlert('Confirmed!');
+     }, 
+     function(e,btn)
+     {
+       e.preventDefault();
+       //errorAlert('Denied!');
+     });
+	
+}
+</script>
+
 <script>
   $(document).ready(function ()
   {
