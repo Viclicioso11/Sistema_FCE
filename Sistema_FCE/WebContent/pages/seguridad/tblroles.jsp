@@ -201,18 +201,21 @@ function linkEditRol(rol)
 <script>
 function deleteRol(rol)
 {
-	var idRol = rol;
-	confirm(function(e,btn)
-     { 	//event + button clicked
-     	e.preventDefault();
-     	window.location.href="../../SL_rol?opc=1&rolID="+idRol;
-       	//successAlert('Confirmed!');
-     }, 
-     function(e,btn)
-     {
-       e.preventDefault();
-       //errorAlert('Denied!');
-     });
+	
+	  $.jAlert({
+		    'type': 'confirm',
+		    'confirmQuestion': '¿Está seguro de eliminar el rol seleccionado?',
+		    'onConfirm': function(e, btn){
+		     e.preventDefault();
+		     window.location.href="../../SL_rol?opc=1&rolID="+rol;
+		     btn.parents('.jAlert').closeAlert();
+		    },
+		    'onDeny': function(e, btn){
+		      e.preventDefault();
+		      btn.parents('.jAlert').closeAlert();
+		    }
+		  });
+
 	
 }
 </script>

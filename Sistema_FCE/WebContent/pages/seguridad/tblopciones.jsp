@@ -195,17 +195,20 @@ function linkEditOpciones(opcion)
 <script>
 function deleteOpciones(id)
 {
-	confirm(function(e,btn)
-     { 	//event + button clicked
-     	e.preventDefault();
-     	window.location.href= "../../SL_opcion?opc=1&id="+ id;
-       	//successAlert('Confirmed!');
-     }, 
-     function(e,btn)
-     {
-       e.preventDefault();
-       //errorAlert('Denied!');
-     });
+	
+	  $.jAlert({
+		    'type': 'confirm',
+		    'confirmQuestion': '¿Está seguro de eliminar la opción seleccionada?',
+		    'onConfirm': function(e, btn){
+		      e.preventDefault();
+     		  window.location.href= "../../SL_opcion?opc=1&id="+ id;
+		      btn.parents('.jAlert').closeAlert();
+		    },
+		    'onDeny': function(e, btn){
+		      e.preventDefault();
+		      btn.parents('.jAlert').closeAlert();
+		    }
+		  });
 	
 }
 </script>
