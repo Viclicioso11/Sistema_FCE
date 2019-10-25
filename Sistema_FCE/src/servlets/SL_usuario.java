@@ -88,13 +88,16 @@ public class SL_usuario extends HttpServlet {
 		{
 			response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
 		}
+			
 		}
+	}
+		
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	
 
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
