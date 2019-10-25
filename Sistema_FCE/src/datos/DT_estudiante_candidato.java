@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import entidades.Tbl_estudiante_candidato;
-import entidades.Tbl_opcion;
+
 
 public class DT_estudiante_candidato {
 	
@@ -71,7 +71,6 @@ public class DT_estudiante_candidato {
 					tuc.setCorreo(rsEstudianteCandidato.getString("correo"));
 					tuc.setNotificado(rsEstudianteCandidato.getInt("notificado"));
 					
-				;
 				
 					listaEstudianteCandidato.add(tuc);
 				}

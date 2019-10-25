@@ -76,7 +76,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <a href="../seguridad/newUser.jsp">Agregar Usuario <i class="fas fa-plus-circle"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
