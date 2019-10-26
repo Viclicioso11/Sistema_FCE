@@ -105,7 +105,7 @@
 	                  <td><%=topcion.getDescripcion() %></td>
 	                  <td><%=estado %></td>
 	                  <td><a href="#"onclick="linkEditOpciones('<%=topcion.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a><td>
+	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a></td>
 	                </tr>
 	             <%
 	        		}   
@@ -195,17 +195,20 @@ function linkEditOpciones(opcion)
 <script>
 function deleteOpciones(id)
 {
-	confirm(function(e,btn)
-     { 	//event + button clicked
-     	e.preventDefault();
-     	window.location.href= "../../SL_opcion?opc=1&id="+ id;
-       	//successAlert('Confirmed!');
-     }, 
-     function(e,btn)
-     {
-       e.preventDefault();
-       //errorAlert('Denied!');
-     });
+	
+	  $.jAlert({
+		    'type': 'confirm',
+		    'confirmQuestion': '¿Está seguro de eliminar la opción seleccionada?',
+		    'onConfirm': function(e, btn){
+		      e.preventDefault();
+     		  window.location.href= "../../SL_opcion?opc=1&id="+ id;
+		      btn.parents('.jAlert').closeAlert();
+		    },
+		    'onDeny': function(e, btn){
+		      e.preventDefault();
+		      btn.parents('.jAlert').closeAlert();
+		    }
+		  });
 	
 }
 </script>

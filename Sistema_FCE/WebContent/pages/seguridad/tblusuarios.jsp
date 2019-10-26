@@ -14,7 +14,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
-<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
+	<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
   
   <!-- DATATABLE NEW -->
     <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -76,7 +76,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <a href="../seguridad/newUser.jsp">Agregar Usuario <i class="fas fa-plus-circle"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -118,7 +118,11 @@
 	                  <td><%=tus.getCarne() %></td>
 	                  <td><%=tus.getCorreo() %></td>
 	                  <td><%=estado %></td>
-	                  <td><a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit"></i></a></td>
+	                  <td>
+	                  <a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
+		                  &nbsp;&nbsp;&nbsp;
+	                  <a href="#" onclick="deleteUser('<%=tus.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  </td>
 	                </tr>
 	             <%
 	        		}   
@@ -141,6 +145,7 @@
           </div>
           <!-- /.card -->
 
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with default features</h3>
@@ -152,6 +157,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+
         </div>
         <!-- /.col -->
       </div>
@@ -214,7 +220,7 @@
 function linkEditUser(user)
 {
 	var idUsuario = user;
-	window.location.href="http://localhost:8080/SEGURIDAD/pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
 }
 </script>
 
@@ -243,6 +249,26 @@ function linkEditUser(user)
   });
   
 </script>
+
+<script>
+function deleteUser(user)
+{
+	var idUsuario = user;
+	confirm(function(e,btn)
+     { 	//event + button clicked
+     	e.preventDefault();
+     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+       	//successAlert('Confirmed!');
+     }, 
+     function(e,btn)
+     {
+       e.preventDefault();
+       //errorAlert('Denied!');
+     });
+	
+}
+</script>
+
 <script>
   $(document).ready(function ()
   {

@@ -88,47 +88,44 @@ tus = dtus.obtenerUser(user);
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <input name="IdUser" id="IdUser" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_USER A EDITAR -->
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre de Usuario:</label>
-                    <input type="text" id="username" name="username" class="form-control" 
-                    placeholder="Nombre de Usuario" required>
+                   
+                   <div class="form-group">
+                    <label for="exampleInputEmail1">Numero de Carne:</label>
+                    <input type="text" id="carne" name="carne" class="form-control" 
+                    placeholder="Carnet de usuario" required>
                   </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nombres:</label>
+                    <input type="text" id="nombres" name="nombres" class="form-control" 
+                    placeholder="Nombres de Usuario" required>
+                  </div>
+                 
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control" 
+                    placeholder="Apellidos del Usuario" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Correo Institucional:</label>
+                    <input type="email" id="correo" name="correo" class="form-control" 
+                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
+                  </div>
+                  
                   <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña: </label>
-                    <input type="password" id="password" name="password" class="form-control" 
+                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" 
                     title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
                     placeholder="Ingrese su Contraseña" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Confirmar Contraseña: </label>
-                    <input type="password" id="password2" name="password2" onchange="pwdEquals()" class="form-control" 
+                    <input type="password" id="contrasenia2" name="contrasenia2" onchange="pwdEquals()" class="form-control" 
                     title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
                     placeholder="Ingrese nuevamente su Contraseña" required>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Primer Nombre:</label>
-                    <input type="text" id="nombre1" name="nombre1" class="form-control" 
-                    placeholder="Primer Nombre" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Segundo Nombre:</label>
-                    <input type="text" id="nombre2" name="nombre2" class="form-control"  placeholder="Nombre de Usuario">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Primer Apellido:</label>
-                    <input type="text" id="apellido1" name="apellido1" class="form-control" 
-                    placeholder="Primer Apellido" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Segundo Apellido:</label>
-                    <input type="text" id="apellido2" name="apellido2" class="form-control" 
-                    placeholder="Segundo Apellido">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email:</label>
-                    <input type="email" id="email" name="email" class="form-control" 
-                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
-                  </div>
+                  
 
                 </div>
                 <!-- /.card-body -->
@@ -164,21 +161,21 @@ tus = dtus.obtenerUser(user);
 	  var pwd1 = "";
 	  var pwd2 = "";
 	  
-	  pwd1 = $("#password").val();
-	  pwd2 = $("#password2").val();
+	  pwd1 = $("#contrasenia").val();
+	  pwd2 = $("#contrasenia2").val();
 	  
 	  if(pwd1 != pwd2)
 	  {
 		  errorAlert('Error', 'Revise la contraseña ingresada');
-		  $("#password").css("border-color", "red");
-		  $("#password").val("");
-		  $("#password2").css("border-color", "red");
-		  $("#password2").val("");
+		  $("#contrasenia").css("border-color", "red");
+		  $("#contrasenia").val("");
+		  $("#contrasenia2").css("border-color", "red");
+		  $("#contrasenia2").val("");
 	  }
 	  else
 		{
-		  $("#password").css("border-color", "#ced4da");
-		  $("#password2").css("border-color", "#ced4da");
+		  $("#contrasenia").css("border-color", "#ced4da");
+		  $("#contrasenia2").css("border-color", "#ced4da");
 		}
 		  
   }
@@ -190,11 +187,11 @@ tus = dtus.obtenerUser(user);
 		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
     	
     	$("#IdUser").val("<%=tus.getId()%>");
-    	$("#username").val("<%=tus.getCarne()%>");
-    	$("#password").val("<%=tus.getContrasena()%>");
-    	$("#nombre1").val("<%=tus.getNombres()%>");
-    	$("#apellido1").val("<%=tus.getApellidos()%>");
-    	$("#email").val("<%=tus.getCorreo()%>");
+    	$("#carne").val("<%=tus.getCarne()%>");
+    	$("#contrasenia").val("<%=tus.getContrasena()%>");
+    	$("#nombres").val("<%=tus.getNombres()%>");
+    	$("#apellidos").val("<%=tus.getApellidos()%>");
+    	$("#correo").val("<%=tus.getCorreo()%>");
     	
     	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      

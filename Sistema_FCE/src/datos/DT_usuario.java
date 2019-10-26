@@ -52,7 +52,7 @@ public class DT_usuario
 		Tbl_usuario tus  = new Tbl_usuario();
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where id_user = ? and estado<>3", 
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_usuario where id = ? and estado<>3", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, idUser);
@@ -122,16 +122,16 @@ public class DT_usuario
 		{
 			this.listUser();
 			rsUsuario.moveToInsertRow();
-			
-			rsUsuario.updateString("carne", tus.getCarne());
 			rsUsuario.updateString("nombres", tus.getNombres());
 			rsUsuario.updateString("apellidos", tus.getApellidos());
+			rsUsuario.updateString("carne", tus.getCarne());
 			rsUsuario.updateString("contrasena", tus.getContrasena());
 			rsUsuario.updateString("correo", tus.getCorreo());
 			rsUsuario.updateInt("estado", 1);
 			rsUsuario.insertRow();
 			rsUsuario.moveToCurrentRow();
 			guardado = true;
+			
 		}
 		catch (Exception e) 
 		{
@@ -147,17 +147,18 @@ public class DT_usuario
 		boolean modificado=false;	
 		try
 		{
+
 			this.listUser();
 			rsUsuario.beforeFirst();
 			while (rsUsuario.next())
 			{
 				if(rsUsuario.getInt(1)==tus.getId())
 				{
-					rsUsuario.updateString("nombre1", tus.getNombres());
+					rsUsuario.updateString("nombres", tus.getNombres());
 					rsUsuario.updateString("apellidos", tus.getApellidos());
-					rsUsuario.updateString("password", tus.getContrasena());
-					rsUsuario.updateString("email", tus.getCorreo());
-					rsUsuario.updateInt("estado", 2);
+					rsUsuario.updateString("contrasena", tus.getContrasena());
+					rsUsuario.updateString("correo", tus.getCorreo());
+					rsUsuario.updateInt("estado",2);
 					rsUsuario.updateRow();
 					modificado=true;
 					break;

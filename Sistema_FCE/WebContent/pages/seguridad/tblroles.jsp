@@ -9,12 +9,12 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Font Awesome -->
+<!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
-<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
+	<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
   
   <!-- DATATABLE NEW -->
     <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -28,6 +28,7 @@
   
   <!-- jAlert css  -->
 <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+
   
   <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -79,7 +80,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="Tbl_rol" name="Tbl_rol" class="display">
+              <table id="Tbl_rol" class="display">
                 <thead>
                 <tr>
                   <th>Id</th>
@@ -106,8 +107,10 @@
 	                  <td><%=trol.getRol() %></td>
 	                  <td><%=trol.getDescripcion() %></td>
 	                  <td><%=estado %></td>
-	                  <td><a href="#"onclick="linkEditRol('<%=trol.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteRol('<%=trol.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a><td>
+	                  <td>
+	                  		<a href="#"onclick="linkEditRol('<%=trol.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;
+	                  		<a href="#" onclick="deleteRol('<%=trol.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  </td>
 	                </tr>
 	             <%
 	        		}   
@@ -145,6 +148,7 @@
   
 </div>
 <!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -197,18 +201,21 @@ function linkEditRol(rol)
 <script>
 function deleteRol(rol)
 {
-	var idRol = rol;
-	confirm(function(e,btn)
-     { 	//event + button clicked
-     	e.preventDefault();
-     	window.location.href="../../SL_rol?opc=1&rolID="+idRol;
-       	//successAlert('Confirmed!');
-     }, 
-     function(e,btn)
-     {
-       e.preventDefault();
-       //errorAlert('Denied!');
-     });
+	
+	  $.jAlert({
+		    'type': 'confirm',
+		    'confirmQuestion': '¿Está seguro de eliminar el rol seleccionado?',
+		    'onConfirm': function(e, btn){
+		     e.preventDefault();
+		     window.location.href="../../SL_rol?opc=1&rolID="+rol;
+		     btn.parents('.jAlert').closeAlert();
+		    },
+		    'onDeny': function(e, btn){
+		      e.preventDefault();
+		      btn.parents('.jAlert').closeAlert();
+		    }
+		  });
+
 	
 }
 </script>
@@ -223,7 +230,6 @@ function deleteRol(rol)
         'excel',
         'print'
         ]
-
       });
   });
   
