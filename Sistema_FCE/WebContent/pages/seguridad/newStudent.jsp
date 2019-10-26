@@ -32,14 +32,7 @@ mensaje = mensaje==null?"":mensaje;
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-	<!-- Navbar -->
-	  	<jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
-	<!-- /.navbar -->
-	
-	<!-- SIDEBAR -->
-	  	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
-	<!-- SIDEBAR -->
-	
+
 	  <!-- Content Wrapper. Contains page content -->
 	  <div class="content-wrapper">
 	    <!-- Content Header (Page header) -->
@@ -73,10 +66,10 @@ mensaje = mensaje==null?"":mensaje;
               <!-- form start -->
               <form role="form" action="../../SL_usuario" method="post">
                 <div class="card-body">
-                  <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+                  <input name="opc" id="opc" type="hidden" value="4"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   
                    <div class="form-group">
-                    <label for="exampleInputEmail1">Numero de Carné:</label>
+                    <label for="exampleInputEmail1">Número de Carné:</label>
                     <input type="text" id="carne" name="carne" class="form-control" 
                     placeholder="Carnet de usuario" required>
                   </div>
@@ -151,13 +144,9 @@ mensaje = mensaje==null?"":mensaje;
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
 
-      if(nuevo == "1")
-      {
-        successAlert('Éxito', 'El nuevo registro ha sido almacenado!!!');
-      }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+        errorAlert('Error', 'Revise los datos e intente nuevamente.');
       }
     
       

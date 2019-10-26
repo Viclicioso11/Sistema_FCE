@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tbl_usuario;
+import datos.DT_estudiante_candidato;
 import datos.DT_usuario;
 
 /**
@@ -117,6 +118,7 @@ public class SL_usuario extends HttpServlet {
 		
 		Tbl_usuario tus = new Tbl_usuario();
 		DT_usuario dtus = new DT_usuario();
+		DT_estudiante_candidato dtsc = new DT_estudiante_candidato();
 		
 		switch(opcion)
 		{
@@ -199,9 +201,46 @@ public class SL_usuario extends HttpServlet {
 				}
 				break;
 				
+			}
+			case 4:
+			{
 				
+				
+				try
+				{
+					tus.setNombres(request.getParameter("nombres"));
+					tus.setApellidos(request.getParameter("apellidos"));
+					tus.setCarrera(request.getParameter("carne"));
+					tus.setCorreo(request.getParameter("correo"));
+					tus.setContrasena(request.getParameter("contrasena"));
+					
+					
+					if(dtsc.validarEstudianteCandidato(tus.getCorreo()))
+					{
+						if(dtus.guardarUser(tus)) {
+							if(dtsc.CambiarEstadoEstudianteCandidato(tus.getCorreo())){
+								response.sendRedirect("./newStudent.jsp?msj=1");
+							}
+									
+						}else {
+							response.sendRedirect("./newStudent.jsp?msj=2");
+						}
+						
+					}
+					else
+					{
+						response.sendRedirect("./newStudent.jsp?msj=2");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error al intentar autenticar el Usuario.");
+				}
+				break;
 				
 			}
+			
 			
 			default:
 			{
