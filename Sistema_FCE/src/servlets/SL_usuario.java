@@ -210,26 +210,26 @@ public class SL_usuario extends HttpServlet {
 				{
 					tus.setNombres(request.getParameter("nombres"));
 					tus.setApellidos(request.getParameter("apellidos"));
-					tus.setCarrera(request.getParameter("carne"));
+					tus.setCarne(request.getParameter("carne"));
 					tus.setCorreo(request.getParameter("correo"));
-					tus.setContrasena(request.getParameter("contrasena"));
+					tus.setContrasena(request.getParameter("contrasenia"));
 					
 					
 					if(dtsc.validarEstudianteCandidato(tus.getCorreo()))
 					{
 						if(dtus.guardarUser(tus)) {
 							if(dtsc.CambiarEstadoEstudianteCandidato(tus.getCorreo())){
-								response.sendRedirect("./newStudent.jsp?msj=1");
+								response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=1");
 							}
 									
 						}else {
-							response.sendRedirect("./newStudent.jsp?msj=2");
+							response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
 						}
 						
 					}
 					else
 					{
-						response.sendRedirect("./newStudent.jsp?msj=2");
+						response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
