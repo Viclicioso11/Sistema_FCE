@@ -229,5 +229,34 @@ public class DT_usuario
 		return vsus;
 	}
 	
+	
+	// Metodo para obtenero un usuario
+		public int obtenerIDUser(String carne)
+		{
+			int id_user = 0;
+			try
+			{
+				PreparedStatement ps = c.prepareStatement("SELECT id from tbl_usuario where carne = ? and estado<>3", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setString(1, carne);
+				rsUsuario = ps.executeQuery();
+				if(rsUsuario.next())
+				{
+					id_user = rsUsuario.getInt("id");
+					
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerIDUser() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return id_user;
+		}
+		
+	
 
+	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -266,8 +267,25 @@ function deleteUser(user)
        //errorAlert('Denied!');
      });
 	
+	
+	
+	$.jAlert({
+	    'type': 'confirm',
+	    'confirmQuestion': '¿Está seguro de eliminar el usuario seleccionado?',
+	    'onConfirm': function(e, btn){
+	     e.preventDefault();
+	     window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+	     btn.parents('.jAlert').closeAlert();
+	    },
+	    'onDeny': function(e, btn){
+	      e.preventDefault();
+	      btn.parents('.jAlert').closeAlert();
+	    }
+	  });
+	
 }
 </script>
+
 
 <script>
   $(document).ready(function ()
@@ -279,16 +297,26 @@ function deleteUser(user)
 
     if(nuevo == "1")
     {
-      successAlert('Éxito', 'El registro ha sido editado!!!');
+      successAlert('Éxito', 'El registro ha sido almacenado correctamente.');
     }
-    if(nuevo == "2")
-    {
-      errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
-    }
-  
     
+    if(nuevo == "3")
+    {
+      successAlert('Éxito', 'El registro ha sido modificado correctamente.');
+    }
+    
+    if(nuevo == "4")
+    {
+      successAlert('Éxito', 'El registro ha sido eliminado correctamente.');
+    }
+    
+    if(nuevo == "5")
+    {
+      errorAlert('Error', 'El registro no se ha podido eliminar.');
+    }
 
   });
   </script>
+
 </body>
 </html>
