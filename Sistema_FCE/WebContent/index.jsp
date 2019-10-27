@@ -47,12 +47,12 @@ mensaje = mensaje==null?"":mensaje;
       
       
 
-      <form role="form" action="SL_usuario" method="post">
+      <form role="form" action="SL_login" method="post">
         <div class="input-group mb-3">
         
         <input name="opc" id="opc" type="hidden" value="3"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
         
-          <input id="carne" name="carne" type="text" class="form-control" placeholder="ID">
+          <input id="carne" name="login" type="text" class="form-control" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -69,7 +69,7 @@ mensaje = mensaje==null?"":mensaje;
         </div>
         
          <div class="input-group mb-3">
-           <select class="form-control select2" name="rol" style="width: 100%;" required="required">
+           <select class="form-control select2" name="id" style="width: 100%;" required="required">
              <option value="0">Seleccione un Rol...</option>
             	<%
 		            		DT_rol dtr = new DT_rol();
@@ -125,24 +125,15 @@ mensaje = mensaje==null?"":mensaje;
   <script src="./plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="./plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
- <script>
- $(document).ready(function ()
-{
- var nuevo = 0;
- nuevo = "<%=mensaje%>";
+<script>
+  $(function () 
+	{
+    //Initialize Select2 Elements
+    $('.select2').select2({theme: 'bootstrap4'})
+	});
+</script>
 
 
-
- if(nuevo == "2")
- {
-   errorAlert('Aviso', 'Carné o contraseña no válidos');
- }
- 
-});
-
- 
-   
- </script>
 
 </body>
 </html>

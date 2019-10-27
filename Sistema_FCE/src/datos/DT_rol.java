@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import entidades.Tbl_rol;
 import entidades.Tbl_usuario;
+import entidades.Vw_rol_opcion;
 
 
 public class DT_rol {
@@ -14,6 +15,7 @@ public class DT_rol {
 	PoolConexion pc = PoolConexion.getInstance(); 
 	Connection c = PoolConexion.getConnection();
 	private ResultSet rsRol;
+	private ResultSet rsRolOpc;
 	
 	
 	//FUnción para devolver un arreglo con todos los roles que hay en la bd
@@ -195,6 +197,43 @@ public class DT_rol {
 			return asignado;
 			
 		}
+		
+///////////////////////////// METODO PARA LISTAR ROL & OPCIONES /////////////////////////////
+         public ArrayList<Vw_rol_opcion> listRolOpc(int idRol)
+         {
+             ArrayList<Vw_rol_opcion> listRolOpc = new ArrayList<Vw_rol_opcion>();
+
+           try
+           {
+             PreparedStatement ps = c.prepareStatement("SELECT * FROM public.vw_rol_opcion where rol_id=?", 
+             ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+             ResultSet.HOLD_CURSORS_OVER_COMMIT);
+             ps.setInt(1, idRol);
+             
+             rsRolOpc = ps.executeQuery();
+             
+             while(rsRolOpc.next())
+            {
+            	 Vw_rol_opcion vtrop = new Vw_rol_opcion();
+              vtrop.setRol_id(rsRolOpc.getInt("rol_id"));
+              vtrop.setRol(rsRolOpc.getString("rol"));
+              vtrop.setOpcion_id(rsRolOpc.getInt("opcion_id"));
+              vtrop.setOpcion(rsRolOpc.getString("opcion"));
+              listRolOpc.add(vtrop);
+             }
+          
+            }
+            catch (Exception e)
+            {
+              System.out.println("DATOS: ERROR en listRolOpc() "+ e.getMessage());
+              e.printStackTrace();
+            }
+
+            return listRolOpc;
+          }
+		
+		
+		
 		
 		
 		

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"session="true" import="entidades.Vw_usuario_rol, datos.DT_usuario;"%>
+    pageEncoding="ISO-8859-1"session="true" import="entidades.*,datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,29 +19,37 @@
  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  
  
-
  <%
+	String loginUser = "";
+	int rolId = 0;
 
-Vw_usuario_rol usuarioSesion = new Vw_usuario_rol();
-DT_usuario dtus = new DT_usuario();
-
-/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
-String carne = "";
-carne = request.getParameter("msj");
-carne = carne==null?"":carne;
-
-usuarioSesion = dtus.UsuarioConfirmado(carne);
-
-//creamos el objeto sesion
-HttpSession sesion = request.getSession();
-	 sesion.setAttribute("nombre", usuarioSesion.getNombre());
-	 sesion.setAttribute("apellido", usuarioSesion.getApellido());
-	 sesion.setAttribute("correo", usuarioSesion.getCorreo());
-	 sesion.setAttribute("id_rol", usuarioSesion.getId_rol());
-	 sesion.setAttribute("carne", usuarioSesion.getCarne());
-	 
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+	
+// 	rolId = (int) session.getAttribute("idRol");
+// 	rolId = loginUser==null?0:rolId;
+	
+	if(loginUser.equals(""))
+	{
+		response.sendRedirect("index.jsp");
+	}
+	else
+	{
+		ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>(); 
+		DT_rol dtr = new DT_rol();
+		listOpciones = dtr.listRolOpc(1);
+		HttpSession hts2 = request.getSession(true);
+		hts2.setAttribute("listOpciones", listOpciones);
+		
+		
+// 		HttpSession hts4 = request.getSession(true);
+// 		hts4.setAttribute("idusuario", idUsuario);
+		
+	}
+%>
  
- %>
+ 
+ 
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

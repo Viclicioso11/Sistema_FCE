@@ -43,20 +43,20 @@ public class SL_login extends HttpServlet {
 //		doGet(request, response);
 		DT_usuario dtus = new DT_usuario();
 		String login = "";
-		String pwd = "";
-		int rolId = 0;
+		String contrasena = "";
+		int id = 0;
 		
 		login = request.getParameter("login");
-		pwd = request.getParameter("pwd");
-		rolId = Integer.parseInt(request.getParameter("rol"));
+		contrasena = request.getParameter("contrasena");
+		id = Integer.parseInt(request.getParameter("id"));
 		
 		try
 		{
-			if(dtus.dtverificarLogin(login, pwd, rolId))
+			if(dtus.dtverificarLogin(login, contrasena, id))
 			{
 				HttpSession hts = request.getSession(true);
 				hts.setAttribute("login", login);
-				hts.setAttribute("idRol", rolId);
+				hts.setAttribute("id", id);
 				response.sendRedirect("sistema.jsp");
 				
 			}

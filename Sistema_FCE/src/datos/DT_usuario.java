@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import entidades.Tbl_usuario;
 import entidades.Vw_usuario_rol;
 
+/**
+ * @author Jonathan
+ *
+ */
 public class DT_usuario 
 {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -228,7 +232,7 @@ public class DT_usuario
 		
 		return vsus;
 	}
-	
+
 	
 	// Metodo para obtenero un usuario
 		public int obtenerIDUser(String carne)
@@ -256,17 +260,17 @@ public class DT_usuario
 			return id_user;
 		}
 		
-		public boolean dtverificarLogin(String user, String pwd, int idRol)
+		public boolean dtverificarLogin(String carne, String contrasena, int id)
 		{
 			boolean existe=false;
 			
-			String SQL = ("SELECT * FROM public.vw_usuario_rol where username=? and password=? and id_rol=?");
+			String SQL = ("SELECT * FROM public.vw_usuario_rol where carne=? and contrasena=? and id=?");
 			try
 			{
 				PreparedStatement ps = c.prepareStatement(SQL);
-				ps.setString(1, user);
-				ps.setString(2, pwd);
-				ps.setInt(3, idRol);
+				ps.setString(1, carne);
+				ps.setString(2, contrasena);
+				ps.setInt(3, id);
 				ResultSet rs = null;
 				rs = ps.executeQuery();
 			
