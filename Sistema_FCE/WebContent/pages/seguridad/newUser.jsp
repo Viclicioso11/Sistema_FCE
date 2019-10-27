@@ -115,7 +115,7 @@ mensaje = mensaje==null?"":mensaje;
                   </div>
                    <div class="form-group">
                    <label for="exampleInputPassword1">Seleccione un Rol del usuario: </label>
-           				<select class="form-control select2" name="rol" style="width: 100%;" required="required">
+           				<select class="form-control select2" name="rol" id="rol" style="width: 100%;" required="required">
            				  <option value="0">Seleccione un Rol...</option>
             				<%
 		            		DT_rol dtr = new DT_rol();

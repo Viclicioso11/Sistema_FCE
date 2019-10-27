@@ -119,13 +119,14 @@ public class SL_usuario extends HttpServlet {
 		
 		Tbl_usuario tus = new Tbl_usuario();	
 		DT_usuario dtus = new DT_usuario();
+		DT_rol dtrol = new DT_rol();
 		DT_estudiante_candidato dtsc = new DT_estudiante_candidato();
 		
 		switch(opcion)
 		{
 			case 1:
 			{
-				DT_rol dtrol = new DT_rol();
+				
 				try
 				{
 					tus.setCarne(request.getParameter("carne"));
@@ -133,7 +134,7 @@ public class SL_usuario extends HttpServlet {
 					tus.setApellidos(request.getParameter("apellidos"));
 					tus.setCorreo(request.getParameter("correo"));
 					tus.setContrasena(request.getParameter("contrasenia"));
-					int id_rol = Integer.parseInt(request.getParameter("idRol"));
+					int id_rol = Integer.parseInt(request.getParameter("rol"));
 					int id_usuario = 0;
 					
 					if(dtus.guardarUser(tus))
@@ -142,8 +143,7 @@ public class SL_usuario extends HttpServlet {
 						if(dtrol.asignarRolUsuario(id_usuario, id_rol)) {
 							response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=1");
 						}
-						
-						
+							
 					}
 					else
 					{
@@ -220,16 +220,28 @@ public class SL_usuario extends HttpServlet {
 					tus.setCarne(request.getParameter("carne"));
 					tus.setCorreo(request.getParameter("correo"));
 					tus.setContrasena(request.getParameter("contrasenia"));
-					
-					
+					int id_rol = Integer.parseInt(request.getParameter("id_rol"));
+					int id_usuario = 0;
+					//Validamos que el correo que puso el usuario existe en la tabla de correos posibles
 					if(dtsc.validarEstudianteCandidato(tus.getCorreo()))
 					{
+						//Guardamos el usuario
 						if(dtus.guardarUser(tus)) {
+							
+							//obtenemos el id del usuario guardado
+							id_usuario = dtus.obtenerIDUser(tus.getCarne());
+							//cambiamos el estado el correo que ya ha sido guardado
 							if(dtsc.CambiarEstadoEstudianteCandidato(tus.getCorreo())){
-								response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=1");
+								//asignamos el rol estudiante al usuario al guardar en la tabla usuario rol
+								if(dtrol.asignarRolUsuario(id_usuario, id_rol)) {
+									
+									response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=1");
+								}
+								
 							}
 									
-						}else {
+						}
+						else {
 							response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
 						}
 						

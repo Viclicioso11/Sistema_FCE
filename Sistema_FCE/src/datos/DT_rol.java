@@ -173,11 +173,10 @@ public class DT_rol {
 			
 			try
 			{
-				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_usuario_rol", 
+				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_rol_usuario", 
 						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 						ResultSet.HOLD_CURSORS_OVER_COMMIT);
 				rsRol = ps.executeQuery();
-				this.listRol();
 				
 				rsRol.moveToInsertRow();
 				rsRol.updateInt("id_rol", id_rol);

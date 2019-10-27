@@ -44,9 +44,11 @@ mensaje = mensaje==null?"":mensaje;
       
       
 
-      <form role="form" action="SL_usuario" method="post">
+      <form role="form" action="../../SL_usuario" method="post">
       
         <div class="input-group mb-3"> 
+        
+         <input name="id_rol" id="id_rol" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
         <input name="opc" id="opc" type="hidden" value="4"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
           <input id="carne" name="carne" type="text" class="form-control" placeholder="Carné de estudiante UCA">
           <div class="input-group-append">
