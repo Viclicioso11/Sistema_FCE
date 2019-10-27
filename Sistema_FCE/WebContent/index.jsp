@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"  import="entidades.Tbl_usuario, datos.DT_usuario, entidades.Vw_usuario_rol ;" session="true"%>
+    pageEncoding="ISO-8859-1"  import="entidades.Tbl_usuario, datos.DT_usuario, datos.DT_rol, entidades.Tbl_rol ,entidades.Vw_usuario_rol, java.util.* ;" session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,7 @@ mensaje = mensaje==null?"":mensaje;
           <input id="carne" name="carne" type="text" class="form-control" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
@@ -66,6 +66,24 @@ mensaje = mensaje==null?"":mensaje;
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        
+         <div class="input-group mb-3">
+           <select class="form-control select2" name="rol" style="width: 100%;" required="required">
+             <option value="0">Seleccione un Rol...</option>
+            	<%
+		            		DT_rol dtr = new DT_rol();
+		            	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+		            	    listRol = dtr.listRol();
+		            	    
+		            	    for(Tbl_rol tr : listRol)
+		            	    {
+		            		%>
+		            		 <option value="<%=tr.getId()%>"><%=tr.getRol() %></option>
+		            		<%	
+		            		} 
+		            		%>
+           </select>
         </div>
         <div class="row">
           <div class="col-8">
@@ -78,7 +96,7 @@ mensaje = mensaje==null?"":mensaje;
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
           </div>
           <!-- /.col -->
         </div>

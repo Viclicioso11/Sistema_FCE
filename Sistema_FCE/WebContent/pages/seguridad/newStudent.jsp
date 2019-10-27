@@ -73,7 +73,7 @@ mensaje = mensaje==null?"":mensaje;
           <input id="apellidos" name="apellidos" type="text" class="form-control" placeholder="Apellidos">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-user""></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>

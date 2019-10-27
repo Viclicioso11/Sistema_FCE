@@ -256,6 +256,36 @@ public class DT_usuario
 			return id_user;
 		}
 		
+		public boolean dtverificarLogin(String user, String pwd, int idRol)
+		{
+			boolean existe=false;
+			
+			String SQL = ("SELECT * FROM public.vw_usuario_rol where username=? and password=? and id_rol=?");
+			try
+			{
+				PreparedStatement ps = c.prepareStatement(SQL);
+				ps.setString(1, user);
+				ps.setString(2, pwd);
+				ps.setInt(3, idRol);
+				ResultSet rs = null;
+				rs = ps.executeQuery();
+			
+				if(rs.next())
+				{
+					existe=true;
+				}
+			
+			
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+				e.printStackTrace();
+			}
+		
+			return existe;
+		}
+		
 	
 
 	
