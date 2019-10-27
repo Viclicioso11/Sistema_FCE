@@ -30,102 +30,106 @@ mensaje = mensaje==null?"":mensaje;
 
 
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<body class="hold-transition login-page">
 
-	  <!-- Content Wrapper. Contains page content -->
-	  <div class="content-wrapper">
-	    <!-- Content Header (Page header) -->
-	    <section class="content-header">
-	      <div class="container-fluid">
-	        <div class="row mb-2">
-	          <div class="col-sm-6">
-	            <h1>Registro [Nuevo Estudiante]</h1>
-	          </div>
-	          <div class="col-sm-6">
-	            <ol class="breadcrumb float-sm-right">
-	             
-	            </ol>
-	          </div>
-	        </div>
-	      </div><!-- /.container-fluid -->
-	    </section>
-	
-	<!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- general form elements -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Nuevo Estudiante</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form role="form" action="../../SL_usuario" method="post">
-                <div class="card-body">
-                  <input name="opc" id="opc" type="hidden" value="4"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
-                  
-                   <div class="form-group">
-                    <label for="exampleInputEmail1">Número de Carné:</label>
-                    <input type="text" id="carne" name="carne" class="form-control" 
-                    placeholder="Carnet de usuario" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Nombres:</label>
-                    <input type="text" id="nombres" name="nombres" class="form-control" 
-                    placeholder="Nombres de Usuario" required>
-                  </div>
-                 
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" class="form-control" 
-                    placeholder="Apellidos del Usuario" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Correo Institucional:</label>
-                    <input type="email" id="correo" name="correo" class="form-control" 
-                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña: </label>
-                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese su Contraseña" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Contraseña: </label>
-                    <input type="password" id="contrasenia2" name="contrasenia2" onchange="pwdEquals()" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese nuevamente su Contraseña" required>
-                  </div>
-                  
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Sistema de Control FCE</b></a>
+  </div>
+  <!-- /.login-logo -->
+  
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Ingresa tu información para registrarte</p>
+      
+      
 
-                </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
-                </div>
-              </form>
+      <form role="form" action="../../SL_usuario" method="post">
+      
+        <div class="input-group mb-3"> 
+        
+         <input name="id_rol" id="id_rol" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+        <input name="opc" id="opc" type="hidden" value="4"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+          <input id="carne" name="carne" type="text" class="form-control" placeholder="Carné de estudiante UCA">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-id-card"></span>
             </div>
-            <!-- /.card -->
-           </div>
           </div>
-         </div>       
-    </section>
+        </div>
+        
+        <div class="input-group mb-3"> 
+        
+          <input id="nombres" name="nombres" type="text" class="form-control" placeholder="Nombres">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        
+          <div class="input-group mb-3"> 
+        
+          <input id="apellidos" name="apellidos" type="text" class="form-control" placeholder="Apellidos">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        
+         <div class="input-group mb-3"> 
+        
+          <input id="correo" name="correo" type="email" class="form-control" placeholder="Correo institucional UCA">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+      
+        
+        <div class="input-group mb-3">
+          <input id="contrasenia" name="contrasenia" type="password" class="form-control" placeholder="Contraseña">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-group mb-3">
+          <input id="contrasenia2" name="contrasenia2" type="password" class="form-control" placeholder="Confirmar contraseña">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+     
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      
+<!-- Aquí estaba las posibilidades de entrar con google o facebook -->
+	
+      <!-- /.social-auth-links -->
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!--fin del divv-->
+
     <!-- /.content -->
 	
-	<!-- Footer -->
-  		<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
-  	<!-- ./Footer -->
-
 </div>
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -134,6 +138,32 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
+  
+  <script>
+  function ComparandoContrasenias()
+  {
+	  var pwd1 = "";
+	  var pwd2 = "";
+	  
+	  pwd1 = $("#contrasenia").val();
+	  pwd2 = $("#contrasenia2").val();
+	  
+	  if(pwd1 != pwd2)
+	  {
+		  errorAlert('Error', 'Revise la contraseña ingresada');
+		  $("#contrasenia").css("border-color", "red");
+		  $("#contrasenia").val("");
+		  $("#contrasenia2").css("border-color", "red");
+		  $("#contrasenia2").val("");
+	  }
+	  else
+		{
+		  $("#contrasenia").css("border-color", "#ced4da");
+		  $("#contrasenia2").css("border-color", "#ced4da");
+		}
+		  
+  }
+  </script>
   
   
   <script>

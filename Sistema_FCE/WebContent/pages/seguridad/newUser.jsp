@@ -1,5 +1,6 @@
+    <%@page import="entidades.Tbl_rol"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +113,24 @@ mensaje = mensaje==null?"":mensaje;
                     title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
                     placeholder="Ingrese nuevamente su Contraseña" required>
                   </div>
+                   <div class="form-group">
+                   <label for="exampleInputPassword1">Seleccione un Rol del usuario: </label>
+           				<select class="form-control select2" name="rol" id="rol" style="width: 100%;" required="required">
+           				  <option value="0">Seleccione un Rol...</option>
+            				<%
+		            		DT_rol dtr = new DT_rol();
+		            	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+		            	    listRol = dtr.listRol();
+		            	    
+		            	    for(Tbl_rol tr : listRol)
+		            	    {
+		            		%>
+		            		 <option value="<%=tr.getId()%>"><%=tr.getRol() %></option>
+		            		<%	
+		            		} 
+		            		%>
+           				</select>
+        		</div>
                   
 
                 </div>
@@ -142,7 +161,31 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  
+   <script>
+  function pwdEquals()
+  {
+	  var pwd1 = "";
+	  var pwd2 = "";
+	  
+	  pwd1 = $("#contrasenia").val();
+	  pwd2 = $("#contrasenia2").val();
+	  
+	  if(pwd1 != pwd2)
+	  {
+		  errorAlert('Error', 'Revise la contraseña ingresada');
+		  $("#contrasenia").css("border-color", "red");
+		  $("#contrasenia").val("");
+		  $("#contrasenia2").css("border-color", "red");
+		  $("#contrasenia2").val("");
+	  }
+	  else
+		{
+		  $("#contrasenia").css("border-color", "#ced4da");
+		  $("#contrasenia2").css("border-color", "#ced4da");
+		}
+		  
+  }
+  </script>
   
   <script>
     $(document).ready(function ()

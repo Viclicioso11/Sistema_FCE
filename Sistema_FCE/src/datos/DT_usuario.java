@@ -229,5 +229,64 @@ public class DT_usuario
 		return vsus;
 	}
 	
+	
+	// Metodo para obtenero un usuario
+		public int obtenerIDUser(String carne)
+		{
+			int id_user = 0;
+			try
+			{
+				PreparedStatement ps = c.prepareStatement("SELECT id from tbl_usuario where carne = ? and estado<>3", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setString(1, carne);
+				rsUsuario = ps.executeQuery();
+				if(rsUsuario.next())
+				{
+					id_user = rsUsuario.getInt("id");
+					
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerIDUser() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return id_user;
+		}
+		
+		public boolean dtverificarLogin(String user, String pwd, int idRol)
+		{
+			boolean existe=false;
+			
+			String SQL = ("SELECT * FROM public.vw_usuario_rol where username=? and password=? and id_rol=?");
+			try
+			{
+				PreparedStatement ps = c.prepareStatement(SQL);
+				ps.setString(1, user);
+				ps.setString(2, pwd);
+				ps.setInt(3, idRol);
+				ResultSet rs = null;
+				rs = ps.executeQuery();
+			
+				if(rs.next())
+				{
+					existe=true;
+				}
+			
+			
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
+				e.printStackTrace();
+			}
+		
+			return existe;
+		}
+		
+	
 
+	
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tbl_usuario;
 import datos.DT_estudiante_candidato;
+import datos.DT_rol;
 import datos.DT_usuario;
 
 /**
@@ -65,15 +66,15 @@ public class SL_usuario extends HttpServlet {
 				
 				if(dtus.eliminarUser(tus))
 				{
-					response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=3");
-		}
-		else
-		{
-			response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=4");
+					response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=4");
+				}
+				else
+				{
+					response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=5");
+				}
 			}
-		}
-		catch(Exception e)
-		{
+			catch(Exception e)
+			{
 			e.printStackTrace();
 			System.out.println("Servlet: Error eliminarUser()");
 			}
@@ -116,14 +117,16 @@ public class SL_usuario extends HttpServlet {
 		opcion = Integer.parseInt(opc);
 		System.out.println("opcion: "+opcion);
 		
-		Tbl_usuario tus = new Tbl_usuario();
+		Tbl_usuario tus = new Tbl_usuario();	
 		DT_usuario dtus = new DT_usuario();
+		DT_rol dtrol = new DT_rol();
 		DT_estudiante_candidato dtsc = new DT_estudiante_candidato();
 		
 		switch(opcion)
 		{
 			case 1:
 			{
+				
 				try
 				{
 					tus.setCarne(request.getParameter("carne"));
@@ -131,12 +134,16 @@ public class SL_usuario extends HttpServlet {
 					tus.setApellidos(request.getParameter("apellidos"));
 					tus.setCorreo(request.getParameter("correo"));
 					tus.setContrasena(request.getParameter("contrasenia"));
-					
-					
+					int id_rol = Integer.parseInt(request.getParameter("rol"));
+					int id_usuario = 0;
 					
 					if(dtus.guardarUser(tus))
 					{
-						response.sendRedirect("./pages/seguridad/newUser.jsp?msj=1");
+						id_usuario = dtus.obtenerIDUser(tus.getCarne());
+						if(dtrol.asignarRolUsuario(id_usuario, id_rol)) {
+							response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=1");
+						}
+							
 					}
 					else
 					{
@@ -163,11 +170,11 @@ public class SL_usuario extends HttpServlet {
 					
 					if(dtus.modificarUser(tus))
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=1");
+						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=3");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=2");
+						response.sendRedirect("./pages/seguridad/editUser.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -210,26 +217,38 @@ public class SL_usuario extends HttpServlet {
 				{
 					tus.setNombres(request.getParameter("nombres"));
 					tus.setApellidos(request.getParameter("apellidos"));
-					tus.setCarrera(request.getParameter("carne"));
+					tus.setCarne(request.getParameter("carne"));
 					tus.setCorreo(request.getParameter("correo"));
-					tus.setContrasena(request.getParameter("contrasena"));
-					
-					
+					tus.setContrasena(request.getParameter("contrasenia"));
+					int id_rol = Integer.parseInt(request.getParameter("id_rol"));
+					int id_usuario = 0;
+					//Validamos que el correo que puso el usuario existe en la tabla de correos posibles
 					if(dtsc.validarEstudianteCandidato(tus.getCorreo()))
 					{
+						//Guardamos el usuario
 						if(dtus.guardarUser(tus)) {
+							
+							//obtenemos el id del usuario guardado
+							id_usuario = dtus.obtenerIDUser(tus.getCarne());
+							//cambiamos el estado el correo que ya ha sido guardado
 							if(dtsc.CambiarEstadoEstudianteCandidato(tus.getCorreo())){
-								response.sendRedirect("./newStudent.jsp?msj=1");
+								//asignamos el rol estudiante al usuario al guardar en la tabla usuario rol
+								if(dtrol.asignarRolUsuario(id_usuario, id_rol)) {
+									
+									response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=1");
+								}
+								
 							}
 									
-						}else {
-							response.sendRedirect("./newStudent.jsp?msj=2");
+						}
+						else {
+							response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
 						}
 						
 					}
 					else
 					{
-						response.sendRedirect("./newStudent.jsp?msj=2");
+						response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
 					}
 				}
 				catch(Exception e)

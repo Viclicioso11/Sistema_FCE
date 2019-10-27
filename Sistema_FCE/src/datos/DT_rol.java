@@ -164,5 +164,39 @@ public class DT_rol {
 			
 			return trol;
 		}
+		
+	
+		//Funcion para asignar un rol a un usuario
+		public boolean asignarRolUsuario(int id_usuario, int id_rol)
+		{
+			boolean asignado=false;	
+			
+			try
+			{
+				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_rol_usuario", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				rsRol = ps.executeQuery();
+				
+				rsRol.moveToInsertRow();
+				rsRol.updateInt("id_rol", id_rol);
+				rsRol.updateInt("id_usuario", id_usuario);
+				
+				rsRol.insertRow();
+				rsRol.moveToCurrentRow();
+				asignado = true;
+				
+				}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en asignarRolUsuario() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			return asignado;
+			
+		}
+		
+		
+		
 	
 }

@@ -234,6 +234,7 @@ function deleteRol(rol)
   });
   
 </script>
+
 <script>
   $(document).ready(function ()
   {
