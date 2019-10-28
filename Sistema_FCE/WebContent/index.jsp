@@ -134,6 +134,26 @@ mensaje = mensaje==null?"":mensaje;
 </script>
 
 
+<script>
+ $(document).ready(function ()
+{
+ var nuevo = 0;
+ nuevo = "<%=mensaje%>";
+
+
+
+ if(nuevo == "2")
+ {
+   errorAlert('Aviso', 'Carné o contraseña no válidos');
+ }
+ 
+});
+
+ 
+   
+ </script>
+
+
 
 </body>
 </html>

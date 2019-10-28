@@ -62,7 +62,7 @@ public class SL_login extends HttpServlet {
 			}
 			else
 			{
-				response.sendRedirect("index.jsp?msg=ERROR");
+				response.sendRedirect("index.jsp?msg=2");
 			}
 		}
 		catch(Exception e)
