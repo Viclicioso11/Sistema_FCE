@@ -70,17 +70,21 @@ public class SL_estudiante_candidato extends HttpServlet {
 			
 			String correo = correos[i].toString(); // pasando el correo acutal a una variable
 			System.out.println(correo);
+			
 			if(correoDriver.enviarCorreo(mensaje, correo)) {//enviar metodo
+				
+				/**
+				 * si se envio lo guardamos en 
+				 * la base de datos
+				 * */
+				Tbl_estudiante_candidato tblec = new Tbl_estudiante_candidato();
+				tblec.setCorreo(correos[i]);
+				tblec.setMensaje(mensaje);
+				dtec.guardarEstudianteCandidato(tblec);
 				
 			}else {
 				response.sendRedirect("./pages/seguridad/newEstudianteCandidato.jsp?msj=2");
 			}
-		}
-			
-		for (int i = 0; i < correos.length; i++) {
-			Tbl_estudiante_candidato tblec = new Tbl_estudiante_candidato();
-			tblec.setCorreo(correos[i]);
-			dtec.guardarEstudianteCandidato(tblec);
 		}
 	
 		response.sendRedirect("./pages/seguridad/newEstudianteCandidato.jsp?msj=1");

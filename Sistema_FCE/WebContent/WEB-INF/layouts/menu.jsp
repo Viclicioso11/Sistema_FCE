@@ -6,14 +6,14 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
-    
-   <%
-	String loginUser = "";
-	int rolId = 0;
 
-	loginUser = (String) session.getAttribute("login");
-	loginUser = loginUser==null?"":loginUser;
-	%>
+     <%
+  	String loginUser = "";
+  	int rolId = 0;
+
+  	loginUser = (String) session.getAttribute("login");
+  	loginUser = loginUser==null?"":loginUser;
+  	%>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -397,7 +397,7 @@
                   <p>Control de Opciones</p>
                 </a>
               </li>
-              
+
             </ul>
           </li>
           <li class="nav-item has-treeview">

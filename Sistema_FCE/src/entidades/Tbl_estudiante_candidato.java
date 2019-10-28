@@ -1,15 +1,21 @@
 package entidades;
 
 public class Tbl_estudiante_candidato {
-	
+
 	//Atributos
 	private int id;
 	private String correo;
 	private int notificado;
 	private int estado;
-	
-	
+	private String mensaje;
+
 	//Metodos Get Y Set
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
 	public int getId() {
 		return id;
 	}
@@ -34,8 +40,8 @@ public class Tbl_estudiante_candidato {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
-	
 
-	
+
+
+
 }
