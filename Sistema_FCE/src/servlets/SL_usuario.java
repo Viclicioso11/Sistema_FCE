@@ -186,27 +186,27 @@ public class SL_usuario extends HttpServlet {
 			}
 			case 3:
 			{
-				try
-				{
-					tus.setCarne(request.getParameter("carne"));
-					tus.setContrasena(request.getParameter("contrasena"));
-					
-					
-					if(dtus.validarUsuario(tus.getCarne(), tus.getContrasena()))
-					{
-						response.sendRedirect("./sistema.jsp?msj="+tus.getCarne());
-					}
-					else
-					{
-						response.sendRedirect("./index.jsp?msj=2");
-					}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					System.out.println("Servlet: Error al intentar autenticar el Usuario.");
-				}
-				break;
+//				try
+//				{
+//					tus.setCarne(request.getParameter("carne"));
+//					tus.setContrasena(request.getParameter("contrasena"));
+//					
+//					
+//					if(dtus.validarUsuario(tus.getCarne(), tus.getContrasena()))
+//					{
+//						response.sendRedirect("./sistema.jsp?msj="+tus.getCarne());
+//					}
+//					else
+//					{
+//						response.sendRedirect("./index.jsp?msj=2");
+//					}
+//				}
+//				catch(Exception e)
+//				{
+//					e.printStackTrace();
+//					System.out.println("Servlet: Error al intentar autenticar el Usuario.");
+//				}
+//				break;
 				
 			}
 			case 4:

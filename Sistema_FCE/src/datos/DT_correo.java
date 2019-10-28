@@ -2,8 +2,10 @@ package datos;
 
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -11,75 +13,95 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+
 import entidades.Tbl_estudiante_candidato;
 
 
 public class DT_correo {
 	
-	public void envairCorreo() {
-		// El correo gmail de envio
-		String correoEnvia = "tuCorreo@gmail.com";
-		String claveCorreo = "tuClave";
+
+	private String port = "587"; //587, 465
+	private String host = "smtp.gmail.com";
+	private String from = "nedmena@gmail.com";
+	private boolean auth = true;
+	private String username = "blabla@gmail.com";
+	private String password = "KIMM090500";
+	private Protocol protocol = Protocol.TLS;
+	private boolean debug = true;
+	
+	public boolean enviarCorreo(String mensaje, String correo) {
 		
 		// La configuracion para enviar correo
 		Properties properties = new Properties();
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.user", correoEnvia);
-		properties.put("mail.password", claveCorreo);
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port",port);
+		properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		
-		// Obtener la sesion
-				Session session = Session.getInstance(properties, null);
+		switch (protocol) {
+		
+		case TLS:
+	        properties.put("mail.smtp.starttls.enable", "true");
+	        break;
+		case SMTP:
+			properties.put("mail.smtp.ssl.enable", "true");
+			break;
+	    case SMTPS:
+	        properties.put("mail.smtp.ssl.enable", "true");
+	        break;
+	    
+	}
 
+		Authenticator authenticator = null;
+		
+		if (auth) {
+            properties.put("mail.smtp.auth", "true");
+            authenticator = new Authenticator() {
+                private PasswordAuthentication pa = new PasswordAuthentication("nedmena@gmail.com", "KIMM090500");
+                @Override
+                public PasswordAuthentication getPasswordAuthentication() {
+                    return pa;
+                }
+            };
+        }
+
+		// Obtener la sesion
+				Session session = Session.getInstance(properties, authenticator);
+				session.setDebug(debug);
+				
+				// Crear el cuerpo del mensaje
+				MimeMessage mimeMessage = new MimeMessage(session);
+				
 				try {
-					// Crear el cuerpo del mensaje
-					MimeMessage mimeMessage = new MimeMessage(session);
 
 					// Agregar quien envio el correo
-					mimeMessage.setFrom(new InternetAddress(correoEnvia, "Dato Java"));
+					mimeMessage.setFrom(new InternetAddress(from));
 
 					// Los destinatarios
-					InternetAddress[] internetAddresses = {
-							new InternetAddress("correo1@gmail.com"),
-							new InternetAddress("correo2@gmail.com"),
-							new InternetAddress("correo3@gmail.com") };
+					InternetAddress[] correoEnviar = {new InternetAddress(correo)};
 
 					// Agregar los destinatarios al mensaje
 					mimeMessage.setRecipients(Message.RecipientType.TO,
-							internetAddresses);
+							correoEnviar);
 
 					// Agregar el asunto al correo
-					mimeMessage.setSubject("Dato Java Enviando Correo.");
+					mimeMessage.setSubject("Mensaje de Inscripción al Sistema de FCE");
 
-					// Creo la parte del mensaje
-					MimeBodyPart mimeBodyPart = new MimeBodyPart();
-					mimeBodyPart
-							.setText("Siguiendo el Tutorial de datojava.blogspot.com env�o el correo.");
+					String cuerpoMensaje = "<strong>Presione el siguiente enlace para dirigirse al cuestionario de registro de estudiante</strong>";
+					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/seguridad/newStudent.jsp\"</a><br><br>";
+					cuerpoMensaje += mensaje;
+						
+					mimeMessage.setContent(cuerpoMensaje, "text/html");
 
-					MimeBodyPart mimeBodyPartAdjunto = new MimeBodyPart();
-					mimeBodyPartAdjunto
-							.attachFile("url del archivo que vas adjuntar");
-
-					// Crear el multipart para agregar la parte del mensaje anterior
-					Multipart multipart = new MimeMultipart();
-					multipart.addBodyPart(mimeBodyPart);
-					multipart.addBodyPart(mimeBodyPartAdjunto);
-
-					// Agregar el multipart al cuerpo del mensaje
-					mimeMessage.setContent(multipart);
-
-					// Enviar el mensaje
-					Transport transport = session.getTransport("smtp");
-					transport.connect(correoEnvia, claveCorreo);
-					transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-					transport.close();
+					Transport.send(mimeMessage);
+					
+					System.out.println("Correo enviado");
+					debug = true;
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				System.out.println("Correo enviado");
+				
+				return debug;
 		
 	}
 }

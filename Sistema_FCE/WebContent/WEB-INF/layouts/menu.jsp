@@ -7,12 +7,13 @@
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
     
-    <%
+   <%
+	String loginUser = "";
+	int rolId = 0;
 
-  //creamos el objeto sesion
- 	 HttpSession sesion = request.getSession();
-    
-    %>
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+	%>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -22,7 +23,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><%=(sesion.getAttribute("nombre")+" "+sesion.getAttribute("apellido"))%></a>
+          <a href="#" class="d-block"> <%=loginUser %></a>
         </div>
       </div>
 

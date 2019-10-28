@@ -16,6 +16,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+<<<<<<< HEAD
   <link rel="stylesheet" href="./css/newEstudianteCandidato.css">
   <script src="./js/newEstudianteCandidato.js" defer></script>
 </head>
@@ -28,6 +29,34 @@
 
 	<!-- SIDEBAR -->
 	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
+=======
+  <!-- jAlert css  -->
+<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+
+  <link rel="stylesheet" href="./css/newEstudianteCandidato.css">
+  <script src="./js/newEstudianteCandidato.js" defer></script>
+  
+  
+   <%
+	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+	String mensaje = "";
+	mensaje = request.getParameter("msj");
+	mensaje = mensaje==null?"":mensaje;
+
+
+%>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  
+  <!-- Navbar -->
+  <jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
+	<!-- /.navbar -->
+	
+	<!-- SIDEBAR -->
+<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
+>>>>>>> 5cabe47824a35ceaf8e9244b5dfe38adc7f983b8
 	<!-- SIDEBAR -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -70,6 +99,7 @@
                     </div>
                     <input type="email" id="email" class="form-control" placeholder="Email" required>
                   </div>
+<<<<<<< HEAD
 
                   <p class="alert" id="empty">Ingrese el correo por favor</p>
                   <p class="alert" id="error">El correo ya se ha añadido</p>
@@ -78,6 +108,12 @@
 
                   
 
+=======
+                  <button type="button" onclick="agregar()" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Agregar correo a la lista">Agregar</button>
+
+
+                  
+>>>>>>> 5cabe47824a35ceaf8e9244b5dfe38adc7f983b8
                   <div class="form-group">
                     <label>Mensaje</label>
                     <textarea class="form-control" rows="6" placeholder="escribe Algo" id="mensaje" name="mensaje" required></textarea>
@@ -124,5 +160,47 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
+<<<<<<< HEAD
 </body>
 </html>
+=======
+
+<!-- jAlert js -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+
+
+
+<script>
+  $(document).ready(function ()
+  {
+   
+    /////////// VARIABLES DE CONTROL MSJ ///////////
+    var nuevo = 0;
+    nuevo = "<%=mensaje%>";
+
+    if(nuevo == "1")
+    {
+      successAlert('Éxito', 'Han sido enviado correctamente los correos');
+    }
+    
+    if(nuevo == "2")
+    {
+      errorAlert('Error', 'Revise correctamente los campos');
+    }
+    
+ 
+
+  });
+  </script>
+
+
+
+
+
+
+
+
+</body>
+</html>
+>>>>>>> 5cabe47824a35ceaf8e9244b5dfe38adc7f983b8

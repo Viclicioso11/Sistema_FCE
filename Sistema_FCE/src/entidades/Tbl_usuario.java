@@ -50,7 +50,7 @@ public class Tbl_usuario
 	public String getContrasena_temp() {
 		return contrasena_temp;
 	}
-	public void setContrasena_temp(String contraseña_temp) {
+	public void setContrasena_temp(String contrasena_temp) {
 		this.contrasena_temp = contrasena_temp;
 	}
 	public String getCorreo() {

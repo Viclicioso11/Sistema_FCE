@@ -8,6 +8,14 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
+    
+     <%
+	String loginUser = "";
+	int rolId = 0;
+
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+	%>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -17,7 +25,7 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"> <%=loginUser %></a>
         </div>
       </div>
 
