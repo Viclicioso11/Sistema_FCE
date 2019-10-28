@@ -26,6 +26,21 @@ input{outline: 0;}
     user-select: none !important;
     font-weight: 500;
 }
+
+.alert{
+    padding: 7px 0px 7px 7px;
+    display: none;
+}
+.alert:nth-child(2){
+    background-color: rgb(255, 235, 119);
+}
+.alert:nth-child(3){
+    color: #fff;
+    background-color: rgb(255, 46, 46);
+}
+.alert:nth-child(4){
+    background-color: rgb(255, 235, 119);
+}
 .lista-item  span:hover, span{cursor: pointer;user-select: none;padding-top: 7px;}
 .lista-item img{height: 20px; width: 20px;margin-top:2px;}
 #form form {position: fixed;}
