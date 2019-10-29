@@ -95,18 +95,12 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Salir del Sistema</span>
           <div class="dropdown-divider"></div>
-<<<<<<< HEAD
+
           
           <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
-			<span>Cerrar Sesión</span>
+			<span>Cerrar Sesiï¿½n</span>
 		  </a>
 
-=======
-          <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
-			<span>Cerrar SesiÃ³n</span>
-		  </a>
-          
->>>>>>> 87f6176f9b00696aa07e7ba3b96b83db8ac234f4
         </div>
       </li>
       <li class="nav-item">

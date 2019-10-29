@@ -84,7 +84,7 @@ mensaje = mensaje==null?"":mensaje;
         </div>
         
          <div class="input-group mb-3">
-           <select class="form-control select2" name="id" style="width: 100%;" required="required">
+           <select class="form-control select2" name="id_rol" style="width: 100%;" required="required">
              <option value="0">Seleccione un Rol...</option>
             	<%
 		            		DT_rol dtr = new DT_rol();

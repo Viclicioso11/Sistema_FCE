@@ -260,17 +260,17 @@ public class DT_usuario
 			return id_user;
 		}
 		
-		public boolean dtverificarLogin(String carne, String contrasena, int id)
+		public boolean dtverificarLogin(String carne, String contrasena, int id_rol)
 		{
 			boolean existe=false;
 			
-			String SQL = ("SELECT * FROM public.vw_usuario_rol where carne=? and contrasena=? and id=?");
+			String SQL = ("SELECT * FROM public.vw_usuario_rol where carne=? and contrasena=? and id_rol=?");
 			try
 			{
 				PreparedStatement ps = c.prepareStatement(SQL);
 				ps.setString(1, carne);
 				ps.setString(2, contrasena);
-				ps.setInt(3, id);
+				ps.setInt(3, id_rol);
 				ResultSet rs = null;
 				rs = ps.executeQuery();
 			
