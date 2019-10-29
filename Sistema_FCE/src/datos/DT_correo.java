@@ -92,13 +92,5 @@ public class DT_correo {
 
 	}
 	
-	
-	public static void main (String[] args) {
-		DT_correo correoDriver = new DT_correo();
-		if (correoDriver.enviarCorreo("hola papu", "kenned.mena@est.uca.edu.ni")) {
-			JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-		}else {
-			JOptionPane.showMessageDialog(null, "intene nuevamente");
-		}
-	}
+
 }

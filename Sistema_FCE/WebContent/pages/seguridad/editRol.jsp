@@ -82,7 +82,7 @@ trol = dtrol.obtenerRol(rol);
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 	<!-- Navbar -->
-	  	<jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
+	  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
