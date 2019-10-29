@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Date;
+
 public class Tbl_estudiante_candidato {
 
 	//Atributos
@@ -8,8 +10,16 @@ public class Tbl_estudiante_candidato {
 	private int notificado;
 	private int estado;
 	private String mensaje;
-
+	private Date fecha;
+	
+	
 	//Metodos Get Y Set
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 	public String getMensaje() {
 		return mensaje;
 	}

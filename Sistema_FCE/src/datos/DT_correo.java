@@ -12,7 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
+import javax.swing.JOptionPane;
 
 import entidades.Tbl_estudiante_candidato;
 
@@ -74,7 +74,7 @@ public class DT_correo {
 					mimeMessage.setSubject("Mensaje de Inscripción al Sistema de FCE");
 
 					String cuerpoMensaje = "<strong>Presione el siguiente enlace para dirigirse al cuestionario de registro de estudiante</strong>";
-					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/seguridad/newStudent.jsp\"</a><br><br>";
+					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/seguridad/newStudent.jsp\">Click</a><br><br>";
 					cuerpoMensaje += mensaje;
 
 					mimeMessage.setContent(cuerpoMensaje, "text/html");
@@ -90,5 +90,15 @@ public class DT_correo {
 
 				return enviado;
 
+	}
+	
+	
+	public static void main (String[] args) {
+		DT_correo correoDriver = new DT_correo();
+		if (correoDriver.enviarCorreo("hola papu", "kenned.mena@est.uca.edu.ni")) {
+			JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+		}else {
+			JOptionPane.showMessageDialog(null, "intene nuevamente");
+		}
 	}
 }
