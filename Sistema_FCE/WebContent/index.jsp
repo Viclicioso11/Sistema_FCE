@@ -43,7 +43,7 @@ mensaje = mensaje==null?"":mensaje;
 <%
 	HttpSession hts = request.getSession(false);
 	hts.removeAttribute("login");
-	hts.removeAttribute("id");
+	hts.removeAttribute("id_rol");
 	hts.invalidate();	
 %>
 
