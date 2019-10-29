@@ -5,16 +5,16 @@
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Gestión Opciones</title>
+  <title>Gestión opciones de rol</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Font Awesome -->
+<!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
-<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
+	<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
   
   <!-- DATATABLE NEW -->
     <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -28,6 +28,7 @@
   
   <!-- jAlert css  -->
 <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+
   
   <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -56,7 +57,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Opciones</h1>
+            <h1>Gestión de Opciones de Rol</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -73,39 +74,35 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="./newOpcion.jsp">Agregar Opciones <i class="fas fa-plus-circle"></i></a>
+              <!-- <a href="../seguridad/newRoltoUser.jsp">Agregar Rol a Usuario<i class="fas fa-plus-circle"></i></a> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="Tbl_opcion" name="Tbl_opcion" class="display">
+              <table id="Tbl_usuario_rol" class="display">
                 <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Opciones</th>
-                  <th>Descripción</th>
-                  <th>Estado</th>
+                  <th>Rol</th>
+                  <th>Opción Sistema</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_opcion dtopcion = new DT_opcion();
-                  	    ArrayList<Tbl_opcion> listOpciones = new ArrayList<Tbl_opcion>();
-                  	    listOpciones = dtopcion.obtenerOpciones();
-                  	        
-                  	    String estado = "";
+                	DT_rol_opcion dtrop = new DT_rol_opcion();
+                  	ArrayList<Vw_rol_opcion> listRolOpcion = new ArrayList<Vw_rol_opcion>();
+                  	listRolOpcion = dtrop.listarRolOpcion();
                   	        		
-                  	    for(Tbl_opcion topcion : listOpciones)
-                  	    {
-                  	        estado = topcion.getEstado()==1||topcion.getEstado()==2?"ACTIVO":"INACTIVO";
+                  	for(Vw_rol_opcion vrop : listRolOpcion)
+                  	{
                 %>
 	                <tr>
-	                  <td><%=topcion.getId()%></td>
-	                  <td><%=topcion.getOpcion() %></td>
-	                  <td><%=topcion.getDescripcion() %></td>
-	                  <td><%=estado %></td>
-	                  <td><a href="#"onclick="linkEditOpciones('<%=topcion.getId()%>');"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteOpciones('<%=topcion.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a></td>
+	                  <td><%=vrop.getRol()%></td>
+	                  <td><%=vrop.getOpcion() %></td>
+	                  <td>
+	                  <a href="#"onclick="asignarNuevaOpcion('<%=vrop.getRol_id()%>');"><i class="fas fa-plus-circle" title="Agregar"></i></a>
+	                  &nbsp;&nbsp;
+	                  <a href="#" onclick="deleteOpcion('<%=vrop.getRol_id()%>','<%=vrop.getOpcion_id()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  </td>
 	                </tr>
 	             <%
 	        		}   
@@ -113,10 +110,8 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Id</th>
-                  <th>Opcion</th>
-                  <th>Descripción</th>
-                  <th>Estado</th>
+                  <th>Rol</th>
+                  <th>Opción Sistema</th>
                   <th>Opciones</th>
                 </tr>
                 </tfoot>
@@ -126,7 +121,7 @@
           </div>
           <!-- /.card -->
 
-               </div>
+          </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -143,6 +138,7 @@
   
 </div>
 <!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -185,24 +181,24 @@
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditOpciones(opcion)
+function asignarNuevaOpcion(opcion)
 {
-	var idOpciones = opcion;
-	window.location.href="../../pages/seguridad/editOpcion.jsp?opcionID="+idOpciones;	
+	var idRol = opcion;
+	window.location.href="../../pages/seguridad/newRol_opcion.jsp?id_rol="+idRol;	
 }
 </script>
 
 <script>
-function deleteOpciones(id)
+function deleteOpcion(id_rol, id_opcion)
 {
 	
 	  $.jAlert({
 		    'type': 'confirm',
-		    'confirmQuestion': '¿Está seguro de eliminar la opción seleccionada?',
+		    'confirmQuestion': '¿Está seguro de eliminar la opción del rol seleccionado?',
 		    'onConfirm': function(e, btn){
-		      e.preventDefault();
-     		  window.location.href= "../../SL_opcion?opc=1&id="+ id;
-		      btn.parents('.jAlert').closeAlert();
+		     e.preventDefault();
+		     window.location.href="../../SL_rol_opcion?id_opcion="+id_opcion+"&id_rol="+id_rol;
+		     btn.parents('.jAlert').closeAlert();
 		    },
 		    'onDeny': function(e, btn){
 		      e.preventDefault();
@@ -216,7 +212,7 @@ function deleteOpciones(id)
 
 <script>
   $(function () {
-    $('#Tbl_opcion').DataTable({
+    $('#Tbl_usuario_rol').DataTable({
         dom: 'Bfrtip',
         buttons: [
         'pdf',
@@ -227,6 +223,7 @@ function deleteOpciones(id)
   });
   
 </script>
+
 <script>
   $(document).ready(function ()
   {
@@ -236,7 +233,12 @@ function deleteOpciones(id)
     nuevo = "<%=mensaje%>";
     if(nuevo == "1")
     {
-      successAlert('Éxito', 'El registro ha sido guardado correctamente.');
+      successAlert('Éxito', 'El registro ha sido almacenado correctamente.');
+    }
+    
+    if(nuevo == "2")
+    {
+    	errorAlert('Error', 'El registro no se ha creado.');
     }
     
     if(nuevo == "3")

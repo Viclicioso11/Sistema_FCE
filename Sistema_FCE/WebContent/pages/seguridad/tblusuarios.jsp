@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>Gestión Usuarios</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,10 @@
           <div class="card">
             <div class="card-header">
               <a href="../seguridad/newUser.jsp">Agregar Usuario <i class="fas fa-plus-circle"></i></a>
+               &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="../seguridad/tbluser_rol.jsp">Roles de Usuario<i class="fas fa-user-tag"></i></a>
             </div>
+              
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example2" class="display">

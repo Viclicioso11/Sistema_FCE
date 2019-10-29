@@ -9,6 +9,8 @@ public class Vw_usuario_rol {
 	private String carne;
 	private String rol;
 	private int id_rol;
+	private int id_user;
+	private String password;
 	private String correo;
 	
 	
@@ -50,5 +52,20 @@ public class Vw_usuario_rol {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+	public int getId_user() {
+		return id_user;
+	}
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	
 
 }
