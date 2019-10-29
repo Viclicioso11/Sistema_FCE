@@ -56,93 +56,151 @@ public class DT_estudiante_candidato {
 	}
 
 	// Metodo para obtener los etudiantes candidatos
-		public ArrayList<Tbl_estudiante_candidato> listEtudianteCandidato()
+	public ArrayList<Tbl_estudiante_candidato> listEtudianteCandidato()
+	{
+		ArrayList<Tbl_estudiante_candidato> listaEstudianteCandidato = new ArrayList<Tbl_estudiante_candidato>();
+
+		try
 		{
-			ArrayList<Tbl_estudiante_candidato> listaEstudianteCandidato = new ArrayList<Tbl_estudiante_candidato>();
-
-			try
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_estudiantes_candidatos where estado<>3",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsEstudianteCandidato = ps.executeQuery();
+			while(rsEstudianteCandidato.next())
 			{
-				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_estudiantes_candidatos where estado<>3",
-						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
-						ResultSet.HOLD_CURSORS_OVER_COMMIT);
-				rsEstudianteCandidato = ps.executeQuery();
-				while(rsEstudianteCandidato.next())
-				{
-					Tbl_estudiante_candidato tuc  = new Tbl_estudiante_candidato();
-					tuc.setId(rsEstudianteCandidato.getInt("id"));
-					tuc.setCorreo(rsEstudianteCandidato.getString("correo"));
-					tuc.setNotificado(rsEstudianteCandidato.getInt("notificado"));
+				Tbl_estudiante_candidato tuc  = new Tbl_estudiante_candidato();
+				tuc.setId(rsEstudianteCandidato.getInt("id"));
+				tuc.setCorreo(rsEstudianteCandidato.getString("correo"));
+				tuc.setNotificado(rsEstudianteCandidato.getInt("notificado"));
 
 
-					listaEstudianteCandidato.add(tuc);
-				}
+				listaEstudianteCandidato.add(tuc);
 			}
-			catch (Exception e)
-			{
-				System.out.println("DATOS: ERROR en listUser() "+ e.getMessage());
-				e.printStackTrace();
-			}
-
-			return listaEstudianteCandidato;
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listUser() "+ e.getMessage());
+			e.printStackTrace();
 		}
 
-		//validamos si ese correo ya est� ingresado en el sistema y si aun no se ha usado
-		public boolean validarEstudianteCandidato(String correo) {
-			try
+		return listaEstudianteCandidato;
+	}
+
+	
+	public ArrayList<Tbl_estudiante_candidato> getEstudiante(){
+		ArrayList<Tbl_estudiante_candidato> listaEstudianteCandidato = new ArrayList<Tbl_estudiante_candidato>();
+
+		try
+		{
+			String consulta = "select id, fecha, correo from public.tbl_estudiantes_candidatos where estado !=3 order by fecha desc;";
+			PreparedStatement ps = c.prepareStatement(consulta,
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsEstudianteCandidato = ps.executeQuery();
+			
+			while(rsEstudianteCandidato.next())
 			{
-				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_estudiantes_candidatos where correo= ? AND estado = 1",
-						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
-						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				Tbl_estudiante_candidato tuc  = new Tbl_estudiante_candidato();
+				tuc.setId(rsEstudianteCandidato.getInt("id"));
+				tuc.setCorreo(rsEstudianteCandidato.getString("correo"));
+				tuc.setFecha(rsEstudianteCandidato.getDate("fecha"));
 
-				ps.setString(1, correo);
-				rsEstudianteCandidato = ps.executeQuery();
-
-				if(rsEstudianteCandidato.next()) {
-					return true;
-				}
-				else {
-					return false;
-				}
-
+				listaEstudianteCandidato.add(tuc);
 			}
-			catch (Exception e)
-			{
-				System.err.println("ERROR ValidarEstudianteCandidato(): "+e.getMessage());
-				e.printStackTrace();
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listUser() "+ e.getMessage());
+			e.printStackTrace();
+		}
+
+		return listaEstudianteCandidato;
+	}
+	
+	//validamos si ese correo ya est� ingresado en el sistema y si aun no se ha usado
+	public boolean validarEstudianteCandidato(String correo) {
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_estudiantes_candidatos where correo= ? AND estado = 1",
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+
+			ps.setString(1, correo);
+			rsEstudianteCandidato = ps.executeQuery();
+
+			if(rsEstudianteCandidato.next()) {
+				return true;
+			}
+			else {
 				return false;
 			}
+
 		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR ValidarEstudianteCandidato(): "+e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-		//al momento de guardar un usuario, ponemos  el estado e n 3
-		public boolean CambiarEstadoEstudianteCandidato(String correo) {
-			boolean modificado = false;
-			try
-			{
+	//al momento de guardar un usuario, ponemos  el estado e n 3
+	public boolean EliminarEstudiante(int id) {
+		boolean modificado = false;
+		try
+		{
 
-				this.getResulset();
+			this.getResulset();
+			rsEstudianteCandidato.beforeFirst();
 
-				rsEstudianteCandidato.beforeFirst();
-
-				while(rsEstudianteCandidato.next()) {
-					if(rsEstudianteCandidato.getString("correo").equals(correo)) {
-						rsEstudianteCandidato.updateInt("estado", 3);
-						rsEstudianteCandidato.updateRow();
-						modificado = true;
-						break;
-					}
-
+			while(rsEstudianteCandidato.next()) {
+				
+				if(rsEstudianteCandidato.getInt("id") == id ) {
+					rsEstudianteCandidato.updateInt("estado", 3);
+					rsEstudianteCandidato.updateRow();
+					modificado = true;
+					break;
 				}
 
 			}
-			catch (Exception e)
-			{
-				System.err.println("ERROR cambiarEstadoEstudianteCandidato: "+e.getMessage());
-				e.printStackTrace();
-			}
-			return modificado;
+
 		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR cambiarEstadoEstudianteCandidato: "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;
+	}
 
+	//al momento de guardar un usuario, ponemos  el estado e n 3
+	public boolean CambiarEstadoEstudianteCandidato(String correo) {
+		boolean modificado = false;
+		try
+		{
 
+			this.getResulset();
+
+			rsEstudianteCandidato.beforeFirst();
+
+			while(rsEstudianteCandidato.next()) {
+				if(rsEstudianteCandidato.getString("correo").equals(correo)) {
+					rsEstudianteCandidato.updateInt("estado", 3);
+					rsEstudianteCandidato.updateRow();
+					modificado = true;
+					break;
+				}
+
+			}
+
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR cambiarEstadoEstudianteCandidato: "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;
+	}
 
 
 }

@@ -28,6 +28,13 @@ public class SL_estudiante_candidato extends HttpServlet {
 	DT_estudiante_candidato dtec = new DT_estudiante_candidato();
 	
 	
+	/**
+	 *	msj = 1 ok cuando se agrega
+	 *	msj = 2 error cuando se agrega
+	 *	msj = 3 ok cuando se elimina
+	 *	msj = 4 error cuando se elimina
+	 */
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,11 +49,13 @@ public class SL_estudiante_candidato extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	/*	// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		DT_correo correoDriver = new DT_correo();
-		String mensaje = "probando";
-		String internetAddresses = "kenned.mena@est.uca.edu.ni";
-		correoDriver.enviarCorreo(mensaje, internetAddresses);
 		*/
+		int id = Integer.parseInt(request.getParameter("id").toString());
+		if(dtec.EliminarEstudiante(id)) {
+			response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=3");
+		}else {
+			response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=4");
+		}
 	}
 
 	/**
@@ -82,13 +91,11 @@ public class SL_estudiante_candidato extends HttpServlet {
 				tblec.setMensaje(mensaje);
 				dtec.guardarEstudianteCandidato(tblec);
 				
-			}else {
-				response.sendRedirect("./pages/seguridad/newEstudianteCandidato.jsp?msj=2");
 			}
 		}
 	
-		response.sendRedirect("./pages/seguridad/newEstudianteCandidato.jsp?msj=1");
-		
+		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=1");
+		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
 	}
 
 }

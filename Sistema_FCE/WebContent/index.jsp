@@ -33,6 +33,21 @@ mensaje = mensaje==null?"":mensaje;
 %>
 
 
+<%	
+   response.setHeader( "Pragma", "no-cache" );
+   response.setHeader( "Cache-Control", "no-store" );
+   response.setDateHeader( "Expires", 0 );
+   response.setDateHeader( "Expires", -1 );
+%>
+
+<%
+	HttpSession hts = request.getSession(false);
+	hts.removeAttribute("login");
+	hts.removeAttribute("id");
+	hts.invalidate();	
+%>
+
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

@@ -86,7 +86,7 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
+  <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">15</span>
@@ -95,11 +95,18 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Salir del Sistema</span>
           <div class="dropdown-divider"></div>
+<<<<<<< HEAD
           
           <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
 			<span>Cerrar Sesión</span>
 		  </a>
 
+=======
+          <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
+			<span>Cerrar SesiÃ³n</span>
+		  </a>
+          
+>>>>>>> 87f6176f9b00696aa07e7ba3b96b83db8ac234f4
         </div>
       </li>
       <li class="nav-item">
