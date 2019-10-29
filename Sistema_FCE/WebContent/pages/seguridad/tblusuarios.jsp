@@ -83,34 +83,7 @@
   <!-- Navbar -->
   	<jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
   <!-- /.navbar -->
-  <%
-	String loginUser = "";
-	int rolId = 0;
-
-	loginUser = (String) session.getAttribute("login");
-	loginUser = loginUser==null?"":loginUser;
-	
-// 	rolId = (int) session.getAttribute("idRol");
-// 	rolId = loginUser==null?0:rolId;
-	
-	if(loginUser.equals(""))
-	{
-		response.sendRedirect("index.jsp");
-	}
-	else
-	{
-		ArrayList <Vw_rol_opcion> listarOpciones = new ArrayList <Vw_rol_opcion>(); 
-		DT_rol dtr = new DT_rol();
-		listarOpciones = dtr.listRolOpc(1);
-		HttpSession hts2 = request.getSession(true);
-		hts2.setAttribute("listOpciones", listOpciones);
-		
-		
-// 		HttpSession hts4 = request.getSession(true);
-// 		hts4.setAttribute("idusuario", idUsuario);
-		
-	}
-%>
+ 
 
   <!-- SIDEBAR -->
   	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
