@@ -17,13 +17,13 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Jalert -->
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
-  
+
   <link rel="stylesheet" href="./css/newEstudianteCandidato.css">
   <script src="./js/newEstudianteCandidato.js" defer></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
- 
+
 
    <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -86,7 +86,7 @@
                   </div>
 
                   <p class="alert" id="empty">Ingrese el correo por favor</p>
-                  <p class="alert" id="error">El correo ya se ha añadido</p>
+                  <p class="alert" id="error">El correo ya se ha aï¿½adido</p>
                   <p class="alert" id="valid">Ingrese un correo valido por favor</p>
                   <button type="button" onclick="agregar()" class="btn btn-primary">Agregar</button>
 
@@ -149,26 +149,33 @@
 
 
 <script>
-  $(document).ready(function ()
-  {
-
     /////////// VARIABLES DE CONTROL MSJ ///////////
+    function alert(type, mensaje, title) {
+    	console.log("pasa por aqui")
+      $.jAlert({
+  		  'type':  "modal",
+          'theme': type,
+  		  'title': title,
+  		  'content': mensaje,
+          'onClose': function() {
+            window.history.pushState({page: "another"}, "newEstudianteCandidato", "/Sistema_FCE/pages/seguridad/newEstudianteCandidato.jsp")
+          }
+  		});
+    }
+    
     var nuevo = 0;
     nuevo = "<%=mensaje%>";
 
     if(nuevo == "1")
     {
-      successAlert('ï¿½xito', 'Han sido enviado correctamente los correos');
+      alert("green", "los correos se han enviado éxitosamente", "É‰xito")
     }
 
     if(nuevo == "2")
     {
-      errorAlert('Error', 'Revise correctamente los campos');
+      alert("red", "Intente nuevamente mas tarde\n si el problema persiste consulte a su servidor", "Error")
     }
 
-
-
-  });
   </script>
 
 
@@ -180,4 +187,3 @@
 
 </body>
 </html>
->>>>>>> 5cabe47824a35ceaf8e9244b5dfe38adc7f983b8
