@@ -112,6 +112,8 @@
           <div class="card">
             <div class="card-header">
               <a href="../seguridad/newRol.jsp">Agregar Rol <i class="fas fa-plus-circle"></i></a>
+              &nbsp; &nbsp; &nbsp; &nbsp;
+               <a href="../seguridad/tblrol_opcion.jsp">Asignar Opciones <i class="fas fa-scroll"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

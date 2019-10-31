@@ -138,7 +138,7 @@ trols = drol.obtenerRol(rol);
                   </div>
                   
                    <div class="form-group">
-                   <label for="exampleInputPassword1">Seleccione un Rol para el usuario: </label>
+                   <label for="exampleInputPassword1">Seleccione una opción para el usuario: </label>
            				<select class="form-control select2" name="id_opcion" style="width: 100%;" required="required">
            				  <option value="0">Seleccione una opcion...</option>
             				<%

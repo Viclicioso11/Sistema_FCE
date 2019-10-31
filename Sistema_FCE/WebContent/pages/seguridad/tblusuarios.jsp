@@ -128,7 +128,7 @@
                   <th>Id</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
-                  <th>UserName</th>
+                  <th>Carné o ID</th>
                   <th>Email</th>
                   <th>Estado</th>
                   <th>Opciones</th>
