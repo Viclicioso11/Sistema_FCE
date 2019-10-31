@@ -41,12 +41,9 @@
    		System.out.println("hts.getAttribute(\"id\") en sistema = " + hts2.getAttribute("id"));
     	int idRol = Integer.parseInt( hts2.getAttribute("id").toString());
     	System.out.println("id = " + idRol);
+    	
    		listOpciones = dtr.listRolOpc(idRol);
     	hts2.setAttribute("listOpciones", listOpciones);
-		
-		
-// 		HttpSession hts4 = request.getSession(true);
-// 		hts4.setAttribute("idusuario", idUsuario);
 		
 	}
 %>

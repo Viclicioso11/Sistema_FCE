@@ -5,22 +5,36 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <title>AdminLTE 3 | Log in</title>
+ <title>Inicio de sesión</title>
  <!-- Tell the browser to be responsive to screen width -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
 
  <!-- Font Awesome -->
- <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
+ <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
  <!-- Ionicons -->
  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
  <!-- icheck bootstrap -->
- <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+ <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
  <!-- Theme style -->
  <link rel="stylesheet" href="dist/css/adminlte.min.css">
  <!-- Google Font: Source Sans Pro -->
  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  <!-- jAlert css  -->
-<link rel="stylesheet" href="./plugins/jAlert/dist/jAlert.css" />
+<link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css">
+
+<%	
+   response.setHeader( "Pragma", "no-cache" );
+   response.setHeader( "Cache-Control", "no-store" );
+   response.setDateHeader( "Expires", 0 );
+   response.setDateHeader( "Expires", -1 );
+%>
+
+<%
+	HttpSession hts = request.getSession(false);
+	hts.removeAttribute("login");
+	hts.removeAttribute("id");
+	hts.invalidate();	
+%>
 
 
 <%
@@ -33,26 +47,12 @@ mensaje = mensaje==null?"":mensaje;
 %>
 
 
-<%	
-   response.setHeader( "Pragma", "no-cache" );
-   response.setHeader( "Cache-Control", "no-store" );
-   response.setDateHeader( "Expires", 0 );
-   response.setDateHeader( "Expires", -1 );
-%>
-
-<%
-	HttpSession hts = request.getSession(false);
-	hts.removeAttribute("login");
-	hts.removeAttribute("id_rol");
-	hts.invalidate();	
-%>
-
 
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Sistema de Control FCE</b></a>
+    <a href="#"><b>Sistema de Control FCE</b></a>
   </div>
   <!-- /.login-logo -->
   
@@ -132,21 +132,15 @@ mensaje = mensaje==null?"":mensaje;
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="./plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- JAlerts js -->
-  <script src="./plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="./plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-
-<script>
-  $(function () 
-	{
-    //Initialize Select2 Elements
-    $('.select2').select2({theme: 'bootstrap4'})
-	});
-</script>
+  <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  
+ 
 
 
 <script>
@@ -155,8 +149,6 @@ mensaje = mensaje==null?"":mensaje;
  var nuevo = 0;
  nuevo = "<%=mensaje%>";
 
-
-
  if(nuevo == "2")
  {
    errorAlert('Aviso', 'Carné o contraseña no válidos');
@@ -164,8 +156,6 @@ mensaje = mensaje==null?"":mensaje;
  
 });
 
- 
-   
  </script>
 
 

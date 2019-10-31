@@ -84,7 +84,7 @@
 
 
   <!-- Navbar -->
-  <jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
   <!-- /.navbar -->
 
   <!-- SIDEBAR -->
@@ -257,13 +257,13 @@
   nuevo = "<%=mensaje%>"
 
   if(nuevo == "1"){
-  	alertC("green", "Mensaje Eviando a todos los correos", "ï¿½xito")
+  	alertC("green", "Mensaje Eviando a todos los correos", "éxito")
   }
   if(nuevo == "2"){
   	alertC("red", "error al enviar los mensajes", "Error")
   }
   if(nuevo == "3"){
-  	alertC("green", "correo eliminado", "ï¿½xito")
+  	alertC("green", "correo eliminado", "éxito")
   }
   if(nuevo == "4"){
   	alertC("red", "No se ha podido eliminar correo", "Error")
