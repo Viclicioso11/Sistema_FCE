@@ -92,10 +92,13 @@ public class SL_estudiante_candidato extends HttpServlet {
 				dtec.guardarEstudianteCandidato(tblec);
 				
 			}
+			else {
+				response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
+			}
 		}
 	
 		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=1");
-		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
+		
 	}
 
 }

@@ -1,5 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    
+    
+    <% 
+    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
+	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
+	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
+	//Recuperamos la url de la pag actual
+	int index = request.getRequestURL().lastIndexOf("/");
+	String miPagina = request.getRequestURL().substring(index+1);
+	System.out.println("miPagina ="+miPagina);
+	boolean permiso = false;
+	String opcionActual = "";
+	//Buscamos si el rol tiene permisos para ver esta pagina
+	for(Vw_rol_opcion vro : listOpciones)
+	{
+		opcionActual = vro.getOpcion().trim();
+		System.out.println("opcionActual ="+opcionActual);
+		if(opcionActual.equals(miPagina.trim()))
+		{
+			permiso = true;
+			break;
+		}
+		else
+		{
+			permiso = false;
+		}
+		
+	}
+	
+	if(!permiso)
+	{
+		response.sendRedirect("../../Error.jsp");
+	}
+%>
 
 <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -50,7 +84,7 @@
 
 
   <!-- Navbar -->
-  <jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
   <!-- /.navbar -->
 
   <!-- SIDEBAR -->
@@ -223,13 +257,13 @@
   nuevo = "<%=mensaje%>"
 
   if(nuevo == "1"){
-  	alertC("green", "Mensaje Eviando a todos los correos", "ï¿½xito")
+  	alertC("green", "Mensaje Eviando a todos los correos", "éxito")
   }
   if(nuevo == "2"){
   	alertC("red", "error al enviar los mensajes", "Error")
   }
   if(nuevo == "3"){
-  	alertC("green", "correo eliminado", "ï¿½xito")
+  	alertC("green", "correo eliminado", "éxito")
   }
   if(nuevo == "4"){
   	alertC("red", "No se ha podido eliminar correo", "Error")

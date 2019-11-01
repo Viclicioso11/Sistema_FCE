@@ -1,8 +1,8 @@
-    <%@page import="entidades.Tbl_rol"%>
+<%@page import="entidades.Tbl_rol"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
     
-     <% 
+    <% 
     ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
@@ -35,12 +35,11 @@
 	}
 %>
     
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Usuario</title>
+<title>Asignar Opción a Rol</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -56,11 +55,24 @@
 
 
 <%
-/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
 String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
+/* RECUPERAMOS EL VALOR DE LA VARIABLE l */
+String idRol = "";
+idRol = request.getParameter("id_rol");
+idRol = idRol==null?"0":idRol;
+
+int rol = 0;
+rol = Integer.parseInt(idRol); 
+
+/* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
+DT_rol drol = new DT_rol();
+Tbl_rol trols = new Tbl_rol();
+
+trols = drol.obtenerRol(rol);
 
 %>
 
@@ -83,12 +95,12 @@ mensaje = mensaje==null?"":mensaje;
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Registro [Nuevo Usuario]</h1>
+	            <h1>Registro de nueva Opción a Rol</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Nuevo Usuario</li>
+	              <li class="breadcrumb-item active">Asignación de opción a rol</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -104,76 +116,57 @@ mensaje = mensaje==null?"":mensaje;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nuevo Usuario</h3>
+                <h3 class="card-title">Asignación Opción</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_usuario" method="post">
+              <form role="form" action="../../SL_rol_opcion" method="post">
                 <div class="card-body">
-                  <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
-                  
+        		<!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
+                  <input name="id_rol" id="id_rol" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_ROL A EDITAR -->
+                   
                    <div class="form-group">
-                    <label for="exampleInputEmail1">Numero de Carne:</label>
-                    <input type="text" id="carne" name="carne" class="form-control" 
+                    <label for="exampleInputEmail1">Nombre Rol:</label>
+                    <input type="text" id="rol" name="rol" class="form-control" 
                     placeholder="Carnet de usuario" required>
                   </div>
                   
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombres:</label>
-                    <input type="text" id="nombres" name="nombres" class="form-control" 
+                    <label for="exampleInputEmail1">Descripción Rol:</label>
+                    <input type="text" id="descripcion" name="descripcion" class="form-control" 
                     placeholder="Nombres de Usuario" required>
                   </div>
-                 
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" class="form-control" 
-                    placeholder="Apellidos del Usuario" required>
-                  </div>
                   
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Correo Institucional:</label>
-                    <input type="email" id="correo" name="correo" class="form-control" 
-                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña: </label>
-                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese su Contraseña" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Contraseña: </label>
-                    <input type="password" id="contrasenia2" name="contrasenia2" onchange="pwdEquals()" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese nuevamente su Contraseña" required>
-                  </div>
                    <div class="form-group">
-                   <label for="exampleInputPassword1">Seleccione un Rol del usuario: </label>
-           				<select class="form-control select2" name="rol" id="rol" style="width: 100%;" required="required">
-           				  <option value="0">Seleccione un Rol...</option>
+                   <label for="exampleInputPassword1">Seleccione una opción para el usuario: </label>
+           				<select class="form-control select2" name="id_opcion" style="width: 100%;" required="required">
+           				  <option value="0">Seleccione una opcion...</option>
             				<%
-		            		DT_rol dtr = new DT_rol();
-		            	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-		            	    listRol = dtr.listRol();
+		            		DT_opcion dtop = new DT_opcion();
+		            	    ArrayList<Tbl_opcion> listOpcion = new ArrayList<Tbl_opcion>();
+		            	    listOpcion = dtop.obtenerOpciones();
 		            	    
-		            	    for(Tbl_rol tr : listRol)
+		            	    for(Tbl_opcion top : listOpcion)
 		            	    {
 		            		%>
-		            		 <option value="<%=tr.getId()%>"><%=tr.getRol() %></option>
+		            		 <option value="<%=top.getId()%>"><%=top.getOpcion() %></option>
 		            		<%	
 		            		} 
 		            		%>
            				</select>
         		</div>
+        		
+                  </div>
+                  
+                 
                   
 
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
-                  <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
             </div>
@@ -196,35 +189,16 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-   <script>
-  function pwdEquals()
-  {
-	  var pwd1 = "";
-	  var pwd2 = "";
-	  
-	  pwd1 = $("#contrasenia").val();
-	  pwd2 = $("#contrasenia2").val();
-	  
-	  if(pwd1 != pwd2)
-	  {
-		  errorAlert('Error', 'Revise la contraseña ingresada');
-		  $("#contrasenia").css("border-color", "red");
-		  $("#contrasenia").val("");
-		  $("#contrasenia2").css("border-color", "red");
-		  $("#contrasenia2").val("");
-	  }
-	  else
-		{
-		  $("#contrasenia").css("border-color", "#ced4da");
-		  $("#contrasenia2").css("border-color", "#ced4da");
-		}
-		  
-  }
-  </script>
   
   <script>
     $(document).ready(function ()
     {
+		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
+    	
+    	$("#id_rol").val("<%=trols.getId()%>");
+    	$("#rol").val("<%=trols.getRol()%>");
+    	$("#descripcion").val("<%=trols.getDescripcion()%>");
+    	
      
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
@@ -232,7 +206,7 @@ mensaje = mensaje==null?"":mensaje;
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El nuevo registro ha sido almacenado!!!');
+        successAlert('Éxito', 'El registro ha sido modificado!!!');
       }
       if(nuevo == "2")
       {

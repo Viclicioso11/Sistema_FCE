@@ -1,11 +1,46 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+   
+      <% 
+    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
+	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
+	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
+	//Recuperamos la url de la pag actual
+	int index = request.getRequestURL().lastIndexOf("/");
+	String miPagina = request.getRequestURL().substring(index+1);
+	System.out.println("miPagina ="+miPagina);
+	boolean permiso = false;
+	String opcionActual = "";
+	//Buscamos si el rol tiene permisos para ver esta pagina
+	for(Vw_rol_opcion vro : listOpciones)
+	{
+		opcionActual = vro.getOpcion().trim();
+		System.out.println("opcionActual ="+opcionActual);
+		if(opcionActual.equals(miPagina.trim()))
+		{
+			permiso = true;
+			break;
+		}
+		else
+		{
+			permiso = false;
+		}
+		
+	}
+	
+	if(!permiso)
+	{
+		response.sendRedirect("../../Error.jsp");
+	}
+%> 
+   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>Gestión Roles</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,7 +79,7 @@
   
 
   <!-- Navbar -->
-  	<jsp:include page="/WEB-INF/layouts/topbar.jsp"></jsp:include>
+  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
   <!-- /.navbar -->
 
   <!-- SIDEBAR -->
@@ -77,6 +112,8 @@
           <div class="card">
             <div class="card-header">
               <a href="../seguridad/newRol.jsp">Agregar Rol <i class="fas fa-plus-circle"></i></a>
+              &nbsp; &nbsp; &nbsp; &nbsp;
+               <a href="../seguridad/tblrol_opcion.jsp">Asignar Opciones <i class="fas fa-scroll"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
