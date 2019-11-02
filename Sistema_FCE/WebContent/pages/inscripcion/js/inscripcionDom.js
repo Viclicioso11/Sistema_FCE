@@ -19,3 +19,7 @@ if(nuevo == "2")
 var input = document.getElementById("palabrasC")
 var tags = new Tagify(input)
 tags.addTags(["hola mundo"])
+
+
+var members = document.getElementById("members")
+var menberT = new Tagify(members)

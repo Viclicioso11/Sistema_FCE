@@ -133,7 +133,24 @@ mensaje = mensaje==null?"":mensaje;
 	                        <input type="hidden" name ="nombreArchivo" id="nombreArchivo" value="" >
 	                      </div>
 	                    </div>
-                    
+					
+						
+						<br />
+						<label for="exampleInputPassword1">Seleccione la cantidad de Integrantes </label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+									Opciones
+								</button>
+								<ul class="dropdown-menu">
+								<li class="dropdown-item"><a data-toggle="modal" data-target="#addMember">Añadir compañero</a></li>
+								<li class="dropdown-item"><a onclick="EliminarMembers()">Eliminar a todos</a></li>
+								</ul>
+							</div>
+							<!-- /btn-group -->
+							<input type="text" class="form-control" id="members" readonly>
+						</div>
+
 			        
 				        <!-- fin div hidden de estudiante 1-->  
 				        <br/>
@@ -270,10 +287,40 @@ mensaje = mensaje==null?"":mensaje;
 	    </section>
 	    <!-- /.content -->
 	
-	
+	  
 
 	</div>
 	
+	<!-- Modal -->
+	  <div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+
+			<!-- modal body -->
+			
+			<br />
+			
+			<div class="form-group" style="padding-left: 5%;width: 90%;">
+				<label for="exampleInputPassword1">Escriba el carn� del participante </label>
+				<input id="addM" class="form-control" type="text" />
+				
+				<br />	
+				<button type="button" class="btn btn-primary" onclick="Addmember()" data-dismiss="modal">Agregar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>  
+			</div>
+			<!-- end modal body -->
+		  </div>
+		</div>
+	  </div>
+	 <!-- end modal -->
+	 
 	<!-- Footer -->
   		<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->

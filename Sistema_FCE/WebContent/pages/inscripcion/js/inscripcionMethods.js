@@ -72,10 +72,10 @@ function ponerNombreEstudiante1(){
 */
 function ponerNombreArchivo(nombre){
 		  
-    var archivo = nombre.files[0];
+    var archivo = "";
     
-    $('#nombreArchivo').val() = archivo.name;
-    alert(archivo.name);
+    $('#nombreArchivo').val(archivo);
+    alert(archivo);
     
 }
 /*
@@ -108,4 +108,15 @@ function aparecer_ocultar_est() {
     document.getElementById('estudiante3').style.display = "block";
     }
     
+}
+
+function EliminarMembers(){
+    menberT.removeAllTags()
+    successAlert('Éxito', 'Se han eliminado los pasticipantes')
+}
+
+function Addmember(){
+    let member = document.getElementById("addM").value
+    menberT.addTags([member])
+    successAlert('Éxito', 'Participante añadido: '+ member)
 }
