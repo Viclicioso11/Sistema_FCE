@@ -290,6 +290,38 @@ public class DT_usuario
 			return existe;
 		}
 		
+		
+		
+		// Metodo para obtenero un usuario
+		public Tbl_usuario obtenerNombreEstudiante(String carne_correo)
+		{
+			Tbl_usuario usuario = new Tbl_usuario();
+			try
+			{
+				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_usuario where carne = ? OR correo = ? and estado<>3", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setString(1, carne_correo);
+				ps.setString(2, carne_correo);
+				
+				rsUsuario = ps.executeQuery();
+				
+				if(rsUsuario.next())
+				{
+					usuario.setNombres(rsUsuario.getString("nombres"));;
+					usuario.setApellidos(rsUsuario.getString("apellidos"));
+					usuario.setId(rsUsuario.getInt("id"));
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerNombreEstudiante() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return usuario;
+		}
+		
 	
 
 	
