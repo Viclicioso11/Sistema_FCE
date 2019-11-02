@@ -1,12 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-    
-    <% 
-    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
+
+<%
+  ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
-	//Recuperamos la url de la pag actual
+
+  //Recuperamos la url de la pag actual
 	int index = request.getRequestURL().lastIndexOf("/");
 	String miPagina = request.getRequestURL().substring(index+1);
 	System.out.println("miPagina ="+miPagina);
@@ -17,22 +17,20 @@
 	{
 		opcionActual = vro.getOpcion().trim();
 		System.out.println("opcionActual ="+opcionActual);
-		if(opcionActual.equals(miPagina.trim()))
-		{
+
+		if(opcionActual.equals(miPagina.trim())) {
 			permiso = true;
 			break;
-		}
-		else
-		{
+		}else	{
 			permiso = false;
 		}
-		
-	}
 	
-	if(!permiso)
-	{
+	}
+
+	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
 	}
+
 %>
 
 <!DOCTYPE html>
@@ -49,25 +47,19 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Jalert -->
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
 
   <link rel="stylesheet" href="./css/newEstudianteCandidato.css">
+  <script src="./js/xlsx.full.min.js"></script>
   <script src="./js/newEstudianteCandidato.js" defer></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-
-   <%
-	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
-	String mensaje = "";
-	mensaje = request.getParameter("msj");
-	mensaje = mensaje==null?"":mensaje;
-	%>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -127,13 +119,22 @@
                   <p class="alert" id="valid">Ingrese un correo valido por favor</p>
                   <button type="button" onclick="agregar()" class="btn btn-primary">Agregar</button>
 
+                  <br/><br/>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file">
+                        <label class="custom-file-label" for="exampleInputFile" id="fileLabel">Escoger Archivo</label>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="form-group">
                     <label>Mensaje</label>
                     <textarea class="form-control" rows="6" placeholder="escribe Algo" id="mensaje" name="mensaje"></textarea>
                   </div>
 
-                  <button type="submit" class="btn btn-primary">Enviar</button>
+                  <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
                   <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
                 <!-- /.card-body -->
@@ -174,53 +175,10 @@
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-
-
-
-
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-
-
-
-<script>
-    /////////// VARIABLES DE CONTROL MSJ ///////////
-    function alert(type, mensaje, title) {
-    	console.log("pasa por aqui")
-      $.jAlert({
-  		  'type':  "modal",
-          'theme': type,
-  		  'title': title,
-  		  'content': mensaje,
-          'onClose': function() {
-            window.history.pushState({page: "another"}, "newEstudianteCandidato", "/Sistema_FCE/pages/seguridad/newEstudianteCandidato.jsp")
-          }
-  		});
-    }
-    
-    var nuevo = 0;
-    nuevo = "<%=mensaje%>";
-
-    if(nuevo == "1")
-    {
-      alert("green", "los correos se han enviado éxitosamente", "É‰xito")
-    }
-
-    if(nuevo == "2")
-    {
-      alert("red", "Intente nuevamente mas tarde\n si el problema persiste consulte a su servidor", "Error")
-    }
-
-  </script>
-
-
-
-
-
-
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 
 </body>
 </html>
-

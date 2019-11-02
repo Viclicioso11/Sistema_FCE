@@ -77,6 +77,7 @@ topcion = dtopcion.obtenerOpcion(opcion);
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
 	<!-- Navbar -->
 	  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
 	<!-- /.navbar -->

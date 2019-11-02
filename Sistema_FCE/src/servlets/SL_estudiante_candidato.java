@@ -72,30 +72,53 @@ public class SL_estudiante_candidato extends HttpServlet {
 		System.out.println(mensaje);
 		String[] correos = correosText.split(",");
 		DT_correo correoDriver = new DT_correo();
-
+		
+		InternetAddress correosT[] = new InternetAddress[correos.length];
+		
+		try {
+			for(int i=0; i< correos.length; i++) {
+				String correo = correos[i].toString();
+				correosT[i] = new InternetAddress(correo);
+			}
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(correoDriver.enviarCorreo(mensaje, correosT)) {
+			for (int i = 0; i < correos.length; i++) { 
+				String correo = correos[i].toString();
+				Tbl_estudiante_candidato tblec = new Tbl_estudiante_candidato();
+				tblec.setCorreo(correos[i]);
+				tblec.setMensaje(mensaje);
+				dtec.guardarEstudianteCandidato(tblec);
+			}
+		}else {
+			response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
+		}
 		
 		//recorriendo los correos obtenidos del form
-		for (int i = 0; i < correos.length; i++) { 
+		//for (int i = 0; i < correos.length; i++) { 
 			
-			String correo = correos[i].toString(); // pasando el correo acutal a una variable
-			System.out.println(correo);
+			//String correo = correos[i].toString(); // pasando el correo acutal a una variable
+			//System.out.println(correo);
 			
-			if(correoDriver.enviarCorreo(mensaje, correo)) {//enviar metodo
+			//if(correoDriver.enviarCorreo(mensaje, correo)) {//enviar metodo
 				
 				/**
 				 * si se envio lo guardamos en 
 				 * la base de datos
 				 * */
-				Tbl_estudiante_candidato tblec = new Tbl_estudiante_candidato();
-				tblec.setCorreo(correos[i]);
-				tblec.setMensaje(mensaje);
-				dtec.guardarEstudianteCandidato(tblec);
+				//Tbl_estudiante_candidato tblec = new Tbl_estudiante_candidato();
+				//tblec.setCorreo(correos[i]);
+				//tblec.setMensaje(mensaje);
+				//dtec.guardarEstudianteCandidato(tblec);
 				
-			}
-			else {
-				response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
-			}
-		}
+			//}
+			//else {
+				//response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
+			//}
+		//}
 	
 		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=1");
 		

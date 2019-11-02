@@ -92,5 +92,66 @@ public class DT_correo {
 
 	}
 	
+	public boolean enviarCorreo(String mensaje, InternetAddress[] correos) {
+
+		boolean enviado = false;
+		// La configuracion para enviar correo
+		Properties properties = new Properties();
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port",port);
+		properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		properties.put("mail.smtp.starttls.enable", "true");
+
+		Authenticator authenticator = null;
+
+		if (auth) {
+            properties.put("mail.smtp.auth", "true");
+            authenticator = new Authenticator() {
+                private PasswordAuthentication pa = new PasswordAuthentication("nedmena@gmail.com", "KIMM090500");
+                @Override
+                public PasswordAuthentication getPasswordAuthentication() {
+                    return pa;
+                }
+            };
+        }
+
+				// Obtener la sesion
+				Session session = Session.getInstance(properties, authenticator);
+				session.setDebug(debug);
+
+				// Crear el cuerpo del mensaje
+				MimeMessage mimeMessage = new MimeMessage(session);
+
+				try {
+
+					// Agregar quien envio el correo
+					mimeMessage.setFrom(new InternetAddress(from));
+
+
+					// Agregar los destinatarios al mensaje
+					mimeMessage.setRecipients(Message.RecipientType.TO, correos);
+
+					// Agregar el asunto al correo
+					mimeMessage.setSubject("Mensaje de Inscripción al Sistema de FCE");
+
+					String cuerpoMensaje = "<strong>Presione el siguiente enlace para dirigirse al cuestionario de registro de estudiante</strong>";
+					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/seguridad/newStudent.jsp\">Click</a><br><br>";
+					cuerpoMensaje += mensaje;
+
+					mimeMessage.setContent(cuerpoMensaje, "text/html");
+
+					Transport.send(mimeMessage);
+
+					System.out.println("Correo enviado");
+					enviado = true;
+
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+
+				return enviado;
+
+	}
+	
 
 }

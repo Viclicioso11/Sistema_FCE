@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
     
-    
-    <% 
+ <% 
     ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
@@ -34,6 +33,7 @@
 		response.sendRedirect("../../Error.jsp");
 	}
 %>
+
 
 <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -103,7 +103,17 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Historial de Estudiantes Candidatos</h3>
+            
+            	<%
+            		boolean x = true;
+            		if (x){
+            	%>
+              		<h3 class="card-title">Historial de Estudiantes Candidatos</h3>
+              	<%}else{ %>
+              		<h3 class="card-title">Estudiantes Candidatos</h3>
+              	<%} %>
+              	
+              	
               <!--<a href="#">Agregar Estudiante Candidato <i class="fas fa-plus-circle"></i></a>-->
             </div>
             <!-- /.card-header -->

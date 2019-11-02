@@ -1,4 +1,4 @@
-ackage entidades;
+package entidades;
 
 public class Tbl_usuario_rol
 {
