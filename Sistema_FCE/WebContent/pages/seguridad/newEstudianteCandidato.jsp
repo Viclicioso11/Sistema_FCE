@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <%
-  ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
+  	ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
 
@@ -30,7 +30,6 @@
 	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
 	}
-
 %>
 
 <!DOCTYPE html>
@@ -56,6 +55,8 @@
   <link rel="stylesheet" href="./css/newEstudianteCandidato.css">
   <script src="./js/xlsx.full.min.js"></script>
   <script src="./js/newEstudianteCandidato.js" defer></script>
+  
+ 
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

@@ -1,12 +1,12 @@
 package entidades;
 
-public class Tbl_usuario_rol
+public class Tbl_usuario_rol 
 {
 	//ATRIBUTOS
 	private int id_user_rol;
 	private int id_user;
 	private int id_rol;
-
+	
 	//METODOS
 	public int getId_user_rol() {
 		return id_user_rol;
@@ -26,8 +26,8 @@ public class Tbl_usuario_rol
 	public void setId_rol(int id_rol) {
 		this.id_rol = id_rol;
 	}
-
-
-
+	
+	
+	
 
 }
