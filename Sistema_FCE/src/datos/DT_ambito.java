@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import entidades.Tbl_ambito;
+import entidades.Tbl_usuario;
 
 public class DT_ambito {
 	

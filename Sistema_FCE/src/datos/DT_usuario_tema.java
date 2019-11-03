@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import entidades.Tbl_usuario;
 import entidades.Tbl_usuario_tema;
+import entidades.Vw_usuario_tema;
 
 public class DT_usuario_tema {
 
@@ -32,6 +33,7 @@ public class DT_usuario_tema {
 			{
 				validar = true;
 				return validar;
+				
 			}
 			
 		}

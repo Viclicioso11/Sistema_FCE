@@ -11,9 +11,9 @@ public class DT_vw_rol_usuario {
 	private ResultSet rsTutor;
 	
 	// Metodo para visualizar todos los usuarios activos que son tutores
-		public ArrayList<Vw_usuario_rol> listTutor()
+		public ArrayList<Vw_usuario_rol> listarTutor()
 		{
-			ArrayList<Vw_usuario_rol> listaTutor = new ArrayList<Vw_usuario_rol>();
+			ArrayList<Vw_usuario_rol> listarTutor = new ArrayList<Vw_usuario_rol>();
 			
 			try
 			{
@@ -24,11 +24,11 @@ public class DT_vw_rol_usuario {
 				
 				while(rsTutor.next())
 				{
-					Vw_usuario_rol  vwUR = new Vw_usuario_rol();
-					vwUR.setId_user(rsTutor.getInt("id_usuario"));
-					vwUR.setNombre(rsTutor.getString("nombre"));
+					Vw_usuario_rol  vwur = new Vw_usuario_rol();
+					vwur.setId_user(rsTutor.getInt("id_usuario"));
+					vwur.setNombre(rsTutor.getString("nombre"));
 					
-					listaTutor.add(vwUR);
+					listarTutor.add(vwur);
 				}
 			}
 			catch (Exception e)
@@ -37,6 +37,10 @@ public class DT_vw_rol_usuario {
 				e.printStackTrace();
 			}
 			
-			return listaTutor;
+			return listarTutor;
 		}
+		
+		
+		
+		
 }
