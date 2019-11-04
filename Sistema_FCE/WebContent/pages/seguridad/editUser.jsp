@@ -4,7 +4,7 @@
     <% 
     ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
-	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
+	listOpciones = (ArrayList <Vw_rol_opcion>)session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
 	int index = request.getRequestURL().lastIndexOf("/");
 	String miPagina = request.getRequestURL().substring(index+1);

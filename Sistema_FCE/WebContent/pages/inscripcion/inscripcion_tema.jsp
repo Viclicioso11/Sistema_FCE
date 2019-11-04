@@ -92,8 +92,8 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Inscripciï¿½n</a></li>
-	              <li class="breadcrumb-item active">Inscripciï¿½n Tema</li>
+	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Inscripción</a></li>
+	              <li class="breadcrumb-item active">Inscripción Tema</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -114,21 +114,21 @@ mensaje = mensaje==null?"":mensaje;
 	              </div>
 	              
 	              <!-- form start -->
-	              <form role="form" action="../../SL_tema" method="post" enctype="mulltipart/form-data">
+	              <form role="form" name="formulario" action="../../SL_tema" method="post" enctype="multipart/form-data">
 					
 					<div class="card-body">
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
 		                 
-						<label for="exampleInputEmail1">TEMA de Forma de Culminaciï¿½n de Estudios:</label>
+						<label for="exampleInputEmail1">TEMA de Forma de Culminación de Estudios:</label>
 						<input type="text" id="tema" name="tema" class="form-control" placeholder="Tema de FCE" required>
 					
 						<br/>
 					
 						<!-- -->
-	                    <label for="exampleInputFile">Propuesta de Forma de Culminaciï¿½n de Estudios:</label>
+	                    <label for="exampleInputFile">Propuesta de Forma de Culminación de Estudios:</label>
 	                    <div class="input-group">
 	                      <div class="custom-file">
-	                        <input  onchange="ponerNombreArchivo(this)" type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce">
+	                        <input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce">
 	                        <label class="custom-file-label" for="exampleInputFile">Elija el documento de Propuesta FCE</label>
 	                        <input type="hidden" name ="nombreArchivo" id="nombreArchivo" value="" >
 	                      </div>
@@ -143,68 +143,46 @@ mensaje = mensaje==null?"":mensaje;
 									Opciones
 								</button>
 								<ul class="dropdown-menu">
-								<li class="dropdown-item"><a data-toggle="modal" data-target="#addMember">AÃ±adir compaÃ±ero</a></li>
+								<li class="dropdown-item"><a data-toggle="modal" data-target="#addMember">Añadir compañero</a></li>
 								<li class="dropdown-item"><a onclick="EliminarMembers()">Eliminar a todos</a></li>
 								</ul>
+								
+								<input type="hidden" id="carne" name="carne"/>
 							</div>
 							<!-- /btn-group -->
 							<input type="text" class="form-control" id="members" readonly>
 						</div>
-
-			        
-				        <!-- fin div hidden de estudiante 1-->  
-				        <br/>
-			        
-						<div class="form-group">
-							<label for="exampleInputPassword1">Seleccione la cantidad de Integrantes </label>
-							<select onchange="aparecer_ocultar_est()" class="form-control select2" name="cantidad_integrantes" id="cantidad_integrantes" style="width: 100%;" required="required">
-								<option value="0">Seleccione...</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
-	        		
-	        		
-		        		<!-- div hidden de estudiante 1-->
-		        		<div id="estudiante1">
-		                    <label for="exampleInputEmail1">Carnï¿½:</label>
-		                    <input onchange="ponerNombreEstudiante1()" type="text" id="carne1" name="carne1" class="form-control"  placeholder="Carnï¿½ Estudiante" required>
-		                    <label for="exampleInputEmail1">Nombre Estudiante:</label>
-		                    <input type="text" id="nombre1" name="nombre1" class="form-control" placeholder="Nombre Estudiante" required>
-		                </div>
-		                <!-- fin div hidden de estudiante 1-->  
-	                
-		                <!-- div hidden de estudiante 2-->
-			        	<div id="estudiante2">
-		                    <label for="exampleInputEmail1">Carnï¿½:</label>
-		                    <input type="text" id="carne2" name="carne2" class="form-control" placeholder="Carnï¿½ Estudiante" required>
-		                    <label for="exampleInputEmail1">Nombre Estudiante:</label>
-		                    <input type="text" id="nombre2" name="nombre2" class="form-control" placeholder="Nombre Estudiante" required>
-				        </div>
-			        
-	                	<!-- fin div hidden de estudiante 2-->  
-	                  
-		                <!-- div hidden de estudiante 3-->
-			        	<div id="estudiante3">
-		                    <label for="exampleInputEmail1">Carnï¿½:</label>
-		                    <input  type="text" id="carne3" name="carne3" class="form-control" placeholder="Carnï¿½ Estudiante" required>
-		                    <label for="exampleInputEmail1">Nombre Estudiante:</label>
-		                    <input type="text" id="nombre3" name="nombre3" class="form-control" placeholder="Nombre Estudiante" required>
-				        </div>
-		                <!-- fin div hidden de estudiante 3-->  
 		                
 						<br/>
 	
 						<!-- tags input -->
 						<label for="exampleInputEmail1">Palabras Claves</label>
-						<input class="form-control" name='palabrasC' id="palabrasC" value='tag1, tag2'>
-	 
+						
+						<div class="row">
+						
+						<div class="col-sm-4">
+							<div class="form-group">
+							<input class="form-control" name='palabra_clave1' id="palabra_clave1" value=''>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+							<input class="form-control" name='palabra_clave2' id="palabra_clave2" value=''>
+							</div>
+						</div>
+				        	<div class="col-sm-4">
+							<div class="form-group">
+							<input class="form-control" name='palabra_clave3' id="palabra_clave3" value=''>
+							</div>
+						</div>
+						
+						</div>
+						
 		                <br/>
 		                
-			            <label for="exampleInputEmail1">Informaciï¿½n General de la culminaciï¿½n de estudio</label>
+			            <label for="exampleInputEmail1">Información General de la culminación de estudio</label>
 		          	
-			          	<!-- div detalles FCE
+			          	
 			        	<div class="row">
 
 				          <div class="col-sm-4">
@@ -250,7 +228,7 @@ mensaje = mensaje==null?"":mensaje;
 				             <div class="form-group">
 			                    <label for="exampleInputPassword1">Ambito de FCE: </label>
 		           				<select class="form-control select2" name="ambito_fce" id="ambito_fce" style="width: 100%;" required="required">
-		           				  <option value="0">Seleccione un ï¿½mbito de FCE...</option>
+		           				  <option value="0">Seleccione un ámbito de FCE...</option>
 		            				<%
 				            		DT_ambito dtam = new DT_ambito();
 				            	    ArrayList<Tbl_ambito> listAmbito = new ArrayList<Tbl_ambito>();
@@ -265,7 +243,6 @@ mensaje = mensaje==null?"":mensaje;
 				          </div>
 
 				        </div>
-				        -->
 		               	<!--fin  div detalles fce-->
 					 
 	
@@ -337,6 +314,19 @@ mensaje = mensaje==null?"":mensaje;
 	<!-- jAlert js -->
 	<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
 	<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+    
+    
+    <script>
+    
+    var nuevo = 0;
+    nuevo = "<%=mensaje%>";
+
+    if(nuevo == "2")
+        errorAlert('Error', 'Revise los datos e intente nuevamente!!!')
+
+    
+    </script>
+    
     
 </body>
 </html>
