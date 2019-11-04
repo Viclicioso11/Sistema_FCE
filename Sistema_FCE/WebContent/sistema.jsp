@@ -48,7 +48,14 @@
 	}
 %>
  
- 
+ <%
+
+/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+String mensaje = "";
+mensaje = request.getParameter("msj");
+mensaje = mensaje==null?"":mensaje;
+
+%>
  
 </head>
 <body class="hold-transition sidebar-mini">
@@ -354,6 +361,28 @@
 <script src="plugins/chart.js/Chart.min.js"></script>
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/pages/dashboard3.js"></script>
+
+
+
+
+<script>
+ $(document).ready(function ()
+{
+ var nuevo = 0;
+ nuevo = "<%=mensaje%>";
+
+ if(nuevo == "1")
+ {
+   successAlert('Exito', 'Su Tema FCE ha sido registrado');
+ }
+ 
+ 
+});
+
+ </script>
+
+
+
 
 </body>
 </html>

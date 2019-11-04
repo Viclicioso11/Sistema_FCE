@@ -39,7 +39,7 @@
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Gestión Usuarios</title>
+  <title>Gestión Facultades</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -97,12 +97,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestion de Usuario</h1>
+            <h1>DataTables</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"></a></li>
-              <li class="breadcrumb-item active">Gestion de Usuario</li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
             </ol>
           </div>
         </div>
@@ -115,9 +115,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="../seguridad/newUser.jsp">Agregar Usuario <i class="fas fa-plus-circle"></i></a>
-               &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="../seguridad/tbluser_rol.jsp">Roles de Usuario<i class="fas fa-user-tag"></i></a>
+              <a href="../seguridad/newFacultad.jsp">Agregar Facultad <i class="fas fa-plus-circle"></i></a>
             </div>
               
             <!-- /.card-header -->
@@ -125,45 +123,30 @@
               <table id="example2" class="display">
                 <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Carné o ID</th>
-                  <th>Email</th>
+                  <th>Nombre</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_usuario dtus = new DT_usuario();
-                  	        		ArrayList<Tbl_usuario> listUser = new ArrayList<Tbl_usuario>();
-                  	        		listUser = dtus.listUser();
+                	DT_facultad dtfa = new DT_facultad();
+                  	        		ArrayList<Tbl_facultad> listFacultad = new ArrayList<Tbl_facultad>();
+                  	        		listFacultad = dtfa.listFacultad();
                   	        		
-                  	        		String nombreCompleto = "";
-                  	        		String nombre2="";
-                  	        		String apellido2="";
-                  	        		String apellidos= "";
                   	        		String estado = "";
-                  	        		for(Tbl_usuario tus : listUser)
+                  	        		for(Tbl_facultad tfa : listFacultad)
                   	        		{
-                  	        			nombre2=nombre2==null?" ":nombre2;
-                  	        			apellido2=apellido2==null?" ":apellido2;
-                  	        			nombreCompleto = tus.getNombres();
-                  	        			apellidos = tus.getApellidos();
-                  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+
+                  	        			estado = tfa.getEstado()==1||tfa.getEstado()==2?"ACTIVO":"";
                 %>
 	                <tr>
-	                  <td><%=tus.getId()%></td>
-	                  <td><%=nombreCompleto %></td>
-	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getCarne() %></td>
-	                  <td><%=tus.getCorreo() %></td>
+	                  <td><%=tfa.getNombre()%></td>
 	                  <td><%=estado %></td>
 	                  <td>
-	                  <a onclick="linkEditUser('<%=tus.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
+	                  <a href="#" onclick="linkEditFacultad('<%=tfa.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
 		                  &nbsp;&nbsp;&nbsp;
-	                  <a href="#" onclick="deleteUser('<%=tus.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  <a href="#" onclick="deleteFacultad('<%=tfa.getId()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
 	                  </td>
 	                </tr>
 	             <%
@@ -172,11 +155,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Nombre</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -259,10 +238,10 @@
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditUser(user)
+function linkEditFacultad(facultad)
 {
-	var idUsuario = user;
-	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	var idFacultad = facultad;
+	window.location.href="../../pages/seguridad/editFacultad.jsp?facultadID="+idFacultad;	
 }
 </script>
 
@@ -293,13 +272,13 @@ function linkEditUser(user)
 </script>
 
 <script>
-function deleteUser(user)
+function deleteFacultad(facultad)
 {
-	var idUsuario = user;
+	var idFacultad = facultad;
 	confirm(function(e,btn)
      { 	//event + button clicked
      	e.preventDefault();
-     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+     	window.location.href="../../SL_facultad?opc=1&facultadID="+idFacultad;
        	//successAlert('Confirmed!');
      }, 
      function(e,btn)
@@ -312,10 +291,10 @@ function deleteUser(user)
 	
 	$.jAlert({
 	    'type': 'confirm',
-	    'confirmQuestion': '¿Está seguro de eliminar el usuario seleccionado?',
+	    'confirmQuestion': '¿Está seguro de eliminar el facultad seleccionado?',
 	    'onConfirm': function(e, btn){
 	     e.preventDefault();
-	     window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+	     window.location.href="../../SL_facultad?opc=1&facultadID="+idFacultad;
 	     btn.parents('.jAlert').closeAlert();
 	    },
 	    'onDeny': function(e, btn){
