@@ -130,8 +130,6 @@ mensaje = mensaje==null?"":mensaje;
 						<input type="text" class="form-control" id="palabras" value="">
 						<input type="hidden" id="palabrasClave" name="PalabrasClave"/>
 						
-						</div>
-						
 		                <br/>
 		                
 			            <label for="exampleInputEmail1">Información General de la culminación de estudio</label>
