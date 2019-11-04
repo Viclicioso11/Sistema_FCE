@@ -4,7 +4,7 @@
     <% 
     ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
-	listOpciones = (ArrayList <Vw_rol_opcion>)session.getAttribute("listOpciones");
+	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
 	int index = request.getRequestURL().lastIndexOf("/");
 	String miPagina = request.getRequestURL().substring(index+1);
@@ -38,7 +38,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Usuario</title>
+<title>Editar Facultad</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -59,19 +59,19 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* RECUPERAMOS EL VALOR DE LA VARIABLE userID */
-String idUser = "";
-idUser = request.getParameter("userID");
-idUser = idUser==null?"0":idUser;
+/* RECUPERAMOS EL VALOR DE LA VARIABLE facultadID */
+String idFacultad = "";
+idFacultad = request.getParameter("facultadID");
+idFacultad = idFacultad==null?"0":idFacultad;
 
-int user = 0;
-user = Integer.parseInt(idUser); 
+int facultad = 0;
+facultad = Integer.parseInt(idFacultad); 
 
 /* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
-Tbl_usuario tus = new Tbl_usuario();
-DT_usuario dtus = new DT_usuario();
+Tbl_facultad tfa = new Tbl_facultad();
+DT_facultad dtfa = new DT_facultad();
 
-tus = dtus.obtenerUser(user);
+tfa = dtfa.obtenerFacultad(facultad);
 %>
 
 
@@ -93,12 +93,12 @@ tus = dtus.obtenerUser(user);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Edición [Usuario]</h1>
+	            <h1>Edición [Facultad]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Edición Usuario</li>
+	              <li class="breadcrumb-item"><a href="tblfacultads.jsp">Seguridad</a></li>
+	              <li class="breadcrumb-item active">Edición Facultad</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -114,70 +114,20 @@ tus = dtus.obtenerUser(user);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición Usuario</h3>
+                <h3 class="card-title">Edición Facultad</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_usuario" method="post">
+              <form role="form" action="../../SL_facultad" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
-                  <input name="IdUser" id="IdUser" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_USER A EDITAR -->
-                   
-                   <div class="form-group">
-                    <label for="exampleInputEmail1">Numero de Carne:</label>
-                    <input type="text" id="carne" name="carne" class="form-control" 
-                    placeholder="Carnet de usuario" required>
-                  </div>
+                  <input name="IdFacultad" id="IdFacultad" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_USER A EDITAR -->
                   
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombres:</label>
-                    <input type="text" id="nombres" name="nombres" class="form-control" 
-                    placeholder="Nombres de Usuario" required>
+                    <label for="exampleInputEmail1">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" 
+                    placeholder="Nombre de Facultad" required>
                   </div>
-                 
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" class="form-control" 
-                    placeholder="Apellidos del Usuario" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Correo Institucional:</label>
-                    <input type="email" id="correo" name="correo" class="form-control" 
-                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña: </label>
-                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese su Contraseña" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Confirmar Contraseña: </label>
-                    <input type="password" id="contrasenia2" name="contrasenia2" onchange="pwdEquals()" class="form-control" 
-                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
-                    placeholder="Ingrese nuevamente su Contraseña" required>
-                  </div>
-                  <div class="form-group">
-                   <label for="exampleInputPassword1">Seleccione un Rol del usuario: </label>
-           				<select class="form-control select2" name="rol" style="width: 100%;" required="required">
-           				  <option value="0">Seleccione un Rol...</option>
-            				<%
-		            		DT_rol dtr = new DT_rol();
-		            	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-		            	    listRol = dtr.listRol();
-		            	    
-		            	    for(Tbl_rol tr : listRol)
-		            	    {
-		            		%>
-		            		 <option value="<%=tr.getId()%>"><%=tr.getRol() %></option>
-		            		<%	
-		            		} 
-		            		%>
-           				</select>
-        		</div>
-                  
 
                 </div>
                 <!-- /.card-body -->
@@ -208,42 +158,12 @@ tus = dtus.obtenerUser(user);
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
   <script>
-  function pwdEquals()
-  {
-	  var pwd1 = "";
-	  var pwd2 = "";
-	  
-	  pwd1 = $("#contrasenia").val();
-	  pwd2 = $("#contrasenia2").val();
-	  
-	  if(pwd1 != pwd2)
-	  {
-		  errorAlert('Error', 'Revise la contraseña ingresada');
-		  $("#contrasenia").css("border-color", "red");
-		  $("#contrasenia").val("");
-		  $("#contrasenia2").css("border-color", "red");
-		  $("#contrasenia2").val("");
-	  }
-	  else
-		{
-		  $("#contrasenia").css("border-color", "#ced4da");
-		  $("#contrasenia2").css("border-color", "#ced4da");
-		}
-		  
-  }
-  </script>
-  
-  <script>
     $(document).ready(function ()
     {
 		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
     	
-    	$("#IdUser").val("<%=tus.getId()%>");
-    	$("#carne").val("<%=tus.getCarne()%>");
-    	$("#contrasenia").val("<%=tus.getContrasena()%>");
-    	$("#nombres").val("<%=tus.getNombres()%>");
-    	$("#apellidos").val("<%=tus.getApellidos()%>");
-    	$("#correo").val("<%=tus.getCorreo()%>");
+    	$("#IdFacultad").val("<%=tfa.getId()%>");
+    	$("#nombre").val("<%=tfa.getNombre()%>");
     	
     	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      

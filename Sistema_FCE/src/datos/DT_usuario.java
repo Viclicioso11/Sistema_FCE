@@ -291,7 +291,36 @@ public class DT_usuario
 			return usuario;
 		}
 		
-	
+		public Tbl_usuario obtenerUser(int id)
+		{
+			Tbl_usuario tus  = new Tbl_usuario();
+			try
+			{
+				PreparedStatement ps = c.prepareStatement("SELECT * from tbl_usuario where id = ? and estado<>3", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, id);
+				rsUsuario = ps.executeQuery();
+				if(rsUsuario.next())
+				{
+					
+					tus.setId(rsUsuario.getInt("id"));
+					tus.setNombres(rsUsuario.getString("nombres"));
+					tus.setApellidos(rsUsuario.getString("apellidos"));
+					tus.setCarne(rsUsuario.getString("carne"));
+					tus.setContrasena(rsUsuario.getString("contrasena"));
+					tus.setCorreo(rsUsuario.getString("correo"));
+					tus.setEstado(rsUsuario.getInt("estado"));
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerIDUser() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return tus;
+		}
 
 	
 }
