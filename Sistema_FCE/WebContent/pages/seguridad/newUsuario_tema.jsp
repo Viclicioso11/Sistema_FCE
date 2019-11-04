@@ -205,14 +205,6 @@ DT_usuario_tema dtuste = new DT_usuario_tema();
   <script>
     $(document).ready(function ()
     {
-		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-    	
-    	$("#tema").val("<%=tus.getId()%>");
-    	$("#tipo").val("<%=tus.getCarne()%>");
-    	$("#ambito").val("<%=tus.getContrasena()%>");
-    	$("#carrera").val("<%=tus.getNombres()%>");
-    	
-    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
