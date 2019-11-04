@@ -151,7 +151,7 @@ mensaje = mensaje==null?"":mensaje;
 							<input type="text" class="form-control" id="members" readonly>
 						</div>
 
-			        
+			        	<input type="hidden" id="carne" name="carne"/>
 				        <!-- fin div hidden de estudiante 1-->  
 				        <br/>
 			        

@@ -112,11 +112,16 @@ function aparecer_ocultar_est() {
 
 function EliminarMembers(){
     menberT.removeAllTags()
+    let c = []
+    carne = c
     successAlert('Éxito', 'Se han eliminado los pasticipantes')
+    console.log(carne)
 }
 
 function Addmember(){
     let member = document.getElementById("addM").value
+    actualCarne = member
     menberT.addTags([member])
     successAlert('Éxito', 'Participante añadido: '+ member)
+    console.log(carne)
 }
