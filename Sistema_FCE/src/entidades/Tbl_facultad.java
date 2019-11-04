@@ -1,7 +1,13 @@
 package entidades;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Tbl_facultad {
+=======
+public class Tbl_facultad 
+{
+	//ATRIBUTOS
+>>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
 =======
 public class Tbl_facultad 
 {
@@ -12,11 +18,17 @@ public class Tbl_facultad
 	private int estado;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
 
 	//METODOS
 
 	
+<<<<<<< HEAD
+>>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
+=======
 >>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
 	public int getId() {
 		return id;
@@ -37,13 +49,19 @@ public class Tbl_facultad
 		this.estado = estado;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
 
 	
 	
 	
 	
 	
+<<<<<<< HEAD
+>>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
+=======
 >>>>>>> 9340c1979f0526f5a0028a36e436d9eb0e7459db
 	
 
