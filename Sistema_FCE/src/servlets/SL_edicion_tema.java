@@ -28,16 +28,16 @@ import datos.DT_usuario_tema;
 /**
  * Servlet implementation class SL_tema
  */
-@WebServlet("/SL_tema")
+@WebServlet("/SL_edicion_tema")
 @MultipartConfig(location="C:\\Users\\HP I7\\Documents\\pruebaArchivos")
-public class SL_tema extends HttpServlet {
+public class SL_edicion_tema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SL_tema() {
+    public SL_edicion_tema() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -81,11 +81,6 @@ public class SL_tema extends HttpServlet {
 			
 		}
 		
-	
-		
-		
-		//Esto es para la respuesta al ajax
-		
 		
 		 
 	}
@@ -106,6 +101,7 @@ public class SL_tema extends HttpServlet {
 	
 		String palabrasClaves = request.getParameter("palabrasClave");
 		String nombreTema = request.getParameter("tema");
+		String id_estudiantes_eliminar = request.getParameter("id_estudiante_eliminado");
 		
 		tema.setTema(request.getParameter("tema"));
 		tema.setId_ambito(Integer.parseInt(request.getParameter("ambito_fce")));
@@ -113,11 +109,24 @@ public class SL_tema extends HttpServlet {
 		tema.setId_tipo_fce(Integer.parseInt(request.getParameter("tipo_fce")));
 		tema.setPalabras_claves(palabrasClaves);
 		
+		
 		String[] carnes = (request.getParameter("carne")).split(",");
+		//para eliminar de la tabla tema usuario a los usuarios que ya no pertenecen a esta
+		String[] eliminados = id_estudiantes_eliminar.split(",");
 		
 		if(processRequest(request, response)) {
-			//guardamos el tema
-			if(dtema.guardarTema(tema)) {
+			//editamos el tema
+			//hacemos un bucle para eliminar los usuarios que se quitaron de la fce actual
+			for(int i  = 0; i < eliminados.length; i++) { 
+				//lo parseamos para que llegue como un entero al metodo
+				if(dtema.eliminarEstudiante(Integer.parseInt(eliminados[i]))) {
+					
+				}else {
+					break;
+				}
+			}
+			
+			if(dtema.modificarTema(tema)) {
 				
 				//obtenemos el id del tema, para guardar en la tabla tema usuario
 				int idTema = dtema.obtenerIdTema(nombreTema);
@@ -125,9 +134,9 @@ public class SL_tema extends HttpServlet {
 				//guardamos en un arraylist el id del usuario (segun el carne) y el id tema
 				for(int i  = 0; i < carnes.length; i++) {
 					
-					int idUser = dtus.obtenerIDUser(carnes[i]);
 					//seteamos en el objeto el id del usuario, al obtenerlo de la funcion al que le mandamos el carne
-					tust.setId_usuario(idUser);
+					int id_usuario = dtus.obtenerIDUser(carnes[i]);
+					tust.setId_usuario(id_usuario);
 					tust.setId_tema(idTema);
 					usuariosTema.add(tust);
 				}
@@ -135,7 +144,7 @@ public class SL_tema extends HttpServlet {
 				if(dtema.guardarUsuariosTema(usuariosTema)) {
 					
 					
-					response.sendRedirect("sistema.jsp?msj=1");
+					response.sendRedirect("tblinscripciones.jsp?msj=1");
 					
 				}
 				else {

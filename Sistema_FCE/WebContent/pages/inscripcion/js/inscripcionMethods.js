@@ -23,6 +23,39 @@ function EliminarMembers(){
     successAlert('Éxito', 'Se han eliminado los pasticipantes')
 }
 
+
+
+//metodo para el editar
+function AddmemberEditar(){
+    let member = document.getElementById("addM").value;
+    actualCarne = member
+    
+    $.ajax({
+        type: "GET",
+        url: "../../SL_edicion_tema",
+        data:{filtro : member} ,
+        contentType : "application/json",
+        error : function(){ 
+        	errorAlert('ERROR', 'Contacte con administrador de sitio');
+        },
+        success: function(msg){
+        	
+        	if(msg == "2"){
+        		warningAlert('Error', 'Usuario no válido o no disponible');
+        	}
+        	else{
+        		successAlert('Éxito', 'Participante añadido: '+ msg);
+        		menberT.addTags([msg]);
+           	 
+        	}
+        	 
+        }
+    }); 
+    
+   
+}
+
+
 function Addmember(){
     let member = document.getElementById("addM").value;
     actualCarne = member
@@ -50,6 +83,10 @@ function Addmember(){
     }); 
     
    
+}
+
+function editPalabrasClaves(){
+	
 }
 
 function InputPalabra(){
