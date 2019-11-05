@@ -100,7 +100,6 @@ mensaje = mensaje==null?"":mensaje;
 	                      <div class="custom-file">
 	                        <input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce">
 	                        <label class="custom-file-label" for="exampleInputFile">Elija el documento de Propuesta FCE</label>
-	                        <input type="hidden" name ="nombreArchivo" id="nombreArchivo" value="" >
 	                      </div>
 	                    </div>
 					

@@ -29,7 +29,7 @@ import datos.DT_usuario_tema;
  * Servlet implementation class SL_tema
  */
 @WebServlet("/SL_tema")
-@MultipartConfig(location="C:\\Users\\HP I7\\Documents\\pruebaArchivos")
+@MultipartConfig(location="C:\\uploads")
 public class SL_tema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -97,21 +97,14 @@ public class SL_tema extends HttpServlet {
 	//public static String dirUploadFiles;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
 		Tbl_tema tema = new Tbl_tema();
 		Tbl_usuario_tema tust = new Tbl_usuario_tema();
 		DT_tema dtema = new DT_tema();
 		DT_usuario dtus = new DT_usuario();
-		ArrayList<Tbl_usuario_tema> usuariosTema = new ArrayList<Tbl_usuario_tema>(); 
 		
-
-		String palabra1 = request.getParameter("palabra_clave1");
-		String palabra2 = request.getParameter("palabra_clave2");
-		String palabra3 = request.getParameter("palabra_clave3");
+		ArrayList<Tbl_usuario_tema> usuariosTema = new ArrayList<Tbl_usuario_tema>();
 	
-		String palabrasClaves = ""+ palabra1+","+palabra2+","+palabra3+"";
-		
+		String palabrasClaves = request.getParameter("PalabrasClave");
 		String nombreTema = request.getParameter("tema");
 		
 		tema.setTema(request.getParameter("tema"));
@@ -120,56 +113,72 @@ public class SL_tema extends HttpServlet {
 		tema.setId_tipo_fce(Integer.parseInt(request.getParameter("tipo_fce")));
 		tema.setPalabras_claves(palabrasClaves);
 		
-		String valoresCarne = request.getParameter("carne");
+		String[] carnes = (request.getParameter("carne")).split(",");
 		
-		String[] carnes = valoresCarne.split(",");
-		
-		
-		//guardamos el tema
-		if(dtema.guardarTema(tema)) {
-			
-			//obtenemos el id del tema, para guardar en la tabla tema usuario
-			int idTema = dtema.obtenerIdTema(nombreTema);
-			
-			//guardamos en un arraylist el id del usuario (segun el carne) y el id tema
-			for(int i  = 0; i < carnes.length; i++) {
+		if(processRequest(request, response)) {
+			//guardamos el tema
+			if(dtema.guardarTema(tema)) {
 				
-				//seteamos en el objeto el id del usuario, al obtenerlo de la funcion al que le mandamos el carne
-				tust.setId_usuario(dtus.obtenerIDUser(carnes[i]));
-				tust.setId_tema(idTema);
-				usuariosTema.add(tust);
-			}
-			
-			if(dtema.guardarUsuariosTema(usuariosTema)) {
+				//obtenemos el id del tema, para guardar en la tabla tema usuario
+				int idTema = dtema.obtenerIdTema(nombreTema);
 				
-				processRequest(request, response);
-				response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=1");
+				//guardamos en un arraylist el id del usuario (segun el carne) y el id tema
+				for(int i  = 0; i < carnes.length; i++) {
+					
+					//seteamos en el objeto el id del usuario, al obtenerlo de la funcion al que le mandamos el carne
+					tust.setId_usuario(dtus.obtenerIDUser(carnes[i]));
+					tust.setId_tema(idTema);
+					usuariosTema.add(tust);
+				}
 				
-			}
-			else {
+				if(dtema.guardarUsuariosTema(usuariosTema)) {
+					
+					
+					response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=1");
+					
+				}
+				else {
+					
+					response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
+				}
+				
+				
+			}else {
 				
 				response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
 			}
-			
-			
-		}else {
-			
-			response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
 		}
+		
+		
+		
 			
 	}
 	
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        response.setContentType("text/html;charset=UTF-8");
-        Collection<Part> parts = request.getParts();
-        for(Part part : parts) {
-        		// se escribe el archivo pero con un nuevo nombre
-        		// en este caso se manda a traer el nombre original
-                part.write(getFileName(part));
-        }
+		boolean guardado = false;
+		try {
+			
+			response.setContentType("text/html;charset=UTF-8");
+	        Collection<Part> parts = request.getParts();
+	        for(Part part : parts) {
+	        		// se escribe el archivo pero con un nuevo nombre
+	        		// en este caso se manda a traer el nombre original
+	        	String name = getFileName(part);
+	        	
+	        	if(name != "false") {
+	        		part.write(name);
+	        		guardado = true;
+	        	}
+	                
+	        }
+	        
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+        
+        return guardado;
     }
 	
 	public String getFileName(Part part) {
@@ -177,6 +186,9 @@ public class SL_tema extends HttpServlet {
         System.out.println(contentHeader);
         
         String[] subHeaders = contentHeader.split(";");
+        
+        System.out.println(subHeaders);
+        
         for(String current : subHeaders) {
             if(current.trim().startsWith("filename")) {
                 int pos = current.indexOf('=');
@@ -185,7 +197,7 @@ public class SL_tema extends HttpServlet {
                 return fileName.replace("\"", "");
             }
         }
-        return null;
+        return "false";
     }
 
 }
