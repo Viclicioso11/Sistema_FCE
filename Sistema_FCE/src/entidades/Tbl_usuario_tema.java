@@ -1,6 +1,7 @@
 package entidades;
 
 public class Tbl_usuario_tema {
+<<<<<<< HEAD
 
 	
 	//ATRIBUTOS
@@ -13,6 +14,15 @@ public class Tbl_usuario_tema {
 	
 	
 
+=======
+	
+	//ATRIBUTOS
+	private int id_usuario_tema;
+	private int id;
+	private int id_usuario;
+	private int id_tema;
+	
+>>>>>>> b41ca9a0d844b691289af50d574cd043e10f92ee
 
 	//METODOS
 	public int getId_usuario_tema() {
@@ -21,6 +31,10 @@ public class Tbl_usuario_tema {
 	public void setId_usuario_tema(int id_usuario_tema) {
 		this.id_usuario_tema = id_usuario_tema;
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> b41ca9a0d844b691289af50d574cd043e10f92ee
 	public int getId() {
 		return id;
 	}
@@ -39,6 +53,9 @@ public class Tbl_usuario_tema {
 	public void setId_tema(int id_tema) {
 		this.id_tema = id_tema;
 	}
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b41ca9a0d844b691289af50d574cd043e10f92ee
 }

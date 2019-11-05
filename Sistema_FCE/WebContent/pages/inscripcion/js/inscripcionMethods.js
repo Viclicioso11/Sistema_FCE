@@ -51,3 +51,27 @@ function Addmember(){
     
    
 }
+
+function InputPalabra(){
+    console.clear()
+    let inputVal = document.getElementById("palabras").value
+    inputVal = util(inputVal)
+
+    let values = inputVal.split(",")
+    
+    let valor = []
+    for (let value of values){
+        value = util(value)
+        value = util(value.split(":").pop())
+        valor.push(value)
+    }
+    console.table(valor)
+    document.getElementById("palabrasClave").value = valor.toString()
+}
+
+function util(string){
+    string = string.split("")
+    string.pop()
+    string.shift()
+    return string.join("")
+}
