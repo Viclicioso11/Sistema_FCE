@@ -127,7 +127,7 @@ mensaje = mensaje==null?"":mensaje;
 						<!-- tags input -->
 						<label>Palabras Claves</label>
 						<input type="text" class="form-control" id="palabras" value="">
-						<input type="hidden" id="palabrasClave" name="PalabrasClave"/>
+						<input type="hidden" id="palabrasClave" name="palabrasClave"/>
 						
 		                <br/>
 		                
@@ -270,6 +270,7 @@ mensaje = mensaje==null?"":mensaje;
     var nuevo = 0;
     nuevo = "<%=mensaje%>";
 
+ 
     if(nuevo == "2")
         errorAlert('Error', 'Revise los datos e intente nuevamente!!!')
 

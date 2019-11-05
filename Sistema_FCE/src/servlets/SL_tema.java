@@ -29,7 +29,7 @@ import datos.DT_usuario_tema;
  * Servlet implementation class SL_tema
  */
 @WebServlet("/SL_tema")
-@MultipartConfig(location="C:\\uploads")
+@MultipartConfig(location="C:\\Users\\HP I7\\Documents\\pruebaArchivos")
 public class SL_tema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -104,7 +104,7 @@ public class SL_tema extends HttpServlet {
 		
 		ArrayList<Tbl_usuario_tema> usuariosTema = new ArrayList<Tbl_usuario_tema>();
 	
-		String palabrasClaves = request.getParameter("PalabrasClave");
+		String palabrasClaves = request.getParameter("palabrasClave");
 		String nombreTema = request.getParameter("tema");
 		
 		tema.setTema(request.getParameter("tema"));
@@ -134,7 +134,7 @@ public class SL_tema extends HttpServlet {
 				if(dtema.guardarUsuariosTema(usuariosTema)) {
 					
 					
-					response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=1");
+					response.sendRedirect("sistema.jsp?msj=1");
 					
 				}
 				else {

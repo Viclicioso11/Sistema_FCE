@@ -235,20 +235,20 @@ public class SL_usuario extends HttpServlet {
 								//asignamos el rol estudiante al usuario al guardar en la tabla usuario rol
 								if(dtrol.asignarRolUsuario(id_usuario, id_rol)) {
 									
-									response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=1");
+									response.sendRedirect("./pages/inscripcion/newStudent.jsp?msj=1");
 								}
 								
 							}
 									
 						}
 						else {
-							response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
+							response.sendRedirect("./pages/inscripcion/newStudent.jsp?msj=2");
 						}
 						
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/newStudent.jsp?msj=2");
+						response.sendRedirect("./pages/inscripcion/newStudent.jsp?msj=2");
 					}
 				}
 				catch(Exception e)

@@ -52,9 +52,9 @@ public class SL_estudiante_candidato extends HttpServlet {
 		*/
 		int id = Integer.parseInt(request.getParameter("id").toString());
 		if(dtec.EliminarEstudiante(id)) {
-			response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=3");
+			response.sendRedirect("./pages/inscripcion/tblEstudianteCandidato.jsp?msj=3");
 		}else {
-			response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=4");
+			response.sendRedirect("./pages/inscripcion/tblEstudianteCandidato.jsp?msj=4");
 		}
 	}
 
@@ -93,11 +93,11 @@ public class SL_estudiante_candidato extends HttpServlet {
 				
 			}
 			else {
-				response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=2");
+				response.sendRedirect("./pages/inscripcion/tblEstudianteCandidato.jsp?msj=2");
 			}
 		}
 	
-		response.sendRedirect("./pages/seguridad/tblEstudianteCandidato.jsp?msj=1");
+		response.sendRedirect("./pages/inscripcion/tblEstudianteCandidato.jsp?msj=1");
 		
 	}
 

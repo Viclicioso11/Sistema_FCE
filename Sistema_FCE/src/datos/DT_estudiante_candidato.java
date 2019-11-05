@@ -40,9 +40,7 @@ public class DT_estudiante_candidato {
 			rsEstudianteCandidato.moveToInsertRow();
 
 			rsEstudianteCandidato.updateString("correo", tuc.getCorreo());
-			rsEstudianteCandidato.updateInt("estado", 1);
-			rsEstudianteCandidato.updateInt("notificado", 0);
-			rsEstudianteCandidato.updateString("mensaje", tuc.getMensaje());	
+			rsEstudianteCandidato.updateInt("estado", 1);	
 			rsEstudianteCandidato.insertRow();
 			rsEstudianteCandidato.moveToCurrentRow();
 			guardado = true;

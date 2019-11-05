@@ -64,11 +64,11 @@ public class SL_facultad extends HttpServlet {
 				
 				if(dtfa.eliminarFacultad(tfa))
 				{
-					response.sendRedirect("./pages/seguridad/tblfacultades.jsp?msj=4");
+					response.sendRedirect("./pages/mantenimiento/tblfacultades.jsp?msj=4");
 				}
 				else
 				{
-					response.sendRedirect("./pages/seguridad/tblfacultades.jsp?msj=5");
+					response.sendRedirect("./pages/mantenimiento/tblfacultades.jsp?msj=5");
 				}
 			}
 			catch(Exception e)
@@ -86,7 +86,7 @@ public class SL_facultad extends HttpServlet {
 		
 		default:
 		{
-			response.sendRedirect("../seguridad/tblfacultads.jsp?msj=ERROR");
+			response.sendRedirect("../mantenimiento/tblfacultades.jsp?msj=ERROR");
 		}
 			
 		}
@@ -129,11 +129,11 @@ public class SL_facultad extends HttpServlet {
 					
 					if(dtfa.guardarFacultad(tfa))
 					{
-							response.sendRedirect("./pages/seguridad/tblfacultades.jsp?msj=1");
+							response.sendRedirect("./pages/mantenimiento/tblfacultades.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/newFacultad.jsp?msj=2");
+						response.sendRedirect("./pages/mantenimiento/newFacultad.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -152,11 +152,11 @@ public class SL_facultad extends HttpServlet {
 					
 					if(dtfa.modificarFacultad(tfa))
 					{
-						response.sendRedirect("./pages/seguridad/tblfacultades.jsp?msj=3");
+						response.sendRedirect("./pages/mantenimiento/tblfacultades.jsp?msj=3");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/editFacultad.jsp?msj=2");
+						response.sendRedirect("./pages/mantenimiento/editFacultad.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
