@@ -1,7 +1,7 @@
     <%@page import="entidades.Tbl_rol"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-    
+   <%--  
      <% 
     ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
@@ -33,7 +33,7 @@
 	{
 		response.sendRedirect("../../Error.jsp");
 	}
-%>
+%> --%>
     
     
 <!DOCTYPE html>
