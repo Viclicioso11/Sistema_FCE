@@ -7,9 +7,6 @@ public class Tbl_ambito {
 		private String ambito;
 		private String descripcion;
 		private int estado;
-		
-		
-		//METODOS
 		public int getId() {
 			return id;
 		}
@@ -34,7 +31,13 @@ public class Tbl_ambito {
 		public void setEstado(int estado) {
 			this.estado = estado;
 		}
-	
+		
+		
+		
+		//METODOS
+		
+		
+
 		
 		
 }
