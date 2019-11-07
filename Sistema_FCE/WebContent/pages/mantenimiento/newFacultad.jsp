@@ -41,7 +41,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Facultad</title>
+<title>Nueva Facultad</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -84,11 +84,11 @@ mensaje = mensaje==null?"":mensaje;
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Registro [Nuevo Facultad]</h1>
+	            <h1>Registro [Nueva Facultad]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblfacultades.jsp">Seguridad</a></li>
+	              <li class="breadcrumb-item"><a href="tblfacultades.jsp">Gestión de facultades</a></li>
 	              <li class="breadcrumb-item active">Nuevo Facultad</li>
 	            </ol>
 	          </div>
@@ -105,7 +105,7 @@ mensaje = mensaje==null?"":mensaje;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nuevo Facultad</h3>
+                <h3 class="card-title">Nueva Facultad</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

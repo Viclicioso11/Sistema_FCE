@@ -182,7 +182,7 @@ mensaje = mensaje==null?"":mensaje;
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El nuevo registro ha sido almacenado!!!');
+        successAlert('Éxito', 'La carrera ha sido almacenado!!!');
       }
       if(nuevo == "2")
       {
