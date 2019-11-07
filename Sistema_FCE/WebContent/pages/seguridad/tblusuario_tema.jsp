@@ -193,7 +193,7 @@
                   <th>Id</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
-                  <th>UserName</th>
+                  <th>UserName</th> 
                   <th>Email</th>
                   <th>Estado</th>
                   <th>Opciones</th>
