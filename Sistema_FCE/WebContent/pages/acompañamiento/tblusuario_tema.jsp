@@ -136,8 +136,12 @@
                 <tbody>
                 <%
                 	DT_vw_usuario_tema dtuste = new DT_vw_usuario_tema();
+                	DT_vw_rol_usuario dtus = new DT_vw_rol_usuario();
                 					ArrayList<Vw_usuario_tema> listarUsuarioTema = new ArrayList<Vw_usuario_tema>();
                   	        		listarUsuarioTema = dtuste.listUsuarioTema();
+                  	        		ArrayList<Vw_usuario_rol> listarTutor = new ArrayList<Vw_usuario_rol>();
+                  	       			listarTutor = dtus.listarTutor(); 		
+                  	       
                   	        		
                   	        		String TemaFCE = "";
                   	        		String TipoFCE="";
@@ -156,6 +160,7 @@
 	                  <td><%=tuste.getTema() %></td>
 	                  <td><%=tuste.getTipo() %></td>
 	                 <td><%=tuste.getTipo() %></td>
+
 	                  <td>
 	                  <div class="input-group-prepend">
 								<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -227,9 +232,21 @@
 			<br />
 			
 			<div class="form-group" style="padding-left: 5%;width: 90%;">
-				<label for="exampleInputPassword1">Escriba el carné del participante </label>
-				<input id="addM" class="form-control" type="text" />
-				
+				<table>
+		          <thead>
+		          </thead>
+		          <tbody class="table">
+		              <tr>
+		                  <td>1</td>
+		                  <td>2</td>
+		              </tr>
+		              <tr>
+		                  <td>3</td>
+		                  <td>4</td>
+		              </tr>
+		          </tbody>
+		      </table>
+						
 				<br />	
 				<button type="button" class="btn btn-primary" onclick="Addmember()" data-dismiss="modal">Agregar</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>  

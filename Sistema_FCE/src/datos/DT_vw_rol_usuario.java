@@ -17,7 +17,7 @@ public class DT_vw_rol_usuario {
 			
 			try
 			{
-				PreparedStatement ps = c.prepareStatement("SELECT * FROM public.vw_usuario_rol where rol ='Tutor' or rol='tutor';", 
+				PreparedStatement ps = c.prepareStatement("SELECT  * FROM public.vw_usuario_rol where id_rol =3;", 
 						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 						ResultSet.HOLD_CURSORS_OVER_COMMIT);
 				rsTutor = ps.executeQuery();
