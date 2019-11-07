@@ -191,11 +191,11 @@
                 <tfoot>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th> 
-                  <th>Email</th>
-                  <th>Estado</th>
+                  <th>Tema</th>
+                  <th>Tipo</th>
+                  <th>Ambito</th>
+                  <th>Carrera</th>
+                  <th>Tutor</th>
                   <th>Opciones</th>
                 </tr>
                 </tfoot>
