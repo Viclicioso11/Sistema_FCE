@@ -302,29 +302,7 @@
               
             </ul>
           </li>
-    	<li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Mantenimiento
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../mantenimiento/tblfacultades.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gestión Facultades</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../mantenimiento/tblcarrera.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gestión Carreras</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-book"></i>
@@ -353,12 +331,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="../seguridad/tblEstudianteCandidato.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Estudiantes Candidatos</p>
-                </a>
-              </li>
             </ul>
           </li>
 

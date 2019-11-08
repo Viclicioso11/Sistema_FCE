@@ -53,6 +53,7 @@ public class SL_tema extends HttpServlet {
 	    String filtro = request.getParameter("filtro");
 		System.out.println("nada mas "+filtro);
 		
+		
 		DT_usuario dtus = new DT_usuario();
 		DT_usuario_tema dtem = new DT_usuario_tema();
 		Tbl_usuario tus = new Tbl_usuario();

@@ -74,7 +74,7 @@ public class DT_correo {
 					mimeMessage.setSubject("Mensaje de Inscripción al Sistema de FCE");
 
 					String cuerpoMensaje = "<strong>Presione el siguiente enlace para dirigirse al cuestionario de registro de estudiante</strong>";
-					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/seguridad/newStudent.jsp\">Click</a><br><br>";
+					cuerpoMensaje += "<a href=\"http://localhost:8080/Sistema_FCE/pages/inscripcion/newStudent.jsp\">Click</a><br><br>";
 					cuerpoMensaje += mensaje;
 
 					mimeMessage.setContent(cuerpoMensaje, "text/html");

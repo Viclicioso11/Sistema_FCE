@@ -292,35 +292,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../inscripcion/tblEstudianteCandidato.jsp" class="nav-link">
+                <a href="pages/inscripcion/tblEstudianteCandidato.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión Estudiantes</p>
                 </a>
               </li>
               
-            </ul>
-          </li>
-         <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Mantenimiento
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/mantenimiento/tblfacultades.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gestión Facultades</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mantenimiento/tblcarrera.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gestión Carreras</p>
-                </a>
-              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -348,13 +325,6 @@
                 <a href="pages/seguridad/tblopciones.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Control de Opciones</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="pages/seguridad/tblEstudianteCandidato.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Estudiantes Candidatos</p>
                 </a>
               </li>
 
