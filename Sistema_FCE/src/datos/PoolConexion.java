@@ -13,9 +13,9 @@ public class PoolConexion
 	private static Connection con = null; //CREA UN OBJETO DE TIPO Connection
 	private static DataSource dataSource; //CREA UN OBJETO DE TIPO DataSource
 	private static String db = "FCE"; //VARIABLE CON EL NOMBRE DE LA BD
-	private static String url = "jdbc:postgresql://localhost:5432/"+db; // VARIABLE CON LA URL DE CONEXION A LA BD
-	private static String user = "postgres"; // VARIABLE CON EL USERNAME DE BD
-	private static String pass = "Usuario123#.";
+	private static String url = "jdbc:postgresql://165.98.12.158:5432/"+db; // VARIABLE CON LA URL DE CONEXION A LA BD
+	private static String user = "fce3"; // VARIABLE CON EL USERNAME DE BD
+	private static String pass = "5P5j*KbC@;
 	//private static String pass = "Usuario123#."; // VARIABLE CON EL PASSWORD DE BD
 	
 	private PoolConexion() // CONSTRUCTOR DE LA CLASE
@@ -31,7 +31,7 @@ public class PoolConexion
 		}
 	}
 	
-	public static PoolConexion getInstance() // ESTE METODO RETORNA LA INSTANCIA ÚNICA DEL OBJETO (POOL)
+	public static PoolConexion getInstance() // ESTE METODO RETORNA LA INSTANCIA ÃšNICA DEL OBJETO (POOL)
 	{
 		if(INSTANCE == null)
 		{
@@ -48,7 +48,7 @@ public class PoolConexion
 	 	org.apache.commons.dbcp.BasicDataSource basicDataSource = new org.apache.commons.dbcp.BasicDataSource();
         basicDataSource.setDriverClassName("org.postgresql.Driver");//SE ESPECIFICA EL DRIVER DE CONEXION 
         basicDataSource.setUsername(user); // SE ASIGNA EL USUARIO
-        basicDataSource.setPassword(pass); // SE ASIGNA LA CONTRASEÑA
+        basicDataSource.setPassword(pass); // SE ASIGNA LA CONTRASEÃ‘A
         basicDataSource.setUrl(url); // SE ASIGNA LA URL DE CONEXION A LA BD
         basicDataSource.setMaxActive(50); // SE ESPECIFICAN HASTA UN MAXIMO DE 50 HILOS DE CONEXION ACTIVOS A LA BD
         dataSource = basicDataSource; // AL OBJETO DE TIPO DATASOURCE PREVIAMENTE INSTANCIADO SE LE ASIGNA LA FABRICA DEL POOL DE CONEXIONES
@@ -95,7 +95,7 @@ public class PoolConexion
 
 	    
 	    
-	    public static void main(String[] args) throws SQLException // ES LA COMPROBACION DE LA IMPLEMENTACIÓN DEL API DE POOL DE CONEXIONES CON EL PATRÓN SINGLETON
+	    public static void main(String[] args) throws SQLException // ES LA COMPROBACION DE LA IMPLEMENTACIÃ“N DEL API DE POOL DE CONEXIONES CON EL PATRÃ“N SINGLETON
 		{
 			// TODO Auto-generated method stub
 			PoolConexion.getInstance();
@@ -120,7 +120,7 @@ public class PoolConexion
 	            try 
 	            {
 	               con.close();
-	               System.out.println("Se desconectó de "+db+"!!!");
+	               System.out.println("Se desconectÃ³ de "+db+"!!!");
 	            } 
 	            catch (SQLException ex) 
 	            {
