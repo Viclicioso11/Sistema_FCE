@@ -32,6 +32,7 @@ public class DT_vw_rol_usuario {
 				Vw_usuario_rol  vwur = new Vw_usuario_rol();
 				vwur.setId_user(rsTutor.getInt("id_usuario"));
 				vwur.setNombre(rsTutor.getString("nombre"));
+				vwur.setApellido(rsTutor.getString("apellido"));
 				
 				listarTutor.add(vwur);
 			}
@@ -65,6 +66,7 @@ public class DT_vw_rol_usuario {
 			if(rsTutor.next())
 			{
 				usuario.setNombre(rsTutor.getString("nombres"));
+				usuario.setApellido(rsTutor.getString("apellidos"));
 				usuario.setId_user(rsTutor.getInt("id"));
 			}
 			// Closing connection thread, very important!
@@ -72,7 +74,7 @@ public class DT_vw_rol_usuario {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en obtenerNombreEstudiante() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en obtenerNombreTutor() "+ e.getMessage());
 				e.printStackTrace();
 			}
 			

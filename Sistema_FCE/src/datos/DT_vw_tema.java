@@ -49,7 +49,7 @@ public class DT_vw_tema {
 	
 
 	/**
-	 * este nos servira para filtar todos los temas que no tienen tutyores 
+	 * este nos servira para filtar todos los temas que no tienen tutores 
 	 */
 	public ArrayList<Vw_tema> filtrarSintutor(ArrayList<Vw_tema> data){
 		
@@ -140,6 +140,7 @@ public class DT_vw_tema {
 				vwT.setPalabras_claves(rsWvTema.getString("palabras_claves"));
 				vwT.setTutor(rsWvTema.getInt("id_tutor"));
 				vwT.setNombre_tutor(rsWvTema.getString("nombre_tutor"));
+				vwT.setApellido_tutor(rsWvTema.getString("apellido_tutor"));
 				vwT.setCarrera(rsWvTema.getString("carrera"));
 				vwT.setAmbito(rsWvTema.getString("ambito"));
 				vwT.setTipo_fce(rsWvTema.getString("tipo_fce"));

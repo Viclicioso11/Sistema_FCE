@@ -11,6 +11,7 @@ public class Vw_tema {
 	private String palabras_claves;
 	private int id_tema;
 	private String 	nombre_tutor;
+	private String apellido_tutor;
 	
 	public int getId_tema() {
 		return id_tema;
@@ -67,4 +68,10 @@ public class Vw_tema {
 		this.nombre_tutor = nombre_tutor;
 	}
 	
+	public String getApellido_tutor() {
+		return apellido_tutor;
+	}
+	public void setApellido_tutor(String apellido_tutor) {
+		this.apellido_tutor = apellido_tutor;
+	}
 }

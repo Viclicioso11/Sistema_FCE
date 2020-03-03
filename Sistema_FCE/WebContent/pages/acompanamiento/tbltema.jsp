@@ -228,7 +228,7 @@
 	                  <td><%=temaC.getTema() %></td>
 	                  <td><%=temaC.getTipo_fce() %></td>
 	                  <td><%=temaC.getFecha() %></td>
-	                  <td id="tutorName"><%=temaC.getNombre_tutor() %></td>
+	                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
 				      <td>
 		                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
 			          </td>
@@ -278,7 +278,7 @@
 		            	    
            	    for(Vw_usuario_rol tr : listarTutor )  {
            	%>
-        		 <option value="<%=tr.getId_user()%>"><%=tr.getNombre() %></option>
+        		 <option value="<%=tr.getId_user()%>"><%=tr.getNombre() %><%=tr.getApellido() %></option>
 		    <%	}  %>
           </select>
           
