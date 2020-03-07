@@ -3,6 +3,7 @@
 	.navbar-dark{background-color: #01284f !important;}
 	.brand-text{color: #ffffff !important;}
 	.nav-item .active{background-color: #01284f !important;}
+	.img-circle { border-radius: 20% !important;}
 </style>
 
 <!-- Navbar -->
