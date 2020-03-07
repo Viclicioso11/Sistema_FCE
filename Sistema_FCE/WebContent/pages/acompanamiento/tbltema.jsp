@@ -6,6 +6,7 @@
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
 	
+	/* //objetos para el login
     String loginUser = "";
 	loginUser = (String) session.getAttribute("login");
 	loginUser = loginUser == null ? "":loginUser;
@@ -37,7 +38,7 @@
 	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
 		return;
-	}
+	} */
 %>
 
 <%
@@ -98,7 +99,7 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+ <div class="content-wrapper">
   
   
     <!-- Content Header (Page header) -->
@@ -134,7 +135,7 @@
                 <a href="../inscripcion/inscripcion_tema.jsp">Incripción de tema <i class="fas fa-user-tag"></i></a>
                 
                 <br/><br/>
-             <div class="form-group">
+                 <div class="form-group">
 			          <label>Temas FCE</label>
 			          <select class="form-control" style="width: 100%;" id="vista" onchange="vistatabla()">
 			          	<!-- rellenar con los id XD -->
@@ -143,8 +144,7 @@
 				          <option value ="3">Temas con tutor asignados</option>
 			          </select>
 		          
-        	 </div>
-       		 
+        		</div>
        		 <div class = "card" id= "vista1">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -184,8 +184,7 @@
                 			type="button" 
                 			class="btn btn-default" 
                 			data-toggle="modal" 
-                			data-target="#asignTutor" 
-                			onClick="setIdTema(<%=temaS.getId_tema()%>, 'tutorName<%=temaS.getId_tema() %>')">
+                			data-target="#asignTutor" onclick="setIdTema(<%=temaS.getId_tema()%>, 'tutorName<%=temaS.getId_tema() %>')">
              				Asignar tutor 
                 		</button>
             		  
@@ -196,63 +195,63 @@
 			          </td>
 	                </tr>
 
-	            <%}//endfor%>  
+	            <%}%>  
                 </tbody>
               </table>
-             </div>
+              </div>
               
-             <br/><br/>
+              <br/><br/>
               
-             <div class = "card" id="vista2">
-				  <table id="example2" class="table table-bordered">
-	                <thead>
-		                <tr>
-		                  <th>Id</th>
-		                  <th>Tema</th>
-		                  <th>Tipo</th>
-		                  <th>Fecha</th>
-		                  <th>Tutor</th>
-		          
-		                 <th>Opciones</th>
-		                </tr>
-	                </thead>
-	                
-	                <tbody>
-		            	<% 
-		           		DT_vw_tema dtemas = new DT_vw_tema();
-		            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
-		            	TemasC = dtema.listarTemasTutor();
-		            	
-		            	for(Vw_tema temaC: TemasC)	{
-		            	%>
-		                <tr>
-		                  <td><%=temaC.getId_tema() %></td>
-		                  <td><%=temaC.getTema() %></td>
-		                  <td><%=temaC.getTipo_fce() %></td>
-		                  <td><%=temaC.getFecha() %></td>
-		                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
-					      <td>
-			                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
-				          </td>
-		                </tr>
-		            	<%}//endfor%>
-	                </tbody>
-	              </table>
-             </div>
-         </div>
+              <div class = "card" id="vista2">
+			  <table id="example2" class="table table-bordered">
+                <thead>
+	                <tr>
+	                  <th>Id</th>
+	                  <th>Tema</th>
+	                  <th>Tipo</th>
+	                  <th>Fecha</th>
+	                  <th>Tutor</th>
+	          
+	                 <th>Opciones</th>
+	                </tr>
+                </thead> 
+                <tbody>   
+	            <% 
+	           		 DT_vw_tema dtemas = new DT_vw_tema();
+	            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
+	            	TemasC = dtema.listarTemasTutor();
+	            	
+	            	for(Vw_tema temaC: TemasC)	{
+	            %>
+	                <tr>
+	                  <td><%=temaC.getId_tema() %></td>
+	                  <td><%=temaC.getTema() %></td>
+	                  <td><%=temaC.getTipo_fce() %></td>
+	                  <td><%=temaC.getFecha() %></td>
+	                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
+				      <td>
+		                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
+			          </td>
+	                </tr>
+	            <%}%>
+	              
+                </tbody>
+              </table>
+              </div>
+         	</div>
 
           <!-- /.card-body -->
-          </div>
+         	 </div>
           <!-- /.card -->
 
-        </div>
+       	 </div>
         <!-- /.col -->
-      </div>
-      </div>
+      	</div>
       <!-- /.row -->
+      </div>
     </section>
     <!-- /.content -->
-  </div>
+ 	</div>
   <!-- /.content-wrapper -->
 
   		<div class="modal fade" id="asignTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -292,16 +291,15 @@
 	         <button type="button" class="btn btn-primary" onclick="setTutor()" data-dismiss="modal">Asignar</button>
 			 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>  
 	    </div>
-        </div>
-      </div>
-    </div>
+        		</div>
+      		</div>
+    	</div>
              
-              
-            </div>
+   <!-- Footer -->
+   <jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
+   <!-- ./Footer -->
+</div>
   
-  <!-- Footer -->
-  	<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
-  <!-- ./Footer -->
   
 <!-- ./wrapper -->
 
@@ -346,6 +344,7 @@
   <script type="text/javascript"></script>
 
 <script>
+
   $('#example2').DataTable({
       dom: 'Bfrtip',
       buttons: [
@@ -354,7 +353,6 @@
       'print'
       ],
   	  "order": []
-
   });
   
   $('#example1').DataTable({
@@ -365,7 +363,6 @@
       'print'
       ],
   	  "order": []
-
   });
   
   $("#example2, #example1").css({
@@ -374,14 +371,12 @@
     })
    $("tr").css({"height": "49px"})
     
-    
   $("#vista2").css({"display": "none"})
   
   $('#tutor').select2({ theme: 'bootstrap4' })
   
       /////////// VARIABLES DE CONTROL MSJ ///////////
  var mensaje =  "<%=mensaje%>"
-
  if(mensaje == "1")
    successAlert('ï¿½xito', 'El registro ha sido almacenado correctamente.')
  
@@ -478,10 +473,6 @@ function vistatabla(){
 	
 }
 		
-	
-
 </script>
-
 </body>
 </html>
-

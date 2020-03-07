@@ -1,5 +1,13 @@
+<style>
+	.navbar-gray-dark{background-color: #01284f !important;}
+	.navbar-dark{background-color: #01284f !important;}
+	.brand-text{color: #ffffff !important;}
+	.nav-item .active{background-color: #01284f !important;}
+</style>
+
+
 <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-dark navbar-gray-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">

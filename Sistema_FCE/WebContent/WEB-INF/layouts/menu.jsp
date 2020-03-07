@@ -1,19 +1,22 @@
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="sistema.jsp" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="inicio del sistema.jsp" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">Sistema FCE</span>
-    </a>
-     <%
+<%
   	String loginUser = "";
   	int rolId = 0;
 
   	loginUser = (String) session.getAttribute("login");
   	loginUser = loginUser==null?"":loginUser;
-  	%>
+%>  
 
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar elevation-4 sidebar-light-primary">
+    
+    
+    <!-- Brand Logo -->
+    <a href="sistema.jsp" class="brand-link navbar-gray-dark">
+      <img src="dist/img/logo.jpg" alt="inicio del sistema.jsp" class="brand-image img-circle elevation-3">
+      <span class="brand-text font-weight-light">Sistema FCE</span>
+    </a>
+     
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -22,7 +25,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Bienvenido: <%=loginUser %></a>
+          <a href="#" class="d-block" id="">Bienvenido: <%=loginUser %></a>
         </div>
       </div>
 
@@ -31,57 +34,51 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          
+          <li class="nav-item">
+            <a href="./sistema.jsp" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
+                HOME
               </p>
             </a>
-             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./sistema.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inicio</p>
-                </a>
-              </li>
-            </ul>
           </li>
             
           <li class="nav-header">EXAMPLES</li>
+         
           
-         <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fas fa-graduation-cap"></i>
+              <i class="fas fa-book"></i>
               <p>
                 Inscripción
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <!-- sub nav -->
             <ul class="nav nav-treeview">
+            
               <li class="nav-item">
                 <a href="pages/inscripcion/tblEstudianteCandidato.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión Estudiantes</p>
                 </a>
               </li>
-            </ul>
-             <ul class="nav nav-treeview">
+              
               <li class="nav-item">
                 <a href="pages/inscripcion/tblplan_graduacion.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión Planes</p>
                 </a>
               </li>
-            </ul>
-               <ul class="nav nav-treeview">
+              
               <li class="nav-item">
                 <a href="pages/inscripcion/tblcronograma.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión Cronogramas</p>
                 </a>
               </li>
+              
             </ul>
           </li>
           
