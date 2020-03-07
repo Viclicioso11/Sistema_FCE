@@ -49,6 +49,7 @@ public class SL_planG extends HttpServlet {
 				this.postPlanG(request, response);
 				break;
 			case 2:
+				this.editPlanG(request, response);
 				break;
 			default:
 		}
@@ -81,6 +82,50 @@ public class SL_planG extends HttpServlet {
 				return;
 			}else{
 				response.sendRedirect("./pages/inscripcion/tblplan_graduacion.jsp?msj=2");
+				return;
+			}
+			
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Servlet: Error al guardar plan de graduacion");
+			
+		}
+	}
+	
+	
+	/**
+	 * editar plan de graduacion
+	 */
+	private void editPlanG(HttpServletRequest request, HttpServletResponse response) {
+		
+		DT_plan_graduacion DTplan = new DT_plan_graduacion();
+		Tbl_plan_graduacion Tblplan = new Tbl_plan_graduacion();
+		
+		
+		try {
+			Date inicioPg = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("Finicio"));
+			Date finPg = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("Ffin"));
+			String descripcion = request.getParameter("descripcion");
+			String cohorte = request.getParameter("cohorte");
+			int idpg = Integer.parseInt(request.getParameter("idpg"));
+			
+			Tblplan.setCohorte(cohorte);
+			Tblplan.setFecha_inicio(inicioPg);
+			Tblplan.setFecha_fin(finPg);
+			Tblplan.setDescripcion(descripcion);
+			Tblplan.setId(idpg);
+			
+			System.out.println(Tblplan.getCohorte());
+			System.out.println(Tblplan.getFecha_fin());
+			System.out.println(Tblplan.getFecha_inicio());
+			System.out.println(Tblplan.getDescripcion());
+			
+			if(DTplan.editarPlanG(Tblplan)) {			
+				response.sendRedirect("./pages/inscripcion/tblplan_graduacion.jsp?msj=3");
+				return;
+			}else{
+				response.sendRedirect("./pages/inscripcion/tblplan_graduacion.jsp?msj=4");
 				return;
 			}
 			

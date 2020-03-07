@@ -53,7 +53,7 @@ public class DT_actividad_pg {
 	
 	
 	public String ArrayToJson(ArrayList<Tbl_actividad_pg> actividades) {
-		
+		System.out.println("pasa por json");
 		JSONArray jsonA = new JSONArray();
 		for(Tbl_actividad_pg actividad : actividades) {
 			JSONObject jsonO = new JSONObject();
@@ -266,10 +266,11 @@ public class DT_actividad_pg {
 		
 		try
 		{
+			System.out.println("pasa por listar");
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
 
-			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_actividad_pg where id_plan_graduacion = ? AND estado <> 3", 
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_actividad_pg where id_plan_graduacion = ? ", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, id_plan);
@@ -298,6 +299,61 @@ public class DT_actividad_pg {
 		}
 		
 		return listaAct;
+	}
+	
+	public boolean eliminarActividad(int idActividad) {
+		boolean eliminado = false;
+		
+		try {
+			
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_actividad_pg where id = ? ", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idActividad);
+			rsPg = ps.executeQuery();
+			
+			if(rsPg.next()) {
+				rsPg.updateInt("estado",3);
+				rsPg.updateRow();
+				eliminado=true;
+			}
+			connectionP.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return eliminado;
+	}
+	
+	
+	public int countActividadPG(int idpg) {
+		int actividades =0;
+		
+		try {
+			
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("select count(*) as actividadn from tbl_actividad_pg where id_plan_graduacion = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idpg);
+			rsPg = ps.executeQuery();
+			
+			if(rsPg.next()) {
+				actividades= this.rsPg.getInt("actividadn");
+			}
+			connectionP.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return actividades;
 	}
 	
 	public static void main(String[] args) {

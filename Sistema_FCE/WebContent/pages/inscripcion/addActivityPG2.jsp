@@ -44,11 +44,12 @@
 <% 
 	String paramId = request.getParameter("idPG");
 	int idP = 0;
-	boolean redireccionar = false;
+	
 	if(paramId != null){
 		idP = Integer.parseInt(paramId);
 	}else{
-		redireccionar = true;
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
 	}
 	
 	int msj = request.getParameter("msj") == null ? 0 : Integer.parseInt(request.getParameter("msj"));
@@ -59,9 +60,11 @@
 	ArrayList<Tbl_actividad_pg> actividades = new ArrayList<Tbl_actividad_pg>();
 	
 	if(idP ==0){
-		redireccionar = true;
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
 	}else if(DTpg.ExistePG(idP) ==false){
-		redireccionar = true;
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
 	}else{
 		tblPG = DTpg.obtenerPlanG(idP);
 		actividades = DTactividad.listarActividadesPg(idP);
@@ -77,13 +80,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-
-  <!-- fullCalendar -->
-  <link rel="stylesheet" href="../../plugins/fullcalendar/main.min.css">
-  <link rel="stylesheet" href="../../plugins/fullcalendar-daygrid/main.min.css">
-  <link rel="stylesheet" href="../../plugins/fullcalendar-timegrid/main.min.css">
-  <link rel="stylesheet" href="../../plugins/fullcalendar-bootstrap/main.min.css">
-
   <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
@@ -99,13 +95,6 @@
   <!-- DATATABLE NEW buttons -->
   <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
 
-  <script>
-	let redireccionar = <%=redireccionar%>
-	
-	if(redireccionar){
-		window.location.href= "./tblplan_graduacion.jsp";
-	}
-  </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -196,7 +185,7 @@
 		  <!-- table -->
 		  <div class="col-md-8">	
 		  	<div class="card">
-		  		<div class="card-body">
+		  		<div class="card-body" style="overflow-x: scroll;">
 		  			<table id="tableA" class="table table-bordered">
 				  		<thead>
 			                <tr>
@@ -218,9 +207,7 @@
 		                	  <th><%=actividad.getFecha_fin().toString() %></th>
 		                	  <th>
 		                	  	<a href="#" onclick="editar(<%=actividad.getId()%>)"><i class="far fa-edit"></i></a>&nbsp;&nbsp;
-		                	  	<a href="#">
-		                	  		<i class="far fa-trash-alt"></i>
-		                	  	</a>
+		                	  	<a href="#" onclick="eliminar(<%=actividad.getId()%>)" ><i class="far fa-trash-alt"></i></a>
 		                	  </th>
 		                	</tr>
 		                <%} %>
@@ -263,22 +250,13 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery UI -->
-<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+
+<!-- jQuery UI --> 
+<!-- <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../dist/js/demo.js"></script> -->
-
-
-<!-- fullCalendar 2.2.5 -->
-<script src="../../plugins/moment/moment.min.js"></script>
-<script src="../../plugins/fullcalendar/main.min.js"></script>
-<script src="../../plugins/fullcalendar-daygrid/main.min.js"></script>
-<script src="../../plugins/fullcalendar-timegrid/main.min.js"></script>
-<script src="../../plugins/fullcalendar-interaction/main.min.js"></script>
-<script src="../../plugins/fullcalendar-bootstrap/main.min.js"></script>
-<script src="../../plugins/fullcalendar/locales/es.js"></script>
 
 <!-- date-range-picker -->
 <script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
@@ -349,7 +327,6 @@ $("#calendar").css({"display": "none"})
 function editar(id){
 	
 	//poner la informacion en el form
-	
 	//primero se rescata la informacion
 	let row = $("#actividadId"+id)
 	
@@ -379,6 +356,29 @@ function cancelar(){
 }
 
 
+
+//confirmar para eliminar actividad
+function eliminar(id){
+	
+	let idP = <%=idP%>
+	let redireccionar = "../../SL_actividad_pg?id=" + id + "&idPg=" + idP;
+	console.log(idP);
+	console.log(redireccionar);
+	
+	
+	$.jAlert({
+	    'type': 'confirm',
+	    'confirmQuestion': '¿Eliminar actividad?',
+	    'onConfirm': function(e, btn){
+	      	e.preventDefault();
+    		window.location.href= redireccionar;
+	    },
+	    'onDeny': function(e, btn){ e.preventDefault();}
+	  }
+    );
+	
+}
+
 //funciones de mensajes
 function alertC(type, mensaje, title) {
   	console.log("pasa por aqui")
@@ -391,7 +391,7 @@ function alertC(type, mensaje, title) {
       	window.history.pushState({page: "another"}, "addactivityPG", "/Sistema_FCE/pages/inscripcion/addActivityPG2.jsp?idPG="+idPG)
     	}
   	});
-  }
+ }
     /////////// VARIABLES DE CONTROL MSJ ///////////
   let nuevo = <%=msj%>
   
@@ -407,6 +407,14 @@ function alertC(type, mensaje, title) {
     if(nuevo == 4){
     	alertC("red","Error al editar la actividad" ,"Error")
     }
+    
+    if(nuevo == 5){
+    	alertC("green","Se elimino una actividad" ,"Exito")
+    }
+    if(nuevo == 6){
+    	alertC("red","Error al eliminar actividad" ,"Error")
+    }
+    
   
 </script>
 </body>

@@ -261,7 +261,7 @@
   		'title': title,
   		'content': mensaje,
       'onClose': function() {
-      	window.history.pushState({page: "another"}, "tblEstudianteCandidato", "/Sistema_FCE/pages/seguridad/tblEstudianteCandidato.jsp")
+      	window.history.pushState({page: "another"}, "tblEstudianteCandidato", "/Sistema_FCE/pages/inscripcion/tblEstudianteCandidato.jsp")
     	}
   	});
   }

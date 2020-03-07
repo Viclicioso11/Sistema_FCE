@@ -6,7 +6,6 @@
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
 	
-	/* //objetos para el login
     String loginUser = "";
 	loginUser = (String) session.getAttribute("login");
 	loginUser = loginUser == null ? "":loginUser;
@@ -38,7 +37,7 @@
 	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
 		return;
-	} */
+	}
 %>
 
 <%
@@ -135,7 +134,7 @@
                 <a href="../inscripcion/inscripcion_tema.jsp">Incripción de tema <i class="fas fa-user-tag"></i></a>
                 
                 <br/><br/>
-                 <div class="form-group">
+             <div class="form-group">
 			          <label>Temas FCE</label>
 			          <select class="form-control" style="width: 100%;" id="vista" onchange="vistatabla()">
 			          	<!-- rellenar con los id XD -->
@@ -144,7 +143,8 @@
 				          <option value ="3">Temas con tutor asignados</option>
 			          </select>
 		          
-        		</div>
+        	 </div>
+       		 
        		 <div class = "card" id= "vista1">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -196,48 +196,49 @@
 			          </td>
 	                </tr>
 
-	            <%}%>  
+	            <%}//endfor%>  
                 </tbody>
               </table>
-              </div>
+             </div>
               
-              <br/><br/>
+             <br/><br/>
               
-              <div class = "card" id="vista2">
-			  <table id="example2" class="table table-bordered">
-                <thead>
-	                <tr>
-	                  <th>Id</th>
-	                  <th>Tema</th>
-	                  <th>Tipo</th>
-	                  <th>Fecha</th>
-	                  <th>Tutor</th>
-	          
-	                 <th>Opciones</th>
-	                </tr>
-                </thead>    
-	            <% 
-	           		 DT_vw_tema dtemas = new DT_vw_tema();
-	            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
-	            	TemasC = dtema.listarTemasTutor();
-	            	
-	            	for(Vw_tema temaC: TemasC)	{
-	            %>
-	                <tr>
-	                  <td><%=temaC.getId_tema() %></td>
-	                  <td><%=temaC.getTema() %></td>
-	                  <td><%=temaC.getTipo_fce() %></td>
-	                  <td><%=temaC.getFecha() %></td>
-	                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
-				      <td>
-		                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
-			          </td>
-	                </tr>
-	            <%}%>
-	              
-                </tbody>
-              </table>
-              </div>
+             <div class = "card" id="vista2">
+				  <table id="example2" class="table table-bordered">
+	                <thead>
+		                <tr>
+		                  <th>Id</th>
+		                  <th>Tema</th>
+		                  <th>Tipo</th>
+		                  <th>Fecha</th>
+		                  <th>Tutor</th>
+		          
+		                 <th>Opciones</th>
+		                </tr>
+	                </thead>
+	                
+	                <tbody>
+		            	<% 
+		           		DT_vw_tema dtemas = new DT_vw_tema();
+		            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
+		            	TemasC = dtema.listarTemasTutor();
+		            	
+		            	for(Vw_tema temaC: TemasC)	{
+		            	%>
+		                <tr>
+		                  <td><%=temaC.getId_tema() %></td>
+		                  <td><%=temaC.getTema() %></td>
+		                  <td><%=temaC.getTipo_fce() %></td>
+		                  <td><%=temaC.getFecha() %></td>
+		                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
+					      <td>
+			                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
+				          </td>
+		                </tr>
+		            	<%}//endfor%>
+	                </tbody>
+	              </table>
+             </div>
          </div>
 
           <!-- /.card-body -->
@@ -246,6 +247,7 @@
 
         </div>
         <!-- /.col -->
+      </div>
       </div>
       <!-- /.row -->
     </section>
@@ -301,7 +303,6 @@
   	<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
   <!-- ./Footer -->
   
-</div>
 <!-- ./wrapper -->
 
 <!-- jQuery -->

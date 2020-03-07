@@ -2,6 +2,9 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 
 <% 
+	/*
+		Esto es el objeto session
+	*/
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -42,19 +45,38 @@
 %>
 
 <%
-	String idPlan = request.getParameter("planID");
-	int id = idPlan == null ? 0 : Integer.parseInt(idPlan);
+	int idPlan = 0;
+
+	if (request.getParameter("planID") != null){
+		idPlan = Integer.parseInt(request.getParameter("planID"));
+	}else{
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
+	}
 	
+	
+	DT_plan_graduacion DTpg = new DT_plan_graduacion();
 	String Actividades = "";
-	if(id !=0 ){
+	String fechaInicio = "";
+	
+	if(idPlan == 0 ){
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
+		
+	}else if (!DTpg.ExistePG(idPlan)){
+		response.sendRedirect("./tblplan_graduacion.jsp");
+		return;
+		
+	}else{
 		//obtener todos las actividades de un plan G
 		DT_actividad_pg DTa = new DT_actividad_pg();
+		
+		//retrayendo las actividates
 		ArrayList<Tbl_actividad_pg> actividades = new ArrayList<Tbl_actividad_pg>();
-		
-		actividades = DTa.listarActividadesPg(id);
-		
+		actividades = DTa.listarActividadesPg(idPlan);
 		Actividades = DTa.ArrayToJson(actividades);
 		
+		fechaInicio = DTpg.obtenerPlanG(idPlan).getFecha_inicio().toString();
 	}
 %>
 
@@ -71,12 +93,12 @@
 
   <!-- fullCalendar -->
   <link rel="stylesheet" href="../../plugins/fullcalendar/main.min.css">
+  <!--
   <link rel="stylesheet" href="../../plugins/fullcalendar-daygrid/main.min.css">
   <link rel="stylesheet" href="../../plugins/fullcalendar-timegrid/main.min.css">
+  -->
   <link rel="stylesheet" href="../../plugins/fullcalendar-bootstrap/main.min.css">
 
-  <!-- timepicker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
@@ -118,57 +140,9 @@
         <div class="row">
 
 
-          <!-- create events column -->
-          <div class="col-md-4">
-
-            <div class="sticky-top mb-3">
-
-
-              <div class="card" id="vista1">
-                <div class="card-header">
-                  <h3 class="card-title">Crear Actividad</h3>
-                </div>
-                <div class="card-body">
-
-                  <form id="addEvent">
-
-                    <div class="form-group">
-                      <label >Titulo de la actividad</label>
-                      <input type="text" class="form-control form-control-sm" required autocomplete="off" disabled>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Rango de Fecha:</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="far fa-calendar-alt"></i>
-                          </span>
-                        </div>
-                        <input type="text" class="form-control float-right form-control-sm" id="dateRange" required autocomplete="off" disabled>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label >Descricion de la actividad</label>
-                      <textarea disabled class="form-control form-control-sm"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" disabled>Agregar</button>
-                    <button type="reset" class="btn btn-danger" disabled>Cancelar</button>
-
-                  </form>
-                </div>
-              </div>
-
-              
-
-            </div>
-          </div>
-          <!-- /.col -->
-
+          
           <!-- calendar column -->
-          <div class="col-md-8">
+          <div class="col-md-12" style="padding: 0% 10%">
             <div class="card card-primary">
               <div class="card-body p-0">
                 <!-- THE CALENDAR -->
@@ -199,34 +173,37 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery UI -->
-<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../dist/js/demo.js"></script> -->
 
 
 <!-- fullCalendar 2.2.5 -->
-<script src="../../plugins/moment/moment.min.js"></script>
+
 <script src="../../plugins/fullcalendar/main.min.js"></script>
-<script src="../../plugins/fullcalendar-daygrid/main.min.js"></script>
-<script src="../../plugins/fullcalendar-timegrid/main.min.js"></script>
-<script src="../../plugins/fullcalendar-interaction/main.min.js"></script>
 <script src="../../plugins/fullcalendar-bootstrap/main.min.js"></script>
 <script src="../../plugins/fullcalendar/locales/es.js"></script>
+<script src="../../plugins/fullcalendar-daygrid/main.min.js"></script>
 
-<!-- date-range-picker -->
-<script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
+<!-- 
 <script src="../../plugins/moment/moment.min.js"></script>
-<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../../plugins/fullcalendar-timegrid/main.min.js"></script>
+<script src="../../plugins/fullcalendar-interaction/main.min.js"></script>
+ -->
+ 
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="../dist/js/demo.js"></script> -->
+<!-- jQuery UI -->
+<!-- <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>-->
+
 
 <script src="./js/verPlanG.js"></script>
 
 <script>
-	let actividades = <%=Actividades%>
+	let actividades = <%=Actividades%>;
 	
-	console.log(actividades)
+	let fecha_inicio = "<%=fechaInicio%>";
+	calendar.gotoDate(new Date(fecha_inicio))
+	
 	for(let i =0; i < actividades.length; i++){
 		agregar(actividades[i]);
 	}

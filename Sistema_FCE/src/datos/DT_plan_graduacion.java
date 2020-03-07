@@ -160,6 +160,7 @@ public class DT_plan_graduacion {
 					Date fecha_inicio = new Date(tplan.getFecha_inicio().getTime() );
 					Date fecha_fin = new Date(  tplan.getFecha_fin().getTime() );
 					
+					rsPg.updateString("cohorte", tplan.getCohorte());
 					rsPg.updateString("descripcion", tplan.getDescripcion());
 					rsPg.updateDate("fecha_inicio",fecha_inicio);
 					rsPg.updateDate("fecha_fin",fecha_fin);
@@ -190,7 +191,7 @@ public class DT_plan_graduacion {
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
 
-			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_plan_graduacion where id = ? AND estado <> 3", 
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_plan_graduacion where id = ?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, id_planG);

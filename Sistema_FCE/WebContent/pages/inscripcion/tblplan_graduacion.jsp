@@ -120,7 +120,7 @@
             </div>
               
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll;">
               <table id="tablePG" class="table table-bordered">
                 <thead>
 	                <tr>
@@ -151,28 +151,25 @@
 	                  <td><%=plan.getFecha_inicio()%></td>
 	                  <td><%=plan.getFecha_fin()%></td>
 	                  
-	                  <%
-	                  if(plan.getEstado() == 3){
-	                	  //si el estado es igual tres no puede editar, solo ver, pues ya acabó
-	                  %>
+	                  
+	                  <%  if(plan.getEstado() == 3){ //comienzo if   %>
 	                   <td>
-                	 	<a href="#" onclick="linkVerPlan('<%=plan.getId()%>');"><i class="fas fa-eye" title="Ver"></i></a>
-	                  </td>
-	                  <%
-	                  	}
-	                  else{  
-	                  %>
+                	 	<a href="./verPlan_graduacion.jsp?planID=<%=plan.getId()%>"><i class="fas fa-eye" title="Ver"></i></a>
+	                   </td>
+	                   
+	                  <%} else{//else    %>
 	                  
 	                  <td>
 	                  	<a href="./addActivityPG2.jsp?idPG=<%=plan.getId()%>" title="agregar actividades"><i class="fas fa-plus"></i></a>
 	                  		&nbsp;&nbsp;&nbsp;
-                	 	<a href="#" onclick="linkVerPlan('<%=plan.getId()%>');"><i class="fas fa-eye"title="Ver"></i></a>
+                	 	<a href="./verPlan_graduacion.jsp?planID=<%=plan.getId()%>"><i class="fas fa-eye"title="Ver"></i></a>
 		                	&nbsp;&nbsp;&nbsp;
-	                  	<a href="#" onclick="linkEditarPlan('<%=plan.getId()%>');"><i class="far fa-edit" title="Editar"></i></a>
+	                  	<a href="./editarPlan_graduacion.jsp?planID=<%=plan.getId()%>"><i class="far fa-edit" title="Editar"></i></a>
 	                  </td>
+	                
+	                  <%}// end if%>
 	                </tr>
-	                <%}%>
-	            <%}%>
+	            <%}// end for%>
                 </tbody>
               </table>
           </div>

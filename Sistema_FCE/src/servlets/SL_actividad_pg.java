@@ -32,23 +32,41 @@ public class SL_actividad_pg extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @solo para eliminar alguna actividad
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String opcS = request.getParameter("opc");
-		int opc = 0;
-		// convertiremos el string a int (opc)
-		if(opcS != null) {
-			opc = Integer.parseInt(opcS);
+		
+		int idActividad = 0;
+		int idPg = 0;
+		
+		if(request.getParameter("id") != null && request.getParameter("idPg") != null) {
+			idActividad = Integer.parseInt(request.getParameter("id"));
+			idPg = Integer.parseInt(request.getParameter("idPg"));
+		}else {
+			response.sendRedirect("./pages/inscripcion/addActivityPG2.jsp?idPG=");
+			return;
 		}
 		
-		switch (opc) {
-			case 2:
-				GuardarActividades(request, response);				
-				
-			default:
-					break;
+		
+		if (idActividad == 0 || idPg == 0) {
+			response.sendRedirect("./pages/inscripcion/addActivityPG2.jsp?idPG=" + idPg);
+			return;
 		}
+		
+		DT_actividad_pg Dtapg = new DT_actividad_pg();
+		
+		if(Dtapg.eliminarActividad(idActividad)) {
+			response.sendRedirect("./pages/inscripcion/addActivityPG2.jsp?idPG=" + idPg + "&msj=5");
+			return;
+		}else {
+			response.sendRedirect("./pages/inscripcion/addActivityPG2.jsp?idPG=" + idPg + "&msj=6");
+			return;
+		}
+
+		/*
+		 5 eliminado
+		 6 error eliminar 
+		 */
 	}
 
 	/**
@@ -127,6 +145,7 @@ public class SL_actividad_pg extends HttpServlet {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private void GuardarActividades(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//obtener todos las actividades de un plan G
 		DT_actividad_pg DTa = new DT_actividad_pg();
