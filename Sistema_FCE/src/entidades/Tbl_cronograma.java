@@ -10,7 +10,7 @@ public class Tbl_cronograma {
 	private String descripcion;
 	private Date fecha_inicio;
 	private Date fecha_fin;
-	private String tipo_cronograma;
+	private int tipo_cronograma;
 	private int estado;
 	
 	//METODOS
@@ -38,10 +38,10 @@ public class Tbl_cronograma {
 	public void setFecha_fin(Date fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
-	public String getTipo_cronograma() {
+	public int getTipo_cronograma() {
 		return tipo_cronograma;
 	}
-	public void setTipo_cronograma(String tipo_cronograma) {
+	public void setTipo_cronograma(int tipo_cronograma) {
 		this.tipo_cronograma = tipo_cronograma;
 	}
 	public int getEstado() {

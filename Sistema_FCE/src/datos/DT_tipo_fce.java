@@ -234,5 +234,38 @@ public class DT_tipo_fce {
 		return tTipoFce;
 	}
 	
+	//para mostrar en el ver cronograma
+	public String obtenerTipoFceNombre(int idTipoFce)
+	{
+		Tbl_tipo_fce tTipoFce  = new Tbl_tipo_fce();
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT tipo from tbl_tipo_fce where id = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idTipoFce);
+			
+			rsTipoFce = ps.executeQuery();
+			if(rsTipoFce.next())
+			{
+				
+				tTipoFce.setTipo(rsTipoFce.getString("tipo"));
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en ObtenerTipoFce() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return tTipoFce.getTipo();
+	}
+
 	
 }

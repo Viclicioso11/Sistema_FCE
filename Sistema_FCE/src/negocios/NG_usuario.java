@@ -38,7 +38,7 @@ public class NG_usuario {
 			
 			if(dtu.existeCarne(tus.getCarne()))
 			{
-				guardado = 2; //EL USERNAME YA EXISTE
+				guardado = 2; //EL carne YA EXISTE
 			}
 			else
 			{
@@ -71,3 +71,4 @@ public class NG_usuario {
 	
 
 }
+

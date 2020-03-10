@@ -7,6 +7,7 @@ public class Vw_rol_opcion {
 	private String rol;
 	private int opcion_id;
 	private String opcion;
+	private String descripcion;
 	
 	//Metodos
 	
@@ -34,7 +35,14 @@ public class Vw_rol_opcion {
 	public void setOpcion(String opcion) {
 		this.opcion = opcion;
 	}
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	
 
 }
+
+

@@ -53,6 +53,17 @@ public class SL_cronograma extends HttpServlet {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
+		String strIdTipoCro = request.getParameter("id_tipo_cronograma");	
+		int idTipoCronograma = 0;
+		
+		if( strIdTipoCro != null) {
+			idTipoCronograma = Integer.parseInt(strIdTipoCro);
+		}
+		if(idTipoCronograma == 0) {
+			idTipoCronograma = 1;
+		}
+		
+
 		DT_cronograma dtcro = new DT_cronograma();
 		
 		switch(opc) {
@@ -64,17 +75,23 @@ public class SL_cronograma extends HttpServlet {
 				tcro.setFecha_inicio(formatter.parse(request.getParameter("fecha_in")));
 				
 				tcro.setDescripcion(request.getParameter("descripcion"));
-				tcro.setTipo_cronograma(request.getParameter("tipo"));
+
+				tcro.setTipo_cronograma(idTipoCronograma);
+
 				tcro.setFecha_fin(formatter.parse(request.getParameter("fecha_fin")));
 				
 				if(dtcro.guardarCronograma(tcro)) {
 					
 					response.sendRedirect("./pages/inscripcion/tblcronograma.jsp?msj=1");
+
+					return;
 					
 				}else {
 					response.sendRedirect("./pages/inscripcion/tblcronograma.jsp?msj=3");
+					return;
+
+					
 				}
-				
 				
 			} catch (ParseException e) {
 				System.out.println("DATOS: ERROR en parsearFechas "+ e.getMessage());
@@ -90,16 +107,23 @@ public class SL_cronograma extends HttpServlet {
 
 			try {
 				tcro.setDescripcion(request.getParameter("descripcion"));
-				tcro.setTipo_cronograma(request.getParameter("tipoCronograma"));
+
+				tcro.setTipo_cronograma(idTipoCronograma);
+
+
 				tcro.setId(Integer.parseInt(request.getParameter("idCrono")));
 				tcro.setFecha_inicio(formatter.parse(request.getParameter("fecha_in")));
 				tcro.setFecha_fin(formatter.parse(request.getParameter("fecha_fin")));
 				
 				if(dtcro.editarCronograma(tcro)) {
 					response.sendRedirect("./pages/inscripcion/tblcronograma.jsp?msj=1");
+
+					return;
 				}
 				else {
 					response.sendRedirect("./pages/inscripcion/tblcronograma.jsp?msj=2");
+					return;
+
 				}
 				
 				
@@ -117,3 +141,4 @@ public class SL_cronograma extends HttpServlet {
 	}
 
 }
+	

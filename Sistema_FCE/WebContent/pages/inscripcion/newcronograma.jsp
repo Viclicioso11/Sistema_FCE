@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 
@@ -71,6 +72,8 @@
   <!-- date picker -->
   <link href="../../plugins/date-picker/datepicker.css">
   
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+  
     <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   
@@ -124,10 +127,28 @@
                     <input type="text"  id="descripcionCronograma" name="descripcion" class="form-control"  required>
                   </div>
                   
+                  
                    <div class="form-group">
-                    <label for="descripción">Tipo de Cronograma:</label>
-                    <input type="text"  id="tipoCronograma" name="tipo" class="form-control"  required>
-                  </div>
+                   <label for="id_tipo_cronograma">Tipo de Cronograma: </label>
+           				<select class="form-control select2" name="id_tipo_cronograma" id="id_tipo_cronograma" style="width: 100%;" required="required">
+           				  <option value="0">Seleccione un tipo de cronograma...</option>
+            				<%
+		            		DT_tipo_fce dtfc = new DT_tipo_fce();
+		            	    ArrayList<Tbl_tipo_fce> listTipo = new ArrayList<Tbl_tipo_fce>();
+		            	    listTipo = dtfc.listarTipoFce();
+		            	    
+		            	    for(Tbl_tipo_fce tbtf : listTipo)
+		            	    {
+		            		%>
+		            		 <option value="<%=tbtf.getId()%>"><%=tbtf.getTipo() %></option>
+		            		<%	
+		            		} 
+		            		%>
+           				</select>
+        		</div>
+                   
+                    <input type="hidden"  id="tipoCronograma" name="tipo" class="form-control" >
+                
                     
                   <div class="form-group">
                       <label>Fecha de inicio</label>
@@ -137,7 +158,7 @@
                             <i class="far fa-calendar-alt"></i>
                           </span>
                         </div>
-                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_in" name="fecha_in" required >
+                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_in" name="fecha_in" onchange="validarFechaInicio();" required >
                       </div>
                   </div>
                     
@@ -149,7 +170,7 @@
                             <i class="far fa-calendar-alt"></i>
                           </span>
                         </div>
-                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_fin" name="fecha_fin" required>
+                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_fin" name="fecha_fin"  onchange="validarFechaFin();"  required>
                       </div>
                   </div>
                   
@@ -195,6 +216,52 @@
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 
+<!-- jAlert js -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+
+
+
+<script>
+function validarFechaFin(){
+	
+	
+	let fecha_fin = $("#fecha_fin").val();
+	let fecha_inicio = $("#fecha_in").val();
+	
+	fecha_inicio =  new Date (fecha_inicio);
+	fecha_fin = new Date (fecha_fin);
+	
+	if(fecha_fin < fecha_inicio){
+		errorAlert('Aviso', 'La fecha de fin no puede ser menor a la fecha de inicio');
+		$("#fecha_fin").val($("#fecha_in").val());
+	}
+	
+	
+	
+}
+
+</script>
+
+
+<script>
+function validarFechaInicio(){
+	
+	
+	let fecha_fin = $("#fecha_fin").val();
+	let fecha_inicio = $("#fecha_in").val();
+	
+	fecha_inicio =  new Date (fecha_inicio);
+	fecha_fin = new Date (fecha_fin);
+	
+	if(fecha_inicio > fecha_fin){
+		errorAlert('Aviso', 'La fecha de inicio no puede ser mayor a la fecha de fin');
+		$("#fecha_in").val($("#fecha_fin").val());
+	}
+	
+}
+
+</script>
 
 <script>
 
@@ -230,13 +297,15 @@
 	            "Deciembre"
 	        ],
 	        "firstDay": 1
-	    }
+	    };
 	$('[data-toggle="datepicker"]').daterangepicker({
 		singleDatePicker: true,
 	    locale: locale 
-	})
-	
+	});
+
 </script>
 
+
 </body>
+
 </html>

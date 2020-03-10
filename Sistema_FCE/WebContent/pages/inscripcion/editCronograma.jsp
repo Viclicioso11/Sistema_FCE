@@ -150,10 +150,25 @@
                     <input type="text"  id="descripcion" name="descripcion" class="form-control"  required>
                   </div>
                   
-                   <div class="form-group">
-                    <label for="descripción">Tipo de Cronograma:</label>
-                    <input type="text"  id="tipoCronograma" name="tipoCronograma" class="form-control"  required>
-                  </div>
+                  <div class="form-group">
+                   <label for="id_tipo_cronograma">Tipo de Cronograma: </label>
+           				<select class="form-control select2" name="id_tipo_cronograma" id="id_tipo_cronograma" style="width: 100%;" required="required">
+           				  <option value="0">Seleccione un tipo de cronograma...</option>
+            				<%
+		            		DT_tipo_fce dtfc = new DT_tipo_fce();
+		            	    ArrayList<Tbl_tipo_fce> listTipo = new ArrayList<Tbl_tipo_fce>();
+		            	    listTipo = dtfc.listarTipoFce();
+		            	    
+		            	    for(Tbl_tipo_fce tbtf : listTipo)
+		            	    {
+		            		%>
+		            		 <option value="<%=tbtf.getId()%>"><%=tbtf.getTipo() %></option>
+		            		<%	
+		            		} 
+		            		%>
+           				</select>
+        		</div>
+                   
                     
                   <div class="form-group">
                       <label>Fecha de inicio</label>
@@ -239,7 +254,7 @@
 		
 		$("#idCrono").val("<%=tcro.getId()%>");
     	$("#descripcion").val("<%=tcro.getDescripcion()%>");
-    	$("#tipoCronograma").val("<%=tcro.getTipo_cronograma()%>");
+    	$("#id_tipo_cronograma").val("<%=tcro.getTipo_cronograma()%>");
     	$("#fecha_in").val(inicio);
     	$("#fecha_fin").val(fin);
      
@@ -319,4 +334,5 @@ let fin = "<%=limites[1]%>";
 
 
 </body>
+
 </html>

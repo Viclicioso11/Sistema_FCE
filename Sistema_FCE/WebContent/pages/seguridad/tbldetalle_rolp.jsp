@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-    
+   
 <% 
 /*
 	DT_rol_opcion Dtro = new DT_rol_opcion();
@@ -40,17 +40,15 @@
 		response.sendRedirect("../../Error.jsp");
 		return;
 	}
-	
 	*/
 %>
-    
-    
+   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Gestión Opciones de Rol</title>
+  <title>Gestión Roles</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -85,6 +83,27 @@
 	String mensaje = "";
 	mensaje = request.getParameter("msj");
 	mensaje = mensaje==null?"":mensaje;
+
+
+%>
+
+<%
+/* RECUPERAMOS EL VALOR DE LA VARIABLE id_rol */
+String idRol = "";
+idRol = request.getParameter("id_rol");
+idRol = idRol==null?"0":idRol;
+
+int rol = 0;
+rol = Integer.parseInt(idRol); 
+
+/* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
+
+DT_rol_opcion dtrop = new DT_rol_opcion();
+
+ArrayList<Vw_rol_opcion> rolOpciones = new ArrayList<Vw_rol_opcion>();
+
+rolOpciones = dtrop.listarRolOpcion(rol);
+
 %>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -107,7 +126,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            
+          
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -121,94 +140,38 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      
-       <!-- /.col -->
-        <div class="col-8">
+        <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <h2>Opciones Disponibles de Rol</h2>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body" id="divTblOpciones">
             
-            <input type="hidden" id="id_opciones" name="id_opciones">
-              <table id="Tbl_opciones" class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>Opción</th>
-                  <th>Descripción</th>
-                  <th>Seleccionar</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%
-                	String rol = request.getParameter("id_rol");
-                	int id_rol = 0;
-                	if(rol != null){
-                	id_rol = Integer.parseInt(rol);
-     
-                	DT_rol_opcion dtop = new DT_rol_opcion();
-                  	ArrayList<Tbl_opcion> listOpcion = new ArrayList<Tbl_opcion>();
-                  	listOpcion = dtop.listarOpcionesDisponibles(id_rol);
-                  	
-                  	        		
-                  	for(Tbl_opcion top : listOpcion)
-                  	{
-                %>
-	                <tr>
-	                  <td><%=top.getOpcion()%></td>
-	                  <td><%=top.getDescripcion() %></td>
-	                  <td id ="<%=top.getId()%>">
-	                  <a href="#"onclick="seleccionarOpcion('<%=top.getId()%>');"><i class="fas fa-check" title="Agregar"></i></a>
-	                 
-	                  </td>
-	                </tr>
-	             <%
-	        		}  
-                	}
-	             %>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          </div>
-        <!-- /.col -->
-      
-      <!-- tabla de roles -->
-      <div class="col-4">
-          <div class="card">
-            <div class="card-header">
-               <h2>Roles</h2>
+              <h2>Detalles de Rol</h2>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="Tbl_rol" class="table-bordered">
+            
+            
+              <table id="Tbl_rol" class="table table-bordered">
                 <thead>
                 <tr>
                   <th>Rol</th>
-                  <th>Seleccionar</th>
-                  <th>Detalle</th>
+                  <th>Opción</th>
+                  <th>Descripción</th>
+                  <th>Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_rol dtrol = new DT_rol();
-                  	ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-                  	listRol = dtrol.listRol();
-                  	        		
-                  	for(Tbl_rol trol : listRol)
-                  	{
+                  	       
+                  	 for(Vw_rol_opcion vrop : rolOpciones)
+                  	  {
+                  	        			
                 %>
 	                <tr>
-	                  <td><%=trol.getRol()%></td>
-	                  <td id ="filaRol<%=trol.getId()%>" onclick="seleccionarRol('filaRol<%=trol.getId()%>');" title="Seleccionar este rol">
-	                  	<a href="#"onclick="seleccionarRol('filaRol<%=trol.getId()%>');"><i class="fas fa-check"  title="Seleccionar este Rol"></i></a>
-	                  </td>
-	                   <td>
-	                  <a href="#" onclick="detalleRol(<%=trol.getId()%>);"><i class="fas fa-info-circle" title="Detalles"></i></a>
+	                  <td><%=vrop.getRol()%></td>
+	                  <td><%=vrop.getOpcion()%></td>
+	                  <td><%=vrop.getDescripcion()%></td>
+	                  <td>
+	                  		<a href="#" onclick="deleteOpcionRol('<%=vrop.getOpcion_id()%>','<%=vrop.getRol_id()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
 	                  </td>
 	                </tr>
 	             <%
@@ -216,17 +179,14 @@
 	             %>
                 </tbody>
               </table>
-              
-              <button type="button" class="btn btn-primary" id="btnAsignar" onClick="asignarOpcionRol()">Asignar</button>
-              <button type="button" class="btn btn-danger" id="btnCancelar" onClick="limpiarCampos()">Cancelar</button>
-              
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
 
-          </div>
-             </div>
+               </div>
+        <!-- /.col -->
+      </div>
       <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -282,26 +242,25 @@
 <!-- jAlert js -->
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-  
-  <script src="./js/rol_opcion.js" defer></script>
 
 <script>
-
+function linkEditRol(rol)
+{
+	var idRol = rol;
+	window.location.href="../../pages/seguridad/editRol.jsp?rolID="+idRol;	
+}
 </script>
 
 <script>
-
-
-
-function deleteOpcion(id_rol, id_opcion)
+function deleteOpcionRol(id_opcion, id_rol)
 {
 	
 	  $.jAlert({
 		    'type': 'confirm',
-		    'confirmQuestion': '¿Está seguro de eliminar la opción del rol seleccionado?',
+		    'confirmQuestion': '¿Está seguro de eliminar la opción al rol seleccionado?',
 		    'onConfirm': function(e, btn){
 		     e.preventDefault();
-		     window.location.href="../../SL_rol_opcion?id_opcion="+id_opcion+"&id_rol="+id_rol;
+		     window.location.href="../../SL_rol_opcion?opc=2&id_opcion="+id_opcion+"&id_rol="+id_rol;
 		     btn.parents('.jAlert').closeAlert();
 		    },
 		    'onDeny': function(e, btn){
@@ -309,6 +268,7 @@ function deleteOpcion(id_rol, id_opcion)
 		      btn.parents('.jAlert').closeAlert();
 		    }
 		  });
+
 	
 }
 </script>
@@ -316,7 +276,7 @@ function deleteOpcion(id_rol, id_opcion)
 
 <script>
   $(function () {
-    $('#Tbl_opciones').DataTable({
+    $('#Tbl_rol').DataTable({
         dom: 'Bfrtip',
         buttons: [
         'pdf',
@@ -325,93 +285,31 @@ function deleteOpcion(id_rol, id_opcion)
         ]
       });
     
-    $("#Tbl_opciones").css({
+    $("#Tbl_rol").css({
         "border": "none",
         "padding-top": "20px",
       })
       $("tr").css({"height": "49px"})
+      
   });
-  	
-  $(function () {
-	  
-	  $('#Tbl_rol').DataTable({
-
-	      });
-	    $("#Tbl_rol").css({
-	        "border": "none",
-	        "padding-top": "20px",
-	      })
-	      $("tr").css({"height": "49px"})
-	  });
-
   
 </script>
 
 <script>
-
-//para guardar
-function asignarOpcionRol(){
- 
-var opciones = $("#id_opciones").val();
-var id_rol = "<%=rol%>";
- 
-	if(id_rol != "" && opciones != "" ){
-	
-		window.location.href= "../../SL_rol_opcion?opc=1&id_rol="+ id_rol+"&id_opciones="+opciones;
-		id_rol = null;
-		$("#id_opciones").val("");
-		
-	}else{
-		errorAlert('Error', 'Debe seleccionar al menos una opción a un rol.');
-	}
-	
-	
-}
-</script>
-
-<script>
-//para ver los detalles 
-function detalleRol(id_rol){
- 
-	window.location.href="../../pages/seguridad/tbldetalle_rolp.jsp?id_rol="+id_rol;	
-	
-}
-</script>
-
-
-<script>
   $(document).ready(function ()
   {
-   	//cuando se recargue la página, para que quede seleccionada
-	 var rolSelect = document.getElementById("filaRol<%=rol%>");
-	 if(rolSelect != null){
-		 rolSelect.style.backgroundColor = "green";
-	 }
-		 
+   
     /////////// VARIABLES DE CONTROL MSJ ///////////
     var nuevo = 0;
     nuevo = "<%=mensaje%>";
+
     if(nuevo == "1")
-    {
-      successAlert('Éxito', 'Registros almacenados correctamente.');
-    }
-    
-    if(nuevo == "2")
-    {
-    	errorAlert('Error', 'El registro no almacenados.');
-    }
-    
-    if(nuevo == "3")
-    {
-      successAlert('Éxito', 'El registro ha sido modificado correctamente.');
-    }
-    
-    if(nuevo == "4")
     {
       successAlert('Éxito', 'El registro ha sido eliminado correctamente.');
     }
+  
     
-    if(nuevo == "5")
+    if(nuevo == "2")
     {
       errorAlert('Error', 'El registro no se ha podido eliminar.');
     }
@@ -420,8 +318,8 @@ function detalleRol(id_rol){
     
   
     
+
   });
   </script>
 </body>
-
 </html>

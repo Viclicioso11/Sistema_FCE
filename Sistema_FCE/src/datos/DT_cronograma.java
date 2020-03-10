@@ -38,7 +38,8 @@ public class DT_cronograma {
 			java.sql.Date sqlFin = new java.sql.Date(tco.getFecha_fin().getTime());
 			rsCronograma.moveToInsertRow();
 			rsCronograma.updateString("descripcion", tco.getDescripcion());
-			rsCronograma.updateString("tipo_cronograma", tco.getTipo_cronograma());
+
+			rsCronograma.updateInt("id_tipo_cronograma", tco.getTipo_cronograma());
 			rsCronograma.updateDate("fecha_inicio",sqlInicio);
 			rsCronograma.updateDate("fecha_fin", sqlFin);
 			rsCronograma.updateInt("estado",1);
@@ -84,7 +85,9 @@ public class DT_cronograma {
 			{
 				if(rsCronograma.getInt(1)== tcro.getId())
 				{
-					rsCronograma.updateString("tipo_cronograma", tcro.getTipo_cronograma());
+
+					rsCronograma.updateInt("id_tipo_cronograma", tcro.getTipo_cronograma());
+
 					rsCronograma.updateString("descripcion", tcro.getDescripcion());	
 					rsCronograma.updateRow();
 					modificado=true;
@@ -163,7 +166,9 @@ public class DT_cronograma {
 				tcro.setDescripcion(rsCronograma.getString("descripcion"));
 				tcro.setFecha_inicio(rsCronograma.getDate("fecha_inicio"));
 				tcro.setFecha_fin(rsCronograma.getDate("fecha_fin"));
-				tcro.setTipo_cronograma(rsCronograma.getString("tipo_cronograma"));
+
+				tcro.setTipo_cronograma(rsCronograma.getInt("id_tipo_cronograma"));
+
 			}
 			// Closing connection thread, very important!
 			connectionP.closeConnection(con);
@@ -437,7 +442,9 @@ public class DT_cronograma {
 				
 				acro.setId(rsCronograma.getInt("id"));
 				acro.setDescripcion(rsCronograma.getString("descripcion"));
-				acro.setTipo_cronograma(rsCronograma.getString("tipo_cronograma"));
+
+				acro.setTipo_cronograma(rsCronograma.getInt("id_tipo_cronograma"));
+
 				acro.setFecha_inicio(rsCronograma.getDate("fecha_inicio"));
 				acro.setFecha_fin(rsCronograma.getDate("fecha_fin"));
 				listaCro.add(acro);	

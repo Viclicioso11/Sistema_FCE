@@ -67,11 +67,12 @@ cronograma = Integer.parseInt(idCronograma);
 
 Tbl_cronograma tcro = new Tbl_cronograma();
 DT_cronograma dtcro = new DT_cronograma();
+DT_tipo_fce dtfc = new DT_tipo_fce();
 
 //un id solo de prueba para cargar
 tcro = dtcro.obtenerDetallesCronograma(cronograma);
 //para poner la url sin las comillas que trae de la base de datos
-
+String tipoFCE = dtfc.obtenerTipoFceNombre(tcro.getTipo_cronograma());
 ArrayList<Tbl_actividad_cronograma> listaActividades = new ArrayList<Tbl_actividad_cronograma>();
 
 //obtenemos todas las actividades del cronograma correspondiente
@@ -341,7 +342,7 @@ function cambiarVista(){
 		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
     
     	$("#id_cronograma").val("<%=tcro.getId()%>");
-    	$("#tipoCronograma").val("<%=tcro.getTipo_cronograma()%>");
+    	$("#tipoCronograma").val("<%=tipoFCE%>");
     	$("#descripcionCronograma").val("<%=tcro.getDescripcion()%>");
     	$("#fechaCronograma").val("<%="Del "+tcro.getFecha_inicio().toString() +" al "+ tcro.getFecha_fin().toString()%>");
     	
@@ -373,4 +374,5 @@ function cambiarVista(){
     </script>
 
 </body>
+
 </html>
