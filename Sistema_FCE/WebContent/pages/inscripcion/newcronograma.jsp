@@ -178,6 +178,7 @@
 	              <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
                 
+                
                                 
               </form>
           </div>
@@ -227,12 +228,20 @@ function validarFechaFin(){
 	
 	
 	let fecha_fin = $("#fecha_fin").val();
+	let fecha_fin_validar = new Date();
+	let fin;
+	
 	let fecha_inicio = $("#fecha_in").val();
+	let fecha_inicio_validar = new Date();
+	let inicio;
 	
-	fecha_inicio =  new Date (fecha_inicio);
-	fecha_fin = new Date (fecha_fin);
+	inicio = fecha_inicio.split("/");
+	fecha_inicio_validar.setFullYear(inicio[2], inicio[1] - 1, inicio[0]);
 	
-	if(fecha_fin < fecha_inicio){
+	fin = fecha_fin.split("/");
+	fecha_fin_validar.setFullYear(fin[2], fin[1] - 1, fin[0]);
+	
+	if(fecha_fin_validar < fecha_inicio_validar){
 		errorAlert('Aviso', 'La fecha de fin no puede ser menor a la fecha de inicio');
 		$("#fecha_fin").val($("#fecha_in").val());
 	}
@@ -249,12 +258,21 @@ function validarFechaInicio(){
 	
 	
 	let fecha_fin = $("#fecha_fin").val();
+	let fecha_fin_validar = new Date();
+	let fin;
+	
 	let fecha_inicio = $("#fecha_in").val();
+	let fecha_inicio_validar = new Date();
+	let inicio;
 	
-	fecha_inicio =  new Date (fecha_inicio);
-	fecha_fin = new Date (fecha_fin);
+	inicio = fecha_inicio.split("/");
+	fecha_inicio_validar.setFullYear(inicio[2], inicio[1] - 1, inicio[0]);
 	
-	if(fecha_inicio > fecha_fin){
+	fin = fecha_fin.split("/");
+	fecha_fin_validar.setFullYear(fin[2], fin[1] - 1, fin[0]);
+	
+	
+	if(fecha_inicio_validar > fecha_fin_validar){
 		errorAlert('Aviso', 'La fecha de inicio no puede ser mayor a la fecha de fin');
 		$("#fecha_in").val($("#fecha_fin").val());
 	}

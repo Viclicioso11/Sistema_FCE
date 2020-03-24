@@ -151,16 +151,19 @@ public class DT_estudiante_candidato {
 			ps.setString(1, correo);
 			rsEstudianteCandidato = ps.executeQuery();
 
-			connectionP.closeConnection(con);
+			
 			
 			if(rsEstudianteCandidato.next()) {
+				connectionP.closeConnection(con);
 				return true;
+				
 			}
 			else {
+				connectionP.closeConnection(con);
 				return false;
 			}
 			
-
+			
 		}
 		catch (Exception e)
 		{

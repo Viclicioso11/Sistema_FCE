@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
     
 <% 
+/*
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -39,6 +40,7 @@
 		response.sendRedirect("../../Error.jsp");
 		return;
 	}
+	*/
 %>
     
     
@@ -129,8 +131,7 @@ mensaje = mensaje==null?"":mensaje;
             </div>
           </div>
         </div>
-      
-        
+       
         <div class="input-group mb-3">
           <input id="contrasenia" name="contrasenia" type="password" class="form-control" placeholder="Contraseña">
           <div class="input-group-append">

@@ -1,6 +1,13 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
-    
+
+    <% 
+    /*
+    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
+	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
+	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
+
 <% 
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
@@ -20,6 +27,7 @@
 		return;
 	}
 	
+
 	//Recuperamos la url de la pag actual
 	int index = request.getRequestURL().lastIndexOf("/");
 	String miPagina = request.getRequestURL().substring(index+1);
@@ -37,16 +45,29 @@
 	
 	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
-		return;
-	}
+
+	} 
+	*/
 %>
-    
+
+<%
+	String cronograma = "";
+	cronograma = request.getParameter("id_cronograma");
+	int id_cronograma = 0;
+	if(cronograma != ""){
+		id_cronograma  = Integer.parseInt(cronograma); 
+	}
+	
+
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Plan de Graduación</title>
+  <title>Creación de Tarea</title>
   
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,7 +83,7 @@
   <!-- date picker -->
   <link href="../../plugins/date-picker/datepicker.css">
   
-   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
   
     <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
@@ -85,12 +106,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Plan de Graduación</h1>
+            <h1>Creación de nueva tarea</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Plan de Graduación</li>
+              <li class="breadcrumb-item active">Cronograma de Actividades</li>
             </ol>
           </div>
         </div>
@@ -103,19 +124,42 @@
         
         <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nuevo Plan de Graduación</h3>
+                <h3 class="card-title">Nueva Tarea</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_planG" method="post">
+              <form role="form" action="../../SL_cronograma" method="post">
                 <div class="card-body">
                 
                   
                    <input name="opc" id="opc" type="hidden" value="1">
                   <div class="form-group">
-                    <label for="cohorte">Cohorte:</label>
-                    <input type="text"  id="cohorte" name="cohorte" class="form-control"  required>
+                    <label for="cohorte">Descripción:</label>
+                    <input type="text"  id="descripcionCronograma" name="descripcion" class="form-control"  required>
                   </div>
+                  
+                  
+                   <div class="form-group">
+                   <label for="id_tipo_cronograma">Tipo de Cronograma: </label>
+           				<select class="form-control select2" name="id_tipo_cronograma" id="id_tipo_cronograma" style="width: 100%;" required="required">
+           				  <option value="0">Seleccione un tipo de cronograma...</option>
+            				<%
+		            		DT_tipo_fce dtfc = new DT_tipo_fce();
+		            	    ArrayList<Tbl_tipo_fce> listTipo = new ArrayList<Tbl_tipo_fce>();
+		            	    listTipo = dtfc.listarTipoFce();
+		            	    
+		            	    for(Tbl_tipo_fce tbtf : listTipo)
+		            	    {
+		            		%>
+		            		 <option value="<%=tbtf.getId()%>"><%=tbtf.getTipo() %></option>
+		            		<%	
+		            		} 
+		            		%>
+           				</select>
+        		</div>
+                   
+                    <input type="hidden"  id="tipoCronograma" name="tipo" class="form-control" >
+                
                     
                   <div class="form-group">
                       <label>Fecha de inicio</label>
@@ -125,7 +169,7 @@
                             <i class="far fa-calendar-alt"></i>
                           </span>
                         </div>
-                        <input onchange="validarFechaInicio();" data-toggle="datepicker" class="form-control float-right form-control-sm" id="Finicio" name="Finicio" required >
+                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_in" name="fecha_in" onchange="validarFechaInicio();" required >
                       </div>
                   </div>
                     
@@ -137,19 +181,14 @@
                             <i class="far fa-calendar-alt"></i>
                           </span>
                         </div>
-                        <input onchange="validarFechaFin();" data-toggle="datepicker" class="form-control float-right form-control-sm" id="Ffin" name="Ffin" required>
+                        <input data-toggle="datepicker" class="form-control float-right form-control-sm" id="fecha_fin" name="fecha_fin"  onchange="validarFechaFin();"  required>
                       </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea  id="descripcion" name="descripcion" class="form-control" 
-                     required></textarea>
                   </div>
                   
                   <button type="submit" class="btn btn-primary">Guardar</button>
 	              <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
+                
                 
                                 
               </form>
@@ -199,23 +238,15 @@
 function validarFechaFin(){
 	
 	
-	let fecha_fin = $("#Ffin").val();
-	let fecha_fin_validar = new Date();
-	let fin;
+	let fecha_fin = $("#fecha_fin").val();
+	let fecha_inicio = $("#fecha_in").val();
 	
-	let fecha_inicio = $("#Finicio").val();
-	let fecha_inicio_validar = new Date();
-	let inicio;
+	fecha_inicio =  new Date (fecha_inicio);
+	fecha_fin = new Date (fecha_fin);
 	
-	inicio = fecha_inicio.split("/");
-	fecha_inicio_validar.setFullYear(inicio[2], inicio[1] - 1, inicio[0]);
-	
-	fin = fecha_fin.split("/");
-	fecha_fin_validar.setFullYear(fin[2], fin[1] - 1, fin[0]);
-	
-	if(fecha_fin_validar < fecha_inicio_validar){
+	if(fecha_fin < fecha_inicio){
 		errorAlert('Aviso', 'La fecha de fin no puede ser menor a la fecha de inicio');
-		$("#Ffin").val($("#Finicio").val());
+		$("#fecha_fin").val($("#fecha_in").val());
 	}
 	
 	
@@ -229,24 +260,15 @@ function validarFechaFin(){
 function validarFechaInicio(){
 	
 	
-	let fecha_fin = $("#Ffin").val();
-	let fecha_fin_validar = new Date();
-	let fin;
+	let fecha_fin = $("#fecha_fin").val();
+	let fecha_inicio = $("#fecha_in").val();
 	
-	let fecha_inicio = $("#Finicio").val();
-	let fecha_inicio_validar = new Date();
-	let inicio;
+	fecha_inicio =  new Date (fecha_inicio);
+	fecha_fin = new Date (fecha_fin);
 	
-	inicio = fecha_inicio.split("/");
-	fecha_inicio_validar.setFullYear(inicio[2], inicio[1] - 1, inicio[0]);
-	
-	fin = fecha_fin.split("/");
-	fecha_fin_validar.setFullYear(fin[2], fin[1] - 1, fin[0]);
-	
-	
-	if(fecha_inicio_validar > fecha_fin_validar){
+	if(fecha_inicio > fecha_fin){
 		errorAlert('Aviso', 'La fecha de inicio no puede ser mayor a la fecha de fin');
-		$("#Finicio").val($("#Ffin").val());
+		$("#fecha_in").val($("#fecha_fin").val());
 	}
 	
 }
@@ -287,13 +309,15 @@ function validarFechaInicio(){
 	            "Deciembre"
 	        ],
 	        "firstDay": 1
-	    }
+	    };
 	$('[data-toggle="datepicker"]').daterangepicker({
 		singleDatePicker: true,
 	    locale: locale 
-	})
-	
+	});
+
 </script>
 
+
 </body>
+
 </html>
