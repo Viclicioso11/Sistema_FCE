@@ -405,5 +405,34 @@ public class DT_tema {
 			
 	}
 	
-
+	/**
+	 * Verificar si existe tema
+	 * 
+	 * */
+	public boolean existeTema(int idtema) {
+		
+		boolean existe = false;
+		try {
+			Connection con = this.connectionP.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_tema where id = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idtema);
+			
+			rsTema = null;
+			rsTema = ps.executeQuery();
+			
+			if(rsTema.next()) {
+				existe = true;
+			}
+			
+			this.connectionP.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return existe;
+	}
 }

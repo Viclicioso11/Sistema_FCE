@@ -1,0 +1,35 @@
+.b-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 40px;
+}
+.b-list_type_tree .b-list__item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  color: inherit;
+  line-height: 1.5;
+}
+.b-list_type_tree .b-list__item:before {
+  content: "";
+  position: absolute;
+  border-top: 1px dotted #676767;
+  border-left: 1px dotted #676767;
+  width: 35px;
+  height: 100%;
+  left: -35px;
+  top: 10px;
+}
+.b-list_type_tree .b-list__item:after {
+  content: "";
+  position: absolute;
+  border-left: 1px dotted #676767;
+  height: 95%;
+  left: -35px;
+  top: -22px;
+  z-index: 0;
+}
+.b-list_type_tree .b-list__item:last-child:before {
+  border-left: none;
+}

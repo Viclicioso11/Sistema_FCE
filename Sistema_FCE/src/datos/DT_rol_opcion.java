@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import java.util.Iterator;
-
 import entidades.Tbl_opcion;
-import entidades.Tbl_rol;
 import entidades.Tbl_rol_opcion;
 
 import entidades.Vw_rol_opcion;

@@ -1,10 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -140,8 +136,6 @@ public class SL_rol_opcion extends HttpServlet {
 		
 		Tbl_rol_opcion trop = new Tbl_rol_opcion();	
 		DT_rol_opcion dtrop = new DT_rol_opcion();
-		String ids_opciones = "";
-		ArrayList<Integer> array_id_opcion = new ArrayList<Integer>();
 	
 
 

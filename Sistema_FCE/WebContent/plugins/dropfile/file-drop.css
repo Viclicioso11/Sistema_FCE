@@ -1,0 +1,56 @@
+body{
+  background-color: #E8E9EC;
+}
+.file-container{
+  position: relative;
+  border: 2px dashed #0e60b1;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.file-container-hover{
+  border: 2px solid #0e60b1 !important;
+}
+
+.file-container-hover p {
+  color: rgb(193, 198, 211) !important;
+}
+
+.file-container input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.file-container p{
+  color: rgb(86, 94, 110);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+@media screen  and (min-width: 0px) and (max-width: 576px){
+  /* small */
+  .file-container p{
+    line-height: 50px;
+    font-size: 115%;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 768px){
+  /* medium */
+  .file-container p{
+    line-height: 100px;
+    font-size: 120%;
+  }
+}
+@media screen and (min-width: 769px){
+  /* large */
+  .file-container p{
+    line-height: 170px;
+    font-size: 140%;
+  }
+}

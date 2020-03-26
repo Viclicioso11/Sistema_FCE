@@ -1,39 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-    
-      <% 
-    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
-	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
-	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
+
+<% 
+	DT_rol_opcion Dtro = new DT_rol_opcion();
+	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
+	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
+	
+	//objetos para el login
+    String loginUser = "";
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser == null ? "":loginUser;
+	
+	if(loginUser.equals("")) {
+		response.sendRedirect("../../index.jsp?session=null");
+		return;
+	}
+	if (Opciones.size() < 1){
+		response.sendRedirect("../../index.jsp?opcs=null");
+		return;
+	}
+	
 	//Recuperamos la url de la pag actual
 	int index = request.getRequestURL().lastIndexOf("/");
 	String miPagina = request.getRequestURL().substring(index+1);
-	System.out.println("miPagina ="+miPagina);
 	boolean permiso = false;
-	String opcionActual = "";
+	
 	//Buscamos si el rol tiene permisos para ver esta pagina
-	for(Vw_rol_opcion vro : listOpciones)
-	{
-		opcionActual = vro.getOpcion().trim();
-		System.out.println("opcionActual ="+opcionActual);
-		if(opcionActual.equals(miPagina.trim()))
-		{
+	for(Vw_rol_opcion opcion : Opciones) {	
+		if(opcion.getOpcion().trim().equals(miPagina.trim()) ) {
 			permiso = true;
 			break;
-		}
-		else
-		{
+		} else	{
 			permiso = false;
 		}
-		
 	}
 	
-	if(!permiso)
-	{
+	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
-	} 
+		return;
+	}
 %>
-    
     
     <%
 
