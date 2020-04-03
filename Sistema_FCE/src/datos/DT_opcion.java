@@ -107,7 +107,7 @@ public class DT_opcion {
 			while(rsOpcion.next()) {
 				if(rsOpcion.getInt("id") == id) {
 					rsOpcion.updateInt("estado", 3);					
-					rsOpcion.updateRow();					
+					rsOpcion.updateRow();	
 					eliminado = true;
 					break;
 					

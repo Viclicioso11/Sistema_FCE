@@ -51,34 +51,23 @@
 %>
 
 <%
-	String msj = "";
-	msj = request.getParameter("msj");
-	int mensaje = 0;
-	
-	if(msj != null){
-		mensaje  = Integer.parseInt(msj); 
-	}
-	
+
+	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+	String mensaje = "";
+	mensaje = request.getParameter("msj");
+	mensaje = mensaje==null ? "":mensaje;
+
 	DT_cronograma dtcrono = new DT_cronograma();
-	DT_tema dtma = new DT_tema();
+	DT_tema dttema = new DT_tema();
 	
 	// es el id del cronograma actual
 	int id_cronograma = dtcrono.obtenerIdCronogramaFechas();
 	
-	//para obtener el id del tema al cual asignar la nueva tarea
-	String nombre_tema = "";
+	//cambiar por el id del usuario de la sesión
+	int id_tutor = 34;
 	
-	String id_tema_texto = "";
-	id_tema_texto = request.getParameter("id_tem");
-	int id_tema = 0;
-	
-	if(id_tema_texto != null) {
-		id_tema = Integer.parseInt(id_tema_texto);
-		nombre_tema = dtma.obtenerNombreTema(id_tema);
-	}
+
 %>
-
-
 
 
 <!DOCTYPE html>
@@ -86,7 +75,7 @@
 <head>
   <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Creación de Tarea</title>
+  <title>Creación de tarea grupal</title>
   
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -96,34 +85,41 @@
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
-  <!-- date picker -->
-  <link href="../../plugins/date-picker/datepicker.css">
-  
-  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
-  
-    <!-- timepicker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  
   
    <!-- DATATABLE NEW -->
     <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- DATATABLE NEW buttons -->
     <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
   
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
+  <!-- date picker -->
+  <link href="../../plugins/date-picker/datepicker.css">
+  
+   <!-- timepicker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+  
+    <!-- timepicker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-	<!-- Navbar -->
- 	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
-	<!-- /.navbar -->
+  
 
-	<!-- SIDEBAR -->
- 	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
-	<!-- SIDEBAR	 -->
-	
+  <!-- Navbar -->
+  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
+  <!-- /.navbar -->
+
+  <!-- SIDEBAR -->
+  	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
+  <!-- SIDEBAR -->
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -131,12 +127,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Creación de nueva tarea para <%=nombre_tema %></h1>
+            
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Gestión grupo FCE</a></li>
-              <li class="breadcrumb-item active">Creación de nueva tarea</li>
+              
             </ol>
           </div>
         </div>
@@ -144,13 +139,65 @@
     </section>
 
     <!-- Main content -->
+    
     <section class="content">
     <form id="formGuardar" action="../../SL_tarea" method="POST">
       <div class="row">
       
+       <!-- /.col -->
+        <div class="col-5">
+          <div class="card">
+            <div class="card-header">
+            <h2>Seleccionar temas</h2>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" id="divTblOpciones">
+            
+            <input type="hidden" id="id_grupos" name="id_grupos" required>
+            <input type="hidden" id="id_actividad" name="id_actividad" required>
+            <input type="hidden" id="opc" name="opc" value="1">
+            
+            
+              <table id="Tbl_opciones" class="table table-bordered">
+                <thead>
+                <tr>
+                  <th>Tema</th>
+                  <th>Seleccionar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+     
+                  	ArrayList<Tbl_tema> listTema = new ArrayList<Tbl_tema>();
+                  	listTema = dttema.listarTemasTutor(id_tutor);
+                  	
+                  	        		
+                  	for(Tbl_tema tem : listTema)
+                  	{
+                %>
+	                <tr>
+	                  <td><%=tem.getTema()%></td>
+	                  <td id ="<%=tem.getId()%>">
+	                  <a href="#"onclick="seleccionaGrupo('<%=tem.getId()%>');"><i class="fas fa-check" title="Seleccionar"></i></a>
+	                 
+	                  </td>
+	                </tr>
+	             <%
+	        		}  
+                	
+	             %>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          </div>
+        <!-- /.col -->
       
-      <!-- tabla de actividades cronograma -->
-      <div class="col-12">
+      <!-- tabla de roles -->
+      <div class="col-7">
           <div class="card">
             <div class="card-header">
                <h2>Seleccionar actividad del cronograma</h2>
@@ -207,7 +254,7 @@
       
 		         <div class="row">
 		         
-			         <div class="col-sm-12">
+			         <div class="col-sm-6">
 			         
 				         <div class="form-group">
 				                <label for="tituloTarea">Título tarea:</label>
@@ -235,13 +282,10 @@
 			         	</div>
 			         	
 			         </div>
-	            <input type="hidden" id="id_actividad" name="id_actividad" required>
-	            <input type="hidden" id="opc" name="opc" value="2">
-	            <input type="hidden" id="id_grupo" name="id_grupo" value="<%=id_tema%>">
-            
+         
          
          	 </div>
-         	 <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar</button>
+         	 <button type="button" class="btn btn-primary" onclick="guardarTareaGrupal()">Guardar</button>
 	         <button type="reset" class="btn btn-danger" onclick="limpiarCampos()">Cancelar</button>
          </div>
        </div>
@@ -253,39 +297,26 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  	<!-- Footer -->
+  
+  <!-- Footer -->
   	<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
-  	<!-- ./Footer -->
-  	
+  <!-- ./Footer -->
+  
+  
+  
 </div>
 <!-- ./wrapper -->
 
+
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
+<!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery UI -->
-<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../dist/js/demo.js"></script> -->
-
-<!-- datepicker -->
-<script src="../../plugins/date-picker/datepicker.js"></script>
-<script src="../../plugins/date-picker/datepicker.es.js"></script>
-
 
 <!-- date-range-picker -->
 <script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-
-<!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-
 <!-- DATATABLE NEW -->
   <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
 
@@ -303,11 +334,17 @@
   <!-- js DATATABLE NEW buttons excel -->
   <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
 
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
 
+<!-- jAlert js -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  <script src="./js/newtarea.js" defer></script>
-
-
+  <script src="./js/tarea_grupal.js" defer></script>
 
 <script>
 
@@ -329,9 +366,48 @@
 
 </script>
 
+<script>
+
+
+function deleteOpcion(id_rol, id_opcion)
+{
+	
+	  $.jAlert({
+		    'type': 'confirm',
+		    'confirmQuestion': '¿Está seguro de eliminar la opción del rol seleccionado?',
+		    'onConfirm': function(e, btn){
+		     e.preventDefault();
+		     window.location.href="../../SL_rol_opcion?id_opcion="+id_opcion+"&id_rol="+id_rol;
+		     btn.parents('.jAlert').closeAlert();
+		    },
+		    'onDeny': function(e, btn){
+		      e.preventDefault();
+		      btn.parents('.jAlert').closeAlert();
+		    }
+		  });
+	
+}
+</script>
+
 
 <script>
-  
+  $(function () {
+    $('#Tbl_opciones').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+        'pdf',
+        'excel',
+        'print'
+        ]
+      });
+    
+    $("#Tbl_opciones").css({
+        "border": "none",
+        "padding-top": "20px",
+      })
+      $("tr").css({"height": "49px"})
+  });
+  	
   $(function () {
 	  
 	  $('#Tbl_rol').DataTable({
@@ -347,10 +423,25 @@
   
 </script>
 
+
+<script>
+//para ver los detalles 
+function detalleRol(id_rol){
+ 
+	window.location.href="../../pages/seguridad/tbldetalle_rolp.jsp?id_rol="+id_rol;	
+	
+}
+</script>
+
+
 <script>
   $(document).ready(function ()
   {
 
+		$('#dateRange').daterangepicker({
+		    "locale": local
+		})
+		 
     /////////// VARIABLES DE CONTROL MSJ ///////////
     var nuevo = 0;
     nuevo = "<%=mensaje%>";
@@ -385,7 +476,5 @@
     
   });
   </script>
-
 </body>
-
 </html>

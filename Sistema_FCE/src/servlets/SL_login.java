@@ -48,7 +48,7 @@ public class SL_login extends HttpServlet {
 		String login = "";
 		String contrasena = "";
 		int id_rol = 0;
-		
+		int id_usuario = 0;
 		
 		//obtenemos la info para 
 		//verificar si el usuario existe
@@ -61,10 +61,11 @@ public class SL_login extends HttpServlet {
 			
 			if(dtus.dtverificarLogin(login, contrasena, id_rol))	{
 				
+				id_usuario = dtus.obtenerIDUser(login);
 				
 				HttpSession hts = null;
 				// creando atributos del login
-				hts = this.crearAtributos(request, login, id_rol);
+				hts = this.crearAtributos(request, login, id_rol, id_usuario);
 				// guardar opciones
 				this.guardarOpciones(hts, id_rol);
 				
@@ -84,12 +85,13 @@ public class SL_login extends HttpServlet {
 		
 	}
 	
-	public HttpSession crearAtributos(HttpServletRequest request,String login, int id_rol ) {
+	public HttpSession crearAtributos(HttpServletRequest request,String login, int id_rol, int id_usuario ) {
 		//creando sesion si es necesaria 
 		//o obtener session activa
 		HttpSession hts = request.getSession(true);
 		hts.setAttribute("login", login);
 		hts.setAttribute("id", id_rol);
+		hts.setAttribute("idUsuario", id_usuario );
 		
 		return hts;
 	}

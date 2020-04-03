@@ -114,23 +114,30 @@ public class SL_tema extends HttpServlet {
 				//obtenemos el id del tema, para guardar en la tabla tema usuario
 				int idTema = dtema.obtenerIdTema(nombreTema);
 				
-				//guardamos en un arraylist el id del usuario (segun el carne) y el id tema
-				for(int i  = 0; i < carnes.length; i++) {
+				//si guardamos el temaCronograma
+				if( dtema.asignarTemaCronograma(idTema) ) {
 					
-					int idUser = dtus.obtenerIDUser(carnes[i]);
-					//seteamos en el objeto el id del usuario, al obtenerlo de la funcion al que le mandamos el carne
-					Tbl_usuario_tema tust = new Tbl_usuario_tema();
-					tust.setId_usuario(idUser);
-					tust.setId_tema(idTema);
-					usuariosTema.add(tust);
-				}
-				
-				if(dtema.guardarUsuariosTema(usuariosTema)) {
-					response.sendRedirect("sistema.jsp?msj=1");
-					return;
-				}else {
-					response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
-					return;
+					//guardamos en un arraylist el id del usuario (segun el carne) y el id tema
+					for(int i  = 0; i < carnes.length; i++) {
+						
+						int idUser = dtus.obtenerIDUser(carnes[i]);
+						//seteamos en el objeto el id del usuario, al obtenerlo de la funcion al que le mandamos el carne
+						Tbl_usuario_tema tust = new Tbl_usuario_tema();
+						tust.setId_usuario(idUser);
+						tust.setId_tema(idTema);
+						usuariosTema.add(tust);
+					}
+					
+					if(dtema.guardarUsuariosTema(usuariosTema)) {
+						
+						
+						response.sendRedirect("sistema.jsp?msj=1");
+						return;
+					}else {
+						response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
+						return;
+					}
+					
 				}
 				
 			}else {				

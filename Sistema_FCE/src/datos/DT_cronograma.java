@@ -348,7 +348,7 @@ public class DT_cronograma {
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
 
-			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_actividad_cronograma where id_cronograma = ? AND estado <> 3 "
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_actividad_cronograma where id_cronograma = ? AND estado <> 3 ORDER BY fecha_inicio ASC, fecha_fin ASC "
 					+ "ORDER BY fecha_inicio asc",
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
@@ -504,6 +504,38 @@ public class DT_cronograma {
 		
 		return limites;
 	}
+	
+	//obtenemos el id del cronograma en dependencia de la fecha de hoy del servidor de bd, validando que esté entre el rango de inicio y fin del cronograma
+	public int obtenerIdCronogramaFechas()
+	{
+		int id_cronograma = 0;
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT id FROM tbl_cronograma WHERE current_date between fecha_inicio and fecha_fin AND estado <> 3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsCronograma = ps.executeQuery();
+			
+			if(rsCronograma.next())
+			{
+				id_cronograma = rsCronograma.getInt("id");
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerIdcronogramaFechas "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return id_cronograma;
+	}
+	
 	
 	
 }

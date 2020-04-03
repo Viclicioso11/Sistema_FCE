@@ -4,7 +4,7 @@ public class Tbl_detalle_grupo_tarea {
 	
 	//ATRIBUTOS
 	private int id;
-	private int id_detalle_grupo_tarea;
+	private int id_tema;
 	private int id_tarea;
 	private int estado;
 	
@@ -18,12 +18,7 @@ public class Tbl_detalle_grupo_tarea {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getId_detalle_grupo_tarea() {
-		return id_detalle_grupo_tarea;
-	}
-	public void setId_detalle_grupo_tarea(int id_detalle_grupo_tarea) {
-		this.id_detalle_grupo_tarea = id_detalle_grupo_tarea;
-	}
+	
 	public int getId_tarea() {
 		return id_tarea;
 	}
@@ -35,6 +30,12 @@ public class Tbl_detalle_grupo_tarea {
 	}
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	public int getId_tema() {
+		return id_tema;
+	}
+	public void setId_tema(int id_tema) {
+		this.id_tema = id_tema;
 	}
 
 
