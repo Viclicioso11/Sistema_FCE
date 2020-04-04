@@ -24,7 +24,7 @@ import datos.DT_usuario_tema;
  * Servlet implementation class SL_tema
  */
 @WebServlet("/SL_tema")
-@MultipartConfig(location="C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema")
+@MultipartConfig(location="C:\\glassfish5\\glassfish\\domains\\domain1\\applications\\Sistema_FCE\\archivo_tema")
 public class SL_tema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -106,7 +106,7 @@ public class SL_tema extends HttpServlet {
 			
 			//guardamos en el objeto la url del archivo
 			
-			url = "C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema\\"+nombreArchivo;
+			url = "C:\\glassfish5\\glassfish\\domains\\domain1\\applications\\Sistema_FCE\\archivo_tema"+nombreArchivo;
 			tema.setUrl(url);
 			//guardamos el tema
 			if(dtema.guardarTema(tema)) {

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import datos.DT_rol;
 import datos.DT_usuario;
+import entidades.Tbl_usuario;
 import entidades.Vw_rol_opcion;
 
 /**
@@ -49,6 +50,7 @@ public class SL_login extends HttpServlet {
 		String contrasena = "";
 		int id_rol = 0;
 		int id_usuario = 0;
+		Tbl_usuario tus = new Tbl_usuario();
 		
 		//obtenemos la info para 
 		//verificar si el usuario existe
@@ -63,9 +65,11 @@ public class SL_login extends HttpServlet {
 				
 				id_usuario = dtus.obtenerIDUser(login);
 				
+				tus = dtus.obtenerNombreUsuario(login);
+				
 				HttpSession hts = null;
 				// creando atributos del login
-				hts = this.crearAtributos(request, login, id_rol, id_usuario);
+				hts = this.crearAtributos(request, login, id_rol, id_usuario, tus);
 				// guardar opciones
 				this.guardarOpciones(hts, id_rol);
 				
@@ -85,13 +89,16 @@ public class SL_login extends HttpServlet {
 		
 	}
 	
-	public HttpSession crearAtributos(HttpServletRequest request,String login, int id_rol, int id_usuario ) {
+	public HttpSession crearAtributos(HttpServletRequest request,String login, int id_rol, int id_usuario, Tbl_usuario usuario ) {
 		//creando sesion si es necesaria 
 		//o obtener session activa
+		
 		HttpSession hts = request.getSession(true);
 		hts.setAttribute("login", login);
 		hts.setAttribute("id", id_rol);
 		hts.setAttribute("idUsuario", id_usuario );
+		hts.setAttribute("nombre", usuario.getNombres());
+		hts.setAttribute("apellido",usuario.getApellidos());
 		
 		return hts;
 	}

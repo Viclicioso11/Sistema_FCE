@@ -2,6 +2,10 @@
   	String loginUser = "";
   	String rolIdTexto = session.getAttribute("id").toString();
   	
+  	
+  	String nombre = session.getAttribute("nombre").toString();
+  	String apellido = session.getAttribute("apellido").toString();
+  	
   	loginUser = (String) session.getAttribute("login");
   	loginUser = loginUser==null?"":loginUser;
   	
@@ -11,6 +15,13 @@
   		rol_id = Integer.parseInt(rolIdTexto);
     }
   	
+  	char letraNombre = ' ';
+  	if(nombre.charAt(0) == ' ') {
+  		letraNombre = nombre.toUpperCase().charAt(1);
+  	}else {
+  		letraNombre =  nombre.toUpperCase().charAt(0);
+  	}
+  		
   	%>
 
 
@@ -29,10 +40,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/letrasNombre/letra<%=letraNombre%>.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block" id="">Bienvenido: <%=loginUser %></a>
+          <a href="#" class="d-block" id=""><%=nombre%> <%=apellido%></a>
         </div>
       </div>
 
@@ -56,13 +67,13 @@
           
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fas fa-book"></i>
+              <i class="fas fa-graduation-cap"></i>
               <p>
                 Inscripción
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <!-- sub nav -->
+            <!-- sub nav --> 
             <ul class="nav nav-treeview">
             
               <li class="nav-item">

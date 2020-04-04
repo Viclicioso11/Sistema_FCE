@@ -509,4 +509,40 @@ public class DT_usuario
 		
 		return existe;
 	}	
+	
+	// Metodo para obtener el nombre y el apellido de un usuario separados
+	public Tbl_usuario obtenerNombreUsuario(String carne)
+	{
+		Tbl_usuario usuario = new Tbl_usuario();
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement("SELECT nombres, apellidos from tbl_usuario where carne = ? and estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, carne);
+			
+			rsUsuario = ps.executeQuery();
+			
+			if(rsUsuario.next())
+			{
+				usuario.setNombres(rsUsuario.getString("nombres"));;
+				usuario.setApellidos(rsUsuario.getString("apellidos"));
+			}
+			
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerNombreUsuario() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return usuario;
+	}
+	
+	
 }

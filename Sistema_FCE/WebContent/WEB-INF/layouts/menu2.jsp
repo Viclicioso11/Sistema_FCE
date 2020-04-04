@@ -8,6 +8,8 @@
      <%
   	String loginUser = "";
   	String rolIdTexto = session.getAttribute("id").toString();
+  	String nombre = session.getAttribute("nombre").toString();
+  	String apellido = session.getAttribute("apellido").toString();
   	
   	loginUser = (String) session.getAttribute("login");
   	loginUser = loginUser==null?"":loginUser;
@@ -28,7 +30,7 @@
            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Bienvenido: <%=loginUser %></a>
+          <a href="#" class="d-block"><%=nombre%> <%=apellido%></a>
         </div>
       </div>
 
