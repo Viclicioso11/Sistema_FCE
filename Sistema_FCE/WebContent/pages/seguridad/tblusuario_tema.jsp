@@ -6,7 +6,7 @@
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
 	
-	//objetos para el login
+	/* //objetos para el login
     String loginUser = "";
 	loginUser = (String) session.getAttribute("login");
 	loginUser = loginUser == null ? "":loginUser;
@@ -38,7 +38,7 @@
 	if(!permiso) {
 		response.sendRedirect("../../Error.jsp");
 		return;
-	}
+	} */
 %>
 
     

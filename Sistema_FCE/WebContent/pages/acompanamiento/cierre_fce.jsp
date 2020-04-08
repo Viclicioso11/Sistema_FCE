@@ -7,14 +7,17 @@
 <%
  String idtema = request.getParameter("idtema");
  
+ 
  if (idtema == null){
 	 response.sendRedirect("../../Error.jsp");
 	 return;
  }
- 
+  
  DT_cierre dtCierre = new DT_cierre();
  boolean cierre = dtCierre.tieneCierre(Integer.parseInt(idtema));
 %>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -109,6 +112,7 @@
 <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 <!-- dropfile -->
 <%if(!cierre){//si esta FCE no se ha cerrado %>
+
 <script src="../../plugins/dropfile/file-drop.js"></script>
 <%}// si esta FCE ya se ha cerrado %>
 

@@ -434,10 +434,10 @@
 	        success: function(msg){
 	        	
 	        	if(msg == "2"){
-	        		warningAlert('Error', 'Tutor no v�lido o no disponible');
+	        		warningAlert('Error', 'Tutor no valido o no disponible');
 	        	}
 	        	else{
-	        		successAlert('�xito', 'Tutor Asignado: '+ msg);
+	        		successAlert('valido', 'Tutor Asignado: '+ msg);
 	        		$("#" + tutorfieldId).html(msg)
 	           	 
 	        	}

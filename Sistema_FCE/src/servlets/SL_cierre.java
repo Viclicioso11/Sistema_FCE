@@ -106,7 +106,7 @@ public class SL_cierre extends HttpServlet {
 				
 				if(name != "false" && this.archivoAdmitido(name)) {
 					this.nombreArchivo = "archivofinal_tema" + idtema + "_" + name;
-					part.write(name);
+					part.write(this.nombreArchivo);
 					verificado = true;
 				} 
 			}

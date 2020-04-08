@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import entidades.Tbl_tema;
-import entidades.Tbl_usuario;
-import entidades.Tbl_usuario_tema;
+import entidades.*;
 
 
 
@@ -435,4 +433,87 @@ public class DT_tema {
 		
 		return existe;
 	}
+	
+	public ArrayList<vw_tema_tutor> obtenertemasaval(int id_tema)
+	{
+		
+		 ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_tutor where id_tema = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id_tema);
+			rsTema = ps.executeQuery();
+			
+			while(rsTema.next())
+			{
+				vw_tema_tutor te  = new vw_tema_tutor();
+				te.setFecha(rsTema.getString("fecha"));
+				te.setPalabras_claves(rsTema.getString("palabras_claves"));
+				te.setId_tutor(rsTema.getInt("id_tutor"));
+				te.setNombre_tutor(rsTema.getString("nombre_tutor"));
+				te.setApellido_tutor(rsTema.getString("apellido_tutor"));
+				te.setCarrera(rsTema.getString("carrera"));
+				te.setAmbito(rsTema.getString("ambito"));
+				te.setTipo_fce(rsTema.getString("tipo_fce"));
+				te.setId_tema(rsTema.getInt("id_tema"));
+				te.setTema(rsTema.getString("tema"));
+				aval.add(te);
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerTemas() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return aval;
+	}
+	
+	//Metodo para retornar el un objeto creado de la sesion
+		public vw_tema_tutor tutoraval(int idtema)
+		{
+			vw_tema_tutor ttur  = new vw_tema_tutor();
+			try
+			{
+				//Getting connection thread, important!
+				Connection con = connectionP.getConnection();
+				
+				PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_tutor where id_tema = ? ", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, idtema);
+				rsTema= ps.executeQuery();
+				if(rsTema.next())
+				{
+					ttur.setFecha(rsTema.getString("fecha"));
+					ttur.setPalabras_claves(rsTema.getString("palabras_claves"));
+					ttur.setId_tutor(rsTema.getInt("id_tutor"));
+					ttur.setNombre_tutor(rsTema.getString("nombre_tutor"));
+					ttur.setApellido_tutor(rsTema.getString("apellido_tutor"));
+					ttur.setCarrera(rsTema.getString("carrera"));
+					ttur.setAmbito(rsTema.getString("ambito"));
+					ttur.setTipo_fce(rsTema.getString("tipo_fce"));
+					ttur.setId_tema(rsTema.getInt("id_tema"));
+					ttur.setTema(rsTema.getString("tema"));
+				}
+				// Closing connection thread, very important!
+				connectionP.closeConnection(con);
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerUsuarioConfirmado() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return ttur;
+		}
+		
 }

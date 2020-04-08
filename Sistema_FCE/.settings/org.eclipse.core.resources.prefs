@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/Error.jsp=UTF-8
 encoding//WebContent/WEB-INF/layouts/topbar.jsp=UTF-8
+encoding//WebContent/pages/acompanamiento/carta_aval.jsp=UTF-8
 encoding//WebContent/pages/inscripcion/inscripcion_tema.jsp=UTF-8
 encoding//src/datos/DT_correo.java=UTF-8

@@ -124,7 +124,7 @@ public class DT_vw_tema {
 		try {
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM public.vw_tema_tutor", 
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM public.vw_tema_tutor ", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			
@@ -158,5 +158,52 @@ public class DT_vw_tema {
 		
 		
 	}
+	
+	
+	
+	public ArrayList<Vw_tema> listarTemasAval(int idtema){
+		
+		
+		ArrayList<Vw_tema> temas_aval = new ArrayList<Vw_tema>();
+		
+		try {
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM public.vw_tema_tutor where id = ? ", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			
+			rsWvTema = ps.executeQuery();
+			
+			while(rsWvTema.next()) {
+				
+				Vw_tema  vwT = new Vw_tema();
+				
+				vwT.setId_tema(rsWvTema.getInt("id_tema"));
+				vwT.setTema(rsWvTema.getString("tema"));
+				vwT.setFecha(rsWvTema.getString("fecha"));
+				vwT.setPalabras_claves(rsWvTema.getString("palabras_claves"));
+				vwT.setTutor(rsWvTema.getInt("id_tutor"));
+				vwT.setNombre_tutor(rsWvTema.getString("nombre_tutor"));
+				vwT.setApellido_tutor(rsWvTema.getString("apellido_tutor"));
+				vwT.setCarrera(rsWvTema.getString("carrera"));
+				vwT.setAmbito(rsWvTema.getString("ambito"));
+				vwT.setTipo_fce(rsWvTema.getString("tipo_fce"));
+				System.out.println(vwT.getTutor());
+				temas_aval.add(vwT);
+			}
+			
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);			
+			
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return temas_aval;
+		
+		
+	}
+	
+	
 
 }
