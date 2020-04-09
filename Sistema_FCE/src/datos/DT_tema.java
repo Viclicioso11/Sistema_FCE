@@ -438,8 +438,43 @@ public class DT_tema {
 	
 	public ArrayList<vw_tema_tutor> obtenertemasaval(int id_tema)
 	{
+		ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
+		try {
+		Connection con = this.connectionP.getConnection();
+		 
+			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_tutor where id_tema = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id_tema);
+			rsTema = ps.executeQuery();
+			
+			while(rsTema.next())
+			{
+				vw_tema_tutor te  = new vw_tema_tutor();
+				te.setFecha(rsTema.getString("fecha"));
+				te.setPalabras_claves(rsTema.getString("palabras_claves"));
+				te.setId_tutor(rsTema.getInt("id_tutor"));
+				te.setNombre_tutor(rsTema.getString("nombre_tutor"));
+				te.setApellido_tutor(rsTema.getString("apellido_tutor"));
+				te.setCarrera(rsTema.getString("carrera"));
+				te.setAmbito(rsTema.getString("ambito"));
+				te.setTipo_fce(rsTema.getString("tipo_fce"));
+				te.setId_tema(rsTema.getInt("id_tema"));
+				te.setTema(rsTema.getString("tema"));
+				aval.add(te);
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerTemas() "+ e.getMessage());
+			e.printStackTrace();
+		}
 		
-		 ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
+		return aval;
+	}
 
 	//al guardar un tema, asignar el cronograma al que este será asignado
 	
@@ -558,39 +593,7 @@ public class DT_tema {
 	
 
 
-			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_tutor where id_tema = ?", 
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
-					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			ps.setInt(1, id_tema);
-			rsTema = ps.executeQuery();
-			
-			while(rsTema.next())
-			{
-				vw_tema_tutor te  = new vw_tema_tutor();
-				te.setFecha(rsTema.getString("fecha"));
-				te.setPalabras_claves(rsTema.getString("palabras_claves"));
-				te.setId_tutor(rsTema.getInt("id_tutor"));
-				te.setNombre_tutor(rsTema.getString("nombre_tutor"));
-				te.setApellido_tutor(rsTema.getString("apellido_tutor"));
-				te.setCarrera(rsTema.getString("carrera"));
-				te.setAmbito(rsTema.getString("ambito"));
-				te.setTipo_fce(rsTema.getString("tipo_fce"));
-				te.setId_tema(rsTema.getInt("id_tema"));
-				te.setTema(rsTema.getString("tema"));
-				aval.add(te);
-				
-			}
-			// Closing connection thread, very important!
-			connectionP.closeConnection(con);
-		}
-		catch (Exception e)
-		{
-			System.out.println("DATOS: ERROR en obtenerTemas() "+ e.getMessage());
-			e.printStackTrace();
-		}
-		
-		return aval;
-	}
+
 	
 	//Metodo para retornar el un objeto creado de la sesion
 		public vw_tema_tutor tutoraval(int idtema)
@@ -632,3 +635,4 @@ public class DT_tema {
 		}
 		
 }
+
