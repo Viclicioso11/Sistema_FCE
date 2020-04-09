@@ -19,6 +19,12 @@ public class DT_tema_cronograma
 	// Metodo para listar los temas de un tutor disponibles
 	public ArrayList<Vw_tema_cronograma> listar_temas_cronograma(int id_tutor)
 	{
+		
+		DT_cronograma dtcrono = new DT_cronograma();
+		
+		// es el id del cronograma actual
+		int id_cronograma = dtcrono.obtenerIdCronogramaFechas();
+		
 		ArrayList<Vw_tema_cronograma> listaTemaCronograma = new ArrayList<Vw_tema_cronograma>();
 		
 		try
@@ -26,10 +32,11 @@ public class DT_tema_cronograma
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
 
-			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_cronograma where id_tutor = ? AND estado_tema = 1  AND estado_cronograma = 1", 
+			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_cronograma where id_tutor = ? AND estado_tema = 1  AND id_cronograma = ?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 					ps.setInt(1, id_tutor);
+					ps.setInt(2, id_cronograma);
 					
 			rsTemaCronograma = ps.executeQuery();
 			while(rsTemaCronograma.next())

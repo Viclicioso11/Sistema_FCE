@@ -16,6 +16,7 @@ public class DT_tema {
 	ConnectionPooling connectionP = ConnectionPooling.getInstance();
 	private ResultSet rsTema;
 	Calendar cal = Calendar.getInstance();
+	DT_cronograma dtcronogra = new DT_cronograma();
 	
 	public boolean guardarTema(Tbl_tema tem)
 	{
@@ -403,6 +404,7 @@ public class DT_tema {
 			
 	}
 	
+ 
 	/**
 	 * Verificar si existe tema
 	 * 
@@ -438,10 +440,123 @@ public class DT_tema {
 	{
 		
 		 ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
+
+	//al guardar un tema, asignar el cronograma al que este será asignado
+	
+	public boolean asignarTemaCronograma(int id_tema) {
+		
+		//obtenemos el id del cronograma en dependencia de la fecha de inscripcion respecto a inicio o fin de un cronograma
+		
+		int id_cronograma = dtcronogra.obtenerIdCronogramaFechas();
+			
+		
+
+		boolean asignado = false;
+		try {
+			
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT * from public.tbl_tema_cronograma	", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			
+			rsTema = ps.executeQuery();
+			
+			rsTema.moveToInsertRow();
+			rsTema.updateInt("id_cronograma", id_cronograma);
+			rsTema.updateInt("id_tema", id_tema);
+				
+			rsTema.insertRow();
+			rsTema.moveToCurrentRow();
+			
+			asignado = true;
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return asignado;
+			
+	}
+
+	
+	public ArrayList<Tbl_tema> listarTemasTutor(int id_tutor) {
+		
+		ArrayList<Tbl_tema> listaTemas = new ArrayList<Tbl_tema>();
+		
+		try {
+			
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT * from public.tbl_tema WHERE tutor = ? AND estado <> 3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id_tutor);
+			
+			rsTema = ps.executeQuery();
+			
+			while ( rsTema.next() ) {
+				
+				Tbl_tema tbtema = new Tbl_tema();
+				
+				tbtema.setId(rsTema.getInt("id"));
+				tbtema.setTema(rsTema.getString("tema"));
+				
+				listaTemas.add(tbtema);
+				
+			}
+			
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return listaTemas;	
+		
+	}
+	
+	//retorna los nombres y apellidos de los estudiantes y sus carne
+	public String obtenerNombreTema(int id_tema)
+	{
+		
+		String nombre = "";
+
 		try
 		{
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
+
+
+			PreparedStatement ps = con.prepareStatement("SELECT tema from tbl_tema  where id = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id_tema);
+			rsTema = ps.executeQuery();
+			
+			if(rsTema.next())
+			{
+				nombre = rsTema.getString("tema");
+				
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerEstudiantes() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return nombre;
+	}
+	
+
 
 			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema_tutor where id_tema = ?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 

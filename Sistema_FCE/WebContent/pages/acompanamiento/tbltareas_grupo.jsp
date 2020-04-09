@@ -66,9 +66,17 @@
    mensaje = request.getParameter("msj");
    mensaje = mensaje==null ? "":mensaje;
    
+   DT_tema dtma = new DT_tema();
    
-   int id_tutor = 34;
- 
+   int id_tema = 0;
+   String nombre_tema = "";
+   String id_temaCad = request.getParameter("id_tem");
+   if(id_temaCad != null) {
+	   id_tema = Integer.parseInt(id_temaCad);
+	   nombre_tema = dtma.obtenerNombreTema(id_tema);
+   }
+   
+   
 %>
 
 <!DOCTYPE html>
@@ -125,12 +133,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Temas de FCE</h1>
+            <h1>Gestión de tareas de <%=nombre_tema%></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"></a>Inscripción</li>
-              <li class="breadcrumb-item active">Gestión de Cronograma</li>
+              <li class="breadcrumb-item"><a href="#"></a>Gestión temas tutoría</li>
+              <li class="breadcrumb-item active">Gestión tareas tema</li>
             </ol>
           </div>
         </div>
@@ -143,7 +151,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="../inscripcion/newtarea.jsp?id_tema=&id_cronograma">Crear Tarea <i class="fas fa-plus-circle"></i></a>	
+              <a href="../acompanamiento/newtarea.jsp?id_tem=<%=id_tema%>">Crear Tarea <i class="fas fa-plus-circle"></i></a>	
             </div>
               
             <!-- /.card-header -->
@@ -153,35 +161,66 @@
             
 	            <ul class="list-group">
 	            <%
-	                	DT_tema_cronograma dtc = new DT_tema_cronograma();
+	                	DT_grupo_tarea dttar = new DT_grupo_tarea();
 	         	        				
-	         	        //TemasS para mostrar los temas sin tutor
-	         	       	ArrayList<Vw_tema_cronograma> temas = new  ArrayList<Vw_tema_cronograma> ();
-	         	       	temas = dtc.listar_temas_cronograma(id_tutor);
+	         	        //mostrando las tareas asignadas a un grupo
+	         	       	ArrayList<Vw_tema_tarea> tareas = new  ArrayList<Vw_tema_tarea> ();
+	         	       	tareas = dttar.listarTareasGrupo(id_tema);
 	      	        	
-	      	        	for(Vw_tema_cronograma vtc : temas)	{
+	      	        	for(Vw_tema_tarea vttar : tareas)	{
 	      	        		
 	               	%>
 	               	<li class = "list-group-item ">
 	               		<div class = "row-fluid"> 
 		               		<div class = "col-md-6">
-		               			<a class="ref-color" href="../../pages/acompanamiento/tbltareas_grupo.jsp?id_tema=1"><i class="fas fa-file-word"></i>  <%=vtc.getTema()%> del <%=vtc.getDescripcion_cronograma()%></a>	
+		               			<a class="ref-color" href="../../pages/acompanamiento/editTarea.jsp?id_tarea=<%=vttar.getTarea_id()%>&id_tema=<%=vttar.getTema_id()%>"><i class="fas fa-file-word"></i> <%=vttar.getTitulo_tarea()%></a>
+		               			<p><%=vttar.getDescripcion_tarea()%></p>	
 		               		</div>
 		               		
 		               		<div class = "col-md-3">
 		               			<div class="form-group">
-			           				<select onchange="cambiarVista()" class="form-control select2" id="vistas" name="vistas" style="width: 100%;" required="required">
+			           				<select onchange="editarEstado('<%=vttar.getTarea_id()%>')" class="form-control select2" id="estadoTarea" name="estadoTarea" style="width: 100%;" required>
+			           				<%
+			           				if(vttar.getEstado() == 0) {
+			           				%>
+			           				  <option selected value="0">Pendiente</option>
+			           				<% 
+			           				} else {
+			           				%>
 			           				  <option value="0">Pendiente</option>
+			           				<% }%>
+			           				
+			           				<%
+			           				if(vttar.getEstado() == 1) {
+			           				%>
+			           				  <option selected value="1">Entregada</option>
+			           				<% 
+			           				} else {
+			           				%>
 			           				  <option value="1">Entregada</option>
-			           				  <option value="2">Retrasada</option>		
+			           				<% }%>
+			           				<%
+			           				if(vttar.getEstado() == 2) {
+			           				%>
+			           				  <option selected value="2">Retrasada</option>	
+			           				<% 
+			           				} else {
+			           				%>
+			           				  <option value="2">Retrasada</option>	
+			           				<% }%>
+			           				  
+			           				  	
            				  
            							</select>
         						</div>	
 		               		</div>
 		               		
+		               		<input type="hidden" id="id_tem" name = "id_tem" value="<%=id_tema%>">
+		               		<input type="hidden" id="opc" name = "opc" value="2">
+		               		
 		               		<div class = "col-md-3">
 		               			
-		               			<button class="btn btn-danger" type="button" onClick="s">Eliminar</button>
+		               			<button class="btn btn-danger" type="button" onClick="eliminarTareaGrupo('<%=vttar.getTarea_id()%>')">Eliminar</button>
 		               			
 		               		</div>
 			                 
@@ -251,28 +290,32 @@
 <!-- jAlert js -->
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-
-<script>
-	function linkVercro(idcro){
-		
-		window.location.href="../../pages/inscripcion/verCronograma.jsp?id_cronograma="+idcro;
-	}
-
-</script>
-
-<script>
-	function addActividad(idcro){
-		
-		window.location.href="../../pages/inscripcion/verCronograma.jsp?cronogramaID="+idcro;
-	}
-
-</script>
+  
+  <!--  js de la carpeta js local -->
+  <script src="./js/tbltareas.js" defer></script>
 
 
 <script>
-	function linkEditarcro(idcro){
-		window.location.href="../../pages/inscripcion/editCronograma.jsp?id_cronograma="+idcro;
-	}
+function eliminarTareaGrupo(idTarea) {
+	
+	let idTema = <%=id_tema%>;
+	let opc = $("#opc").val();
+	//lo mandamos al opc 2 del switch
+	let redireccionar = "../../SL_tarea?opc=" + opc + "&tema=" + idTema + "&tarea="+idTarea;
+	
+	$.jAlert({
+	    'type': 'confirm',
+	    'confirmQuestion': '¿Está seguro de eliminar esta tarea de este grupo?',
+	    'onConfirm': function(e, btn){
+	      	e.preventDefault();
+    		window.location.href= redireccionar;
+	    },
+	    'onDeny': function(e, btn){ e.preventDefault();}
+	  }
+    );
+	
+	
+}
 </script>
 
 <script>
@@ -294,54 +337,6 @@
    errorAlert('Error', 'El registro no se ha podido eliminar.')
    
    
-   
-   var idTema = 0
-   var tutorfieldId = ""
-   
- function setIdTema(id, id2){
-	idTema = id
-	tutorfieldId = id2
-	console.log(idTema, tutorfieldId)
- }
- 
- function setTutor(){
-	 
-	 let tutor = $("#tutor").val()
-	 let tema = idTema;
-	 
-	 console.table({tutor: tutor, temaId: tema})
-	 /*
-	 *	hacer la funcion con ajax, post, 
-	 *	y mandar tutor y tema y depues es logica tuya xd 
-	 */
-	 $.ajax({
-	        type: "GET",
-	        url: "../../SL_vw_Tema",
-	        data:{tutorId: tutor, temaId: tema} ,
-	        contentType : "application/json",
-	        error : function(){ 
-	        	errorAlert('ERROR', 'Contacte con administrador de sitio');
-	        },
-	        success: function(msg){
-	        	
-	        	if(msg == "2"){
-	        		warningAlert('Error', 'Tutor no válido o no disponible');
-	        	}
-	        	else{
-	        		successAlert('Éxito', 'Tutor Asignado: '+ msg);
-	        		$("#" + tutorfieldId).html(msg)
-	           	 
-	        	}
-	        	 
-	        }
-	    });   
-	/*
-		se pone en el la tabla el tutor
-	*/
-	
-	
- }
- 
 </script>
 
 </body>

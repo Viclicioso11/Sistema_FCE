@@ -7,9 +7,19 @@
     </a>
      <%
   	String loginUser = "";
-  	int rolId = 0;
+  	String rolIdTexto = session.getAttribute("id").toString();
+  	String nombre = session.getAttribute("nombre").toString();
+  	String apellido = session.getAttribute("apellido").toString();
+  	
   	loginUser = (String) session.getAttribute("login");
   	loginUser = loginUser==null?"":loginUser;
+  	
+  	int rol_id = 0;
+  	
+  	if(rolIdTexto != null) {
+  		rol_id = Integer.parseInt(rolIdTexto);
+    }
+  	
   	%>
 
     <!-- Sidebar -->
@@ -20,7 +30,7 @@
            <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Bienvenido: <%=loginUser %></a>
+          <a href="#" class="d-block"><%=nombre%> <%=apellido%></a>
         </div>
       </div>
 
@@ -87,6 +97,19 @@
                 </a>
               </li>
             </ul>
+            <% //si es tutor
+              if (rol_id == 3) {%>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+              
+                <a href="../acompanamiento/tblgrupos_fce.jsp" class="nav-link">
+                
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gestión Tutorías</p>
+                </a>
+              </li>
+            </ul>
+            <% } %>
           </li>
           
           

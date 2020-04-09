@@ -61,25 +61,35 @@
 	
 	DT_cronograma dtcrono = new DT_cronograma();
 	DT_tema dtma = new DT_tema();
+	//para traer la info de la tarea
+	Tbl_tarea ttar = new Tbl_tarea();
+	DT_grupo_tarea dtgru = new DT_grupo_tarea();
 	
 	// es el id del cronograma actual
 	int id_cronograma = dtcrono.obtenerIdCronogramaFechas();
 	
 	//para obtener el id del tema al cual asignar la nueva tarea
-	String nombre_tema = "";
 	
+	String id_tarea_texto = "";
+	id_tarea_texto = request.getParameter("id_tarea");
+	int id_tarea = 0;
+	
+	if(id_tarea_texto != null) {
+		id_tarea = Integer.parseInt(id_tarea_texto);
+		ttar = dtgru.obtenerInfoTarea(id_tarea);
+		
+	}
+	//para luego de editar volver a las tareas de un tema específico
 	String id_tema_texto = "";
-	id_tema_texto = request.getParameter("id_tem");
+	id_tema_texto = request.getParameter("id_tema");
 	int id_tema = 0;
-	
+
 	if(id_tema_texto != null) {
 		id_tema = Integer.parseInt(id_tema_texto);
-		nombre_tema = dtma.obtenerNombreTema(id_tema);
 	}
+	
+	
 %>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -131,11 +141,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Creación de nueva tarea para <%=nombre_tema %></h1>
+            <h1>Edición de la tarea: <%=ttar.getTitulo() %></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Gestión grupo FCE</a></li>
+              <li class="breadcrumb-item"><a href="#">Gestión tareas de grupo</a></li>
               <li class="breadcrumb-item active">Creación de nueva tarea</li>
             </ol>
           </div>
@@ -145,7 +155,7 @@
 
     <!-- Main content -->
     <section class="content">
-    <form id="formGuardar" action="../../SL_tarea" method="POST">
+    <form id="formEditar" action="../../SL_tarea" method="POST">
       <div class="row">
       
       
@@ -178,8 +188,8 @@
 	                  <td><%=tcrom.getNombre()%></td>
 	                  <td><%=tcrom.getFecha_inicio()%></td>
 	                  <td><%=tcrom.getFecha_fin()%></td>
-	                  <td id ="act<%=tcrom.getId()%>" onclick="setFechasLimites('<%=tcrom.getFecha_inicio()%>','<%=tcrom.getFecha_fin()%>', 'act<%=tcrom.getId()%>');" title="Seleccionar esta actividad">
-	                  	<a href="#" onclick="setFechasLimites('<%=tcrom.getFecha_inicio()%>','<%=tcrom.getFecha_fin()%>', 'act<%=tcrom.getId()%>');"><i class="fas fa-check"  title="Seleccionar esta actividad"></i></a>
+	                  <td id ="<%=tcrom.getId()%>" onclick="setFechasLimites('<%=tcrom.getFecha_inicio()%>','<%=tcrom.getFecha_fin()%>', '<%=tcrom.getId()%>');" title="Seleccionar esta actividad">
+	                  	<a href="#" onclick="setFechasLimites('<%=tcrom.getFecha_inicio()%>','<%=tcrom.getFecha_fin()%>', '<%=tcrom.getId()%>');"><i class="fas fa-check"  title="Seleccionar esta actividad"></i></a>
 	                  </td>
 	                </tr>
 	             <%
@@ -236,12 +246,13 @@
 			         	
 			         </div>
 	            <input type="hidden" id="id_actividad" name="id_actividad" required>
-	            <input type="hidden" id="opc" name="opc" value="2">
-	            <input type="hidden" id="id_grupo" name="id_grupo" value="<%=id_tema%>">
+	            <input type="hidden" id="opc" name="opc" value="3">
+	            <input type="hidden" id="id_tarea" name="id_tarea" value="<%=id_tarea%>">
+	            <input type="hidden" id="id_tema" name="id_tema" value="<%=id_tema%>">
             
          
          	 </div>
-         	 <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar</button>
+         	 <button type="button" class="btn btn-primary" onclick="editarTarea()">Guardar</button>
 	         <button type="reset" class="btn btn-danger" onclick="limpiarCampos()">Cancelar</button>
          </div>
        </div>
@@ -304,8 +315,8 @@
   <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
 
 
-  
-  <script src="./js/newtarea.js" defer></script>
+  <!-- JS con todas las funciones para el edit-->
+  <script src="./js/editTarea.js" defer></script>
 
 
 
@@ -347,44 +358,52 @@
   
 </script>
 
-<script>
-  $(document).ready(function ()
-  {
 
-    /////////// VARIABLES DE CONTROL MSJ ///////////
-    var nuevo = 0;
-    nuevo = "<%=mensaje%>";
-    if(nuevo == "1")
-    {
-      successAlert('Éxito', 'Registros almacenados correctamente.');
-    }
-    
-    if(nuevo == "2")
-    {
-    	errorAlert('Error', 'El registro no almacenados.');
-    }
-    
-    if(nuevo == "3")
-    {
-      successAlert('Éxito', 'El registro ha sido modificado correctamente.');
-    }
-    
-    if(nuevo == "4")
-    {
-      successAlert('Éxito', 'El registro ha sido eliminado correctamente.');
-    }
-    
-    if(nuevo == "5")
-    {
-      errorAlert('Error', 'El registro no se ha podido eliminar.');
-    }
-    
-    
-    
+<script>
   
-    
-  });
-  </script>
+$(document).ready(function ()
+	    {
+			/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
+	    	//tituloTarea
+	    	//dateRange
+	    	//descripcionTarea
+	    	
+	    	let RangoFechas = ""+formatDate('<%=ttar.getFecha_inicio()%>') + " - " + formatDate('<%=ttar.getFecha_fin()%>');
+	    	
+	    	console.log("<%=ttar.getFecha_inicio()%>");
+			$("#tituloTarea").val("<%=ttar.getTitulo()%>");
+	    	$("#descripcionTarea").val("<%=ttar.getDescripcion()%>");
+	    	
+	    	
+	    	$("#dateRange").val(RangoFechas);
+	    	
+	    	//para que se seleccione la actividad con la que había sido creada la actividad
+	    	
+	    	let elemento = document.getElementById("<%=ttar.getId_actividad_cronograma()%>");
+			elemento.style.backgroundColor = "green";
+	    	
+			seleccionaActividad("<%=ttar.getId_actividad_cronograma()%>");
+			
+	    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
+	     
+	      /////////// VARIABLES DE CONTROL MSJ ///////////
+	      var nuevo = 0;
+	      
+	      nuevo = "<%=mensaje%>";
+
+	      if(nuevo == "2")
+	      {
+	        errorAlert('Error', 'Revise los datos e intente nuevamente.');
+	      }
+	    
+	      
+
+	    });
+  
+</script>
+
+
+
 
 </body>
 

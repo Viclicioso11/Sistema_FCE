@@ -61,13 +61,19 @@
 %>
 
 <%
+	//para saber qué FCE cargarles a cada tutor end ependencia de su id
+	String id_tutor_texto = session.getAttribute("idUsuario").toString();
+		
    /* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
    String mensaje = "";
    mensaje = request.getParameter("msj");
    mensaje = mensaje==null ? "":mensaje;
    
+   int id_tutor = 0;
+   if(id_tutor_texto != null) {
+	   id_tutor = Integer.parseInt(id_tutor_texto);
+   }
    
-   int id_tutor = 34;
  
 %>
 
@@ -76,7 +82,7 @@
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Gestión de Temas de FCE</title>
+  <title>Gestión grupos FCE</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -125,12 +131,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Temas de FCE</h1>
+            <h1>Temas brindando tutoría</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"></a>Inscripción</li>
-              <li class="breadcrumb-item active">Gestión de Cronograma</li>
+              <li class="breadcrumb-item"><a href="../../sistema.jsp">Sistema FCE</a> / <li>
+              <li class="breadcrumb-item active"> Gestión grupos FCE</li>
             </ol>
           </div>
         </div>
@@ -143,34 +149,37 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Temas brindando tutorías</h4>
+              
             </div>
               
             <!-- /.card-header -->
             <div class="card-body">
             
-            	
+            	<a href="../acompanamiento/newtarea_grupal.jsp?id_tema=&id_cronograma">Crear tarea para grupos <i class="fas fa-plus-circle"></i></a>
             
 	            <ul class="list-group">
 	            <%
 	                	DT_tema_cronograma dtc = new DT_tema_cronograma();
+	            		//para el porcentaje
+	            		DT_grupo_tarea dtgrut = new DT_grupo_tarea();
+	            		double porcentaje = 0.0;
 	         	        				
-	         	        //TemasS para mostrar los temas sin tutor
 	         	       	ArrayList<Vw_tema_cronograma> temas = new  ArrayList<Vw_tema_cronograma> ();
 	         	       	temas = dtc.listar_temas_cronograma(id_tutor);
 	      	        	
 	      	        	for(Vw_tema_cronograma vtc : temas)	{
 	      	        		
+	      	        		porcentaje = dtgrut.calcularPorcentajeAvanceFCE(vtc.getId_tema());
 	               	%>
 	               	<li class = "list-group-item ">
 	               		<div class = "row-fluid"> 
 		               		<div class = "col-md-6">
-		               			<a class="ref-color" href="../../pages/acompanamiento/tbltareas_grupo.jsp?id_tema=1"><%=vtc.getTema()%> del <%=vtc.getDescripcion_cronograma()%></a>	
+		               			<a class="ref-color" href="../../pages/acompanamiento/tbltareas_grupo.jsp?id_tem=<%=vtc.getId_tema()%>"><%=vtc.getTema()%> del <%=vtc.getDescripcion_cronograma()%></a>	
 		               		</div>
 			                 
 			                 <div class = "col-md-6"> 
 				                  <div class="progress" >
-			  					  	<div id="barra_progreso" class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+			  					  	<div id="barra_progreso" class="progress-bar" role="progressbar" style="width: <%=porcentaje%>%" aria-valuenow="<%=porcentaje%>" aria-valuemin="0" aria-valuemax="100"><%=porcentaje%>%</div>
 								  </div>
 							  </div>
 		                </div>
@@ -239,6 +248,8 @@
 <!-- jAlert js -->
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  
+  
 
 <script>
 	function linkVercro(idcro){
