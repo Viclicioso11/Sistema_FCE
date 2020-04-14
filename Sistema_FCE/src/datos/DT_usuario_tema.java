@@ -192,5 +192,38 @@ public class DT_usuario_tema {
 		}
 		return eliminado;
 	}
+	
+	//para obtener el id del tema dependiendo del id del usuario
+	public int ibtenerIdTema(int id_usuario)
+	{
+		int id_tema = 0;
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT id_tema from vw_tema_estudiante where id_usuario = ? ", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, id_usuario);
+			
+			rsUsuarioTema = ps.executeQuery();
+			
+			if(rsUsuarioTema.next())
+			{
+				id_tema = rsUsuarioTema.getInt("id_tema");
+				
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en Validar ibtenerIdTema "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return id_tema;
+		
+	}
 
 }

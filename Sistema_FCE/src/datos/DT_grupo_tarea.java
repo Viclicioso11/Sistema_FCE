@@ -235,6 +235,8 @@ public class DT_grupo_tarea {
 					vttar.setDescripcion_tarea(rsTarea.getString("descripcion"));
 					vttar.setTema_id(rsTarea.getInt("tema_id"));
 					vttar.setNombre_tema(rsTarea.getString("tema"));
+					vttar.setFecha_inicio(rsTarea.getDate("fecha_inicio"));
+					vttar.setFecha_fin(rsTarea.getDate("fecha_fin"));
 					
 					listaTareasAsignadas.add(vttar);
 					
@@ -322,7 +324,12 @@ public class DT_grupo_tarea {
 				}
 				connectionP.closeConnection(con);
 				
+				if(totalTareas != 0) {
+				
 				porcentaje = (entregadas * 100) / totalTareas;	
+				
+				}
+				
 				
 			} catch (Exception e) {
 				System.err.println("ERROR cambiarEstadoTarea "+e.getMessage());

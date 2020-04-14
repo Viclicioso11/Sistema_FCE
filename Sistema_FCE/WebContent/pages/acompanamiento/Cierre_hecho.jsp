@@ -17,7 +17,7 @@
 		<p>
 			Ya se ha subido el archivo final para esta Culminación de estudio
 			<br>
-			de no ser así, comuniquise con el administrador del sistema o con su tutor
+			de no ser así, comuníquise con el administrador del sistema o con su tutor
 		</p>
 		
 		<br>
