@@ -322,4 +322,37 @@ public class DT_rol_opcion {
 		return opciones;
 	}
 	
+	
+	public boolean isInOption(ArrayList<Vw_rol_opcion> opciones, String[] valores) {
+		boolean existe = false;
+		
+		System.out.println("array[]");
+		for(Vw_rol_opcion opcion: opciones ) {
+			for(String valor: valores) {
+				if (valor.equals(opcion.getOpcion())) {
+					existe = true;
+					break;
+				}
+			}
+			
+			if(existe)
+				break;
+		}
+		
+		return existe;
+	}
+	
+	public boolean isInOption(ArrayList<Vw_rol_opcion> opciones, String valor) {
+		boolean existe = false;
+		System.out.println("String");
+		for(Vw_rol_opcion opcion: opciones ) {
+			if (valor.equals(opcion.getOpcion())) {
+				existe = true;
+				break;
+			}
+		}
+		
+		return existe;
+	}
+	
 }
