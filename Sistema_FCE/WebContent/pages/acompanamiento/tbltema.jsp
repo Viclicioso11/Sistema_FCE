@@ -198,6 +198,7 @@
 	            <%}%>  
                 </tbody>
               </table>
+               
               </div>
               
               <br/><br/>
@@ -288,7 +289,7 @@
         </div>
         <!-- end modal body -->
         <div class="modal-footer">
-	         <button type="button" class="btn btn-primary" onclick="setTutor()" data-dismiss="modal">Asignar</button>
+	         <button type="button" class="btn btn-primary" onclick="setTutor();"data-dismiss="modal">Asignar</button>
 			 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>  
 	    </div>
         		</div>
@@ -374,23 +375,7 @@
   $("#vista2").css({"display": "none"})
   
   $('#tutor').select2({ theme: 'bootstrap4' })
-  
-      /////////// VARIABLES DE CONTROL MSJ ///////////
- var mensaje =  "<%=mensaje%>"
- if(mensaje == "1")
-   successAlert('�xito', 'El registro ha sido almacenado correctamente.')
  
- if(mensaje == "3")
-   successAlert('�xito', 'El registro ha sido modificado correctamente.')
- 
- if(mensaje == "4")
-   successAlert('�xito', 'El registro ha sido eliminado correctamente.')
- 
- if(mensaje == "5")
-   errorAlert('Error', 'El registro no se ha podido eliminar.')
-   
-   
-   
    var idTema = 0
    var tutorfieldId = ""
    
@@ -439,18 +424,23 @@
 	        	else{
 	        		successAlert('valido', 'Tutor Asignado: '+ msg);
 	        		$("#" + tutorfieldId).html(msg)
-	           	 
 	        	}
-	        	 
+	        	
 	        }
+	        
+
 	    });
 	/*
 		se pone en el la tabla el tutor
 	*/
 	
-	
  }
-   
+ 
+ $('#asignTutor').on('hidden.bs.modal', function () {
+     location.reload();
+});
+
+
  function editTema(idTema){
 	 window.location.href= "../inscripcion/editInscripcion_fce.jsp?temaID="+ idTema;
  }
@@ -466,13 +456,9 @@ function vistatabla(){
 		$("#vista1").fadeOut()
 		$("#vista2").fadeIn()
 	}
-	
-	
-	
-	
-	
+	  
 }
-		
 </script>
+
 </body>
 </html>

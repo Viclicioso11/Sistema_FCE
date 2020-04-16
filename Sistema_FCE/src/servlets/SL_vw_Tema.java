@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.DT_tema;
 
-/*
+
 import entidades.Tbl_usuario;
 import datos.DT_usuario;
 import datos.DT_usuario_rol;
@@ -18,7 +18,7 @@ import datos.DT_vw_rol_usuario;
 import datos.DT_vw_tema;
 import entidades.Vw_tema;
 import entidades.Vw_usuario_rol;
-*/
+
 /**
  * Servlet implementation class SL_vw_Tema
  */
@@ -41,8 +41,8 @@ public class SL_vw_Tema extends HttpServlet {
 		// TODO Auto-generated method stub
 
 
-		//Tbl_usuario tus = new Tbl_usuario();
-		//DT_usuario dtus = new DT_usuario();
+		Tbl_usuario tus = new Tbl_usuario();
+		DT_usuario dtus = new DT_usuario();
 		DT_tema tema = new DT_tema();
 
 		String tutorId = request.getParameter("tutorId");
@@ -55,15 +55,15 @@ public class SL_vw_Tema extends HttpServlet {
 
 			if( tema.asignartutor(tutorId_asignar,temaId_asignar) ){
 
-				//tus = dtus.obtenerNombreTutor(tutorId_asignar);
-				response.getWriter().write("6");
-
+				tus = dtus.obtenerNombreTutor(tutorId_asignar);
+				response.getWriter().write(""+ tus.getNombres());
+				
 			}else{
-				response.getWriter().write("2");
+				response.getWriter().write("error");
 			}
 
 		}else {
-			response.getWriter().write("2 sistema json jajaja");
+			response.getWriter().write("error");
 		}
 	}
 		
