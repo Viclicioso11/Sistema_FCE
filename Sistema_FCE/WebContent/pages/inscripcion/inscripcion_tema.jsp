@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <% 
+/*
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -39,6 +40,7 @@
 		response.sendRedirect("../../Error.jsp");
 		return;
 	}
+	*/
 %>
  
 <%
@@ -119,6 +121,8 @@ mensaje = mensaje==null?"":mensaje;
 	              
 	              <!-- form start -->
 	              <form role="form" name="formulario" action="../../SL_tema" method="post" enctype="multipart/form-data">
+					
+					
 					
 					<div class="card-body">
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->

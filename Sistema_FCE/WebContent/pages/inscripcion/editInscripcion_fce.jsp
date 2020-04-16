@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <% 
+/*
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -39,6 +40,7 @@
 		response.sendRedirect("../../Error.jsp");
 		return;
 	}
+	*/
 %>
 
  
@@ -163,6 +165,7 @@ System.out.println(ttma.getUrl());
 						<!-- -->
 					<div class="row">
 
+						
 				       <div class="col-sm-10">
 				        <div class="form-group">
 				        	<label for="exampleInputFile">Propuesta de Forma de Culminación de Estudios:</label>
@@ -175,14 +178,14 @@ System.out.println(ttma.getUrl());
 				        	
 				        </div>
 				       </div>
-				      <!-- 
+				      
 				       <div class="col-sm-2">
 				        <div class="form-group">
 				        	<a href="<%= ttma.getUrl()%>">Descargar Propuesta <i class="fas fa-file-download"></i></a>
 	                    </div>
 	                    
 				     </div>
-	                -->
+	                
 	                </div> 
 					
 						
