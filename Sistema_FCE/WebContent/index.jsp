@@ -27,7 +27,7 @@
 
 	<style type="text/css">
 		#body{
-			background-image: url("./dist/img/estudiantes.png");
+			background-image: url("./dist/img/bg-login.jpg");
 			background-size: cover;
 			background-position: center center;
 		}
@@ -55,7 +55,7 @@ mensaje = mensaje==null?"":mensaje;
 <body id="body">
 
 <div class="login-box">
-  <div class="login-logo">
+  <div class="login-logo" style="background-color: #062844">
     <a href="#" style="color: #fff"><b>Sistema de Control FCE</b></a>
   </div>
   <!-- /.login-logo -->

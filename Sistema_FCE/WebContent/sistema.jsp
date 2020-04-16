@@ -72,7 +72,7 @@
   <!-- /.navbar -->
 
   <!-- SIDEBAR -->
-  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu-d-1.jsp"></jsp:include>
   <!-- SIDEBAR -->
 
   <!-- Content Wrapper. Contains page content -->

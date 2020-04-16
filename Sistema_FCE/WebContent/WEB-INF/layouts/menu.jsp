@@ -56,9 +56,7 @@
           <li class="nav-item">
             <a href="./sistema.jsp" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                HOME
-              </p>
+              <span>HOME</span>
             </a>
           </li>
             
@@ -130,6 +128,7 @@
               </li>
             </ul>
              <% } %>
+             
           </li>
           
           
