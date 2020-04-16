@@ -28,7 +28,7 @@
  
 
   <!-- SIDEBAR -->
-  	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
+  	<jsp:include page="/WEB-INF/layouts/menu-d-1.jsp"></jsp:include>
   <!-- SIDEBAR -->
 
  

@@ -77,8 +77,8 @@ mensaje = mensaje==null?"":mensaje;
 <body class="hold-transition login-page">
 
 <div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Sistema de Control FCE</b></a>
+  <div class="login-logo" style="background-color: #062844">
+    <a href="#" style="color: #ffffff"><b>Sistema de Control FCE</b></a>
   </div>
   <!-- /.login-logo -->
   

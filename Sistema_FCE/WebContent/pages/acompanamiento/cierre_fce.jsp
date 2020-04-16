@@ -57,7 +57,7 @@
 	 
 	
 	    <!-- SIDEBAR -->
-	  	<jsp:include page="/WEB-INF/layouts/menu2.jsp"></jsp:include>
+	  	<jsp:include page="/WEB-INF/layouts/menu-d-2.jsp"></jsp:include>
 	    <!-- SIDEBAR -->
 	    
 	     <!-- Content Wrapper. Contains page content -->
