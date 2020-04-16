@@ -32,7 +32,7 @@ function editarEstado(id_tarea) {
 
 function editarEstadoEstudiante(id_tarea) {
 	
-	 let estadoTarea = document.getElementById("estadoTarea").value;	
+	 let estadoTarea = document.getElementById("estadoTarea"+id_tarea).value;	
 	 let id_tema = document.getElementById("id_tem").value;		
 	 
 
@@ -50,7 +50,7 @@ function editarEstadoEstudiante(id_tarea) {
 	    	        successAlert('Exito', 'Estado de tarea editado correctamente');
 	    	        
 	    	        if(estadoTarea == 1) {
-	    	        	document.getElementById("estadoTarea").disabled = true;
+	    	        	document.getElementById("estadoTarea"+id_tarea).disabled = true;
 	    	        }
 	    	        
 	    	        }

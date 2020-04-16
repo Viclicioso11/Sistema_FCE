@@ -125,7 +125,7 @@ topcion = dtopcion.obtenerOpcion(opcion);
               <form role="form" action="../../SL_opcion" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
-                  <input name="IdOpcion" id="IdOpcion" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_opcion A EDITAR -->
+                  <input name="IdOpcion" id="IdOpcion" type="hidden" value="<%=opcion%>"> <!-- ESTE INPUT ES UTILIZADO EL ID_opcion A EDITAR -->
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nombre de Opción:</label>
                     <input type="text" id="opcion" name="opcion" class="form-control" 
@@ -175,7 +175,7 @@ topcion = dtopcion.obtenerOpcion(opcion);
     {
 		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
     	
-		$("#IdOpcion").val("<%=topcion.getId()%>");
+		$("#IdOpcion").val("<%=opcion%>");
     	$("#opcion").val("<%=topcion.getOpcion()%>");
     	$("#descripcion").val("<%=topcion.getDescripcion()%>");
      

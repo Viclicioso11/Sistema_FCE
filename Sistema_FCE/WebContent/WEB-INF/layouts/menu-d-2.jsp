@@ -150,9 +150,10 @@
          	*/
          	String[] AcompanamientoO = {
          			"tbltema.jsp",
+         			"tblgrupos_administrador.jsp",
          			"tblgrupos_fce.jsp",
          			"tbltareas_individual.jsp"};
-         	
+         
          	if(DTROL.isInOption(arrayOpciones, AcompanamientoO)){ //Comienzo if Acompañamiento %>
          <li class="nav-item has-treeview">
            
@@ -163,6 +164,7 @@
                <i class="fas fa-angle-left right"></i>
              </p>
            </a>
+           
            
            <ul class="nav nav-treeview">
            	 
@@ -175,8 +177,20 @@
              </li>
              <%}//fin IF secundario %>
              
+             
              <%
            	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[1])){
+           	 %>
+             <li class="nav-item">
+               <a href="../acompanamiento/tblgrupos_administrador.jsp" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Avance Cronograma</p>
+               </a>
+             </li>
+             <%}//fin IF secundario %>
+             
+             <%
+           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[2])){
            	 %>
              <li class="nav-item">
                <a href="../acompanamiento/tblgrupos_fce.jsp" class="nav-link">
@@ -187,7 +201,7 @@
              <%}//fin IF secundario %>
              
              <%
-           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[2])){
+           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[3])){
            	 %>
              <li class="nav-item">
                <a href="../acompanamiento/tbltareas_individual.jsp" class="nav-link">

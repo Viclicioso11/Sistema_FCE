@@ -63,16 +63,6 @@
 	// es el id del cronograma actual
 	int id_cronograma = dtcrono.obtenerIdCronogramaFechas();
 	
-	//para saber qué FCE cargar para poner tarea según el tutor
-	String id_tutor_texto = session.getAttribute("idUsuario").toString();
-	
-
-	int id_tutor = 0;
-	if(id_tutor_texto != null) {
-		id_tutor = Integer.parseInt(id_tutor_texto);
-	 }
-	
-
 %>
 
 
@@ -147,7 +137,7 @@
     <!-- Main content -->
     
     <section class="content">
-    <form id="formGuardar" action="../../SL_tarea" method="POST">
+    <form id="formGuardar" action="../../SL_tarea_admin" method="POST">
       <div class="row">
       
        <!-- /.col -->
@@ -174,17 +164,18 @@
                 <tbody>
                 <%
      
-                  	ArrayList<Tbl_tema> listTema = new ArrayList<Tbl_tema>();
-                  	listTema = dttema.listarTemasTutor(id_tutor);
+                	DT_tema_cronograma dtcro = new DT_tema_cronograma();
+                  	ArrayList<Vw_tema_cronograma> listTema = new ArrayList<Vw_tema_cronograma>();
+                  	listTema = dtcro.listar_temas_administrador();
                   	
                   	        		
-                  	for(Tbl_tema tem : listTema)
+                  	for(Vw_tema_cronograma tem : listTema)
                   	{
                 %>
 	                <tr>
 	                  <td><%=tem.getTema()%></td>
-	                  <td id ="<%=tem.getId()%>">
-	                  <a href="#"onclick="seleccionaGrupo('<%=tem.getId()%>');"><i class="fas fa-check" title="Seleccionar"></i></a>
+	                  <td id ="<%=tem.getId_tema()%>">
+	                  <a href="#"onclick="seleccionaGrupo('<%=tem.getId_tema()%>');"><i class="fas fa-check" title="Seleccionar"></i></a>
 	                 
 	                  </td>
 	                </tr>
@@ -373,30 +364,6 @@
 </script>
 
 <script>
-
-
-function deleteOpcion(id_rol, id_opcion)
-{
-	
-	  $.jAlert({
-		    'type': 'confirm',
-		    'confirmQuestion': '¿Está seguro de eliminar la opción del rol seleccionado?',
-		    'onConfirm': function(e, btn){
-		     e.preventDefault();
-		     window.location.href="../../SL_rol_opcion?id_opcion="+id_opcion+"&id_rol="+id_rol;
-		     btn.parents('.jAlert').closeAlert();
-		    },
-		    'onDeny': function(e, btn){
-		      e.preventDefault();
-		      btn.parents('.jAlert').closeAlert();
-		    }
-		  });
-	
-}
-</script>
-
-
-<script>
   $(function () {
     $('#Tbl_opciones').DataTable({
         dom: 'Bfrtip',
@@ -429,15 +396,6 @@ function deleteOpcion(id_rol, id_opcion)
   
 </script>
 
-
-<script>
-//para ver los detalles 
-function detalleRol(id_rol){
- 
-	window.location.href="../../pages/seguridad/tbldetalle_rolp.jsp?id_rol="+id_rol;	
-	
-}
-</script>
 
 
 <script>

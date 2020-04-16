@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import entidades.Tbl_detalle_grupo_tarea;
@@ -332,11 +333,75 @@ public class DT_grupo_tarea {
 				
 				
 			} catch (Exception e) {
-				System.err.println("ERROR cambiarEstadoTarea "+e.getMessage());
+				System.err.println("ERROR calcularPorcentajeAvanceFCE "+e.getMessage());
 				e.printStackTrace();
 			}
 			
 			
+			
+			return porcentaje;
+		}
+		
+		
+		//para calcular el porcentaje global de todos los avances de las FCE
+		public double calcularPorcentajeGlobal() {
+			
+			double porcentaje = 0.0;
+			double porcentajeTotal = 0.0;
+			int cantidadTemas = 0;
+			
+			//para que no cierre la conexion por cada vuelta, aqui se guardaran todos los id en memoria
+			ArrayList<Integer> ids = new ArrayList<Integer>();
+			int contador = 0; //para conocer la ubicacion y cantidad de elementos
+
+			DT_cronograma dtcrono = new DT_cronograma();
+			
+			// es el id del cronograma actual
+			int id_cronograma = dtcrono.obtenerIdCronogramaFechas();
+			
+			//traemos todos los id del cronograma actual donde su estado sea activo
+			try {
+				//Getting connection thread, important!
+				Connection con = connectionP.getConnection();
+				
+
+				PreparedStatement ps = con.prepareStatement("SELECT id_tema FROM vw_tema_cronograma WHERE id_cronograma = ? AND estado_tema = 1", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, id_cronograma);
+				
+				rsTarea = ps.executeQuery();
+				
+				rsTarea.beforeFirst();
+				//guardamos los id
+				while(rsTarea.next()) {
+				
+					ids.add(rsTarea.getInt("id_tema")) ;
+					contador++;
+				}
+				connectionP.closeConnection(con);
+				
+				//por cada id de tema vamos a obtener su porcentaje de avance
+				
+				for(int i = 0; i < ids.size(); i++) {
+					cantidadTemas++;
+					porcentajeTotal += calcularPorcentajeAvanceFCE(ids.get(i));
+				}
+				
+				if(porcentajeTotal != 0) {
+				
+				porcentaje = (porcentajeTotal / cantidadTemas);	
+				
+				}
+				
+				
+				
+				
+			} catch (Exception e) {
+				System.err.println("ERROR calcularPorcentajeGlobal "+e.getMessage());
+				e.printStackTrace();
+			}
+		
 			
 			return porcentaje;
 		}

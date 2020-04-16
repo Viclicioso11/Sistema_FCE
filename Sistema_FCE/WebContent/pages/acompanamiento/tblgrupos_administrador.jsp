@@ -61,31 +61,16 @@
 %>
 
 <%
+	//para saber qué FCE cargarles a cada tutor end ependencia de su id
+	String id_tutor_texto = session.getAttribute("idUsuario").toString();
+		
    /* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
    String mensaje = "";
    mensaje = request.getParameter("msj");
    mensaje = mensaje==null ? "":mensaje;
+  
    
-   DT_tema dtma = new DT_tema();
-   DT_usuario_tema dtust = new DT_usuario_tema();
-   
-   
-   
-   String id_usuario_texto = "";
-   
-   id_usuario_texto = session.getAttribute("idUsuario").toString();
-   
-  	int id_usuario = 0;
-
-  	if(id_usuario_texto != null) {
-  		id_usuario = Integer.parseInt(id_usuario_texto);
-    }
-   
-   int id_tema = 0;
-   
-   id_tema = dtust.ibtenerIdTema(id_usuario);
-   
-   
+ 
 %>
 
 <!DOCTYPE html>
@@ -93,7 +78,7 @@
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tareas asignadas</title>
+  <title>Avance de cronograma</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -142,12 +127,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tareas asignadas</h1>
+            <h1>Avance de temas de cronograma</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"></a>Inicio</li>
-              <li class="breadcrumb-item active">Tareas asignadas</li>
+              <li class="breadcrumb-item"><a href="../../sistema.jsp">Sistema FCE</a> / <li>
+              <li class="breadcrumb-item active">Avance de temas de cronograma</li>
             </ol>
           </div>
         </div>
@@ -159,121 +144,62 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">	
-            
+            <div class="card-header">
+              
+              <div class = "row-fluid"> 
+		               <div class = "col-md-6">
+		               	   <p>Porcentaje de avance global </p>
+		               </div>
+			                 
+			   <%
+			   DT_tema_cronograma dtc = new DT_tema_cronograma();
+       			//para el porcentaje
+       			DT_grupo_tarea dtgrut = new DT_grupo_tarea();
+			    double porcentajeGlobal = dtgrut.calcularPorcentajeGlobal();
+			   
+			   %>
+			           <div class = "col-md-6"> 
+				           <div class="progress" >
+			  				   <div id="barra_progreso" class="progress-bar" role="progressbar" style="width: <%=porcentajeGlobal%>%" aria-valuenow="<%=porcentajeGlobal%>" aria-valuemin="0" aria-valuemax="100"><%=String.format("%.2f" ,porcentajeGlobal)%>%</div>
+						   </div>
+						</div>
+		       </div>
+		                
             </div>
               
             <!-- /.card-header -->
             <div class="card-body">
             
-            <%
-            	//si tiene un tema asignado carga tareas, sino aparece un texto
-            	
-            	if(id_tema != 0) {
-            		
-            %>
+            	<a href="../acompanamiento/newtarea_grupal_admin.jsp?">Crear tarea para grupos <i class="fas fa-plus-circle"></i></a>
             
 	            <ul class="list-group">
 	            <%
-	                	DT_grupo_tarea dttar = new DT_grupo_tarea();
+	                	
+	            		double porcentaje = 0.0;
 	         	        				
-	         	        //mostrando las tareas asignadas a un grupo
-	         	       	ArrayList<Vw_tema_tarea> tareas = new  ArrayList<Vw_tema_tarea> ();
-	         	       	tareas = dttar.listarTareasGrupo(id_tema);
+	         	       	ArrayList<Vw_tema_cronograma> temas = new  ArrayList<Vw_tema_cronograma> ();
+	         	       	temas = dtc.listar_temas_administrador();
 	      	        	
-	      	        	for(Vw_tema_tarea vttar : tareas)	{
+	      	        	for(Vw_tema_cronograma vtc : temas)	{
 	      	        		
+	      	        		porcentaje = dtgrut.calcularPorcentajeAvanceFCE(vtc.getId_tema());
 	               	%>
 	               	<li class = "list-group-item ">
 	               		<div class = "row-fluid"> 
-		               		<div class = "col-md-4">
-		               			<a class="ref-color" href="#"><i class="fas fa-file-word"></i> <%=vttar.getTitulo_tarea()%></a>
-		               			<p><%=vttar.getDescripcion_tarea()%></p>	
+		               		<div class = "col-md-6">
+		               			<a class="ref-color" href="../../pages/acompanamiento/tbltareas_grupo.jsp?id_tem=<%=vtc.getId_tema()%>"><%=vtc.getTema()%> del <%=vtc.getDescripcion_cronograma()%></a>	
 		               		</div>
-		               		
-		               		<div class = "col-md-2">
-		               		
-		               		<b><p style="text-align: center;">Inicia</p></b>
-		               		<p style="text-align: center;"><%=vttar.getFecha_inicio()%></p>		
-		               		
-		               		</div>
-		               		
-		               		<div class = "col-md-2">
-		               		
-		               		<b><p style="text-align: center;">Termina</p></b>
-		               		<p style="text-align: center;"><%=vttar.getFecha_fin()%></p>	
-		               		
-		               		
-		               		</div>
-		               		
-		               		<div class = "col-md-2">
-		               			<div class="form-group">
-			           				<select onchange="editarEstadoEstudiante('<%=vttar.getTarea_id()%>')" class="form-control select2" id="estadoTarea<%=vttar.getTarea_id()%>" name="estadoTarea<%=vttar.getTarea_id()%>" style="width: 100%;" required>
-			           				<%
-			           				if(vttar.getEstado() == 0) {
-			           				%>
-			           				  <option selected value="0">Pendiente</option>
-			           				<% 
-			           				} else {
-			           				%>
-			           				  <option value="0">Pendiente</option>
-			           				<% }%>
-			           				
-			           				<%
-			           				if(vttar.getEstado() == 1) {
-			           				%>
-			           				  <option selected value="1" di>Entregada</option>
-			           				  <script>	
-			           				  //si ya fue entregada no puede editarlo
-			           				  document.getElementById("estadoTarea<%=vttar.getTarea_id()%>").disabled=true;  
-			           				  </script>
-			           				<% 
-			           				} else {
-			           				%>
-			           				  <option value="1">Entregada</option>
-			           				<% }%>
-			           				<%
-			           				if(vttar.getEstado() == 2) {
-			           				%>
-			           				  <option selected value="2">Retrasada</option>	
-			           				<% 
-			           				} else {
-			           				%>
-			           				  <option value="2">Retrasada</option>	
-			           				<% }%>
-			           				  
-			           				  	
-           				  
-           							</select>
-        						</div>	
-		               		</div>
-		               		
-		               		<input type="hidden" id="id_tem" name = "id_tem" value="<%=id_tema%>">
-		               		<input type="hidden" id="opc" name = "opc" value="2">
-		               		
+			                 
+			                 <div class = "col-md-6"> 
+				                  <div class="progress" >
+			  					  	<div id="barra_progreso" class="progress-bar" role="progressbar" style="width: <%=porcentaje%>%" aria-valuenow="<%=porcentaje%>" aria-valuemin="0" aria-valuemax="100"><%=porcentaje%>%</div>
+								  </div>
+							  </div>
 		                </div>
 		            </li>
 	             <%}%>
 	            </ul>
             
-            <%} // fin del if
-            	//si no tiene un tema
-            	else {
-            		
-            %>
-            
-		            
-		        <h3>Usted aún no ha inscrito un Tema de Forma de Culminación de Estudios</h3>
-				
-				<p>
-					Si ya ha inscrito un tema de FCE y esta pantalla aparece, contáctese con coordinación.
-					<br>
-				</p>
-		            
-            
-            <%
-            	}
-            %>
      
           </div>
           <!-- /.card-body -->
@@ -336,10 +262,30 @@
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  <!--  js de la carpeta js local -->
-  <script src="./js/tbltareas.js" defer></script>
+  
+
+<script>
+	function linkVercro(idcro){
+		
+		window.location.href="../../pages/inscripcion/verCronograma.jsp?id_cronograma="+idcro;
+	}
+
+</script>
+
+<script>
+	function addActividad(idcro){
+		
+		window.location.href="../../pages/inscripcion/verCronograma.jsp?cronogramaID="+idcro;
+	}
+
+</script>
 
 
+<script>
+	function linkEditarcro(idcro){
+		window.location.href="../../pages/inscripcion/editCronograma.jsp?id_cronograma="+idcro;
+	}
+</script>
 
 <script>
 
@@ -360,6 +306,18 @@
    errorAlert('Error', 'El registro no se ha podido eliminar.')
    
    
+   
+   var idTema = 0
+   var tutorfieldId = ""
+   
+ function setIdTema(id, id2){
+	idTema = id
+	tutorfieldId = id2
+	console.log(idTema, tutorfieldId)
+ }
+ 
+
+ 
 </script>
 
 </body>
