@@ -460,7 +460,47 @@ public class DT_cronograma {
 		
 		return listaCro;
 	}
-	
+	public ArrayList<Tbl_cronograma> listarCronogramasT(int id_tutor)
+	{
+		ArrayList<Tbl_cronograma> listaCro = new ArrayList<Tbl_cronograma>();
+		
+		
+		try
+		{
+			Connection con = connectionP.getConnection();
+
+			
+			PreparedStatement ps = con.prepareStatement("SELECT id_cronograma, descripcion, fecha_inicio, fecha_fin, estado, id_tipo_cronograma"
+					+ " where estado <> 3 and id_tutor = "+id_tutor
+					+ " ORDER BY fecha_inicio desc", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsCronograma = ps.executeQuery();
+			
+			while(rsCronograma.next())
+			{
+				Tbl_cronograma acro = new Tbl_cronograma();
+				
+				acro.setId(rsCronograma.getInt("id_cronograma"));
+				acro.setDescripcion(rsCronograma.getString("descripcion"));
+
+				acro.setTipo_cronograma(rsCronograma.getInt("id_tipo_cronograma"));
+
+				acro.setFecha_inicio(rsCronograma.getDate("fecha_inicio"));
+				acro.setFecha_fin(rsCronograma.getDate("fecha_fin"));
+				listaCro.add(acro);	
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listarCronogramas "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return listaCro;
+	}
 	//FUnción obtener fecha maxima y fecha minima de un cronograma en funcion de sus actividades
 	public String[] limitesFecha (int id_cronograma)
 	{

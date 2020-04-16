@@ -59,6 +59,21 @@
 	}
 */
 %>
+<%
+  	String rolIdTexto = session.getAttribute("id").toString();
+	String IdUsuarioTexto = session.getAttribute("idUsuario").toString();
+  	
+  	int rol_id = 0;
+  	int id_usuario = 0;
+
+  	if(rolIdTexto != null) {
+  		rol_id = Integer.parseInt(rolIdTexto);
+    }
+  	if(IdUsuarioTexto != null) {
+  		id_usuario = Integer.parseInt(IdUsuarioTexto);
+    }
+  	
+  	%>
 
 <%
    /* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -162,7 +177,11 @@
          	        				
          	        //TemasS para mostrar los temas sin tutor
          	       	ArrayList<Tbl_cronograma> actividades = new  ArrayList<Tbl_cronograma> ();
+         	       if (rol_id == 1) {
          	       	actividades = dtc.listarCronogramas();
+         	       }else if (rol_id == 3){
+         	    	  actividades = dtc.listarCronogramasT(id_usuario);
+         	       }
       	        	
       	        	for(Tbl_cronograma cro : actividades)	{
       	        		
