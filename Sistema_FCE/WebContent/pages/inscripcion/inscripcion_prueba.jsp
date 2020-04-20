@@ -47,7 +47,11 @@
 /* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
 String mensaje = "";
 mensaje = request.getParameter("msj");
-mensaje = mensaje==null?"":mensaje;
+
+if(mensaje == null) {
+	mensaje ="nada";
+}
+
 %>
 
     
@@ -85,12 +89,6 @@ mensaje = mensaje==null?"":mensaje;
 
 <div class="wrapper">
 	<!-- Navbar -->
-	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
-	<!-- /.navbar -->
-	
-	<!-- SIDEBAR -->
-	<jsp:include page="/WEB-INF/layouts/menu-d-2.jsp"></jsp:include>
-	<!-- SIDEBAR -->
 	
 	 <!-- Content Wrapper. Contains page content -->
 	 <div class="content-wrapper">
@@ -102,8 +100,8 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Inscripci贸n</a></li>
-	              <li class="breadcrumb-item active">Inscripci贸n Tema</li>
+	              <li class="breadcrumb-item"><a href="#">Inscripci髇</a></li>
+	              <li class="breadcrumb-item active">Inscripci髇 Tema</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -120,20 +118,20 @@ mensaje = mensaje==null?"":mensaje;
 	              </div>
 	              
 	              <!-- form start -->
-	              <form id="formInscribir" name="formInscribir" role="form" name="formulario" action="../../SL_tema" method="post" enctype="multipart/form-data">
+	              <form role="form" name="formulario" action="../../SL_prueba_fichero" method="post" enctype="multipart/form-data">
 					
-					
+					<a target="_blank"href="<%=mensaje%>">Descargar archivo </a>
 					
 					<div class="card-body">
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
 		                 
-						<label for="exampleInputEmail1">Tema de Forma de Culminaci贸n de Estudios:</label>
+						<label for="exampleInputEmail1">Tema de Forma de Culminaci髇 de Estudios:</label>
 						<input type="text" id="tema" name="tema" class="form-control" placeholder="Tema de FCE" required>
 					
 						<br/>
 					
 						<!-- -->
-	                    <label for="exampleInputFile">Propuesta de Forma de Culminaci贸n de Estudios:</label>
+	                    <label for="exampleInputFile">Propuesta de Forma de Culminaci髇 de Estudios:</label>
 	                    <div class="input-group">
 	                      <div class="custom-file">
 	                        <input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce">
@@ -150,7 +148,7 @@ mensaje = mensaje==null?"":mensaje;
 									Opciones
 								</button>
 								<ul class="dropdown-menu">
-									<li class="dropdown-item"><a data-toggle="modal" data-target="#addMember">A帽adir compa帽ero</a></li>
+									<li class="dropdown-item"><a data-toggle="modal" data-target="#addMember">A馻dir compa帽ero</a></li>
 									<li class="dropdown-item"><a onclick="EliminarMembers()">Eliminar a todos</a></li>
 								</ul>
 								<input type="hidden" id="carne" name="carne"/>
@@ -234,7 +232,7 @@ mensaje = mensaje==null?"":mensaje;
 	                <!-- /.card-body -->
 	
 	                <div class="card-footer">
-	                  <button type="button" class="btn btn-primary" onclick="inscribirTema()">Registrar</button>
+	                  <button type="submit" class="btn btn-primary">Registrar</button>
 	                  <button type="reset" class="btn btn-danger">Cancelar</button>
 	                </div>
 
@@ -297,9 +295,20 @@ mensaje = mensaje==null?"":mensaje;
 	<!-- jAlert js -->
 	<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
 	<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-	
-	<!--  js de la carpeta js local -->
-  <script src="./js/inscripcion_tema.js" defer></script>
+    
+    <script>
+    
+    function url() {
+    	
+    	var URL = "<%=mensaje%>";
+    	
+    	
+    	window.open(URL);
+    		
+    }
+    
+    </script>
+    
     
     
     <script>

@@ -634,5 +634,36 @@ public class DT_tema {
 			return ttur;
 		}
 		
+		//para obtener la url del tema de la fce
+		public String obtenerURLTema(int id)
+		{
+			String url = "";
+			try
+			{
+				//Getting connection thread, important!
+				Connection con = connectionP.getConnection();
+
+				PreparedStatement ps = con.prepareStatement("SELECT url from tbl_tema where id = ?", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, id);
+				rsTema = ps.executeQuery();
+				if(rsTema.next())
+				{
+			
+					url = rsTema.getString("url");
+					
+				}
+				// Closing connection thread, very important!
+				connectionP.closeConnection(con);
+			}
+			catch (Exception e)
+			{
+				System.out.println("DATOS: ERROR en obtenerURLTema() "+ e.getMessage());
+				e.printStackTrace();
+			}
+			return url;
+		}
+		
 }
 

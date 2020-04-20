@@ -2,11 +2,14 @@ package servlets;
 
 //utils
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Collection;
 import javax.servlet.http.Part;
 import java.io.InputStream ;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -124,8 +127,9 @@ public class SL_edicion_tema extends HttpServlet {
 		tema.setId_tipo_fce(Integer.parseInt(request.getParameter("tipo_fce")));
 		
 		String url = "";
-		//creamos el objeto que tiene la ruta al directorio
-		File uploads = new File("C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema");
+		//paara la subida del archivo
+		String UPLOAD_DIRECTORY = "archivo_tema";
+		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
 		//obtenemos nuestro part
 		Part filePart = request.getPart("fl_propuesta_fce");
 		String fileName = getFileName(filePart);
@@ -139,26 +143,22 @@ public class SL_edicion_tema extends HttpServlet {
 				return;
 			}
 		}else {
-			 
-			try {
-				File f = new File(fileName);
-				File file = new File(uploads, f.getName());
-				
-				InputStream input = filePart.getInputStream();
-			    Files.copy(input, file.toPath());
-			    
-			  } catch (Exception e){
-			        response.setContentType("text/html");
-			        PrintWriter out = response.getWriter();
-			        out.print("<body>Failed to upload file <br>" + e.getMessage());
-			  }
 			
-			url = "C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema"+fileName;
+			
+			url = uploadPath + File.separator + fileName;
 			tema.setUrl(url);
 			
 			if(dtema.modificarTema(tema, true)) {
-				response.sendRedirect("./pages/acompanamiento/tbltema.jsp?msj=3");
-				return;
+				
+				if(subirArchivo(filePart, uploadPath, fileName)) {
+					response.sendRedirect("./pages/acompanamiento/tbltema.jsp?msj=3");
+					return;
+				}
+				else {
+					response.sendRedirect("./pages/acompanamiento/tbltema.jsp?msj=2");
+					return;
+				}
+				
 			}else {
 				response.sendRedirect("./pages/inscripcion/editInscripcion_fce.jsp?msj=2");
 				return;
@@ -167,6 +167,7 @@ public class SL_edicion_tema extends HttpServlet {
 		}
 	}
 	
+	/*
 	protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -193,20 +194,99 @@ public class SL_edicion_tema extends HttpServlet {
         
         return guardado;
     }
+    */
+	
+	//esto permitirá subir el archivo a la ruta específicada
+	public boolean subirArchivo(Part filePart, String uploadPath, String fileName) throws IOException {
+		
+	    OutputStream out = null;
+	    InputStream filecontent = null;
+	    File uploadDir = new File(uploadPath);
+	   
+		System.out.println(uploadDir);
+		
+		if (!uploadDir.exists()) {
+			if(uploadDir.mkdir()) {
+				
+				//si lgora subir archivo return true
+			    try {
+			        out = new FileOutputStream(new File(uploadPath + File.separator
+			                + fileName));
+			        filecontent = filePart.getInputStream();
+
+			        int read = 0;
+			        final byte[] bytes = new byte[1024];
+
+			        while ((read = filecontent.read(bytes)) != -1) {
+			            out.write(bytes, 0, read);
+			        }
+			       return true;
+			     
+			    } catch (FileNotFoundException fne) {
+			        
+			        System.out.println("<br/> ERROR: " + fne.getMessage());
+			        return false;
+
+			    } finally {
+			        if (out != null) {
+			            out.close();
+			        }
+			        if (filecontent != null) {
+			            filecontent.close();
+			        }
+			    }
+				
+			}
+		} else {
+			
+			 try {
+			        out = new FileOutputStream(new File(uploadPath + File.separator
+			                + fileName));
+			        filecontent = filePart.getInputStream();
+
+			        int read = 0;
+			        final byte[] bytes = new byte[1024];
+
+			        while ((read = filecontent.read(bytes)) != -1) {
+			            out.write(bytes, 0, read);
+			        }
+			        return true;
+			     
+			    } catch (FileNotFoundException fne) {
+			      
+			        System.out.println("<br/> ERROR: " + fne.getMessage());
+			        return false;
+
+			    } finally {
+			        if (out != null) {
+			            out.close();
+			        }
+			        if (filecontent != null) {
+			            filecontent.close();
+			        }
+			     
+			    }
+			
+		}
+		
+		return false;
+	}
 	
 	public String getFileName(Part part) {
         String contentHeader = part.getHeader("content-disposition");
         String[] subHeaders = contentHeader.split(";");
-        
+         
         for(String current : subHeaders) {
             if(current.trim().startsWith("filename")) {
                 int pos = current.indexOf('=');
                 String fileName = current.substring(pos+1);
-                //String nombreArchivo = fileName;
+                System.out.println(fileName);
+                
                 return fileName.replace("\"", "");
             }
         }
         return "false";
     }
+
 
 }

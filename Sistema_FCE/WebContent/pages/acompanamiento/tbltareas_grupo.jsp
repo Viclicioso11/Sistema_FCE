@@ -151,7 +151,15 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <a href="../acompanamiento/newtarea.jsp?id_tem=<%=id_tema%>">Crear Tarea <i class="fas fa-plus-circle"></i></a>	
+             <div class="row">
+             <div class="col-6">
+              	<a href="../acompanamiento/newtarea.jsp?id_tem=<%=id_tema%>">Crear tarea <i class="fas fa-plus-circle"></i></a>	
+              </div>
+               <div class="col-6">
+              	<a href="../acompanamiento/cierre_fce.jsp?idtema=<%=id_tema%>">Generar carta aval<i class="fas fa-plus-circle"></i></a>	
+              </div>
+              
+              </div>
             </div>
               
             <!-- /.card-header -->

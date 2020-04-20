@@ -1,7 +1,13 @@
 package servlets;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 //utils
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.http.Part;
@@ -25,7 +31,7 @@ import datos.DT_usuario_tema;
  */
 
 @WebServlet("/SL_tema")
-@MultipartConfig(location="C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema")
+@MultipartConfig()
 public class SL_tema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -83,31 +89,53 @@ public class SL_tema extends HttpServlet {
 	
 	//public static String dirUploadFiles;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//***
 		Tbl_tema tema = new Tbl_tema();
-		
 		DT_tema dtema = new DT_tema();
 		DT_usuario dtus = new DT_usuario();
+		String id_ambito_texto = "";
+		String id_tipo_texto = "";
+		String id_carrera_texto = "";
 		
+		//para la subida de archivo
+		String UPLOAD_DIRECTORY = "archivo_tema";
+		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+	    final Part filePart = request.getPart("fl_propuesta_fce");
+	    String fileName = getFileName(filePart);//pbtiene el nombre real del part (archivo) a subir
+	    
+	    //si el método no devuelve un nombre y devuelve false
+	    if(fileName == "false") {
+	    	fileName = "archivoPropuesta";
+	    }
+	    //---	
 		ArrayList<Tbl_usuario_tema> usuariosTema = new ArrayList<Tbl_usuario_tema>();
-	
+		
+		//obteniendo todo lo de la petición
 		String palabrasClaves = request.getParameter("palabrasClave");
 		String nombreTema = request.getParameter("tema");
 		
 		tema.setTema(request.getParameter("tema"));
-		tema.setId_ambito(Integer.parseInt(request.getParameter("ambito_fce")));
-		tema.setId_carrera(Integer.parseInt(request.getParameter("carrera")));
-		tema.setId_tipo_fce(Integer.parseInt(request.getParameter("tipo_fce")));
+		
+		id_ambito_texto = request.getParameter("ambito_fce");
+		id_tipo_texto = request.getParameter("tipo_fce");
+		id_carrera_texto = request.getParameter("carrera");
+		
+		
+		
+		if(id_ambito_texto != null && id_tipo_texto != null && id_carrera_texto != null) {	
+			tema.setId_ambito(Integer.parseInt(id_ambito_texto));
+			tema.setId_carrera(Integer.parseInt(id_carrera_texto));
+			tema.setId_tipo_fce(Integer.parseInt(id_tipo_texto));
+		}
+		
 		tema.setPalabras_claves(palabrasClaves);
 		
 		String[] carnes = (request.getParameter("carne")).split(",");
 		String url = "";
-		
-		if(processRequest(request, response)) {
 			
 			//guardamos en el objeto la url del archivo
 			
-			url = "C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema\\"+nombreArchivo;
+			url = uploadPath + File.separator + fileName;
 			tema.setUrl(url);
 			//guardamos el tema
 			if(dtema.guardarTema(tema)) {
@@ -130,10 +158,16 @@ public class SL_tema extends HttpServlet {
 					}
 					
 					if(dtema.guardarUsuariosTema(usuariosTema)) {
+						//si todo se guarda subimos el archivo
+						if(subirArchivo(filePart, uploadPath, fileName)) {
+							response.sendRedirect("sistema.jsp?msj=1");
+							return;
+						}
+						else {
+							response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
+							return;
+						}
 						
-						
-						response.sendRedirect("sistema.jsp?msj=1");
-						return;
 					}else {
 						response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
 						return;
@@ -145,10 +179,87 @@ public class SL_tema extends HttpServlet {
 				response.sendRedirect("./pages/inscripcion/inscripcion_tema.jsp?msj=2");
 				return;
 			}
-		}
+		
 					
 	}
 	
+	
+	//esto permitirá subir el archivo a la ruta específicada
+	public boolean subirArchivo(Part filePart, String uploadPath, String fileName) throws IOException {
+		
+	    OutputStream out = null;
+	    InputStream filecontent = null;
+	    File uploadDir = new File(uploadPath);
+	   
+		System.out.println(uploadDir);
+		
+		if (!uploadDir.exists()) {
+			if(uploadDir.mkdir()) {
+				
+				//si lgora subir archivo return true
+			    try {
+			        out = new FileOutputStream(new File(uploadPath + File.separator
+			                + fileName));
+			        filecontent = filePart.getInputStream();
+
+			        int read = 0;
+			        final byte[] bytes = new byte[1024];
+
+			        while ((read = filecontent.read(bytes)) != -1) {
+			            out.write(bytes, 0, read);
+			        }
+			       return true;
+			     
+			    } catch (FileNotFoundException fne) {
+			        
+			        System.out.println("<br/> ERROR: " + fne.getMessage());
+			        return false;
+
+			    } finally {
+			        if (out != null) {
+			            out.close();
+			        }
+			        if (filecontent != null) {
+			            filecontent.close();
+			        }
+			    }
+				
+			}
+		} else {
+			
+			 try {
+			        out = new FileOutputStream(new File(uploadPath + File.separator
+			                + fileName));
+			        filecontent = filePart.getInputStream();
+
+			        int read = 0;
+			        final byte[] bytes = new byte[1024];
+
+			        while ((read = filecontent.read(bytes)) != -1) {
+			            out.write(bytes, 0, read);
+			        }
+			        return true;
+			     
+			    } catch (FileNotFoundException fne) {
+			      
+			        System.out.println("<br/> ERROR: " + fne.getMessage());
+			        return false;
+
+			    } finally {
+			        if (out != null) {
+			            out.close();
+			        }
+			        if (filecontent != null) {
+			            filecontent.close();
+			        }
+			     
+			    }
+			
+		}
+		
+		return false;
+	}
+	/*
 	protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -175,7 +286,7 @@ public class SL_tema extends HttpServlet {
         
         return guardado;
     }
-	
+	*/
 	public String getFileName(Part part) {
         String contentHeader = part.getHeader("content-disposition");
         String[] subHeaders = contentHeader.split(";");

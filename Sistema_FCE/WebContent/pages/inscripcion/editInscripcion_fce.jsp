@@ -68,9 +68,7 @@ DT_tema dttma = new DT_tema();
 //un id solo de prueba para cargar
 ttma = dttma.obtenerTema(tema);
 //para poner la url sin las comillas que trae de la base de datos
-ttma.setUrl(ttma.getUrl().replace("\"", ""));
-System.out.println(ttma.getUrl());
-
+//ttma.setUrl(ttma.getUrl().replace("\"", ""));
 
 %>
 
@@ -151,7 +149,7 @@ System.out.println(ttma.getUrl());
 	              </div>
 	              
 	              <!-- form start -->
-	              <form role="form" name="formulario" action="../../SL_edicion_tema" method="post" enctype="multipart/form-data">
+	              <form id="formEditar" role="form" name="formulario" action="../../SL_edicion_tema" method="post" enctype="multipart/form-data">
 					
 					<div class="card-body">
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
@@ -160,6 +158,7 @@ System.out.println(ttma.getUrl());
 						<input type="text" id="tema" name="tema" class="form-control" placeholder="Tema de FCE" required>
 					
 						<input type="hidden" id="id_tema" name="id_tema"/>
+						
 						<br/>
 					
 						<!-- -->
@@ -181,7 +180,7 @@ System.out.println(ttma.getUrl());
 				      
 				       <div class="col-sm-2">
 				        <div class="form-group">
-				        	<a href="<%= ttma.getUrl()%>">Descargar Propuesta <i class="fas fa-file-download"></i></a>
+				        	<a  href="../../SL_descarga_archivos?url=<%=ttma.getUrl()%>">Descargar Propuesta <i class="fas fa-file-download"></i></a>
 	                    </div>
 	                    
 				     </div>
@@ -329,7 +328,7 @@ System.out.println(ttma.getUrl());
 	                <!-- /.card-body -->
 	
 	                <div class="card-footer">
-	                  <button type="submit" class="btn btn-primary">Registrar</button>
+	                  <button type="button" class="btn btn-primary" onclick="editarTema()">Registrar</button>
 	                  <button type="reset" class="btn btn-danger">Cancelar</button>
 	                </div>
 
@@ -412,6 +411,8 @@ System.out.println(ttma.getUrl());
   <!-- js DATATABLE NEW buttons excel -->
   <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
 
+<!--  js de la carpeta js local -->
+  <script src="./js/edit_inscripcion_fce.js" defer></script>
     
     
     
@@ -467,6 +468,8 @@ System.out.println(ttma.getUrl());
     	$("#id_tema").val("<%=ttma.getId()%>");
     	$("#tema").val("<%=ttma.getTema()%>");
     	$("#palabras").val("<%=ttma.getPalabras_claves()%>");
+    	
+    	
     	
      	var palabrasProbar = new Tagify(document.getElementById("palabras"),{maxTags: 6})
      	InputPalabra()
