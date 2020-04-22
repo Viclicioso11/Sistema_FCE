@@ -32,40 +32,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./css/carta_aval_print.css" media="print" />
+<link rel="stylesheet" href="./css/carta_aval.css"/>
+
 <meta charset="ISO-8859-1">
 <meta  charset="utf-8"/>
 <title>carta aval</title>
 </head>
 
-</head>
 
-<body lang="Es-MX" style="tab-interval:35.4pt">
+
+<body class="cuerpo" lang="Es-MX" style="tab-interval:35.4pt">
    <div class="WordSection1">
-      	<p class="MsoNormal" text-aling="left" style="margin-top:0cm;margin-right: 0cm;">
+      	<p class="MsoNormal">
      		 <o:p>&nbsp;</o:p>
      	 </p>
-      	<p class="MsoNormal" style="margin-top:0cm; margin-right: 0cm;margin-bottom: 5.75pt; margin-left: 25pt;">Managua, <%=currentDate%></p>
-        <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.85pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
+      	<p class="ciudad">Managua, <%=currentDate%></p>
+        <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.85pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
        	  <span style="mso-spacerun:yes">&nbsp;</span>
         </p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-left: -25;text-align:left">
-       	  <b style="mso-bidi-font-weight:normal">Msc. Mauricio Garcia Sotelo</b>
+     	 <p class="MsoNormal" text-aling="justify" style="margin-left: -25;text-align:left">
+       	  <b class ="dedicado">Msc. Mauricio Garcia Sotelo</b>
      	 </p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-left:0cm;text-align:left; text-indent: 0cm;">
-        	 <i style="mso-bidi-font-style:normal">Director</i>
+     	 <p class="MsoNormal" text-aling="justify" style="margin-left:0cm;text-align:left; text-indent: 0cm;">
+        	 <i class = "cargo">Director</i>
       	</p>
-    	 <p class="MsoNormal" style="margin-left: -.25pts">Departamento de Desarrollo Tecnologico</p>
-     	 <p class="MsoNormal" style="margin-left: -.25pt">Facultad de Ciencia, Tecnologia y Ambiente</p> 
-    	 <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
+    	 <p class="departamento">Departamento de Desarrollo Tecnologico</p>
+     	 <p class="facultad">Facultad de Ciencia, Tecnologia y Ambiente</p> 
+    	 <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
         	 <span style="mso-spacerun:yes">&nbsp;</span>
       	</p>
-    	 <p class="MsoNormal" text-aling="left" style="margin-left: -25;text-align:left">
-         	<b style="mso-bidi-font-weight:normal">Estimado Master Garcia:</b>
+    	 <p class="saludo" text-aling="justify">
+         	<b class ="estimado">Estimado Master Garcia:</b>
       	</p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
+     	 <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
         	 <span style="mso-spacerun:yes">&nbsp;</span>
       	</p>
-     	 <p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm;margin-bottom:7.35pt;margin-left: -.25pt;">Yo, el Licenciado:  <%=Aval.getNombre_tutor()%> <%=Aval.getApellido_tutor()%>   de tutor de la Forma de Culminacion de Estudios: (<%=Aval.getTipo_fce() %>) titulada: <%=Aval.getTema() %></p>
+     	 <p class="conttema">Yo, el Licenciado:  <%=Aval.getNombre_tutor()%> <%=Aval.getApellido_tutor()%>   de tutor de la Forma de Culminacion de Estudios: (<%=Aval.getTipo_fce() %>) titulada: <%=Aval.getTema() %></p>
 	     	<ul>
 	     	 <%
 	     	 	  DT_vw_tema_estudiante dte = new DT_vw_tema_estudiante();
@@ -80,24 +83,24 @@
 	      		%> 
 	      	 
 	      	 </ul>
-	      <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
+	      <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 5.75pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
          <span style="mso-spacerun:yes">&nbsp;</span>
       	 </p>
-     	 <p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-bottom: 8.1pt; margin-left: -.25pt;line-height: 150%;">Por tanto, 
+     	 <p class="aceptacion">Por tanto, 
        	  <b style="mso-bidi-font-weight:normal">otorgo la aceptacion y el aval del trabajo entregado</b>
         	 para su presentacion y evaluacion en acto de disertacio, para optar al titulo de <%=Aval.getCarrera() %>(Concentracion en Sistemas de informacion) que otorga la Universidad Centroamericana (UCA).
       	</p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 13.8pt;margin-left: 0cm;;text-indent: 0cm;">
+     	 <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 13.8pt;margin-left: 0cm;;text-indent: 0cm;">
          	<span style="mso-spacerun:yes">&nbsp;</span>
       	</p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 13.65pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
+     	 <p class="MsoNormal" text-aling="justify" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 13.65pt;margin-left: 0cm;text-align: left;text-indent: 0cm;">
          	<span style="mso-spacerun:yes">&nbsp;</span>
       	</p>
-      	<p class="MsoNormal" style="margin-left: -.25pt">Ratifica y firma</p>
-     	 <p class="MsoNormal" text-aling="left" style="margin-top: 0cm;margin-right: 0cm; margin-bottom: 6.2pt;margin-left: 0cm;text-align: left">
+      	<p class="firma">Ratifica y firma</p>
+     	 <p class="firma2" text-aling="justify">
     	     <b style="mso-bidi-font-weight:normal">Lic. <%=Aval.getNombre_tutor()%> <%=Aval.getApellido_tutor()%> </b>
       	</p>
-      	<p class="MsoNormal" text-aling="left" style="margin-left: 0cm;text-align: left;text-indent: 0cm">
+      	<p class="MsoNormal" text-aling="justify" style="margin-left: 0cm;text-align: left;text-indent: 0cm">
         	<span style="font-size: 11.opt;line-height: 107%;font-family: Calibri, sans-serif;mso-fareast-font-family:calibri">
             	 <span style="mso-spacerun:yes">&nbsp;</span>
          	</span>

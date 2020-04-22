@@ -1,0 +1,84 @@
+.cuerpo{
+	 
+	 background-color:#a6a6a6;
+	 aling-contet:center;
+	 aling-item:center;
+	 margin:17%;
+	 margin-top: 5%;
+  	 margin-bottom: 5%;
+ 	 margin-right: 17%;
+  	 margin-left: 17%;
+}
+
+.WordSection1{
+	
+	border-style: ridge;
+	background-color:#ffffff;
+	width: 900px;
+	padding: 50px;
+	
+	
+}
+
+.MsoNormal{
+    text-align: justify;
+    "margin-top:0cm;
+    margin-right: 0cm;
+    }
+    
+    .ciudad{
+   	text-aling:right;
+    }
+    
+    .dedicado{
+    mso-bidi-font-weight:normal
+    }
+    
+    .cargo{
+    mso-bidi-font-style:normal
+    }
+    
+    .departamento{
+    margin-left: -.25pts
+    }
+    
+    .facultad{
+    margin-left: -.25pt
+    }
+    
+    .saludo{
+    margin-left: -25;
+    text-align:left
+    }
+    
+    .estimado{
+    mso-bidi-font-weight:normal
+    
+    }
+    
+    .conttema{
+		margin-top: 0cm;
+		margin-right: 0cm;
+		margin-bottom:7.35pt;
+		margin-left: -.25pt;
+	}
+	
+	.aceptacion{
+	margin-top: 0cm; 
+	margin-right: 0cm; 
+	margin-bottom: 8.1pt; 
+	margin-left: -.25pt;
+	line-height: 150%;
+	}
+	
+	.firma{
+	margin-left: -.25pt
+	}
+	
+	.firma2{
+	margin-top: 0cm;
+	margin-right: 0cm; 
+	margin-bottom: 6.2pt;
+	margin-left: 0cm;
+	text-align: left
+	}

@@ -19,11 +19,11 @@ import entidades.Tbl_cierre;
  * Servlet implementation class SL_cierre
  */
 @WebServlet("/SL_cierre")
-@MultipartConfig(location="C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema")
+@MultipartConfig(location="C:\\glassfish5\\glassfish\\domains\\domain1\\carta_aval")
 public class SL_cierre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     String nombreArchivo = "";
-    String url = "C:\\glassfish5\\glassfish\\domains\\domain1\\archivo_tema";
+    String url = "C:\\glassfish5\\glassfish\\domains\\domain1\\carta_aval";
     String[] tipoarchivos = {"docx", "doc", "odt", "zip", "rar"};
     /**
      * @see HttpServlet#HttpServlet()
