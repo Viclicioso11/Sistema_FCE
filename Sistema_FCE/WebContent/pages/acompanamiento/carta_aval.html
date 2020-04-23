@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- 
+		asegurarse que esta ruta sea la misma 
+		o apuntar al arhivo	donde se encuentra
+	-->
+	<link rel="stylesheet" href="./css/carta_aval.css"/>
+	<meta  charset="utf-8"/>
+	<title>carta aval</title>
+</head>
+
+<body>
+	<aside id="header">
+		<img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBkYXRhLW5hbWU9IkNhcGEgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNzk2Ljk4IDE4MC4xMyI+PHRpdGxlPlNpbiB0w610dWxvLTE8L3RpdGxlPjxwb2x5Z29uIHBvaW50cz0iNzk2LjQ4IDE3OS42MyA0LjQ4IDE3OS42MyA0MDAuNDggOTAuMTMgNzk2LjQ4IDAuNjMgNzk2LjQ4IDE3OS42MyIgc3R5bGU9ImZpbGw6IzAwMjc0MztzdHJva2U6I2ZmZjtzdHJva2UtbWl0ZXJsaW1pdDoxMCIvPjxwb2x5Z29uIHBvaW50cz0iNC40OCAwLjYzIDc5Ni40OCAwLjYzIDQwMC40OCA5NS4xMyA0LjQ4IDE3OS42MyA0LjQ4IDAuNjMiIHN0eWxlPSJmaWxsOiMwYTMzNGEiLz48L3N2Zz4=">
+		<p>UCA</p>
+	</aside>
+	<p>
+		Managua, <time id="fecha"><!-- aqui va la fecha --></time>
+		<br><br>
+
+		<b>Msc.</b> Mauricio Garcia Sotelo<br>
+		Director<br>
+		Departamento de Desarrollo Tecnologico<br>
+		Facultad de Ciencia, Tecnologia y Ambiente<br>
+		
+		<br>
+		Estimado Master Garcia:
+		<br>
+		
+		Yo el Lic. <span class="tutor"></span>, en calidad de tutor de la forma de culiminacion de estudios
+		titulada <b><span id="tema"><!-- Nombre del FCE --></span></b> 
+		Doy fe de la calidad del trabajo elaborado bajo mi acompañamiento y supervision 
+		por los estudiantes:
+
+	</p>
+	
+	<ul id="estudiantes">
+		<!--  <li> (for) aqui van los estudiantes </li>  -->
+	</ul>
+
+	<p>
+		Por tanto, <b>otorgo la aceptacion y el aval del trabajo entregado</b> para su presentacion y 
+		evaluacion en acto de disertacio, para optar al titulo de <span id="carrera"><!-- aqui va la carrera --></span> 
+		que otorga la Universidad Centroamericana (UCA).
+		
+		<br><br>Ratifica y firma<br>
+		<b>Lic.</b> <span class="tutor"><!-- aqui va el tutor --></span>
+	</p>
+
+
+</body>
+<script>
+	
+	
+	let url = new URL(window.location.href)
+	let idTema = url.searchParams.get("idTema");
+	if(idTema == null){
+		window.location.href = "../../Error.jsp"
+	}else{
+		fetch(`../../SL_cierre?idTema=${idTema}&carta=1`)
+		.then( response => response.json())
+		.then( text => getInfo(text) )
+		.catch( e => console.log(e))		
+	}
+
+	
+	function getInfo(info){
+		if(!info.existe){
+			return;
+		}
+
+		function setVal({titulo, tutor, estudiantes}){
+			document.querySelectorAll(".tutor").forEach( elemento => {
+				elemento.innerHTML = tutor
+			})
+
+			document.querySelector("#tema").innerHTML = titulo;
+
+			let lista = document.getElementById("estudiantes");
+
+			estudiantes.forEach(estudiante => {
+				let li = document.createElement("li");
+				li.innerText = estudiante;
+				lista.append(li);
+			});
+			
+
+			//componer la fecha
+			let fecha = new Date()
+			document.getElementById("fecha").innerHTML = fecha.toLocaleDateString()// la fecha
+		}
+
+		setVal(info);
+		window.print();
+	}
+</script>
+</html>
+
+

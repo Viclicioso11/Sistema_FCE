@@ -22,7 +22,7 @@
 		
 		<br>
 		<p>Si quiere guardar la carta como PDF presione <strong>Ctrl + P</strong> al mismo tiempo</p>
-		<a href="./carta_aval.jsp?idTema=<%=idtema %>" target="_blank" class="btn btn-outline-primary" >Ver carta aval</a>
+		<a href="./carta_aval.html?idTema=<%=idtema %>" target="_blank" class="btn btn-outline-primary" >Ver carta aval</a>
 	</div>
 </div>
 

@@ -131,7 +131,8 @@
              
           </li>
           
-          
+           
+     
          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-cogs"></i>
@@ -202,6 +203,41 @@
               </li>
             </ul>
           </li>
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-book"></i>
+              <p>
+                Cierre FCE
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/acompanamiento/tbltema.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cierre</p>
+                </a>
+              </li>
+            </ul>
+            <% //si es tutor
+              if (rol_id == 3) {%>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+              
+                <a href="pages/acompanamiento/tblgrupos_fce.jsp" class="nav-link">
+               
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gestión Tutorías</p>
+                </a>
+              </li>
+            </ul>
+             <% } %>
+             
+          </li>
+          
+          
+     
           
  
         </ul>
