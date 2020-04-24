@@ -150,10 +150,9 @@
          	*/
          	String[] AcompanamientoO = {
          			"tbltema.jsp",
-         			"tblgrupos_administrador.jsp",
          			"tblgrupos_fce.jsp",
          			"tbltareas_individual.jsp"};
-         
+         	
          	if(DTROL.isInOption(arrayOpciones, AcompanamientoO)){ //Comienzo if Acompañamiento %>
          <li class="nav-item has-treeview">
            
@@ -164,7 +163,6 @@
                <i class="fas fa-angle-left right"></i>
              </p>
            </a>
-           
            
            <ul class="nav nav-treeview">
            	 
@@ -177,20 +175,8 @@
              </li>
              <%}//fin IF secundario %>
              
-             
              <%
            	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[1])){
-           	 %>
-             <li class="nav-item">
-               <a href="../acompanamiento/tblgrupos_administrador.jsp" class="nav-link">
-                 <i class="far fa-circle nav-icon"></i>
-                 <p>Avance Cronograma</p>
-               </a>
-             </li>
-             <%}//fin IF secundario %>
-             
-             <%
-           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[2])){
            	 %>
              <li class="nav-item">
                <a href="../acompanamiento/tblgrupos_fce.jsp" class="nav-link">
@@ -201,7 +187,7 @@
              <%}//fin IF secundario %>
              
              <%
-           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[3])){
+           	 	if(DTROL.isInOption(arrayOpciones, AcompanamientoO[2])){
            	 %>
              <li class="nav-item">
                <a href="../acompanamiento/tbltareas_individual.jsp" class="nav-link">
@@ -215,6 +201,47 @@
          </li>
          <%}//fin Acompañamiento(general) %>
         
+        <%
+        	/*
+        		mostrar evaluacion
+        	*/
+        	String[]  evaluacion = {"cierre_fce.jsp"};
+        	if(DTROL.isInOption(arrayOpciones, evaluacion)){ //Comienzo if Evaluacion %>
+        
+        	<li class="nav-item has-treeview">
+           
+           <a href="#" class="nav-link">
+             <i class="fas fa-tasks"></i>
+             <p>
+               Evaluación
+               <i class="fas fa-angle-left right"></i>
+             </p>
+           </a>
+           
+           <ul class="nav nav-treeview">
+           	 
+           	 <%
+
+             int id_user = Integer.parseInt(session.getAttribute("idUsuario").toString());
+           	 
+             if(id_user != 0){
+            	 DT_usuario_tema dtTema = new DT_usuario_tema();
+            	 int idtema = dtTema.ibtenerIdTema(id_user);
+            	 
+            	 if(DTROL.isInOption(arrayOpciones, evaluacion[0]) && idtema != 0){ %>
+            		 
+	             <li class="nav-item">
+	               <a href="../acompanamiento/cierre_fce.jsp?idtema=<%=idtema%>" class="nav-link">
+	                 <i class="far fa-circle nav-icon"></i>
+	                 <p>Enviar Archivo Final</p>
+	               </a>
+	             </li>
+             <%}}//fin IF secundario %>
+             
+           </ul>
+         </li>
+        
+        <%}//fin Evaluacion(general) %>
         
         <%	
          	/*

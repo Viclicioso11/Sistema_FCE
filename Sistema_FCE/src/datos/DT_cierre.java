@@ -124,4 +124,31 @@ public class DT_cierre {
 		}
 		return cerrado;
 	}
+	
+	public int getCartaTutor(int idTema) {
+		int tutor = 0;
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("SELECT * from tbl_tema where id = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idTema);
+			this.rs = ps.executeQuery();
+			if(rs.next())
+			{
+				tutor = rs.getInt("tutor");
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerTema() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		return tutor;
+	}
 }

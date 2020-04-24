@@ -72,7 +72,7 @@
 		          </div>
 		          <div class="col-sm-6">
 		            <ol class="breadcrumb float-sm-right">
-		              <li class="breadcrumb-item"><a href="#"></a>Acompañamiento</li>
+		              <li class="breadcrumb-item"><a href="#"></a>Cierre</li>
 		              <li class="breadcrumb-item active">Cierre de FCE</li>
 		            </ol>
 		          </div>
