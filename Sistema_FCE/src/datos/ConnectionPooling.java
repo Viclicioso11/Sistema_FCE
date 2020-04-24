@@ -15,16 +15,16 @@ public class ConnectionPooling {
     	// the DataBase
     	dataSource = new BasicDataSource();
     	dataSource.setDriverClassName("org.postgresql.Driver");
-    	//dataSource.setUsername("postgres");
-    	//dataSource.setPassword("Usuario123#.");
-    	//dataSource.setUrl("jdbc:postgresql://localhost:5432/FCE");
+    	dataSource.setUsername("postgres");
+    	dataSource.setPassword("Usuario123#.");
+    	dataSource.setUrl("jdbc:postgresql://localhost:5432/FCE");
     	dataSource.setMaxActive(50);// change to 50 or more when production 
     	dataSource.setValidationQuery("select 1");
     	
     	//EN PRODUCCION
-    	dataSource.setUsername("fce3");
-    	dataSource.setPassword("^j5J$2bTs");
-    	dataSource.setUrl("jdbc:postgresql://165.98.12.158:5432/FCE");
+    	//dataSource.setUsername("fce3");
+    	//dataSource.setPassword("^j5J$2bTs");
+    	//dataSource.setUrl("jdbc:postgresql://165.98.12.158:5432/FCE");
     	
     	
     }

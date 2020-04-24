@@ -86,7 +86,8 @@
          			"tblEstudianteCandidato.jsp",
          			"tblplan_graduacion.jsp",
          			"tblcronograma.jsp",
-         			"inscripcion_tema.jsp"};
+         			"inscripcion_tema.jsp",
+         			"buscarTema.jsp"};
          	
          	if(DTROL.isInOption(arrayOpciones, inscripcionO)){ //Comienzo if Inscripcion %>
          <li class="nav-item has-treeview">
@@ -130,6 +131,15 @@
              <%}//fin IF secundario %>
              
              
+             <%if(DTROL.isInOption(arrayOpciones, inscripcionO[4])){//Comienzo if Secundario%>
+             <li class="nav-item">
+               <a href="pages/inscripcion/buscarTema.jsp" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Buscar Tema</p>
+               </a>
+             </li>
+             <%}//fin IF secundario %>
+             
              <%if(DTROL.isInOption(arrayOpciones, inscripcionO[3])){//Comienzo if Secundario%>
              <li class="nav-item">
                <a href="pages/inscripcion/inscripcion_tema.jsp" class="nav-link">
@@ -151,7 +161,8 @@
          	String[] AcompanamientoO = {
          			"tbltema.jsp",
          			"tblgrupos_fce.jsp",
-         			"tbltareas_individual.jsp"};
+         			"tbltareas_individual.jsp",
+         			"tblgrupos_administrador.jsp"};
          	
          	if(DTROL.isInOption(arrayOpciones, AcompanamientoO)){ //Comienzo if Acompañamiento %>
          <li class="nav-item has-treeview">
@@ -195,6 +206,17 @@
                  <p>Asignaciones</p>
                </a>
              </li>
+             <%}//fin IF secundario %>
+             
+             <%
+             if(DTROL.isInOption(arrayOpciones, AcompanamientoO[3])){
+           	 %>	           	 
+             <li class="nav-item">	
+               <a href="../acompanamiento/tblgrupos_administrador.jsp" class="nav-link">	
+                 <i class="far fa-circle nav-icon"></i>	
+                 <p>Avance Cronograma</p>	
+               </a>	
+             </li>	
              <%}//fin IF secundario %>
              
            </ul>

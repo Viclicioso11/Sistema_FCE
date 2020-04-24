@@ -67,6 +67,13 @@ DT_tema dttma = new DT_tema();
 
 //un id solo de prueba para cargar
 ttma = dttma.obtenerTema(tema);
+
+String nombre_tutor = dttma.obtenerNombreTutor(tema);
+
+if(nombre_tutor.equals("")) {
+	nombre_tutor = "Sin tutor";
+}
+
 //para poner la url sin las comillas que trae de la base de datos
 //ttma.setUrl(ttma.getUrl().replace("\"", ""));
 
@@ -154,8 +161,29 @@ ttma = dttma.obtenerTema(tema);
 					<div class="card-body">
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
 		                 
-						<label for="exampleInputEmail1">TEMA de Forma de Culminación de Estudios:</label>
-						<input type="text" id="tema" name="tema" class="form-control" readonly>
+		                 <div class = "row">
+		                 
+		                 <div class = "col-sm-8">
+		                 	<label for="exampleInputEmail1">Tema de Forma de Culminación de Estudios:</label>
+							<input type="text" id="tema" name="tema" class="form-control" readonly>
+		                 
+		                 </div>
+		                 
+		                 <div class = "col-sm-4">
+		                 	<a href="../../pages/inscripcion/detalle_tema_impreso.html?temaID=<%=tema%>">Descargar en formato PDF <i class="fas fa-file-pdf" title="Ver PDF"></i></a>
+		                 
+		                 </div>
+		                 
+		                 </div>
+						
+						
+						
+						
+						<label for="exampleInputEmail1">Fecha de inscripción:</label>
+						<input type="text" id="fecha" name="fecha" class="form-control" readonly>
+						
+						<label for="exampleInputEmail1">Tutor asignado:</label>
+						<input type="text" id="tutor" name="tutor" class="form-control" readonly>
 					
 						<input type="hidden" id="id_tema" name="id_tema"/>
 						
@@ -172,61 +200,53 @@ ttma = dttma.obtenerTema(tema);
 	                    </div>
 				        	
 				        </div>
-				       </div>
 				      
 				       <div class="col-sm-2">
 				       
 	                    
 				     </div>
-	                
-	                </div> 
 					
-						
-				<br/>
-				<hr/>
-			<label for="exampleInputPassword1">Integrantes de Tema FCE</label>
-			
+			<hr>
 						
 			 <!-- /tabla integrantes-->
             <div id= "tbl_estudiante" class="card-body" >
-
-            <br/>
-            <br/>
-            <br/>
-              <table id="estudiantes" class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>Carné/ID</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                 
-                </tr>
-                </thead>
-                <tbody>
-                <%
-              //aquí se traen los usuarios con sus nombres, apellidos y el id
-
-                ArrayList<Tbl_usuario> estudiantes = new ArrayList<Tbl_usuario>();
-                estudiantes = dttma.obtenerEstudiante(tema);
-
-                  	        		for(Tbl_usuario tus : estudiantes)
-                  	        		{
-                %>
+				<label for="exampleInputPassword1">Integrantes de Tema FCE</label>
+	            <br/>
+	           
+	              <table id="estudiantes" class="table table-bordered">
+	                <thead>
 	                <tr>
-	                  <td><%=tus.getCarne()%></td>
-	                  <td><%=tus.getNombres() %></td>
-	                  <td><%=tus.getApellidos() %></td>
-	               
+	                  <th>Carné/ID</th>
+	                  <th>Nombres</th>
+	                  <th>Apellidos</th>
+	                 
 	                </tr>
-	             <%
-	        		}   
-	             %>
-                </tbody>
-             
-              </table>
+	                </thead>
+	                <tbody>
+	                <%
+	              //aquí se traen los usuarios con sus nombres, apellidos y el id
+	
+	                ArrayList<Tbl_usuario> estudiantes = new ArrayList<Tbl_usuario>();
+	                estudiantes = dttma.obtenerEstudiante(tema);
+	
+	                  	        		for(Tbl_usuario tus : estudiantes)
+	                  	        		{
+	                %>
+		                <tr>
+		                  <td><%=tus.getCarne()%></td>
+		                  <td><%=tus.getNombres() %></td>
+		                  <td><%=tus.getApellidos() %></td>
+		               
+		                </tr>
+		             <%
+		        		}   
+		             %>
+	                </tbody>
+	             
+	              </table>
             </div>
-		                <hr/>
-						<br/>
+            <hr>
+		                
 	
 						<!-- tags input -->
 						<label>Palabras Claves</label>
@@ -322,7 +342,6 @@ ttma = dttma.obtenerTema(tema);
 	                  
 	                </div>
 
-	              </form>
 
 	            </div>
 	            <!-- /.card -->
@@ -364,13 +383,12 @@ ttma = dttma.obtenerTema(tema);
 		  </div>
 		</div>
 	  </div>
+	 </div>
 	 <!-- end modal -->
 	 
 	<!-- Footer -->
   		<jsp:include page="/WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->
-
-	</div>
 	<!-- jQuery -->
 	<script src="../../plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
@@ -406,50 +424,6 @@ ttma = dttma.obtenerTema(tema);
     
     
     
-     <script>
-    function  deleteEstudiante(idEstudiante)
-    {
-    	  let id_tema = document.getElementById("id_tema").value;		
-    	 
-    		$.jAlert({
-    		    'type': 'confirm',
-    		    'confirmQuestion': '¿Está seguro de eliminar al estudiante seleccionado de este tema de FCE?',
-    		    'onConfirm': function(e, btn){
-    		     e.preventDefault();
-    		     
-    	    	 $.ajax({
-    	    	        type: "GET",
-    	    	        url: "../../SL_edicion_tema",
-    	    	        data:{id : idEstudiante, opc : 2, tema : id_tema} ,
-    	    	        contentType : "application/json",
-    	    	        error : function(){ 
-    	    	        	errorAlert('ERROR', 'Contacte con administrador de sitio');
-    	    	        },
-    	    	        success: function(msg){
-    	    	        	if(msg == 1){
-    	    	        		$("#tbl_estudiante").load(" #tbl_estudiante");
-    	    	        		successAlert('Exito', 'Estudiante designado correctamente');
-    	    	        	}
-    	    	        	
-    	    	        	if(msg == "2"){
-    	    	        		warningAlert('Error', 'No se ha podido eliminar el usuario');
-    	    	        	}
-    	    	        	
-    	    	        }
-    	    	    });
-    		     
-    		     btn.parents('.jAlert').closeAlert();
-    		    },
-    		    'onDeny': function(e, btn){
-    		      e.preventDefault();
-    		      btn.parents('.jAlert').closeAlert();
-    		    }
-    		  }); 
-    	 
- 
-    }
-    </script>
-    
     <script>
     $(document).ready(function ()
     {
@@ -457,6 +431,10 @@ ttma = dttma.obtenerTema(tema);
     	
     	$("#id_tema").val("<%=ttma.getId()%>");
     	$("#tema").val("<%=ttma.getTema()%>");
+    	let fecha = setFecha("<%=ttma.getFecha()%>");
+    	
+    	$("#fecha").val(fecha);
+    	$("#tutor").val("<%=nombre_tutor%>");
     	$("#palabras").val("<%=ttma.getPalabras_claves()%>");
     	
     	
@@ -488,7 +466,21 @@ ttma = dttma.obtenerTema(tema);
     
     
     <script>
-  
+  	
+    function setFecha(fecha) {
+    	
+    	let arregloFecha = fecha.split("/");
+    	let mes = "";
+    	let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    	
+    	mes = meses[arregloFecha[1] - 1];
+    	
+    	let fechaTexto = arregloFecha[2] + " de " + mes + " del año "+ arregloFecha[0];
+    	
+    	return fechaTexto;
+    	
+    	
+    }
 
     
     </script>

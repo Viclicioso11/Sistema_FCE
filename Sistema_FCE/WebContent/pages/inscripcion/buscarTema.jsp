@@ -109,19 +109,11 @@
           <div class="card">
             <div class="card-header">
             
-            	<%
-            		boolean x = true;
-            		if (x){
-            	%>
-              		<h2>Temas inscritos</h2>
-              	<%}else{ %>
-              		<h2> </h2>
-              	<%} %>
-              	
+            
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <a href="./inscripcion_tema.jsp" >Inscribir tema nuevo <i class="fas fa-plus-circle"></i></a>
+              
               <br><br>
               <table id="Tbl_ec" class="table table-bordered">
                 <thead>
@@ -154,10 +146,12 @@
                       <td><%=tema.getPalabras_claves()%></td>
                       <td><%=tema.getFecha()%></td>
                       <td style="text-align:center">
-                      <a href="../../pages/inscripcion/detalleTema.jsp?temaID=<%=tema.getId_tema()%>"><i class="fas fa-eye" title="Ver"></i></a>
-		                  &nbsp;&nbsp;&nbsp;
+                      <a href="../../pages/inscripcion/detalle_tema_impreso.html?temaID=<%=tema.getId_tema()%>"><i class="fas fa-file-pdf" title="Ver PDF"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="../../pages/inscripcion/detalleTema.jsp?temaID=<%=tema.getId_tema()%>"><i class="fas fa-eye" title="Ver Detalle"  ></i></a>
+		                  &nbsp;&nbsp;
                         <a href="../../SL_descarga_archivos?url=<%=tema.getUrl()%>" style="color: #17a2b8;">
-                          <i class="fas fa-file-download" title="Descargar"></i>
+                          <i class="fas fa-file-download" title="Descargar Propuesta"></i>
                         </a>
                       </td>
   	                </tr>

@@ -20,7 +20,7 @@ public class DT_vw_tema {
 			//Getting connection thread, important!
 			Connection con = connectionP.getConnection();
 			
-			PreparedStatement ps = con.prepareStatement("SELECT * from Vw_tema where id = ?", 
+			PreparedStatement ps = con.prepareStatement("SELECT * from vw_tema where id_tema = ?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, idTema);
@@ -28,12 +28,12 @@ public class DT_vw_tema {
 			
 			if(rsWvTema.next())
 			{	
-				Vw_tema  vwT = new Vw_tema();
-				vwT.setId_tema(rsWvTema.getInt("id_tema"));
-				vwT.setTema(rsWvTema.getString("tema"));
-				vwT.setAmbito(rsWvTema.getString("ambito"));
-				vwT.setCarrera(rsWvTema.getString("carrera"));
-				vwT.setTutor(rsWvTema.getInt("tutor"));
+				
+				tema.setId_tema(rsWvTema.getInt("id_tema"));
+				tema.setTema(rsWvTema.getString("tema"));
+				tema.setAmbito(rsWvTema.getString("ambito"));
+				tema.setCarrera(rsWvTema.getString("carrera"));
+				tema.setTutor(rsWvTema.getInt("tutor"));
 			}
 			// Closing connection thread, very important!
 			connectionP.closeConnection(con);
@@ -101,6 +101,7 @@ public class DT_vw_tema {
 				vwT.setCarrera(rsWvTema.getString("carrera"));
 				vwT.setAmbito(rsWvTema.getString("ambito"));
 				vwT.setTipo_fce(rsWvTema.getString("tipo_fce"));
+				vwT.setUrl(rsWvTema.getString("url"));
 				
 				System.out.println(vwT.getTutor());
 				
