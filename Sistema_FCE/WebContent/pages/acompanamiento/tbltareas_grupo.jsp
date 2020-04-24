@@ -156,7 +156,7 @@
               	<a href="../acompanamiento/newtarea.jsp?id_tem=<%=id_tema%>">Crear tarea <i class="fas fa-plus-circle"></i></a>	
               </div>
                <div class="col-6">
-              	<a href="../acompanamiento/cierre_fce.jsp?idtema=<%=id_tema%>">Generar carta aval<i class="fas fa-plus-circle"></i></a>	
+              	<a href="../acompanamiento/carta_aval.html?idTema=<%=id_tema%>">Generar carta aval<i class="fas fa-plus-circle"></i></a>	
               </div>
               
               </div>

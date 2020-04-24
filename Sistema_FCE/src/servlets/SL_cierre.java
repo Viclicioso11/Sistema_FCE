@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -11,9 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import datos.DT_carrera;
 import datos.DT_cierre;
 import datos.DT_tema;
+import datos.DT_usuario;
+import datos.DT_vw_tema_estudiante;
 import entidades.Tbl_cierre;
+import entidades.Tbl_tema;
+import entidades.Tbl_usuario;
+import entidades.Vw_tema_estudiante;
 
 /**
  * Servlet implementation class SL_cierre
@@ -38,7 +45,68 @@ public class SL_cierre extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String carta = request.getParameter("carta");
+
+		if (carta == null){
+			carta = "0";
+		}
+
+		if(carta != "0"){
+			int idTema = Integer.parseInt(request.getParameter("idTema").toString());
+			DT_tema Ttema = new DT_tema();
+			
+			if(Ttema.existeTema(idTema)) {
+				this.cartaInfo(response, idTema);
+			}else {
+				response.getWriter().append("{\"existe\": false}");
+			}
+			
+		}
+	}
+	
+	private void cartaInfo(HttpServletResponse response, int idTema) throws IOException {
 		
+		//request.getContextPath();
+		DT_tema Ttema = new DT_tema();
+		DT_usuario Tusuario = new DT_usuario();
+		Tbl_tema tema = new Tbl_tema();
+		Tbl_usuario usuario = new Tbl_usuario();
+		DT_vw_tema_estudiante dtEstudiante = new DT_vw_tema_estudiante();
+		ArrayList<Vw_tema_estudiante> Estudiantes = new ArrayList<Vw_tema_estudiante>();
+		DT_cierre cierre = new DT_cierre();
+		DT_carrera carrera = new DT_carrera();
+		
+		//obteniendo datos
+		tema = Ttema.obtenerTema(idTema);
+		usuario  = Tusuario.obtenerNombreTutor(cierre.getCartaTutor(idTema));//obteniendo tutor
+		Estudiantes = dtEstudiante.listarTemas_estudiante(idTema);//obteniendo estudiantes de un tema
+		String carrera_nombre = carrera.obtenerCarrera(tema.getId_carrera()).getNombre();
+		response.getWriter().append(this.cartaInfoJSON(tema, usuario, Estudiantes, carrera_nombre));
+	}
+	
+	private String cartaInfoJSON(Tbl_tema tema, Tbl_usuario usuario, ArrayList<Vw_tema_estudiante> Estudiantes, String carrera_nombre ) {
+		String json = "";
+		
+		json = "{\"existe\": true,";
+		json += "\"titulo\": \"" + tema.getTema() + "\",";
+		json += "\"tutor\": \"" + usuario.getNombres() + " " + usuario.getApellidos() + "\" ,";
+		json += "\"carrera\": \"" + carrera_nombre + "\", ";
+		json += "\"estudiantes\": [";
+		
+		
+		for(int i =0; i < Estudiantes.size(); i++) {
+			Vw_tema_estudiante estudiante = Estudiantes.get(i);
+			
+			if(i == (Estudiantes.size() -1)) {
+				json += "\"" + estudiante.getNombres() + " " + estudiante.getApellidos()  + "\"";
+			}else {
+				json += "\"" + estudiante.getNombres() + " " + estudiante.getApellidos()  + "\",";
+			}
+		}
+		
+		json += "]}";
+		
+		return json;
 	}
 
 	/**
@@ -74,7 +142,7 @@ public class SL_cierre extends HttpServlet {
 			
 			if(!verificadoArchivo) {
 				response.sendRedirect("./pages/acompanamiento/cierre_fce.jsp?msg=2&idtema=" + idtema);
-				System.out.println("Se ha tratado de subir un archivo dañado o de diferente extension a la solicitada");
+				System.out.println("Se ha tratado de subir un archivo daÃ±ado o de diferente extension a la solicitada");
 				return;
 			}
 			
