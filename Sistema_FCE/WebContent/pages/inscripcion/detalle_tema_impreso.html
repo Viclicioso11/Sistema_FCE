@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- 
+		asegurarse que esta ruta sea la misma 
+		o apuntar al arhivo	donde se encuentra
+	-->
+	<link rel="stylesheet" href="./css/detalle_tema.css"/>
+	<meta  charset="utf-8"/>
+	<title>Detalle FCE</title>
+</head>
+
+<body>
+	<aside id="header">
+		<img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBkYXRhLW5hbWU9IkNhcGEgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNzk2Ljk4IDE4MC4xMyI+PHRpdGxlPlNpbiB0w610dWxvLTE8L3RpdGxlPjxwb2x5Z29uIHBvaW50cz0iNzk2LjQ4IDE3OS42MyA0LjQ4IDE3OS42MyA0MDAuNDggOTAuMTMgNzk2LjQ4IDAuNjMgNzk2LjQ4IDE3OS42MyIgc3R5bGU9ImZpbGw6IzAwMjc0MztzdHJva2U6I2ZmZjtzdHJva2UtbWl0ZXJsaW1pdDoxMCIvPjxwb2x5Z29uIHBvaW50cz0iNC40OCAwLjYzIDc5Ni40OCAwLjYzIDQwMC40OCA5NS4xMyA0LjQ4IDE3OS42MyA0LjQ4IDAuNjMiIHN0eWxlPSJmaWxsOiMwYTMzNGEiLz48L3N2Zz4=">
+		<p>UCA</p>
+	</aside>
+	<p>
+		Forma de culminación de estudios: <b><span id="tema"> </span> </b>
+		<br><br>
+
+		<p> 
+			<b> Fecha de inscripción:</b> <span id="fecha"> </span>
+		</p>
+		<p> 
+			<b> Tutor asignado:</b> <span class="tutor"> </span>
+		</p>
+		
+		<p> 
+			<b>Carrera:</b> <span id="carrera"> </span>
+		</p>
+		
+		<p> 
+			<b>Ámbito:</b> <span id="ambito"> </span>
+		</p>
+		
+		<p> 
+			<b> Tipo de forma de culminación de estudios:</b> <span id="tipo"> </span>
+		</p>
+		
+		<p> 
+			<b> Estudiantes:</b>
+		</p>
+		
+	
+		<ul id="estudiantes">
+			<!--  <li> (for) aqui van los estudiantes </li>  -->
+		</ul>
+
+
+</body>
+<script>
+	
+	
+	let url = new URL(window.location.href)
+	let idTema = url.searchParams.get("temaID");
+	if(idTema == null){
+		window.location.href = "../../Error.jsp"
+	}else{
+		fetch(`../../SL_detalle_tema?id_tema=${idTema}`)
+		.then( response => response.json())
+		.then( text => getInfo(text) )
+		.catch( e => console.log(e))		
+	}
+
+	
+	function getInfo(info){
+		if(!info.existe){
+			return;
+		}
+
+		function setVal({titulo, tutor, carrera,ambito,tipo,fecha, estudiantes}){
+			document.querySelectorAll(".tutor").forEach( elemento => {
+				elemento.innerHTML = tutor
+			})
+
+			document.querySelector("#tema").innerHTML = titulo;
+			
+			document.querySelector("#carrera").innerHTML = carrera;
+			document.querySelector("#ambito").innerHTML = ambito;
+			document.querySelector("#tipo").innerHTML = tipo;
+			document.querySelector("#fecha").innerHTML = fecha;
+			
+			let lista = document.getElementById("estudiantes");
+
+			estudiantes.forEach(estudiante => {
+				let li = document.createElement("li");
+				li.innerText = estudiante;
+				lista.append(li);
+			});
+			
+
+		}
+
+		setVal(info);
+		window.print();
+	}
+</script>
+</html>
+
+

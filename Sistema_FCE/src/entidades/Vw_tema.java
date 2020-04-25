@@ -12,7 +12,14 @@ public class Vw_tema {
 	private int id_tema;
 	private String 	nombre_tutor;
 	private String apellido_tutor;
+	private String url;
 	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public int getId_tema() {
 		return id_tema;
 	}

@@ -24,7 +24,8 @@ public class DT_tema {
 		
 		//para obtener el valor de la fecha del sistema
 		String dia = Integer.toString(cal.get(Calendar.DATE));
-		String mes = Integer.toString(cal.get(Calendar.MONTH));
+		int mesEntero = cal.get(Calendar.MONTH) + 1;
+		String mes = Integer.toString(mesEntero);
 		String anio = Integer.toString(cal.get(Calendar.YEAR));
 		String fechaHoy = ""+anio+"/"+mes+"/"+dia;
 		
@@ -180,6 +181,8 @@ public class DT_tema {
 				tem.setId_carrera(rsTema.getInt("id_carrera"));
 				tem.setId_tipo_fce(rsTema.getInt("id_tipo_fce"));
 				tem.setUrl(rsTema.getString("url"));
+				tem.setTutor(rsTema.getInt("tutor"));
+				tem.setFecha(rsTema.getString("fecha"));
 				
 			}
 			// Closing connection thread, very important!
@@ -663,6 +666,37 @@ public class DT_tema {
 				e.printStackTrace();
 			}
 			return url;
+		}
+		
+
+		public String  obtenerNombreTutor(int tema){
+			
+			
+			String nombre = "";
+			
+			try {
+				//Getting connection thread, important!
+				Connection con = connectionP.getConnection();
+				PreparedStatement ps = con.prepareStatement("SELECT nombre_tutor, apellido_tutor FROM public.vw_tema_tutor WHERE id_tema =	?", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				ps.setInt(1, tema);
+				
+				rsTema = ps.executeQuery();
+				
+				if(rsTema.next()) {
+					
+					nombre = rsTema.getString("nombre_tutor") +" "+rsTema.getString("apellido_tutor");
+				}
+				
+				// Closing connection thread, very important!
+				connectionP.closeConnection(con);			
+				
+			}catch (Exception e) {
+				System.out.println(e.getMessage()+ "ERROR EN OBTENER NOMBRE TUTOR");
+			}
+			return nombre;
+				
 		}
 		
 }
