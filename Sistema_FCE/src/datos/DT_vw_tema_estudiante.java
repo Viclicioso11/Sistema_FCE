@@ -56,28 +56,7 @@ public class DT_vw_tema_estudiante {
 		
 	}
 	
-	/**
-	 * este nos servira para filtar todos los estudiantes que  tienen el mismo tema 
-	 */
-	public ArrayList<Vw_tema_estudiante> filtrarestudiante(ArrayList<Vw_tema_estudiante> data){
-		
-		ArrayList<Vw_tema_estudiante> estr = new ArrayList<Vw_tema_estudiante>(); 
-		
-		for (int i=0; i < data.size() ; i ++) 
-		{
-			int count =0;
-			for(int j=0; j< data.size();j++) 
-			{
-				if(data.get(i).getId_tema() == data.get(j).getId_tema()) 
-				{
-					estr.add(data.get(i));
-				}	
-			}
-		}
-			
-		return estr;
-	}
-	
+
 	
 	
 	

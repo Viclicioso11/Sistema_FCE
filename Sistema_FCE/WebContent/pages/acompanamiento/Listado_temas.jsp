@@ -44,21 +44,17 @@
  
  <% 
  
+ 	int id = Integer.parseInt(request.getParameter("idtema").toString());
  	
- 	int id = Integer.parseInt(idtema);
- 
  	//Obteniendo los datos
  	DT_vw_tema_estudiante dtes= new DT_vw_tema_estudiante();
  	DT_tema dtema = new DT_tema();
+ 	
  	ArrayList<Vw_tema_estudiante> tema_estudiante = new ArrayList<Vw_tema_estudiante>();
- 	tema_estudiante = dtes.listarTemas_estudiante(idtema);
+ 	tema_estudiante = dtes.listarTemas_estudiante(id);
  	
  	ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
- 	aval= dtema.obtenertemasaval(id_tema);
- 	
- 	
- 	
- 
+ 	aval= dtema.obtenertemasaval(id);
 
  %>
 <!DOCTYPE html>
@@ -156,22 +152,7 @@
                 </thead>
                 <tbody>
                 <%	
-                	/* DT_usuario dtus = new DT_usuario();
-                  	        		ArrayList<Tbl_usuario> listUser = new ArrayList<Tbl_usuario>();
-                  	        		listUser = dtus.listUser();
-                  	        		
-                  	        		String nombreCompleto = "";
-                  	        		String nombre2="";
-                  	        		String apellido2="";
-                  	        		String apellidos= "";
-                  	        		String estado = "";
-                  	        		for(Tbl_usuario tus : listUser)
-                  	        		{
-                  	        			nombre2=nombre2==null?" ":nombre2;
-                  	        			apellido2=apellido2==null?" ":apellido2;
-                  	        			nombreCompleto = tus.getNombres();
-                  	        			apellidos = tus.getApellidos();
-                  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":""; */
+                	
                 %>
 	                <tr>
 	                  <td></td>
@@ -180,6 +161,7 @@
 	                  <td></td>
 	                  <td></td>
 	                  <td></td>
+	               
 	                </tr>
 	             <%
 	        		//}   
