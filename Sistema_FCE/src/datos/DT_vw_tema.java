@@ -204,7 +204,36 @@ public class DT_vw_tema {
 		
 		
 	}
-	
+	public String obtenerTipoTema(int idTema)
+	{
+		String tema  = "";
+		try
+		{
+			//Getting connection thread, important!
+			Connection con = connectionP.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement("SELECT tipo_fce from vw_tema where id_tema = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idTema);
+			rsWvTema = ps.executeQuery();
+			
+			if(rsWvTema.next())
+			{	
+				
+				tema = rsWvTema.getString("tipo_fce");
+			}
+			// Closing connection thread, very important!
+			connectionP.closeConnection(con);
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerTipoTema() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return tema;
+	}
 	
 
 }

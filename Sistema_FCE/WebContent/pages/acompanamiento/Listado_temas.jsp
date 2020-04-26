@@ -47,6 +47,7 @@
  	//obtener todos los datos posibles
  	ArrayList<Tbl_tema> temas = new ArrayList<Tbl_tema>();
  	DT_tema dtTema = new DT_tema();
+ 	DT_vw_tema dtvwtema = new DT_vw_tema();
  	temas = dtTema.getTemas();
  %>
 <!DOCTYPE html>
@@ -135,14 +136,18 @@
 	                </tr>
                 </thead>
                 <tbody>
-                <% for(Tbl_tema tema: temas){//Inicio del for %>
+                <% String nombre = "";
+                for(Tbl_tema tema: temas){//Inicio del for
+                	nombre = "";%>
 	                <tr>
 	                  <td><%=tema.getTema() %></td>
-	                  <td><%=tema.getId_tipo_fce()%></td>
+	                  <td><%=dtvwtema.obtenerTipoTema(tema.getId())%></td>
 	                  <td><%=tema.getFecha() %></td>
 	                  <td class="cohorte"><%=tema.getFecha() %></td>
-	               	  <td>Estudiantes-<!-- Obtener Estudiantes --><%=tema.getId() %></td>
-	                  <td><%=tema.getTutor() %> <!-- Obtener Tutor --></td>
+	                  <%for(Tbl_usuario tuser: dtTema.obtenerEstudiante(tema.getId())){//Inicio del for estudiantes
+	                  nombre += tuser.getNombres()+" "+tuser.getApellidos()+"\n";	}//fin del for estudiantes %>
+	               	  <td><%=nombre%></td>
+	                  <td><%=dtTema.obtenerNombreTutor(tema.getId()) %> <!-- Obtener Tutor --></td>
 	                  <td><%=tema.getPalabras_claves() %></td>
 	                  <td>Estado <!-- verificar estado conforme al cierre --></td>
 	                </tr>
