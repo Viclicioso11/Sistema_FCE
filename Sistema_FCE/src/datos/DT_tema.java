@@ -730,5 +730,37 @@ public class DT_tema {
 				
 		}
 		
+		
+		/**
+		 * Eliminado Logico
+		 * set estado = 3
+		 * 
+		 * */
+		public boolean eliminarTema(int idTema) {
+			boolean eliminado = false;
+			
+			try {
+				Connection con = this.connectionP.getConnection();
+				
+				PreparedStatement ps = con.prepareStatement("SELECT * from tbl_tema where id = ?", 
+						ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+						ResultSet.HOLD_CURSORS_OVER_COMMIT);
+				
+				ps.setInt(1, idTema);
+				rsTema = ps.executeQuery();
+				
+				if(this.rsTema.next()) {
+					this.rsTema.updateInt("estado", 3);
+					this.rsTema.updateRow();
+					eliminado = true;
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			return eliminado;
+		}
+		
 }
 

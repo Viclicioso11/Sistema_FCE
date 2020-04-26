@@ -23,7 +23,7 @@ public class DT_cierre {
 	
 	public boolean cerrarFCE(Tbl_cierre cierre) {
 		boolean cerrado = false;
-		
+		DT_tema dtTema = new DT_tema();
 		try {
 			Connection con = connectionP.getConnection();
 			
@@ -36,7 +36,11 @@ public class DT_cierre {
 			this.rs.moveToCurrentRow();
 			
 			this.connectionP.closeConnection(con);
-			cerrado = true;
+			
+			if(dtTema.eliminarTema(cierre.getIdTema())) {
+				cerrado = true;
+			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();

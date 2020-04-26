@@ -49,6 +49,7 @@
  	DT_tema dtTema = new DT_tema();
  	DT_vw_tema dtvwtema = new DT_vw_tema();
  	temas = dtTema.getTemas();
+ 	DT_cierre dtCierre = new DT_cierre();
  %>
 <!DOCTYPE html>
 <html>
@@ -125,6 +126,7 @@
               <table id="table" class="table table-bordered">
                 <thead>
 	                <tr>
+	                  <th>#</th>
 	                  <th>Titulo</th>
 	                  <th>Tipo FCE</th>
 	                  <th>Fecha de inscripcion</th>
@@ -136,20 +138,31 @@
 	                </tr>
                 </thead>
                 <tbody>
-                <% String nombre = "";
+                <%
+                int i = 0;
                 for(Tbl_tema tema: temas){//Inicio del for
-                	nombre = "";%>
+                	String estudiantes = "";
+                	String estado = "";
+                	boolean cierre = false;
+                	i++;
+                	for(Tbl_usuario tuser: dtTema.obtenerEstudiante(tema.getId())){
+  	                  estudiantes += tuser.getNombres()+" "+tuser.getApellidos()+"- ";	
+  	                }
+                	
+                	
+                	cierre = dtCierre.tieneCierre(tema.getId());
+                	estado = cierre ? "Terminado": "En progreso";
+                %>
 	                <tr>
+	                  <td><%=i%></td>
 	                  <td><%=tema.getTema() %></td>
 	                  <td><%=dtvwtema.obtenerTipoTema(tema.getId())%></td>
 	                  <td><%=tema.getFecha() %></td>
 	                  <td class="cohorte"><%=tema.getFecha() %></td>
-	                  <%for(Tbl_usuario tuser: dtTema.obtenerEstudiante(tema.getId())){//Inicio del for estudiantes
-	                  nombre += tuser.getNombres()+" "+tuser.getApellidos()+"\n";	}//fin del for estudiantes %>
-	               	  <td><%=nombre%></td>
-	                  <td><%=dtTema.obtenerNombreTutor(tema.getId()) %> <!-- Obtener Tutor --></td>
+	               	  <td><%=estudiantes%></td>
+	                  <td><%=dtTema.obtenerNombreTutor(tema.getId()) %></td>
 	                  <td><%=tema.getPalabras_claves() %></td>
-	                  <td>Estado <!-- verificar estado conforme al cierre --></td>
+	                  <td><%=estado%></td>
 	                </tr>
 	            <%}//Fin del for %>
                 </tbody>
