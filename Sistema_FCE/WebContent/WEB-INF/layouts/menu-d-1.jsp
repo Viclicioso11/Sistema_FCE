@@ -162,7 +162,8 @@
          			"tbltema.jsp",
          			"tblgrupos_fce.jsp",
          			"tbltareas_individual.jsp",
-         			"tblgrupos_administrador.jsp"};
+         			"tblgrupos_administrador.jsp",
+         			"Listado_temas.jsp"};
          	
          	if(DTROL.isInOption(arrayOpciones, AcompanamientoO)){ //Comienzo if Acompañamiento %>
          <li class="nav-item has-treeview">
@@ -212,9 +213,20 @@
              if(DTROL.isInOption(arrayOpciones, AcompanamientoO[3])){
            	 %>	           	 
              <li class="nav-item">	
-               <a href="../acompanamiento/tblgrupos_administrador.jsp" class="nav-link">	
+               <a href="pages/acompanamiento/tblgrupos_administrador.jsp" class="nav-link">	
                  <i class="far fa-circle nav-icon"></i>	
                  <p>Avance Cronograma</p>	
+               </a>	
+             </li>	
+             <%}//fin IF secundario %>
+             
+             <%
+             if(DTROL.isInOption(arrayOpciones, AcompanamientoO[4])){
+           	 %>	           	 
+             <li class="nav-item">	
+               <a href="pages/acompanamiento/Listado_temas.jsp" class="nav-link">	
+                 <i class="far fa-circle nav-icon"></i>	
+                 <p>Biblioteca de Temas</p>	
                </a>	
              </li>	
              <%}//fin IF secundario %>

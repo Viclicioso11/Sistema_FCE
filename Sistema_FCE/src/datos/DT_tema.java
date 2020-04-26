@@ -113,6 +113,37 @@ public class DT_tema {
 	}
 	
 	
+	public ArrayList<Tbl_tema> getTemas(){
+		ArrayList<Tbl_tema> temas = new ArrayList<Tbl_tema>();
+		try {
+			Connection con = this.connectionP.getConnection();
+			this.getResulset(con);
+			
+			while(this.rsTema.next()) {
+				Tbl_tema tema = new Tbl_tema();
+				tema.setId(rsTema.getInt("id"));
+				tema.setTema(rsTema.getString("tema"));
+				tema.setPalabras_claves(rsTema.getString("palabras_claves"));
+				tema.setId_ambito(rsTema.getInt("id_ambito"));
+				tema.setId_carrera(rsTema.getInt("id_carrera"));
+				tema.setId_tipo_fce(rsTema.getInt("id_tipo_fce"));
+				tema.setUrl(rsTema.getString("url"));
+				tema.setTutor(rsTema.getInt("tutor"));
+				tema.setFecha(rsTema.getString("fecha"));
+				temas.add(tema);
+			}
+			
+			this.connectionP.closeConnection(con);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return temas;
+		
+		
+	}
+	
 	public boolean guardarUsuariosTema(ArrayList<Tbl_usuario_tema> usuariosTema) {
 		
 	boolean guardado = false;

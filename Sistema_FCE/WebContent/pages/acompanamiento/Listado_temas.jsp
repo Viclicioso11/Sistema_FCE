@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-
-<%-- <% 
+ 
+ <% 
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -40,51 +40,34 @@
 		return;
 	}
 %>
- --%>
- 
- <% 
- 
- 	int id = Integer.parseInt(request.getParameter("idtema").toString());
- 	
- 	//Obteniendo los datos
- 	DT_vw_tema_estudiante dtes= new DT_vw_tema_estudiante();
- 	DT_tema dtema = new DT_tema();
- 	
- 	ArrayList<Vw_tema_estudiante> tema_estudiante = new ArrayList<Vw_tema_estudiante>();
- 	tema_estudiante = dtes.listarTemas_estudiante(id);
- 	
- 	ArrayList<vw_tema_tutor> aval = new  ArrayList<vw_tema_tutor>();
- 	aval= dtema.obtenertemasaval(id);
 
+ <%
+ 	
+ 	
+ 	//obtener todos los datos posibles
+ 	ArrayList<Tbl_tema> temas = new ArrayList<Tbl_tema>();
+ 	DT_tema dtTema = new DT_tema();
+ 	temas = dtTema.getTemas();
  %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Listado de temas FCE</title>
+  <title>Biblioteca de TEMAS</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
-	<!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
-  
-  <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- DATATABLE NEW buttons -->
-    <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
   
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
-  <!-- jAlert css  -->
-<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
 
 
   <style>
@@ -137,35 +120,33 @@
             </div>
               
             <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered">
+            <div class="card-body" style="overflow-x: scroll">
+              <table id="table" class="table table-bordered">
                 <thead>
-                <tr>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Titulo de tema</th>
-                  <th>Tipo FCE</th>
-                  <th>Fecha de inscripcion</th>
-                  <th>Progreso</th>
-           
-                </tr>
+	                <tr>
+	                  <th>Titulo</th>
+	                  <th>Tipo FCE</th>
+	                  <th>Fecha de inscripcion</th>
+	                  <th>Cohorte</th>
+	                  <th>Estudiantes</th>
+	                  <th>Tutor</th>
+	                  <th>Palabras Claves</th>
+	                  <th>Estado</th>
+	                </tr>
                 </thead>
                 <tbody>
-                <%	
-                	
-                %>
+                <% for(Tbl_tema tema: temas){//Inicio del for %>
 	                <tr>
-	                  <td></td>
-	                  <td></td>
-	                  <td></td>
-	                  <td></td>
-	                  <td></td>
-	                  <td></td>
-	               
+	                  <td><%=tema.getTema() %></td>
+	                  <td><%=tema.getId_tipo_fce()%></td>
+	                  <td><%=tema.getFecha() %></td>
+	                  <td class="cohorte"><%=tema.getFecha() %></td>
+	               	  <td>Estudiantes-<!-- Obtener Estudiantes --><%=tema.getId() %></td>
+	                  <td><%=tema.getTutor() %> <!-- Obtener Tutor --></td>
+	                  <td><%=tema.getPalabras_claves() %></td>
+	                  <td>Estado <!-- verificar estado conforme al cierre --></td>
 	                </tr>
-	             <%
-	        		//}   
-	             %>
+	            <%}//Fin del for %>
                 </tbody>
               </table>
             </div>
@@ -197,76 +178,45 @@
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
 <!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
-
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
-
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
-
-
-
-
-
+<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<!-- page script -->
-
-<!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-
 
 
 <script>
-  $(function () {
-    $("#example1").DataTable();
-//     $('#example2').DataTable({
-//       "paging": true,
-//       "lengthChange": false,
-//       "searching": true,
-//       "ordering": false,
-//       "info": true,
-//       "autoWidth": false,
-      
-//     });
-    $('#example2').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-        'pdf',
-        'excel',
-        'print'
-        ]
+function cohorte(){
+  let spans = document.querySelectorAll(".cohorte");
+  
+  spans.forEach(function(element){
+	  element.innerHTML = new Date(element.innerHTML).getFullYear();
+  })
+}
+cohorte();
 
-      });
-    
-    $("#example2").css({
-        "border": "none",
-        "padding-top": "20px",
-      })
-      $("tr").css({"height": "49px"})
-      
-  });
+
+$(function () {
+  $('#table').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+      'print'
+      ]
+    });
+});
+  
+  
   
 </script>
-
-
-
-
-
 </body>
 </html>
 
