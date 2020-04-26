@@ -312,8 +312,6 @@ public class DT_rol_opcion {
 				opciones = (ArrayList<Vw_rol_opcion>) opcs;
 			}
 			
-			System.out.println("pasa por el cast de las opciones");
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
