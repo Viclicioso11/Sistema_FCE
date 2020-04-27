@@ -142,7 +142,7 @@
              
              <%if(DTROL.isInOption(arrayOpciones, inscripcionO[4])){//Comienzo if Secundario%>
              <li class="nav-item">
-               <a href="pages/inscripcion/buscarTema.jsp" class="nav-link">
+               <a href="../inscripcion/buscarTema.jsp" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Buscar Tema</p>
                </a>

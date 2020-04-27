@@ -35,6 +35,7 @@ public class SL_login extends HttpServlet {
 		hts.setAttribute("login",null);
 		hts.setAttribute("id", null);
 		hts.setAttribute("listOpciones", null);
+		hts.invalidate();
 		response.sendRedirect("index.jsp");
 		return;
 	}

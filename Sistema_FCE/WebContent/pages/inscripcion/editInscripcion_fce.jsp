@@ -170,7 +170,7 @@ ttma = dttma.obtenerTema(tema);
 				        	<label for="exampleInputFile">Propuesta de Forma de Culminación de Estudios:</label>
 	                    		<div class="input-group">
 	                      		<div class="custom-file">
-	                        	<input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce">
+	                        	<input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce" accept=".doc, .docx, .pdf">
 	                       	<label class="custom-file-label" for="exampleInputFile">Cambiar el documento de Propuesta FCE</label>
 	                      </div>
 	                    </div>
