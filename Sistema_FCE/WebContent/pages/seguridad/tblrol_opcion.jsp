@@ -115,6 +115,8 @@ if(!permiso) {
       </div><!-- /.container-fluid -->
     </section>
 
+	<div class="card" >
+	<div class = "card-body" style="overflow-x: scroll">
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -126,7 +128,7 @@ if(!permiso) {
             <h2>Opciones Disponibles de Rol</h2>
             </div>
             <!-- /.card-header -->
-            <div class="card-body" id="divTblOpciones">
+            <div class="card-body" id="divTblOpciones" style="overflow-x: scroll">
             
             <input type="hidden" id="id_opciones" name="id_opciones">
               <table id="Tbl_opciones" class="table table-bordered">
@@ -181,7 +183,7 @@ if(!permiso) {
                <h2>Roles</h2>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
               <table id="Tbl_rol" class="table-bordered">
                 <thead>
                 <tr>
@@ -224,8 +226,11 @@ if(!permiso) {
 
           </div>
              </div>
+             
       <!-- /.row -->
     </section>
+    </div>
+    </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

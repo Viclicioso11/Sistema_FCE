@@ -139,7 +139,7 @@
                 <div class="card-header">
                   <h3 class="card-title">Crear Actividad</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
 
                   <form id="addEvent">
 

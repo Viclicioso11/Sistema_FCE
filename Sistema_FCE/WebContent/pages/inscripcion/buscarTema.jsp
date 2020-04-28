@@ -112,7 +112,7 @@ if(!permiso) {
             
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
               
               <br><br>
               <table id="Tbl_ec" class="table table-bordered">
