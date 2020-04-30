@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-
+    
 <% 
-/*
 	DT_rol_opcion Dtro = new DT_rol_opcion();
 	ArrayList <Vw_rol_opcion> Opciones = new ArrayList <Vw_rol_opcion>();
 	Opciones = Dtro.getOpciones(session.getAttribute("listOpciones"));
@@ -40,8 +39,8 @@
 		response.sendRedirect("../../Error.jsp");
 		return;
 	}
-	*/
 %>
+    
 
  
 <%
@@ -162,12 +161,20 @@ ttma = dttma.obtenerTema(tema);
 						<br/>
 					
 						<!-- -->
-					<div class="row">
-
 						
+					<div class="row">
+					
+						<div class="col-sm-10">
+						
+						<label>Propuesta de Forma de Culminación de Estudios:</label>
+						</div>
+					</div>
+					<div class="row">
+					
 				       <div class="col-sm-10">
 				        <div class="form-group">
-				        	<label for="exampleInputFile">Propuesta de Forma de Culminación de Estudios:</label>
+				        	
+				        	
 	                    		<div class="input-group">
 	                      		<div class="custom-file">
 	                        	<input  type="file" class="custom-file-input" id="fl_propuesta_fce" name="fl_propuesta_fce" accept=".doc, .docx, .pdf">
@@ -194,7 +201,7 @@ ttma = dttma.obtenerTema(tema);
 			
 						
 			 <!-- /tabla integrantes-->
-            <div id= "tbl_estudiante" class="card-body" >
+            <div id= "tbl_estudiante" class="card-body"  style="overflow-x: scroll">
 
             <a href="#" data-toggle="modal" data-target="#addMember">Asignar Estudiante a FCE<i class="fas fa-plus-circle"></i></a>
             <br/>

@@ -87,7 +87,8 @@
          			"tblplan_graduacion.jsp",
          			"tblcronograma.jsp",
          			"inscripcion_tema.jsp",
-         			"buscarTema.jsp"};
+         			"buscarTema.jsp",
+         			"Informe_tema_tutor.jsp"};
          	
          	if(DTROL.isInOption(arrayOpciones, inscripcionO)){ //Comienzo if Inscripcion %>
          <li class="nav-item has-treeview">
@@ -145,6 +146,15 @@
                <a href="pages/inscripcion/inscripcion_tema.jsp" class="nav-link">
                  <i class="far fa-circle nav-icon"></i>
                  <p>Inscribir Tema</p>
+               </a>
+             </li>
+             <%}//fin IF secundario %>
+             
+             <%if(DTROL.isInOption(arrayOpciones, inscripcionO[5])){//Comienzo if Secundario%>
+             <li class="nav-item">
+               <a href="pages/acompanamiento/Informe_tema_tutor.jsp" class="nav-link">
+                 <i class="far fa-circle nav-icon"></i>
+                 <p>Informe Tutores</p>
                </a>
              </li>
              <%}//fin IF secundario %>

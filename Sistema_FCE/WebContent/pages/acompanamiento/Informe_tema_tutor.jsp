@@ -122,6 +122,7 @@
               
             <!-- /.card-header -->
             <div class="card-body" style="overflow-x: scroll">
+            <label>Seleccione la  fila de la tabla para ver los detalles de la FCE</label>
               <table id="table" class="table table-bordered">
                 <thead>
 	                <tr>
@@ -132,21 +133,22 @@
 	                  <th>Tutor</th>
 	                  <th>Ambito</th>
 	                  <th>Carrera</th>
-	                  <th>Palabras Claves</th>
+	                  
 	                </tr>
                 </thead>
                 <tbody>
                 <%
-                for(Vw_tema tema: temas){//Inicio del for%>
-	                <tr>
-	                  <td><%=tema.getId_tema() %></td>
+                int i = 0;
+                for(Vw_tema tema: temas){//Inicio del for
+                	i++;%>
+	                <tr onclick="irDetalle(<%=tema.getId_tema()%>)">
+	                  <td><%=i%></td>
 	                  <td><%=tema.getTema() %></td>
 	                  <td><%=tema.getTipo_fce()%></td>
 	                  <td><%=tema.getFecha() %></td>
 	                  <td><%=dtTema.obtenerNombreTutor(tema.getId_tema()) %></td>
 	                  <td><%=tema.getAmbito() %>
 	                  <td><%=tema.getCarrera() %></td>
-	                  <td><%=tema.getPalabras_claves() %></td>
 	                </tr>
 	            <%}//Fin del for %>
                 </tbody>
@@ -195,6 +197,17 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 
+<script>
+
+function irDetalle(id) {
+	
+	window.location.href="../../pages/inscripcion/detalleTema.jsp?temaID="+id;	
+	
+}
+
+
+</script>
+
 
 <script>
 $(function () {
@@ -205,8 +218,6 @@ $(function () {
       ]
     });
 });
-  
-  
   
 </script>
 </body>

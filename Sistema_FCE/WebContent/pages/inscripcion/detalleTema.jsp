@@ -160,19 +160,26 @@ if(nombre_tutor.equals("")) {
 		                <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
 		                 
 		                 <div class = "row">
+		                 <div class = "col-sm-8">
+		                 <label >Tema de Forma de Culminación de Estudios:</label>
+		                 </div>
+		                 </div>
+		                 <div class ="row" >
 		                 
 		                 <div class = "col-sm-8">
-		                 	<label for="exampleInputEmail1">Tema de Forma de Culminación de Estudios:</label>
+		                 	
 							<input type="text" id="tema" name="tema" class="form-control" readonly>
 		                 
 		                 </div>
 		                 
 		                 <div class = "col-sm-4">
-		                 	<a href="../../pages/inscripcion/detalle_tema_impreso.html?temaID=<%=tema%>">Descargar en formato PDF <i class="fas fa-file-pdf" title="Ver PDF"></i></a>
+		                 
+		                 <button class="btn btn-primary" type="button" onclick="descargarPDF(<%=tema%>);">Ver en formato PDF  <i class="fas fa-file-pdf" title="Ver PDF"></i></button>
 		                 
 		                 </div>
-		                 
 		                 </div>
+		                 
+		                 
 						
 						
 						
@@ -207,7 +214,7 @@ if(nombre_tutor.equals("")) {
 			<hr>
 						
 			 <!-- /tabla integrantes-->
-            <div id= "tbl_estudiante" class="card-body" >
+            <div id= "tbl_estudiante" class="card-body" style="overflow-x: scroll" >
 				<label for="exampleInputPassword1">Integrantes de Tema FCE</label>
 	            <br/>
 	           
@@ -459,6 +466,17 @@ if(nombre_tutor.equals("")) {
     if(nuevo == "2")
         errorAlert('Error', 'Revise los datos e intente nuevamente!!!')
     }); 
+    </script>
+    
+    
+    <script>
+    
+    function descargarPDF(id) {
+    	
+    	window.location.href="../../pages/inscripcion/detalle_tema_impreso.html?temaID="+id;	
+    	
+    }
+    
     </script>
     
     
