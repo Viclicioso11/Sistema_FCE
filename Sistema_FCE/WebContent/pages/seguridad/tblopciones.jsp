@@ -125,7 +125,7 @@
               
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
             
             <a href="./newOpcion.jsp">Agregar Opciones <i class="fas fa-plus-circle"></i></a>
             <br/> <br/>

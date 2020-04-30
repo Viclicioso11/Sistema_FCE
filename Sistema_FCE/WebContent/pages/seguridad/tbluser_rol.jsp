@@ -121,7 +121,7 @@
                <h2>Gestión de Roles de Usuario</h2>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
               <table id="Tbl_usuario_rol" class="table table-bordered">
                 <thead>
                 <tr>

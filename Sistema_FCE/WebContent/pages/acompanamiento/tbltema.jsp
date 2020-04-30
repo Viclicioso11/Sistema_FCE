@@ -145,7 +145,7 @@
 			          </select>
 		          
         		</div>
-       		 <div class = "card" id= "vista1">
+       		 <div class = "card" id= "vista1" style="overflow-x: scroll">
               <table id="example1" class="table table-bordered">
                 <thead>
 	                <tr>

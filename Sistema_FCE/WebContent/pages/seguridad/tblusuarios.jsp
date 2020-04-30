@@ -129,7 +129,7 @@
             </div>
               
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
             <a href="../seguridad/newUser.jsp">Agregar Usuario <i class="fas fa-plus-circle"></i></a>
                &nbsp; &nbsp; &nbsp; &nbsp;
                 <a href="../seguridad/tbluser_rol.jsp">Roles de Usuario<i class="fas fa-user-tag"></i></a>

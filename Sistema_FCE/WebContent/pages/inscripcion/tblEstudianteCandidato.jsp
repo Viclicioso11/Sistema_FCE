@@ -122,7 +122,7 @@
               <!--<a href="#">Agregar Estudiante Candidato <i class="fas fa-plus-circle"></i></a>-->
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
               <a href="./newEstudianteCandidato.jsp" >Agregar Estudiante Candidato <i class="fas fa-plus-circle"></i></a>
               <br><br>
               <table id="Tbl_ec" class="table table-bordered">
