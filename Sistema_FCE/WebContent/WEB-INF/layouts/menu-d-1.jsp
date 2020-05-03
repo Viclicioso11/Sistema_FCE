@@ -250,7 +250,9 @@
         	/*
         		mostrar evaluacion
         	*/
-        	String[]  evaluacion = {"cierre_fce.jsp"};
+        	String[]  evaluacion = {
+        			"cierre_fce.jsp",
+        			"evaluacion_tutor.jsp"};
         	if(DTROL.isInOption(arrayOpciones, evaluacion)){ //Comienzo if Evaluacion %>
         
         	<li class="nav-item has-treeview">
@@ -266,7 +268,6 @@
            <ul class="nav nav-treeview">
            	 
            	 <%
-
              int id_user = Integer.parseInt(session.getAttribute("idUsuario").toString());
            	 
              if(id_user != 0){
@@ -283,6 +284,14 @@
 	             </li>
              <%}}//fin IF secundario %>
              
+             <%if(DTROL.isInOption(arrayOpciones, evaluacion[1])){ //%>
+             	<li class="nav-item">
+	               <a href="pages/acompanamiento/evaluacion_tutor.jsp" class="nav-link">
+	                 <i class="far fa-circle nav-icon"></i>
+	                 <p>Evaluar tutor</p>
+	               </a>
+	             </li>
+             <%}//fin if %>
            </ul>
          </li>
         

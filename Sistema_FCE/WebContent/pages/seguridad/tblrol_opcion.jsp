@@ -122,7 +122,7 @@ if(!permiso) {
       <div class="row">
       
        <!-- /.col -->
-        <div class="col-8">
+        <div class="col-12 col-lg-8">
           <div class="card">
             <div class="card-header">
             <h2>Opciones Disponibles de Rol</h2>
@@ -177,7 +177,7 @@ if(!permiso) {
         <!-- /.col -->
       
       <!-- tabla de roles -->
-      <div class="col-4">
+      <div class="col-12 col-lg-4">
           <div class="card">
             <div class="card-header">
                <h2>Roles</h2>
