@@ -60,10 +60,6 @@ if(!permiso) {
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- jAlert css  -->
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
 
@@ -71,14 +67,13 @@ if(!permiso) {
   <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
-  <!-- DATATABLE NEW -->
-  <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-  <!-- DATATABLE NEW buttons -->
-  <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-
-
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  
+  
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   
 
@@ -207,32 +202,10 @@ if(!permiso) {
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- DataTables -->
-<!-- <script src="../../plugins/datatables/jquery.dataTables.js"></script> -->
-<!-- <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
-
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-
-<!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
-
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
-
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
-
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- Select2 -->
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
 
 <script src="../../plugins/select2/js/select2.full.min.js"></script>
 
@@ -255,11 +228,6 @@ if(!permiso) {
 		
 		window.location.href="../../pages/inscripcion/verCronograma.jsp?cronogramaID="+idcro;
 	}
-
-</script>
-
-
-<script>
 	function linkEditarcro(idcro){
 		window.location.href="../../pages/inscripcion/editCronograma.jsp?id_cronograma="+idcro;
 	}

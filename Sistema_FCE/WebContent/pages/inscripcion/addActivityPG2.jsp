@@ -82,21 +82,22 @@
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-<!-- jAlert css  -->
+  <!-- jAlert css  -->
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
 
-  <!-- DATATABLE NEW -->
-  <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-  <!-- DATATABLE NEW buttons -->
-  <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  
+  
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Navbar -->
  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
@@ -132,7 +133,7 @@
 
 
           <!-- create events column -->
-          <div class="col-md-4">
+          <div class="col-12 col-lg-4">
 
             <div class="sticky-top mb-3">
 
@@ -183,7 +184,7 @@
           </div>
           <!-- /.col -->
 		  <!-- table -->
-		  <div class="col-md-8">	
+		  <div class="col-12 col-lg-8">	
 		  	<div class="card">
 		  		<div class="card-body" style="overflow-x: scroll;">
 		  			<table id="tableA" class="table table-bordered">
@@ -201,14 +202,14 @@
 		                	for(Tbl_actividad_pg actividad: actividades){
 		                %>
 		                	<tr id="actividadId<%=actividad.getId()%>">
-		                	  <th><%=actividad.getNombre() %></th>
-		                	  <th><%=actividad.getDescripcion() %></th>
-		                	  <th><%=actividad.getFecha_inicio().toString() %></th>
-		                	  <th><%=actividad.getFecha_fin().toString() %></th>
-		                	  <th>
+		                	  <td><%=actividad.getNombre() %></td>
+		                	  <td><%=actividad.getDescripcion() %></td>
+		                	  <td><%=actividad.getFecha_inicio().toString() %></td>
+		                	  <td><%=actividad.getFecha_fin().toString() %></td>
+		                	  <td>
 		                	  	<a href="#" onclick="editar(<%=actividad.getId()%>)"><i class="far fa-edit"></i></a>&nbsp;&nbsp;
 		                	  	<a href="#" onclick="eliminar(<%=actividad.getId()%>)" ><i class="far fa-trash-alt"></i></a>
-		                	  </th>
+		                	  </td>
 		                	</tr>
 		                <%} %>
 		                </tbody>
@@ -250,38 +251,21 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-
-<!-- jQuery UI --> 
-<!-- <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script> -->
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../dist/js/demo.js"></script> -->
-
 <!-- date-range-picker -->
 <script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-<!-- DATATABLE NEW -->
-<script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-
-<!-- DATATABLE NEW buttons -->
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-
-<!-- js DATATABLE NEW buttons print -->
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
-
- <!-- js DATATABLE NEW buttons pdf -->
-<script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
-
-<!-- js DATATABLE NEW buttons excel -->
-<script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
-
 <!-- jAlert js -->
 <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
 <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
 
 <script>
 	let minDate = "<%=tblPG.getFecha_inicio()%>"
@@ -308,15 +292,8 @@ $('#dateRange').daterangepicker({
  * inicializando tabla
  */
 $('#tableA').DataTable({
-  dom: 'Bfrtip',
-  buttons: ['pdf','excel','print'],
-  "order": []
+	"bLengthChange": false,
 })
-$("#tableA").css({
-  "border": "none",
-  "padding-top": "20px",
-})
-$("tbody th").css({"font-weight": "500"})
 
 //asignando valores necesarios
 $("#opc").val(1)

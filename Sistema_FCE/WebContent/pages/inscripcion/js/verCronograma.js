@@ -235,12 +235,6 @@ function verActividad(nombre, descripcion,id, fechaInicio, fechaFin){
 // mostramos todas las actividades
 
 function addEvent(descripcion, nombre, fechaInicio, fechaFin, id, color){
- 
-    console.log(descripcion)
-    console.log(nombre)
-   console.log(fechaInicio)
-   console.log(fechaFin)
-   console.log(id)
    
    
     let evento = {

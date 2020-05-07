@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 
@@ -83,29 +82,25 @@ if(!permiso) {
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   
-   <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- DATATABLE NEW buttons -->
-    <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-  
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
   
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
   <!-- date picker -->
   <link href="../../plugins/date-picker/datepicker.css">
-  
    <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
-  
     <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   
 
@@ -143,13 +138,13 @@ if(!permiso) {
       <div class="row">
       
        <!-- /.col -->
-        <div class="col-5">
+        <div class="col-12 col-lg-5">
           <div class="card">
             <div class="card-header">
             <h2>Seleccionar temas</h2>
             </div>
             <!-- /.card-header -->
-            <div class="card-body" id="divTblOpciones">
+            <div class="card-body" id="divTblOpciones" style="overflow-x: scroll">
             
             <input type="hidden" id="id_grupos" name="id_grupos" required>
             <input type="hidden" id="id_actividad" name="id_actividad" required>
@@ -195,14 +190,14 @@ if(!permiso) {
         <!-- /.col -->
       
       <!-- tabla de roles -->
-      <div class="col-7">
+      <div class="col-12 col-lg-7">
           <div class="card">
             <div class="card-header">
                <h2>Seleccionar actividad del cronograma</h2>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <table id="Tbl_rol" class="table-bordered">
+            <div class="card-body" style="overflow-x: scroll">
+              <table id="Tbl_rol" class="table table-bordered" >
                 <thead>
                 <tr>
                   <th>Título</th>
@@ -315,34 +310,36 @@ if(!permiso) {
 <script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
 
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<!-- DATATABLE NEW buttons --> 
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
+<!-- js DATATABLE NEW buttons pdf -->
+<script src="../../plugins/datatables-buttons/pdf/pdfmake.min.js"></script>
+<script src="../../plugins/datatables-buttons/pdf/vfs_fonts.js"></script>
 
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
+<!-- js DATATABLE NEW buttons excel -->
+<script src="../../plugins/datatables-buttons/excel/jszip.min.js"></script>
+
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  <script src="./js/tarea_grupal.js" defer></script>
+<script src="./js/tarea_grupal.js" defer></script>
 
 <script>
 
@@ -392,32 +389,18 @@ function deleteOpcion(id_rol, id_opcion)
   $(function () {
     $('#Tbl_opciones').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-        'pdf',
-        'excel',
-        'print'
-        ]
+        "bLengthChange": false,
+        buttons: []
       });
     
-    $("#Tbl_opciones").css({
-        "border": "none",
-        "padding-top": "20px",
-      })
-      $("tr").css({"height": "49px"})
+    
+    $('#Tbl_rol').DataTable({
+    	dom: 'Bfrtip',
+        "bLengthChange": false,
+        buttons: []
+	});
+    
   });
-  	
-  $(function () {
-	  
-	  $('#Tbl_rol').DataTable({
-
-	      });
-	    $("#Tbl_rol").css({
-	        "border": "none",
-	        "padding-top": "20px",
-	      })
-	      $("tr").css({"height": "49px"})
-	  });
-
   
 </script>
 

@@ -98,6 +98,8 @@ if(!permiso) {
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
@@ -106,17 +108,16 @@ if(!permiso) {
   
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
   
-    <!-- timepicker -->
+  <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   
   
-   <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- DATATABLE NEW buttons -->
-    <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
   
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Navbar -->
  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
@@ -272,8 +273,7 @@ if(!permiso) {
 <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../dist/js/demo.js"></script> -->
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <!-- datepicker -->
 <script src="../../plugins/date-picker/datepicker.js"></script>
@@ -286,34 +286,36 @@ if(!permiso) {
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<!-- DATATABLE NEW buttons --> 
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
+<!-- js DATATABLE NEW buttons pdf -->
+<script src="../../plugins/datatables-buttons/pdf/pdfmake.min.js"></script>
+<script src="../../plugins/datatables-buttons/pdf/vfs_fonts.js"></script>
 
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
+<!-- js DATATABLE NEW buttons excel -->
+<script src="../../plugins/datatables-buttons/excel/jszip.min.js"></script>
 
 
-  <!-- JS con todas las funciones para el edit-->
-  <script src="./js/editTarea.js" defer></script>
+<!-- JS con todas las funciones para el edit-->
+<script src="./js/editTarea.js" defer></script>
 
 
 
 <script>
-
+	
+	$('#Tbl_rol').DataTable();
 	function setFechasLimites(minDate, maxDate, id_elem) {
 		
 		minDate = formatDate(minDate);
@@ -334,63 +336,44 @@ if(!permiso) {
 
 
 <script>
+
+$(document).ready(function () {
+/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
+  	//tituloTarea
+  	//dateRange
+  	//descripcionTarea
+  	
+  	let RangoFechas = ""+formatDate('<%=ttar.getFecha_inicio()%>') + " - " + formatDate('<%=ttar.getFecha_fin()%>');
+ 	
+ 	console.log("<%=ttar.getFecha_inicio()%>");
+	$("#tituloTarea").val("<%=ttar.getTitulo()%>");
+ 	$("#descripcionTarea").val("<%=ttar.getDescripcion()%>");
+ 	
+ 	
+ 	$("#dateRange").val(RangoFechas);
+ 	
+ 	//para que se seleccione la actividad con la que había sido creada la actividad
+ 	
+ 	let elemento = document.getElementById("<%=ttar.getId_actividad_cronograma()%>");
+	elemento.style.backgroundColor = "green";
+  	
+	seleccionaActividad("<%=ttar.getId_actividad_cronograma()%>");
+
+ 	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
   
-  $(function () {
-	  
-	  $('#Tbl_rol').DataTable({
+    /////////// VARIABLES DE CONTROL MSJ ///////////
+    var nuevo = 0;
+   
+    nuevo = "<%=mensaje%>";
 
-	      });
-	    $("#Tbl_rol").css({
-	        "border": "none",
-	        "padding-top": "20px",
-	      })
-	      $("tr").css({"height": "49px"})
-	  });
+    if(nuevo == "2")
+    {
+      errorAlert('Error', 'Revise los datos e intente nuevamente.');
+    }
+ 
+   
 
-  
-</script>
-
-
-<script>
-  
-$(document).ready(function ()
-	    {
-			/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-	    	//tituloTarea
-	    	//dateRange
-	    	//descripcionTarea
-	    	
-	    	let RangoFechas = ""+formatDate('<%=ttar.getFecha_inicio()%>') + " - " + formatDate('<%=ttar.getFecha_fin()%>');
-	    	
-	    	console.log("<%=ttar.getFecha_inicio()%>");
-			$("#tituloTarea").val("<%=ttar.getTitulo()%>");
-	    	$("#descripcionTarea").val("<%=ttar.getDescripcion()%>");
-	    	
-	    	
-	    	$("#dateRange").val(RangoFechas);
-	    	
-	    	//para que se seleccione la actividad con la que había sido creada la actividad
-	    	
-	    	let elemento = document.getElementById("<%=ttar.getId_actividad_cronograma()%>");
-			elemento.style.backgroundColor = "green";
-	    	
-			seleccionaActividad("<%=ttar.getId_actividad_cronograma()%>");
-			
-	    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
-	     
-	      /////////// VARIABLES DE CONTROL MSJ ///////////
-	      var nuevo = 0;
-	      
-	      nuevo = "<%=mensaje%>";
-
-	      if(nuevo == "2")
-	      {
-	        errorAlert('Error', 'Revise los datos e intente nuevamente.');
-	      }
-	    
-	      
-
-	    });
+ });
   
 </script>
 
