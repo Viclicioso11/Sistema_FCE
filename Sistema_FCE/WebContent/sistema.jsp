@@ -41,6 +41,17 @@
 	}
 %>
 
+<%
+
+ String rol_texto = session.getAttribute("id").toString();
+ int id_rol = 0;
+if(rol_texto != null) {
+	
+	id_rol = Integer.parseInt(rol_texto);
+	
+}
+%>
+
 
 <!DOCTYPE html>
 <html>
@@ -62,6 +73,16 @@
  
  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
  
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="plugins/fullcalendar/main.min.css">
+  <link rel="stylesheet" href="plugins/fullcalendar-daygrid/main.min.css">
+  <link rel="stylesheet" href="plugins/fullcalendar-timegrid/main.min.css">
+  <link rel="stylesheet" href="plugins/fullcalendar-bootstrap/main.min.css">
+  
+  
+    <!-- jAlert css  -->
+	<link rel="stylesheet" href="plugins/jAlert/dist/jAlert.css" />
+ 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -77,55 +98,55 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Sistema</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Sistema</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+   
+		<%
+		//para cada rol cargar un inicio distinto, y si no es aprte de los 3 primeros roles, que cargue un default
+		switch (id_rol) {
+		
+		
+		case 1: 
+			
+		%>
+		<jsp:include page="inicioAdministrador.jsp"></jsp:include>
+		
+		<%
+		//fin primer case
+			break;
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">INICIO EN CONSTRUCCIÓN <i class="fas fa-tools"></i></h3>
-                  <br>
-                  
-                </div>
-              
-              </div>
-              <img src="dist/img/construccion.jpg"  alt="En construcción">
-              <!-- <img src="dist/img/logoUca.png"  alt="Entrada Uca">/.content-header -->
-            </div>
-            <!-- /.card -->
-            
-            
-            <!-- /.card -->
-          </div>
-          <!-- /.col-md-6 -->
-        
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+		case 2: 
+		
+		%>
+		
+		
+		<%
+		//fin segundo case
+			break;
+		
+		case 3:
+			
+		%>	
+		
+		
+		<%	
+		//fin tercer case
+			break;
+		
+		default: 
+		%>	
+		
+		
+		<%
+		//fin default
+		}//fin switch
+		
+		%>
+		
+		
+		
+		
+		
+
+
   </div>
   <!-- /.content-wrapper -->
 
@@ -139,6 +160,8 @@
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
@@ -151,7 +174,21 @@
 <script src="dist/js/pages/dashboard3.js"></script>
 
 
+<!-- fullCalendar 2.2.5 -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/fullcalendar/main.min.js"></script>
+<script src="plugins/fullcalendar-daygrid/main.min.js"></script>
+<script src="plugins/fullcalendar-timegrid/main.min.js"></script>
+<script src="plugins/fullcalendar-interaction/main.min.js"></script>
+<script src="plugins/fullcalendar-bootstrap/main.min.js"></script>
+<script src="plugins/fullcalendar/locales/es.js"></script>
 
+<!-- jAlert js -->
+  <script src="plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  
+  <!-- jAlert js -->
+  <script src="./js/inicioAdmin.js"></script>
 
 <script>
 $(document).ready(function ()

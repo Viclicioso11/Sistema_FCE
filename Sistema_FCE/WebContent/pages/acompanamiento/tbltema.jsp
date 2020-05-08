@@ -460,5 +460,21 @@ function vistatabla(){
 }
 </script>
 
+
+<script>
+
+  
+      /////////// VARIABLES DE CONTROL MSJ ///////////
+ var mensaje =  "<%=mensaje%>"
+
+ 
+ if(mensaje == "3")
+   successAlert('Éxito', 'El registro ha sido modificado correctamente.')
+ 
+ 
+   
+</script>
+
+
 </body>
 </html>

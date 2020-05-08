@@ -1,4 +1,4 @@
-
+/*
 $('#dateRange').daterangepicker({
     "locale": {
         "format": "YYYY/MM/DD",
@@ -73,7 +73,7 @@ $('#dateRangeCronograma').daterangepicker({
 
 // fin de la manipulacion del Dom
 
-
+*/
 /**
  * initialización de 
  * variables del calendar
@@ -87,7 +87,7 @@ var d    = date.getDate(),
 var Calendar = FullCalendar.Calendar
 var Draggable = FullCalendarInteraction.Draggable
 
-var calendarEl = document.getElementById('calendar')
+var calendarEl = document.getElementById('calendarCrono')
 var containerEvents = document.getElementById('external-events')
 var checkbox = document.getElementById('drop-remove')
 

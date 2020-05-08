@@ -34,6 +34,7 @@ public class DT_vw_tema {
 				tema.setAmbito(rsWvTema.getString("ambito"));
 				tema.setCarrera(rsWvTema.getString("carrera"));
 				tema.setTutor(rsWvTema.getInt("tutor"));
+				tema.setTipo_fce(rsWvTema.getString("tipo_fce"));
 			}
 			// Closing connection thread, very important!
 			connectionP.closeConnection(con);

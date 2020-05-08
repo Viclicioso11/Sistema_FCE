@@ -181,10 +181,10 @@ public class SL_tarea extends HttpServlet {
 				
 				if(dtgrut.asignarTareaGrupoIndividual(idTemaTexto, id_tarea)) {
 					
-					response.sendRedirect("./pages/acompanamiento/newtarea_grupal.jsp?msj=1");
+					response.sendRedirect("./pages/acompanamiento/newtare.jsp?msj=1");
 				} else {
 					
-					response.sendRedirect("./pages/acompanamiento/newtarea_grupal.jsp?msj=2");
+					response.sendRedirect("./pages/acompanamiento/newtarea.jsp?msj=2");
 				}
 				
 				
