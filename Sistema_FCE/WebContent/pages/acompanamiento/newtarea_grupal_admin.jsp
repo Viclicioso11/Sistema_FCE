@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;" %>
 
@@ -73,11 +72,11 @@ if(!permiso) {
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   
-   <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!-- DATATABLE NEW buttons -->
-    <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
   
   
   <!-- Google Font: Source Sans Pro -->
@@ -88,14 +87,12 @@ if(!permiso) {
   
    <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
-  
-    <!-- timepicker -->
+  <!-- timepicker -->
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   
 
@@ -306,34 +303,35 @@ if(!permiso) {
 <script src="../../plugins/inputmask/jquery.inputmask.bundle.js"></script>
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
 
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<!-- DATATABLE NEW buttons --> 
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
+<!-- js DATATABLE NEW buttons pdf -->
+<script src="../../plugins/datatables-buttons/pdf/pdfmake.min.js"></script>
+<script src="../../plugins/datatables-buttons/pdf/vfs_fonts.js"></script>
 
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
+<!-- js DATATABLE NEW buttons excel -->
+<script src="../../plugins/datatables-buttons/excel/jszip.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- page script -->
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-  
-  <script src="./js/tarea_grupal.js" defer></script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+
+<script src="./js/tarea_grupal.js" defer></script>
 
 <script>
 
@@ -359,33 +357,17 @@ if(!permiso) {
   $(function () {
     $('#Tbl_opciones').DataTable({
         dom: 'Bfrtip',
+        "bLengthChange": false,
         buttons: [
         'pdf',
         'excel',
         'print'
         ]
       });
-    
-    $("#Tbl_opciones").css({
-        "border": "none",
-        "padding-top": "20px",
-      })
-      $("tr").css({"height": "49px"})
-  });
-  	
-  $(function () {
-	  
-	  $('#Tbl_rol').DataTable({
-
-	      });
-	    $("#Tbl_rol").css({
-	        "border": "none",
-	        "padding-top": "20px",
-	      })
-	      $("tr").css({"height": "49px"})
-	  });
-
-  
+    $('#Tbl_rol').DataTable({
+		  "bLengthChange": false		
+	});
+  });  
 </script>
 
 

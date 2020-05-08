@@ -64,8 +64,6 @@ if(rol_texto != null) {
 
  <!-- Font Awesome Icons -->
  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
- <!-- IonIcons -->
- <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
  <!-- Theme style -->
  <link rel="stylesheet" href="dist/css/adminlte.min.css">
  <!-- Google Font: Source Sans Pro -->
@@ -168,6 +166,7 @@ if(rol_texto != null) {
 <script src="dist/js/adminlte.js"></script>
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
+<<<<<<< HEAD
 <!-- OPTIONAL SCRIPTS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 <script src="dist/js/demo.js"></script>
@@ -182,6 +181,8 @@ if(rol_texto != null) {
 <script src="plugins/fullcalendar-interaction/main.min.js"></script>
 <script src="plugins/fullcalendar-bootstrap/main.min.js"></script>
 <script src="plugins/fullcalendar/locales/es.js"></script>
+=======
+>>>>>>> 4a53f96cc0451659ef229a4097385bd34ae0e5c4
 
 <!-- jAlert js -->
   <script src="plugins/jAlert/dist/jAlert.min.js"></script>
@@ -210,7 +211,7 @@ $(document).ready(function ()
  
 });
 
- </script>
+</script>
 
 
 

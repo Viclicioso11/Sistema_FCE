@@ -63,10 +63,13 @@
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
   
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
+  
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -78,7 +81,7 @@
   </style>
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   
 
@@ -186,16 +189,18 @@
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
-<!-- DATATABLE NEW buttons -->
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<!-- DATATABLE NEW buttons --> 
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-<script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+
 
 <script>
 
@@ -213,6 +218,7 @@ function irDetalle(id) {
 $(function () {
   $('#table').DataTable({
       dom: 'Bfrtip',
+      "bLengthChange": false,
       buttons: [
       'print'
       ]

@@ -66,10 +66,10 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  
   <!-- jAlert css  -->
   <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
 
@@ -77,14 +77,13 @@
   <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
-  <!-- DATATABLE NEW -->
-  <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-  <!-- DATATABLE NEW buttons -->
-  <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.dataTables.min.css">
+  
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   
 
@@ -107,7 +106,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-           
+           <h3>Asignar tutor a FCE</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -124,28 +123,27 @@
     <section class="content">
       <div class="row">
         <div class="col-12">
+        
           <div class="card">
+          
             <div class="card-header">
-             <h2>Asignar tutor a FCE</h2>
-             
-             
+    			<a href="../inscripcion/inscripcion_tema.jsp">
+    				Incripción de tema 
+    				<i class="fas fa-user-tag"></i>
+    			</a>
+             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-               &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="../inscripcion/inscripcion_tema.jsp">Incripción de tema <i class="fas fa-user-tag"></i></a>
+            <div class="card-body" style="overflow-x: scroll">
                 
-                <br/><br/>
-                 <div class="form-group">
-			          <label>Temas FCE</label>
-			          <select class="form-control" style="width: 100%;" id="vista" onchange="vistatabla()">
-			          	<!-- rellenar con los id XD -->
-			          			          	
-			  			  <option value="2">Temas sin tutor asignados</option>
-				          <option value ="3">Temas con tutor asignados</option>
-			          </select>
-		          
-        		</div>
-       		 <div class = "card" id= "vista1" style="overflow-x: scroll">
+             <div class="form-group">
+		          <label>Temas FCE</label>
+		          <select class="form-control" style="width: 100%;" id="vista" onchange="vistatabla()">	          	
+		  			  <option value="2">Temas sin tutor asignados</option>
+			          <option value ="3">Temas con tutor asignados</option>
+		          </select>
+      		 </div>
+        		
+       		 <div id="vista1" >
               <table id="example1" class="table table-bordered">
                 <thead>
 	                <tr>
@@ -199,57 +197,57 @@
                 </tbody>
               </table>
                
-              </div>
+             </div>
               
               <br/><br/>
               
-              <div class = "card" id="vista2">
-			  <table id="example2" class="table table-bordered">
-                <thead>
-	                <tr>
-	                  <th>Id</th>
-	                  <th>Tema</th>
-	                  <th>Tipo</th>
-	                  <th>Fecha</th>
-	                  <th>Tutor</th>
-	          
-	                 <th>Opciones</th>
-	                </tr>
-                </thead> 
-                <tbody>   
-	            <% 
-	           		 DT_vw_tema dtemas = new DT_vw_tema();
-	            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
-	            	TemasC = dtema.listarTemasTutor();
-	            	
-	            	for(Vw_tema temaC: TemasC)	{
-	            %>
-	                <tr>
-	                  <td><%=temaC.getId_tema() %></td>
-	                  <td><%=temaC.getTema() %></td>
-	                  <td><%=temaC.getTipo_fce() %></td>
-	                  <td><%=temaC.getFecha() %></td>
-	                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
-				      <td>
-		                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
-			          </td>
-	                </tr>
-	            <%}%>
-	              
-                </tbody>
-              </table>
+              <div id="vista2">
+				  <table id="example2" class="table table-bordered">
+	                <thead>
+		                <tr>
+		                  <th>Id</th>
+		                  <th>Tema</th>
+		                  <th>Tipo</th>
+		                  <th>Fecha</th>
+		                  <th>Tutor</th>
+		          
+		                 <th>Opciones</th>
+		                </tr>
+	                </thead> 
+	                <tbody>   
+		            <% 
+		           		 DT_vw_tema dtemas = new DT_vw_tema();
+		            	ArrayList<Vw_tema> TemasC = new ArrayList<Vw_tema>();
+		            	TemasC = dtema.listarTemasTutor();
+		            	
+		            	for(Vw_tema temaC: TemasC)	{
+		            %>
+		                <tr>
+		                  <td><%=temaC.getId_tema() %></td>
+		                  <td><%=temaC.getTema() %></td>
+		                  <td><%=temaC.getTipo_fce() %></td>
+		                  <td><%=temaC.getFecha() %></td>
+		                  <td id="tutorName"><%=temaC.getNombre_tutor()%><%=temaC.getApellido_tutor()%></td>
+					      <td>
+			                  <a href="#" onclick="editTema('<%=temaC.getId_tema()%>');"><i class="far fa-edit" ></i></a>
+				          </td>
+		                </tr>
+		            <%}%>
+		              
+	                </tbody>
+	              </table>
               </div>
+              
          	</div>
 
           <!-- /.card-body -->
-         	 </div>
+          </div>
           <!-- /.card -->
 
        	 </div>
         <!-- /.col -->
       	</div>
       <!-- /.row -->
-      </div>
     </section>
     <!-- /.content -->
  	</div>
@@ -310,39 +308,36 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- DataTables -->
-<!-- <script src="../../plugins/datatables/jquery.dataTables.js"></script> -->
-<!-- <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+<!-- DATATABLE NEW buttons --> 
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
+<!-- js DATATABLE NEW buttons pdf -->
+<script src="../../plugins/datatables-buttons/pdf/pdfmake.min.js"></script>
+<script src="../../plugins/datatables-buttons/pdf/vfs_fonts.js"></script>
 
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
+<!-- js DATATABLE NEW buttons excel -->
+<script src="../../plugins/datatables-buttons/excel/jszip.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
 
 <!-- Select2 -->
 <script src="../../plugins/select2/js/select2.full.min.js"></script>
 <!-- page script -->
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-  <script type="text/javascript"></script>
+<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+<script type="text/javascript"></script>
 
 <script>
 
@@ -366,14 +361,8 @@
   	  "order": []
   });
   
-  $("#example2, #example1").css({
-      "border": "none",
-      "padding-top": "20px",
-    })
-   $("tr").css({"height": "49px"})
     
   $("#vista2").css({"display": "none"})
-  
   $('#tutor').select2({ theme: 'bootstrap4' })
  
    var idTema = 0
@@ -396,18 +385,6 @@
 	 *	hacer la funcion con ajax, post, 
 	 *	y mandar tutor y tema y depues es logica tuya xd 
 	 */
-	 
-	 /*
-	 generarAlerts("../../SL_vw_Tema",{tutorId: tutor, temaId: tema},"GET",
-			 [{
-		 		'msg':'2',
-		 		'func':function(){WarningAlert('Tutor no vï¿½lido o no disponible')}
-			 },{
-				'msg':'6',
-			    'func':function(){SuccessAlert('Tutor Asignado')}
-			 }])
-			 
-	*/
 	 $.ajax({
 	        type: "GET",
 	        url: "../../SL_vw_Tema",

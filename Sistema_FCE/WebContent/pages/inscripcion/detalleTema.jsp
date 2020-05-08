@@ -87,19 +87,13 @@ if(nombre_tutor.equals("")) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<!-- jAlert css  -->
 	<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
-
-
-  <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-    
 	<!-- tag input -->
 	<link rel="stylesheet" href="../../plugins/tag-input/tag-input.css">
 	<script src="../../plugins/tag-input/tag-input.js"></script>
@@ -111,7 +105,7 @@ if(nombre_tutor.equals("")) {
 	<link rel="stylesheet" href="./css/inscripcion.css">
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 
 <div class="wrapper">
 	<!-- Navbar -->
@@ -400,29 +394,11 @@ if(nombre_tutor.equals("")) {
 	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="../../dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../../dist/js/demo.js"></script>
-	
+	<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- jAlert js -->
 	<script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
 	<script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
-<!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-
-<!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-
-<!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
-
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
-
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
 
 <!--  js de la carpeta js local -->
   <script src="./js/edit_inscripcion_fce.js" defer></script>

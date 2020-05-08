@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
-    <% /*
-    ArrayList <Vw_rol_opcion> listOpciones = new ArrayList <Vw_rol_opcion>();
-	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
-	listOpciones = (ArrayList <Vw_rol_opcion>) session.getAttribute("listOpciones");
 
 <% 
 DT_rol_opcion Dtro = new DT_rol_opcion();
@@ -48,7 +44,7 @@ if(!permiso) {
 %>
     
     
-    <%
+<%
 
 /* RECUPERAMOS EL VALOR DE LA VARIABLE cronogramaID */
 String idCronograma = "";
@@ -100,12 +96,13 @@ listaActividades = dtcro.listarActividadesCronograma(cronograma);
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <style>
   </style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<!-- Navbar -->
  	<jsp:include page="/WEB-INF/layouts/topbar2.jsp"></jsp:include>
@@ -280,9 +277,7 @@ listaActividades = dtcro.listarActividadesCronograma(cronograma);
 <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../dist/js/demo.js"></script> -->
-
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <!-- fullCalendar 2.2.5 -->
 <script src="../../plugins/moment/moment.min.js"></script>
