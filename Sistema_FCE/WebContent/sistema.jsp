@@ -114,7 +114,7 @@ if(rol_texto != null) {
 		case 2: 
 		
 		%>
-		
+		<jsp:include page="inicioEstudiante.jsp"></jsp:include>
 		
 		<%
 		//fin segundo case
@@ -166,7 +166,6 @@ if(rol_texto != null) {
 <script src="dist/js/adminlte.js"></script>
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-<<<<<<< HEAD
 <!-- OPTIONAL SCRIPTS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 <script src="dist/js/demo.js"></script>
@@ -181,8 +180,6 @@ if(rol_texto != null) {
 <script src="plugins/fullcalendar-interaction/main.min.js"></script>
 <script src="plugins/fullcalendar-bootstrap/main.min.js"></script>
 <script src="plugins/fullcalendar/locales/es.js"></script>
-=======
->>>>>>> 4a53f96cc0451659ef229a4097385bd34ae0e5c4
 
 <!-- jAlert js -->
   <script src="plugins/jAlert/dist/jAlert.min.js"></script>
@@ -190,6 +187,7 @@ if(rol_texto != null) {
   
   <!-- jAlert js -->
   <script src="./js/inicioAdmin.js"></script>
+  <script src="./js/inicioEstudiante.js"></script>
 
 <script>
 $(document).ready(function ()
