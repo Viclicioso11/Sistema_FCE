@@ -16,10 +16,7 @@ var calendar2 = new Calendar2(calendarE2, {
     editable    : false,
     droppable   : false,
 	eventRender: function(event, element) {
-        $(element).tooltip({
-            title: event.title,
-            container: "body"
-        });
+      
 	},
 })
 

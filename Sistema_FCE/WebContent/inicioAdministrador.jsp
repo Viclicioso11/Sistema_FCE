@@ -43,10 +43,10 @@ listaActividades = dtcro.listarActividadesCronograma(cronograma);
 %>
     <!-- Main content -->
     <div class="content">
-		    <!-- jQuery -->
-		<script src="plugins/jquery/jquery.min.js"></script>
-		<!-- jQuery UI -->
-		<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    
+	<!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+		
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
@@ -137,7 +137,7 @@ listaActividades = dtcro.listarActividadesCronograma(cronograma);
 
         <!-- /.row -->
       </div>
-      
+      <script src="./js/inicioAdmin.js"></script>
       
 <script>
     $(document).ready(function ()
@@ -158,7 +158,7 @@ listaActividades = dtcro.listarActividadesCronograma(cronograma);
     	for(Tbl_actividad_cronograma tacro :listaActividades){
     		
     		%>	
-    		
+    		console.log("otra actividad");
     		descripcion = "<%=tacro.getDescripcion()%>";
     		nombre = "<%=tacro.getNombre()%>";
     		fechaInicio = "<%=tacro.getFecha_inicio()%>";

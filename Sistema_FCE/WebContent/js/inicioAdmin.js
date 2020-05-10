@@ -160,10 +160,10 @@ var calendar = new Calendar(calendarEl, {
     themeSystem : 'bootstrap',
     locale      : 'es',
     eventClick  : function(info){
-    	let fechaInicio = moment(info.event.start).format('YYYY/MM/DD');
-    	let fechaFin = moment(info.event.end).format('YYYY/MM/DD');
+    	//let fechaInicio = moment(info.event.start).format('YYYY/MM/DD');
+    	//let fechaFin = moment(info.event.end).format('YYYY/MM/DD');
     	//al hacer click sobre uno de los eventos, mandamos todos estos valores al metodo que los setea en los campos
-    	verActividad(info.event.title, info.event.extendedProps.description, info.event.id, fechaInicio, fechaFin);
+    	//verActividad(info.event.title, info.event.extendedProps.description, info.event.id, fechaInicio, fechaFin);
     	
     },
     editable    : true,
@@ -214,31 +214,11 @@ function guardar(){
     }
 }
 
-/**
- * Fin del calendar
- */
-//funcion para poner los detalles de la actividad en los campos de actividad
-function verActividad(nombre, descripcion,id, fechaInicio, fechaFin){
-	
-	document.getElementById("nombreActividad").value = nombre;
-	document.getElementById("descripcionActividad").value = descripcion;
-	document.getElementById("fechaActividad").value = fechaInicio + "-" + fechaFin;
-	
-	//alert('Título: ' + nombre );
-	//alert('ID: ' + id);
-}
 
 // mostramos todas las actividades
 
 function addEvent(descripcion, nombre, fechaInicio, fechaFin, id, color){
- 
-    console.log(descripcion)
-    console.log(nombre)
-   console.log(fechaInicio)
-   console.log(fechaFin)
-   console.log(id)
-   
-   
+
     let evento = {
         id : id,
         title: nombre,
@@ -286,22 +266,6 @@ function ini_events(eventos) {
 //iniciando los eventos
 ini_events($('#external-events div.external-event'))
 
-// dando permiso para que se puedan
-// arrastrar al 
-
-new Draggable(containerEvents, {
-    itemSelector: '.external-event',
-    eventData: function(eventEl) {
-        return {
-        id: idEvento++, 
-        title: eventEl.innerText,
-        backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-        borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-        textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
-        }
-    }
-})
-
 var currColor = "#ffc107"
 $('#color-chooser > li > a').click(function() {
     currColor = $(this).css('color')
@@ -312,26 +276,6 @@ $('#color-chooser > li > a').click(function() {
     $('#add-new-event').css(estilos)
 })
 
-$('#add-new-event').click(function () {
-
-    let val = $('#new-event').val()
-
-    if (val.length == 0) { return }
-    
-    let event = $('<div />')
-    let estilos = {
-      'background-color': currColor,
-      'border-color'    : currColor,
-      'color'           : '#fff'
-    }
-
-    event.css(estilos).addClass('external-event')
-    event.html(val)
-    $('#external-events').prepend(event)
-    $('#new-event').val('')
-
-    ini_events(event)
-})
 
 
 //let string = "[{ \"hola\":\"ji\"},{ \"hola\": 0}]" // todo eso es una cadena

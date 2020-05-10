@@ -47,6 +47,8 @@
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Gestión Ámbito</title>
+  <!-- Imagen del título-->
+ <link  rel="icon"   href="../../dist/img/favicon.png" type="image/png" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 

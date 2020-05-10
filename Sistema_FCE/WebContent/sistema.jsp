@@ -62,6 +62,9 @@ if(rol_texto != null) {
 
  <title>Sistema FCE</title>
 
+	<!-- Imagen del título-->
+	 <link  rel="icon"   href="dist/img/favicon.png" type="image/png" />
+
  <!-- Font Awesome Icons -->
  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
  <!-- Theme style -->
@@ -96,6 +99,30 @@ if(rol_texto != null) {
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
+  <!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="dist/js/adminlte.js"></script>
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="dist/js/pages/dashboard3.js"></script>
+
+
+<!-- fullCalendar 2.2.5 -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/fullcalendar/main.min.js"></script>
+<script src="plugins/fullcalendar-daygrid/main.min.js"></script>
+<script src="plugins/fullcalendar-timegrid/main.min.js"></script>
+<script src="plugins/fullcalendar-interaction/main.min.js"></script>
+<script src="plugins/fullcalendar-bootstrap/main.min.js"></script>
+<script src="plugins/fullcalendar/locales/es.js"></script>
    
 		<%
 		//para cada rol cargar un inicio distinto, y si no es aprte de los 3 primeros roles, que cargue un default
@@ -105,6 +132,8 @@ if(rol_texto != null) {
 		case 1: 
 			
 		%>
+		<!-- jAlert js -->
+  		
 		<jsp:include page="inicioAdministrador.jsp"></jsp:include>
 		
 		<%
@@ -124,6 +153,7 @@ if(rol_texto != null) {
 			
 		%>	
 		
+		<jsp:include page="inicioTutor.jsp"></jsp:include>
 		
 		<%	
 		//fin tercer case
@@ -156,38 +186,21 @@ if(rol_texto != null) {
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE -->
-<script src="dist/js/adminlte.js"></script>
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-<!-- OPTIONAL SCRIPTS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<script src="dist/js/demo.js"></script>
-<script src="dist/js/pages/dashboard3.js"></script>
-
-
-<!-- fullCalendar 2.2.5 -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/fullcalendar/main.min.js"></script>
-<script src="plugins/fullcalendar-daygrid/main.min.js"></script>
-<script src="plugins/fullcalendar-timegrid/main.min.js"></script>
-<script src="plugins/fullcalendar-interaction/main.min.js"></script>
-<script src="plugins/fullcalendar-bootstrap/main.min.js"></script>
-<script src="plugins/fullcalendar/locales/es.js"></script>
 
 <!-- jAlert js -->
   <script src="plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  <!-- jAlert js -->
-  <script src="./js/inicioAdmin.js"></script>
-  <script src="./js/inicioEstudiante.js"></script>
+  
+ 
+  
+  
+  <!-- date-range-picker -->
+<script src="plugins/inputmask/jquery.inputmask.bundle.js"></script>
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+  
 
 <script>
 $(document).ready(function ()

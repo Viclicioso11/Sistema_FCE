@@ -43,29 +43,34 @@ ListaTarea = dtttar.ArrayToJson(listaTarea);
 
 %>
 <div>
-	<div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Sistema</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Calendario</li>
-            </ol>
-          </div><!-- /.col -->
-        </div>
-      </div><!-- /.container-fluid -->
-    </div>
-
+	
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-      
+        <div class="row">
+          <div class="col-md-12">
+          
+            <div class="card">
+            	
+              <div class="card-header">
+                
+				<h4>SISTEMA FCE</h4>
+			
+              
+              </div>
+             
+             </div>
+             
+               <!-- /.card -->
+          </div>
+          <!-- /.col-md-6 -->
+        
+          <!-- /.col-md-6 -->
+        </div>
+              
         <div class="row">
 				     <!-- calendar column -->
-          <div class="col-md-12">
+          <div class="col-md-12 col-lg-8">
             <div class="card">
               <div class="card-body">
                 <!-- THE CALENDAR -->
@@ -76,14 +81,54 @@ ListaTarea = dtttar.ArrayToJson(listaTarea);
             <!-- /.card -->
           </div>
           <!-- end calendar column -->
+			 	<div class = "col-12 col-lg-4">
+              	
+              	<div class = "card">
+              		<div class = "card-body">
+              		<h4 style="text-align: center;"> Otros servicios UCA </h4>
+						<table style="margin: 7px auto 0px;">
+							<tbody>
+							<tr style="border-bottom: 1px solid #c8c8c8; border-top: 1px solid #c8c8c8;">
+							<td style="text-align: center; width: 25%; padding: 5px;"><i class="fa fa-university"></i></td>
+							<td style="width: 75%; padding: 5px;">
+							<h5 style="margin: 2px 0px;"><span style="font-size: medium;"><a target="_blank" href="http://www.uca.edu.ni/">Sitio Principal UCA</a></span></h5>
+							</td>
+							</tr>
+							<tr style="border-bottom: 1px solid #c8c8c8;">
+							<td style="width: 25%; text-align: center; padding: 5px;"><i class="fas fa-globe-americas"></i></td>
+							<td style="width: 75%; padding: 5px;">
+							<h5 style="margin: 2px 0px;"><span style="font-size: medium;"><a target="_blank" href="https://serviciosenlinea.uca.edu.ni/ss/Home.aspx">Servicios en Línea</a></span></h5>
+							</td>
+							</tr>
+							<tr style="border-bottom: 1px solid #c8c8c8;">
+							<td style="width: 25%; text-align: center; padding: 5px;"><i class="fa fa-book"></i></td>
+							<td style="width: 75%; padding: 5px;">
+							<h5 style="margin: 2px 0px;"><span style="font-size: medium;"><a target="_blank" href="http://virtual.uca.edu.ni/">EVA</a></span></h5>
+							</td>
+							</tr>
+							</tbody>
+					</table>
+						              	
+              		</div>
+              	</div>
+              	</div> 
+
+
+
 
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+      </div>
+       
     <!-- jQuery -->
 		<script src="plugins/jquery/jquery.min.js"></script>
 	<!-- jQuery UI -->
 		<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+		
+		<script src="./js/inicioEstudiante.js"></script>
+		
+		
 		<script>
 		    $(document).ready(function ()
 		    {
