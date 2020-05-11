@@ -128,7 +128,7 @@ ttma = dttma.obtenerTema(tema);
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Inscripciones</a></li>
+	              <li class="breadcrumb-item"><a href="tbltema.jsp">Asignar Tutor</a></li>
 	              <li class="breadcrumb-item active">Inscripción Tema</li>
 	            </ol>
 	          </div>

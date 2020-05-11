@@ -92,8 +92,8 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Manteniemiento</a></li>
-	              <li class="breadcrumb-item active">Nuevo ambito</li>
+	              <li class="breadcrumb-item"><a href="tblambito.jsp">Gestión de Ámbito</a></li>
+	              <li class="breadcrumb-item active">Nuevo Ámbito</li>
 	            </ol>
 	          </div>
 	        </div>

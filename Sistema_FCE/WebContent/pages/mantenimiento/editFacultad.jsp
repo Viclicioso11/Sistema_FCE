@@ -106,7 +106,7 @@ tfa = dtfa.obtenerFacultad(facultad);
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblfacultads.jsp">Gestión de Facultades</a></li>
+	              <li class="breadcrumb-item"><a href="tblfacultades.jsp">Gestión de Facultades</a></li>
 	              <li class="breadcrumb-item active">Edición Facultad</li>
 	            </ol>
 	          </div>

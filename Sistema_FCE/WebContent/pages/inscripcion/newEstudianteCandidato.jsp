@@ -92,7 +92,7 @@
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Estudiantes Candidatos</a></li>
+	              <li class="breadcrumb-item"><a href="tblEstudianteCandidato.jsp">Estudiantes Candidatos</a></li>
 	              <li class="breadcrumb-item active">Inscripción Tema</li>
 	            </ol>
 	          </div>

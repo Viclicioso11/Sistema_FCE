@@ -94,7 +94,7 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Seguridad</a></li>
+	              <li class="breadcrumb-item"><a href="tblopciones.jsp">Gestión de Opciones</a></li>
 	              <li class="breadcrumb-item active">Nueva Opción</li>
 	            </ol>
 	          </div>

@@ -107,7 +107,7 @@ trol = dtrol.obtenerRol(rol);
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblrol.jsp">Gestión Rol</a></li>
+	              <li class="breadcrumb-item"><a href="tblroles.jsp">Gestión Rol</a></li>
 	              <li class="breadcrumb-item active">Edición Rol</li>
 	            </ol>
 	          </div>

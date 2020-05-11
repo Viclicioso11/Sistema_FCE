@@ -127,7 +127,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="tblplan_graduacion.jsp">Inicio</a></li>
               <li class="breadcrumb-item active">Plan de Graduación</li>
             </ol>
           </div>

@@ -102,7 +102,7 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Inscripción</a></li>
+	              <li class="breadcrumb-item"><a href="buscarTema.jsp">Temas inscritos</a></li>
 	              <li class="breadcrumb-item active">Inscripción Tema</li>
 	            </ol>
 	          </div>

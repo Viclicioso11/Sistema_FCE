@@ -92,7 +92,7 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">Mantenimiento</a></li>
+	              <li class="breadcrumb-item"><a href="tbl_tipo_fce.jsp">Gestión Tipo FCE</a></li>
 	              <li class="breadcrumb-item active">Nuevo Tipo FCE</li>
 	            </ol>
 	          </div>

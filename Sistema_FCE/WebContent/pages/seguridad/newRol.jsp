@@ -95,8 +95,8 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item active">Nuevo Rol</li>
-	              <li class="breadcrumb-item"><a href="tblroles.jsp">Gestión Roles</a></li>
+	            <li class="breadcrumb-item"><a href="tblroles.jsp">Gestión Roles</a></li>
+	             <li class="breadcrumb-item active">Nuevo Rol</li> 
 	            </ol>
 	          </div>
 	        </div>
