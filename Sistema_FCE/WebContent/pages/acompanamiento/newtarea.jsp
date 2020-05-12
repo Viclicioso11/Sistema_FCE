@@ -130,7 +130,7 @@ if(!permiso) {
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Gestión grupo FCE</a></li>
+              <li class="breadcrumb-item"><a href="tbltareas_grupo.jsp">Gestión de tareas grupo FCE</a></li>
               <li class="breadcrumb-item active">Creación de nueva tarea</li>
             </ol>
           </div>

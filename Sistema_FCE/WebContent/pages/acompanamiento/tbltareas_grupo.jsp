@@ -117,7 +117,7 @@ if(!permiso) {
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"></a>Gestión temas tutoría</li>
+              <li class="breadcrumb-item"><a href="tblgrupos_administrador.jsp">Tareas Grupales</a></li>
               <li class="breadcrumb-item active">Gestión tareas tema</li>
             </ol>
           </div>

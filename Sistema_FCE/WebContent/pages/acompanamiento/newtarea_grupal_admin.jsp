@@ -114,11 +114,11 @@ if(!permiso) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            
+             <h1>Tarea Grupal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              
+              <li class="breadcrumb-item"><a href="tblgrupos_administrador.jsp">Avances de Temas Cronograma</a></li>
             </ol>
           </div>
         </div>
